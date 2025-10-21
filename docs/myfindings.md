@@ -2,19 +2,20 @@
 
 ## URL Scheme
 
-All URLs scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
+Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
-* param1 = That defines if the action will be activated in the **camera** or **bacpac** (back in the HERO2 days the "bacpac" was the separate WiFi unit).
-* ACTION = A two character parameter which defines what the camera needs to do. Eg: SH for Shoot
+* param1 = That defines if the action will be activated in the **camera** or **bacpac**.
+*Back in the HERO2 days, the "bacpac" was a separate WiFi unit attached to the camera*.
+* ACTION = A two character parameter which defines what the camera needs to do. Eg: `SH` for Shoot
 * OPTION: The arguments for ACTION
-* If you see a URL which contains "PASSWORD" without the quotes, it
-means it needs the camera password, which you can obtain here:  
-<http://10.5.5.9/bacpac/sd> using cURL or other HTTP lib using the "GET"
-method.
+* PASSWORD: The camera password. You can obtain it at <http://10.5.5.9/bacpac/sd> using cURL or other HTTP lib using the "GET" method.
 
-## Hypothesis
+## Observed Behavior
 
-It seems calling any invalid endpoint ie: ZZ returns only one `01` byte
+1. It seems incorrectly calling any endpoint or any invalid endpoint ie: `ZZ` returns only a `01` byte.
+2. In any other case, a valid endpoint returns a two byte response corresponding to the action performed. For example: `00 07` if we modified the FPS to 60 via `FS 07`.
+3. Some endpoints return more data, for example the `sx` endpoint returns 56 bytes with the camera status.
+4. Some endpoints don't require an OPTION, in that case the URL should be called without the `p=%OPTION` part.
 
 ## Endpoints discovered
 
@@ -44,17 +45,6 @@ It seems calling any invalid endpoint ie: ZZ returns only one `01` byte
 | OPTION | Description |
 |--------|-------------|
 | 00     | OFF         |
-
-### Volume
-
-* param1: `camera`
-* ACTION: `BS`
-
-| OPTION | Description |
-|--------|-------------|
-| 00     | No sounds   |
-| 01     | 70% volume  |
-| 02     | 100% volume |
 
 ### Resolution
 
@@ -105,3 +95,27 @@ It seems calling any invalid endpoint ie: ZZ returns only one `01` byte
 | 08     | 100         |
 | 09     | 120         |
 | 0a     | 240         |
+
+### Volume
+
+* param1: `camera`
+* ACTION: `BS`
+
+| OPTION | Description |
+|--------|-------------|
+| 00     | No sounds   |
+| 01     | 70% volume  |
+| 02     | 100% volume |
+
+### File management
+
+* param1: `camera`
+
+| ACTION | Description                     |
+|--------|---------------------------------|
+| DL     | Delete last media file          |
+| DA     | Delete all media files          |
+| DF     | Delete a specific file (requires replacing `%OPTION` with filepath) |
+| FO     | Format SD card                  |
+
+todo: check LS
