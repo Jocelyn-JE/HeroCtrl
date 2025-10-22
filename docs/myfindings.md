@@ -53,6 +53,23 @@ Turns off the camera.
 |--------|-------------|
 | 00     | OFF         |
 
+### Record / Shutter
+
+* param1: `camera`
+* ACTION: `SH`
+
+What this can do depending on the current camera mode:
+
+* Start/stop recording a video in video mode
+* Take a singular picture in single picture mode.
+* Start/stop taking pictures in the continuous pictures mode
+* Take multiple pictures in burst mode.
+
+| OPTION | Description                         |
+|--------|-------------------------------------|
+| 00     | Stop recording / taking pictures    |
+| 01     | Start recording / taking pictures   |
+
 ### Resolution
 
 * param1: `camera`
@@ -195,3 +212,52 @@ Changes the default mode when the camera is powered on.
 | 01     | Photo mode                      |
 | 02     | Burst mode                      |
 | 03     | Time-lapse mode                 |
+
+### Set time
+
+* param1: `camera`
+* ACTION: `TM`
+
+Sets the date and time of the camera.
+
+This endpoint requires 6 bytes in the URL each preceded by a `%`. Each byte is hexadecimal of course, so you need to [convert](https://www.rapidtables.com/convert/number/decimal-to-hex.html) your decimal value to hex.
+
+| Byte   | Description    | Range     |
+|--------|----------------|-----------|
+| 1      | Year           | (20)00-99 |
+| 2      | Month          | 1-12      |
+| 3      | Day            | 1-31      |
+| 4      | Hour           | 0-23      |
+| 5      | Minute         | 0-59      |
+| 6      | Seconds        | 0-59      |
+
+Example for `22/10/2025` at `22:08:30`:
+
+* `http://10.5.5.9/camera/TM?t=PASSWORD&p=%19%0A%16%16%09%1E`
+
+### Video mode
+
+* param1: `camera`
+* ACTION: `VM`
+
+Changes the TV-out video standard.
+
+| OPTION | Description                     |
+|--------|---------------------------------|
+| 00     | [NTSC](https://en.wikipedia.org/wiki/NTSC) video mode                 |
+| 01     | [PAL](https://en.wikipedia.org/wiki/PAL) video mode                  |
+
+### Video preview
+
+* param1: `camera`
+* ACTION: `PV`
+
+Changes the video preview state. (unstable/random)
+
+It seems the preview is automatically enabled when starting the camera. If the preview freezes, enable it again to unfreeze it.
+
+| OPTION | Description                      |
+|--------|----------------------------------|
+| 00     | Disables video preview           |
+| 01     | ???                              |
+| 02     | Enables video preview            |
