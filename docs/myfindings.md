@@ -6,18 +6,18 @@
 
 Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
-* param1 = That defines if the action will be activated in the **camera** or **bacpac**.
-*Back in the HERO2 days, the "bacpac" was a separate WiFi unit attached to the camera*.
+* param1 = That defines if the action will be activated in the **camera** or **bacpac**
+*Back in the HERO2 days, the "bacpac" was a separate WiFi unit attached to the camera*
 * ACTION = A two character parameter which defines what the camera needs to do. Eg: `SH` for Shoot
 * OPTION: The arguments for ACTION
-* PASSWORD: The camera password. You can obtain it at <http://10.5.5.9/bacpac/sd> using cURL or other HTTP lib using the "GET" method.
+* PASSWORD: The camera password. You can obtain it at <http://10.5.5.9/bacpac/sd> using cURL or other HTTP lib using the "GET" method
 
 ## Observed Behavior
 
-1. It seems incorrectly calling any endpoint or any invalid endpoint ie: `ZZ` returns only a `01` byte.
-2. In any other case, a valid endpoint returns a two byte response corresponding to the action performed. For example: `00 07` if we modified the FPS to 60 via `FS 07`. So maybe the first byte returned is the return code `00` for success and `01` for error.
-3. Some endpoints return more data, for example the `sx` endpoint returns 56 bytes with the camera status.
-4. Some endpoints don't require an OPTION, in that case the URL should be called without the `p=%OPTION` part.
+1. It seems incorrectly calling any endpoint or any invalid endpoint ie: `ZZ` returns only a `01` byte
+2. In any other case, a valid endpoint returns a two byte response corresponding to the action performed. For example: `00 07` if we modified the FPS to 60 via `FS 07`. So maybe the first byte returned is the return code `00` for success and `01` for error
+3. Some endpoints return more data, for example the `sx` endpoint returns 56 bytes with the camera status
+4. Some endpoints don't require an OPTION, in that case the URL should be called without the `p=%OPTION` part
 
 ---
 
@@ -37,7 +37,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `bacpac`
     * ACTION: `PW`
 
-    Changes the power state of the camera.
+    Changes the power state of the camera
 
     | OPTION | Description |
     |--------|-------------|
@@ -47,7 +47,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `PW`
 
-    Turns off the camera.
+    Turns off the camera
 
     | OPTION | Description |
     |--------|-------------|
@@ -61,9 +61,11 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     What this can do depending on the current camera mode:
 
     * Start/stop recording a video in video mode
-    * Take a singular picture in single picture mode.
-    * Start/stop taking pictures in the continuous pictures mode
-    * Take multiple pictures in burst mode.
+    * Take a picture in single picture mode, or take as many pictures as the continuous shot setting
+    * Take multiple pictures in burst mode
+    * Start/stop taking photos in timelapse mode
+
+    In general this simulates a single shutter button press, if you want to use this for continuous shot you will need to send multiple `SH 01` commands
 
     Usage:
 
@@ -79,7 +81,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
     Changes the video preview state. (unstable/random)
 
-    It seems the preview is automatically enabled when starting the camera. If the preview freezes, enable it again to unfreeze it.
+    It seems the preview is automatically enabled when starting the camera. If the preview freezes, enable it again to unfreeze it
 
     | OPTION | Description                      |
     |--------|----------------------------------|
@@ -92,23 +94,39 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `LL`
 
-    Turns on/off the locate mode to find the camera.
+    Turns on/off the locate mode to find the camera
 
     | OPTION | Description                                            | Notes |
     |--------|--------------------------------------------------------|-------|
     | 00     | Turns off location mode                                | N/A   |
     | 01     | Makes the red led flash and the camera beep to find it | Will beep regardless of volume setting but will not flash if leds are turned off |
 
+5. ### Camera mode
+
+    * param1: `camera`
+    * ACTION: `CM`
+
+    Changes the camera's current mode
+
+    | OPTION | Description                                  |
+    |--------|----------------------------------------------|
+    | 00     | Video mode                                   |
+    | 01     | Photo mode                                   |
+    | 02     | Burst mode                                   |
+    | 03     | Timelapse mode                               |
+    | 04     | Video mode (HERO 2 timer mode)               |
+    | 05     | Preview mode (touchscreen bacpac or HDMI)    |
+
 ---
 
 ## Recording settings
 
-1. ### Resolution
+1. ### Video resolution
 
     * param1: `camera`
     * ACTION: `VV`
 
-    Changes the current video resolution.
+    Changes the current video resolution
 
     | OPTION | Resolution      | Available FPS (NTSC)   | Available FOV          |
     |--------|-----------------|------------------------|------------------------|
@@ -129,7 +147,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `FV`
 
-    Changes the current field of view.
+    Changes the current field of view
 
     | OPTION | FOV         |
     |--------|-------------|
@@ -142,7 +160,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `FS`
 
-    Changes the current frames per second.
+    Changes the current frames per second
 
     <!-- markdownlint-disable MD033 -->
     <table>
@@ -180,8 +198,57 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     <!-- markdownlint-enable MD033 -->
 
     > [!NOTE]
-    > Check the Resolution section for available FPS per resolution.
-    > The closest matching FPS mode (rounded up) will be selected if the requested FPS is not available for the current resolution.
+    > Check the Resolution section for available FPS per resolution
+    > The closest matching FPS mode (rounded up) will be selected if the requested FPS is not available for the current resolution
+
+---
+
+## Photo settings
+
+1. ### Photo resolution
+
+    * param1: `camera`
+    * ACTION: `PR`
+
+    Changes the current photo resolution for single photos, bursts and timelapses
+
+    | OPTION | Resolution  | FOV    |
+    |--------|-------------|--------|
+    | 03     | 5 MP        | Medium |
+    | 06     | 7 MP        | Medium |
+    | 04     | 7 MP        | Wide   |
+    | 05     | 12 MP       | Wide   |
+
+2. ### Timelapse interval
+
+    * param1: `camera`
+    * ACTION: `TI`
+
+    Changes the current timelapse photo interval
+
+    | OPTION | Interval    |
+    |--------|-------------|
+    | 00     | 0.5s        |
+    | 01     | 1s          |
+    | 02     | 2s          |
+    | 05     | 5s          |
+    | 0a     | 10s         |
+    | 1e     | 30s         |
+    | 3c     | 60s         |
+
+3. ### Continuous shot
+
+    * param1: `camera`
+    * ACTION: `CS`
+
+    Changes the continuous shot setting (will take photos as long as the shutter is pressed)
+
+    | OPTION | Speed        |
+    |--------|--------------|
+    | 00     | Single (OFF) |
+    | 03     | 3 photos/s   |
+    | 05     | 5 photos/s   |
+    | 0a     | 10 photos/s  |
 
 ---
 
@@ -192,7 +259,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `BS`
 
-    Change the beep sound volume.
+    Change the beep sound volume
 
     | OPTION | Description |
     |--------|-------------|
@@ -205,7 +272,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `LB`
 
-    Changes the led configuration.
+    Changes the led configuration
 
     | OPTION | Description                    |
     |--------|--------------------------------|
@@ -218,7 +285,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `DM`
 
-    Changes the default mode when the camera is powered on.
+    Changes the default mode when the camera is powered on
 
     | OPTION | Description                     |
     |--------|---------------------------------|
@@ -232,9 +299,9 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `TM`
 
-    Sets the date and time of the camera.
+    Sets the date and time of the camera
 
-    This endpoint requires 6 bytes in the URL each preceded by a `%`. Each byte is hexadecimal of course, so you need to [convert](https://www.rapidtables.com/convert/number/decimal-to-hex.html) your decimal value to hex.
+    This endpoint requires 6 bytes in the URL each preceded by a `%`. Each byte is hexadecimal of course, so you need to [convert](https://www.rapidtables.com/convert/number/decimal-to-hex.html) your decimal value to hex
 
     | Byte   | Description    | Range     |
     |--------|----------------|-----------|
@@ -254,12 +321,24 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     * param1: `camera`
     * ACTION: `VM`
 
-    Changes the video standard.
+    Changes the video standard
 
-    | OPTION | Description                     |
-    |--------|---------------------------------|
-    | 00     | [NTSC](https://en.wikipedia.org/wiki/NTSC) video mode                 |
-    | 01     | [PAL](https://en.wikipedia.org/wiki/PAL) video mode                  |
+    | OPTION | Description                                           |
+    |--------|-------------------------------------------------------|
+    | 00     | [NTSC](https://en.wikipedia.org/wiki/NTSC) video mode |
+    | 01     | [PAL](https://en.wikipedia.org/wiki/PAL) video mode   |
+
+6. ### Orientation
+
+    * param1: `camera`
+    * ACTION: `UP`
+
+    Changes orientation of the camera's screen and video recording
+
+    | OPTION | Description  |
+    |--------|--------------|
+    | 00     | UP (default) |
+    | 01     | DOWN         |
 
 ---
 
