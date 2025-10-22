@@ -389,8 +389,10 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
     Shows the number 6 in the top left of the camera's screen, replacing the usual camera icon, FOV, FPS and resolution
 
+<!-- markdownlint-disable MD028 -->
 > [!CAUTION]
 > If you try to record with this setting it will brick the camera until a factory reset is performed
+
 > [!TIP]
 > To reset the camera in this situation do the following:
 >
@@ -399,3 +401,4 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 > * Insert the battery
 > * Click the power button, the camera should then power up
 > * After it powers up, make sure you insert a recommended micro-SD card and update the camera's firmware if it is not the latest version
+<!-- markdownlint-enable MD028 -->
