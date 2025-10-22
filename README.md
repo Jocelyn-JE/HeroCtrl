@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Flutter mobile app to remotely control a GoPro Hero 3 camera
+This is a Flutter mobile app to remotely control a GoPro Hero 3+ Black camera
 
 ## Documentation
 
