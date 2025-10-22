@@ -124,23 +124,23 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 1. ### Video resolution
 
     * param1: `camera`
-    * ACTION: `VV`
+    * ACTION: `VV` or `VR`
 
     Changes the current video resolution
 
-    | OPTION | Resolution      | Available FPS (NTSC)   | Available FOV          |
-    |--------|-----------------|------------------------|------------------------|
-    | 00     | WVGA 240fps     | 240                    | Wide                   |
-    | 01     | 720p            | 120, 60, 50            | Wide, Medium, Narrow   |
-    | 02     | 960p            | 100, 60, 50, 48        | Wide                   |
-    | 03     | 1080p           | 60, 50, 48, 30, 25, 24 | Wide, Medium, Narrow   |
-    | 04     | 1440p           | 48, 30, 25, 24         | Wide                   |
-    | 05     | 2.7k            | 30, 25                 | Wide, Medium           |
-    | 06     | 4k              | 15, 12.5               | Wide                   |
-    | 07     | 2.7k 17:9 24fps | 24                     | Wide, Medium           |
-    | 08     | 4k 17:9 12fps   | 12                     | Wide                   |
-    | 09     | 1080p Superview | 48, 30, 25, 24         | Wide                   |
-    | 0a     | 720p Superview  | 100, 60, 50, 48        | Wide                   |
+    | VV | VR       | Resolution      | Available FPS (NTSC)   | Available FOV          |
+    |----|----------|-----------------|------------------------|------------------------|
+    | 00 | N/A      | WVGA 240fps     | 240                    | Wide                   |
+    | 01 | N/A      | 720p            | 120, 60, 50            | Wide, Medium, Narrow   |
+    | 02 | 06/07/0b | 960p            | 100, 60, 50, 48        | Wide                   |
+    | 03 | N/A      | 1080p           | 60, 50, 48, 30, 25, 24 | Wide, Medium, Narrow   |
+    | 04 | N/A      | 1440p           | 48, 30, 25, 24         | Wide                   |
+    | 05 | N/A      | 2.7k            | 30, 25                 | Wide, Medium           |
+    | 06 | 0a       | 4k              | 15, 12.5               | Wide                   |
+    | 07 | 03       | 2.7k 17:9 24fps | 24                     | Wide, Medium           |
+    | 08 | 02       | 4k 17:9 12fps   | 12                     | Wide                   |
+    | 09 | N/A      | 1080p Superview | 48, 30, 25, 24         | Wide                   |
+    | 0a | N/A      | 720p Superview  | 100, 60, 50, 48        | Wide                   |
 
 2. ### FOV
 
@@ -362,3 +362,40 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 | RS     | Restart the camera's wifi, the bottom blue led flashes    | bacpac |
 | sx     | Gets the status of the camera, returns 56 bytes           | camera |
 | PI     | Returns `0x00` if no OPTION is given                      | camera |
+
+### Research
+
+* #### camera `CN`
+
+    Reacts to `00` - `FF` but the result will be max `1F` after `1F`
+
+    | OPTION   | Observed result (hex)   |
+    |----------|-------------------------|
+    | None     | `00 00`                 |
+    | 00       | `00 00`                 |
+    | 01       | `00 01 00`              |
+    | 02       | `00 02 00 00`           |
+    | 03       | `00 03 00 00 00`        |
+    | XX       | `00 XX 00 * (times XX)` |
+    | 1F       | `00 1F 00 * (31 times)` |
+    | Above 1F | `00 1F 00 * (31 times)` |
+
+### Do not use
+
+> [!IMPORTANT]
+> These settings are known to brick the camera until a factory reset is performed. Use at your own risk
+
+1. #### camera `VR` `05` or `08`
+
+    Shows the number 6 in the top left of the camera's screen, replacing the usual camera icon, FOV, FPS and resolution
+
+    > [!CAUTION]
+    > If you try to record with this setting it will brick the camera until a factory reset is performed
+
+    > [!TIP]
+    > To reset the camera in this situation do the following:
+    > * Remove the battery and SD card
+    > * Press and hold the shutter button (until the last instruction)
+    > * Insert the battery
+    > * Click the power button, the camera should then power up
+    > * After it powers up, make sure you insert a recommended micro-SD card and update the camera's firmware if it is not the latest version
