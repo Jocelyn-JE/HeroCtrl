@@ -1,4 +1,6 @@
-# My findings on the GoPro HERO3+ Black API
+# Documentation on the GoPro HERO3+ Black API
+
+[< Go back to README.md](/README.md)
 
 ## URL Scheme
 
@@ -13,7 +15,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 ## Observed Behavior
 
 1. It seems incorrectly calling any endpoint or any invalid endpoint ie: `ZZ` returns only a `01` byte.
-2. In any other case, a valid endpoint returns a two byte response corresponding to the action performed. For example: `00 07` if we modified the FPS to 60 via `FS 07`.
+2. In any other case, a valid endpoint returns a two byte response corresponding to the action performed. For example: `00 07` if we modified the FPS to 60 via `FS 07`. So maybe the first byte returned is the return code `00` for success and `01` for error.
 3. Some endpoints return more data, for example the `sx` endpoint returns 56 bytes with the camera status.
 4. Some endpoints don't require an OPTION, in that case the URL should be called without the `p=%OPTION` part.
 
@@ -28,11 +30,14 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 | DA     | Delete all videos                                         | camera |
 | FO     | Format SD card                                            | camera |
 | PI     | Returns `0x00` if no OPTION is given                      | camera |
+| PV     | Options are `0x00`, `0x01` and `0x02` no visible reaction on the camera | camera |
 
 ### Power
 
 * param1: `bacpac`
 * ACTION: `PW`
+
+Changes the power state of the camera.
 
 | OPTION | Description |
 |--------|-------------|
@@ -41,6 +46,8 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 * param1: `camera`
 * ACTION: `PW`
+
+Turns off the camera.
 
 | OPTION | Description |
 |--------|-------------|
@@ -51,24 +58,28 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 * param1: `camera`
 * ACTION: `VV`
 
-| OPTION | Resolution      | Available FPS          |
-|--------|-----------------|------------------------|
-| 00     | WVGA 240fps     | 240                    |
-| 01     | 720p            | 120, 60, 50            |
-| 02     | 960p            | 100, 60, 50, 48        |
-| 03     | 1080p           | 60, 50, 48, 30, 25, 24 |
-| 04     | 1440p           | 48, 30, 25, 24         |
-| 05     | 2.7k            | 30, 25                 |
-| 06     | 4k              | 15, 12.5               |
-| 07     | 2.7k 17:9 24fps | 24                     |
-| 08     | 4k 17:9 12fps   | 12                     |
-| 09     | 1080p Superview | 48, 30, 25, 24         |
-| 0a     | 720p Superview  | 100, 60, 50, 48        |
+Changes the current video resolution.
+
+| OPTION | Resolution      | Available FPS          | Available FOV          |
+|--------|-----------------|------------------------|------------------------|
+| 00     | WVGA 240fps     | 240                    | Wide                   |
+| 01     | 720p            | 120, 60, 50            | Wide, Medium, Narrow   |
+| 02     | 960p            | 100, 60, 50, 48        | Wide                   |
+| 03     | 1080p           | 60, 50, 48, 30, 25, 24 | Wide, Medium, Narrow   |
+| 04     | 1440p           | 48, 30, 25, 24         | Wide                   |
+| 05     | 2.7k            | 30, 25                 | Wide, Medium           |
+| 06     | 4k              | 15, 12.5               | Wide                   |
+| 07     | 2.7k 17:9 24fps | 24                     | Wide, Medium           |
+| 08     | 4k 17:9 12fps   | 12                     | Wide                   |
+| 09     | 1080p Superview | 48, 30, 25, 24         | Wide                   |
+| 0a     | 720p Superview  | 100, 60, 50, 48        | Wide                   |
 
 ### FOV
 
 * param1: `camera`
 * ACTION: `FV`
+
+Changes the current field of view.
 
 | OPTION | FOV         |
 |--------|-------------|
@@ -81,25 +92,53 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 * param1: `camera`
 * ACTION: `FS`
 
-| OPTION | FPS         |
-|--------|-------------|
-| 00     | 12          |
-| 01     | 15          |
-| 0b     | 12.5        |
-| 02     | 24          |
-| 03     | 25          |
-| 04     | 30          |
-| 05     | 48          |
-| 06     | 50          |
-| 07     | 60          |
-| 08     | 100         |
-| 09     | 120         |
-| 0a     | 240         |
+Changes the current frames per second.
+
+<!-- markdownlint-disable MD033 -->
+<table>
+  <tr>
+    <th>OPTION</th>
+    <td>00</td>
+    <td>0b</td>
+    <td>01</td>
+    <td>02</td>
+    <td>03</td>
+    <td>04</td>
+    <td>05</td>
+    <td>06</td>
+    <td>07</td>
+    <td>08</td>
+    <td>09</td>
+    <td>0a</td>
+  </tr>
+  <tr>
+    <th>FPS</th>
+    <td>12</td>
+    <td>12.5</td>
+    <td>15</td>
+    <td>24</td>
+    <td>25</td>
+    <td>30</td>
+    <td>48</td>
+    <td>50</td>
+    <td>60</td>
+    <td>100</td>
+    <td>120</td>
+    <td>240</td>
+  </tr>
+</table>
+<!-- markdownlint-enable MD033 -->
+
+> [!NOTE]
+> Check the Resolution section for available FPS per resolution.
+> The closest matching FPS mode (rounded up) will be selected if the requested FPS is not available for the current resolution.
 
 ### Volume
 
 * param1: `camera`
 * ACTION: `BS`
+
+Change the beep sound volume.
 
 | OPTION | Description |
 |--------|-------------|
@@ -118,4 +157,41 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 | DF     | Delete a specific file (requires replacing `%OPTION` with filepath) |
 | FO     | Format SD card                  |
 
-todo: check LS
+### Leds
+
+* param1: `camera`
+* ACTION: `LB`
+
+Changes the led configuration.
+
+| OPTION | Description                    |
+|--------|--------------------------------|
+| 00     | Turns off leds                 |
+| 01     | 2 Leds active (front and back) |
+| 02     | 4 Leds active (all)            |
+
+### Locate
+
+* param1: `camera`
+* ACTION: `LL`
+
+Turns on/off the locate mode to find the camera.
+
+| OPTION | Description                                            | Notes |
+|--------|--------------------------------------------------------|-------|
+| 00     | Turns off location mode                                | N/A   |
+| 01     | Makes the red led flash and the camera beep to find it | Will beep regardless of volume setting but will not flash if leds are turned off |
+
+### Default mode
+
+* param1: `camera`
+* ACTION: `DM`
+
+Changes the default mode when the camera is powered on.
+
+| OPTION | Description                     |
+|--------|---------------------------------|
+| 00     | Video mode                      |
+| 01     | Photo mode                      |
+| 02     | Burst mode                      |
+| 03     | Time-lapse mode                 |
