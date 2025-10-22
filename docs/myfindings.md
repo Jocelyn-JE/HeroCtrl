@@ -283,4 +283,3 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 | RS     | Restart the camera's wifi, the bottom blue led flashes    | bacpac |
 | sx     | Gets the status of the camera, returns 56 bytes           | camera |
 | PI     | Returns `0x00` if no OPTION is given                      | camera |
-| PV     | Options are `0x00`, `0x01` and `0x02` no visible reaction on the camera | camera |
