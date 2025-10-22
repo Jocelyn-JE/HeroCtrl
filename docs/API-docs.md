@@ -353,6 +353,8 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 | DF     | Delete a specific file (requires replacing `%OPTION` with filepath) |
 | FO     | Format SD card                  |
 
+---
+
 ### Miscellaneous
 
 | ACTION | Description / Options                                     | param1 |
@@ -362,6 +364,8 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 | RS     | Restart the camera's wifi, the bottom blue led flashes    | bacpac |
 | sx     | Gets the status of the camera, returns 56 bytes           | camera |
 | PI     | Returns `0x00` if no OPTION is given                      | camera |
+
+---
 
 ### Research
 
@@ -379,6 +383,8 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | XX       | `00 XX 00 * (times XX)` |
     | 1F       | `00 1F 00 * (31 times)` |
     | Above 1F | `00 1F 00 * (31 times)` |
+
+---
 
 ### Do not use
 
