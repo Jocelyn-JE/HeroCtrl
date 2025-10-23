@@ -23,10 +23,13 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 ## Endpoints summary
 
-* [Actions](/docs/myfindings.md#actions)
-* [Recording settings](/docs/myfindings.md#recording-settings)
-* [Settings](/docs/myfindings.md#settings)
-* [Miscellaneous](/docs/myfindings.md#miscellaneous)
+* [Actions](/docs/API-docs.md#actions)
+* [Recording settings](/docs/API-docs.md#recording-settings)
+* [Settings](/docs/API-docs.md#settings)
+* [Camera info](/docs/API-docs.md#camera-info--status)
+* [Files](/docs/API-docs.md#file-management)
+* [Miscellaneous](/docs/API-docs.md#miscellaneous)
+* [Research](/docs/API-docs.md#research)
 
 ---
 
@@ -201,6 +204,68 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     > Check the Resolution section for available FPS per resolution
     > The closest matching FPS mode (rounded up) will be selected if the requested FPS is not available for the current resolution
 
+4. ### Simultaneous video and photo
+
+    * param1: `camera`
+    * OPTION: `PN`
+
+    Changes the simultaneous video and photo setting (will take photos periodically during recording)
+
+    | OPTION | Interval    |
+    |--------|-------------|
+    | 00     | OFF         |
+    | 01     | 5s          |
+    | 02     | 10s         |
+    | 03     | 30s         |
+    | 04     | 60s         |
+
+    > [!NOTE]
+    > Simultaneous video and photo is only available when Protune is off and in the following resolutions:
+    > * 1080p 24fps
+    > * 1080p 30fps
+    > * 720p 60fps
+    > * 1440p 24fps
+
+5. ### Loop video
+
+    * param1: `camera`
+    * OPTION: `LO`
+
+    Changes the loop video setting (continuously records the most recent moment)
+
+    | OPTION | Loop length       |
+    |--------|-------------------|
+    | 00     | OFF               |
+    | 01     | 5min              |
+    | 02     | 20min             |
+    | 03     | 60min             |
+    | 04     | 120min            |
+    | 05     | Max (all SD card) |
+
+6. ### Low light
+
+    * param1: `camera`
+    * OPTION: `LW`
+
+    Enable / disable the low light mode (only works above 30fps)
+
+    | OPTION | State |
+    |--------|-------|
+    | 00     | OFF   |
+    | 01     | ON    |
+
+7. ### Spot meter
+
+    * param1: `camera`
+    * OPTION: `EX`
+
+    Enable / disable the spot meter mode
+
+    | OPTION | State |
+    |--------|-------|
+    | 00     | OFF   |
+    | 01     | ON    |
+
 ---
 
 ## Photo settings
@@ -249,6 +314,131 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | 03     | 3 photos/s   |
     | 05     | 5 photos/s   |
     | 0a     | 10 photos/s  |
+
+4. ### Burst rate
+
+    * param1: `camera`
+    * ACTION: `BU`
+
+    Changes the burst rate of the burst mode (number of photos taken in 1 or 2s)
+
+    | OPTION | Rate         |
+    |--------|--------------|
+    | 00     | 3/1s         |
+    | 01     | 5/1s         |
+    | 02     | 10/1s        |
+    | 03     | 10/2s        |
+    | 04     | 30/1s        |
+    | 05     | 30/2s        |
+    | 06     | 30/3s        |
+
+---
+
+## Protune settings
+
+1. ### Protune
+
+    * param1: `camera`
+    * ACTION: `PT`
+
+    Enable/disable Protune
+
+    | OPTION | State    |
+    |--------|----------|
+    | 00     | Disabled |
+    | 01     | Enabled  |
+
+2. ### White balance
+
+    * param1: `camera`
+    * ACTION: `WB`
+
+    Changes the white balance setting
+
+    | OPTION | Value   |
+    |--------|---------|
+    | 00     | Auto    |
+    | 01     | 3000k   |
+    | 02     | 5500k   |
+    | 03     | 6500k   |
+    | 04     | Cam RAW |
+
+3. ### Exposure
+
+    * param1: `camera`
+    * ACTION: `EV`
+
+    Changes the exposure compensation setting
+
+    | OPTION | Value |
+    |--------|-------|
+    | 06     | -2.0  |
+    | 07     | -1.5  |
+    | 08     | -1.0  |
+    | 09     | -0.5  |
+    | 0a     |  0    |
+    | 0b     | +0.5  |
+    | 0c     | +1.0  |
+    | 0d     | +1.5  |
+    | 0e     | +2.0  |
+
+4. ### Sharpness
+
+    * param1: `camera`
+    * ACTION: `SP`
+
+    Changes the sharpness setting
+
+    | OPTION | Value  |
+    |--------|--------|
+    | 00     | High   |
+    | 01     | Medium |
+    | 02     | Low    |
+
+5. ### ISO
+
+    * param1: `camera`
+    * ACTION: `GA`
+
+    Changes the ISO setting
+
+    | OPTION | Value  |
+    |--------|--------|
+    | 00     | 6400   |
+    | 01     | 1600   |
+    | 02     | 400    |
+
+6. ### Color profile
+
+    * param1: `camera`
+    * ACTION: `CO`
+
+    Changes the color profile setting
+
+    | OPTION | Value       |
+    |--------|-------------|
+    | 00     | GoPro Color |
+    | 01     | Flat        |
+
+7. ### Protune resolutions
+
+    * param1: `camera`
+    * ACTION: `VV`
+
+    Sets the resolution when Protune is ON
+
+    | VV    | Resolution      | Available FPS (NTSC & PAL) |
+    |-------|-----------------|----------------------------|
+    | 00/01 | 720p            | 120, 100, 60, 50           |
+    | 02    | 960p            | 100, 60, 50                |
+    | 03    | 1080p           | 60, 50, 48, 30, 25, 24     |
+    | 04    | 1440p           | 48, 30, 25, 24             |
+    | 05    | 2.7k            | 30, 25                     |
+    | 06    | 4k              | 15, 12.5                   |
+    | 07    | 2.7k 17:9 24fps | 24                         |
+    | 08    | 4k 17:9 12fps   | 12                         |
+    | 09    | 1080p Superview | 48, 30, 25, 24             |
+    | 0a    | 720p Superview  | 100, 60, 50                |
 
 ---
 
@@ -340,9 +530,45 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | 00     | UP (default) |
     | 01     | DOWN         |
 
+7. ### One button mode
+
+    * param1: `camera`
+    * OPTION: `OB`
+
+    Enable / disable the one button mode (starts recording when powering the camera on)
+
+    | OPTION | State |
+    |--------|-------|
+    | 00     | OFF   |
+    | 01     | ON    |
+
+    > [!NOTE]
+    > The one button mode will not work as long as the camera is in wifi "GoPro app" mode
+
+8. ### Auto power off
+
+    * param1: `camera`
+    * OPTION: `AO`
+
+    Enable / disable the auto power off mode (stops after given time)
+
+    | OPTION | Delay |
+    |--------|-------|
+    | 00     | Never |
+    | 01     | 1min  |
+    | 02     | 2min  |
+    | 03     | 5min  |
+
+    > [!NOTE]
+    > The auto power off mode will not work as long as the camera is in wifi "GoPro app" mode
+
 ---
 
-### File management
+## Camera info / status
+
+---
+
+## File management
 
 * param1: `camera`
 
@@ -355,7 +581,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 ---
 
-### Miscellaneous
+## Miscellaneous
 
 | ACTION | Description / Options                                     | param1 |
 |--------|-----------------------------------------------------------|--------|
@@ -367,9 +593,9 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 ---
 
-### Research
+## Research
 
-* #### camera `CN`
+* ### camera `CN`
 
     Reacts to `00` - `FF` but the result will be max `1F` after `1F`
 
