@@ -18,6 +18,8 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 2. In any other case, a valid endpoint returns a two byte response corresponding to the action performed. For example: `00 07` if we modified the FPS to 60 via `FS 07`. So maybe the first byte returned is the return code `00` for success and `01` for error
 3. Some endpoints return more data, for example the `sx` endpoint returns 56 bytes with the camera status
 4. Some endpoints don't require an OPTION, in that case the URL should be called without the `p=%OPTION` part
+5. Uppercase endpoints are pseudo-POST endpoints (GET but changes things)
+6. Lowercase endpoints return data about the camera eg: `bl` returns the battery level in %
 
 ---
 
