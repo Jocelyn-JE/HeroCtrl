@@ -399,12 +399,12 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | 01     | Medium |
     | 02     | Low    |
 
-5. ### ISO
+5. ### ISO Limit
 
     * param1: `camera`
     * ACTION: `GA`
 
-    Changes the ISO setting
+    Changes the ISO limit setting
 
     | OPTION | Value  |
     |--------|--------|
@@ -583,6 +583,8 @@ Exceptions:
 
     Returns 56 bytes of info of all sorts, not all bytes are documented
 
+    All bit position are from index 1 read from left to right
+
     | Byte      | Description                                                 |
     |-----------|-------------------------------------------------------------|
     | 0         | Response code                                               |
@@ -616,7 +618,7 @@ Exceptions:
     | 37        | Loop video                                                  |
     | 50        | Video resolution                                            |
     | 51        | Framerate                                                   |
-    | 52        | (Bits 5/6) Sharpness (Bits 7/8) ISO                         |
+    | 52        | (Bits 5/6) Sharpness (Bits 7/8) ISO limit                  |
     | 53        | Exposure                                                    |
 
 2. ### Battery level
