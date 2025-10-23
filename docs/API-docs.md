@@ -31,7 +31,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 * [Camera info](/docs/API-docs.md#camera-info--status)
 * [Files](/docs/API-docs.md#file-management)
 * [Miscellaneous](/docs/API-docs.md#miscellaneous)
-* [Research](/docs/API-docs.md#research)
+* [Research](/docs/API-docs.md#to-research)
 
 ---
 
@@ -60,7 +60,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 2. ### Record / Shutter
 
-    * param1: `camera`
+    * param1: `camera` or `bacpac`
     * ACTION: `SH`
 
     What this can do depending on the current camera mode:
@@ -121,6 +121,8 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | 03     | Timelapse mode                               |
     | 04     | Video mode (HERO 2 timer mode)               |
     | 05     | Preview mode (touchscreen bacpac or HDMI)    |
+    | 06     | Video mode but forces it each time (if you do `00` multiple times nothing happens normally) |
+    | 07     | Settings                                     |
 
 ---
 
@@ -568,7 +570,53 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 ## Camera info / status
 
-1. ### Battery level
+All endpoints to set something in lowercase will return it's value, eg: `pt` will return the status of Protune (ON `01`/OFF `00`)
+
+Exceptions:
+
+* camera `pw` doesn't work
+
+1. ### Camera status
+
+    Returns 56 bytes of info of all sorts, not all bytes are documented
+
+    | Byte      | Description                                                 |
+    |-----------|-------------------------------------------------------------|
+    | 0         | Response code                                               |
+    | 1         | Camera mode                                                 |
+    | 3         | Default camera mode                                         |
+    | 4         | Spot meter                                                  |
+    | 5         | Timelapse interval                                          |
+    | 6         | Auto power off                                              |
+    | 7         | FOV                                                         |
+    | 8         | Photo resolution                                            |
+    | 13        | Recording progress (int) high byte                          |
+    | 14        | Recording progress (int) low byte                           |
+    | 16        | Volume                                                      |
+    | 17        | Leds status                                                 |
+    | 18        | (Bit 3) Video mode (Bit 2) Locate (Bit 5) One button mode (Bit 6) Orientation (Bit 8) Video preview |
+    | 19        | Battery level 0-3                                           |
+    | 21        | Photos remaining (int) high byte                            |
+    | 22        | Photos remaining (int) low byte                             |
+    | 23        | Number of photos taken (int) high byte                      |
+    | 24        | Number of photos taken (int) low byte                       |
+    | 25        | Recording time left in minutes (int) high byte              |
+    | 26        | Recording time left in minutes (int) low byte               |
+    | 27        | Number of videos taken (int) high byte                      |
+    | 28        | Number of videos taken (int) low byte                       |
+    | 29        | Shutter                                                     |
+    | 30        | (Bit 1) Color profile (Bit 7) Protune (Bit 2) Low light     |
+    | 32        | Burst rate                                                  |
+    | 33        | Continuous shot                                             |
+    | 34        | White balance                                               |
+    | 36        | Simultaneous video and photo interval                       |
+    | 37        | Loop video                                                  |
+    | 50        | Video resolution                                            |
+    | 51        | Framerate                                                   |
+    | 52        | (Bits 5/6) Sharpness (Bits 7/8) ISO                         |
+    | 53        | Exposure                                                    |
+
+2. ### Battery level
 
     * param1: `camera`
     * OPTION: `bl`
@@ -577,6 +625,119 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     |--------|----------------------|
     | 0      | Response code        |
     | 1      | Battery level 0-100% |
+
+3. ### Camera name / model
+
+    * param1: `camera`
+    * OPTION: `cn`
+
+    Returns "HERO3+ Black Edition"
+
+    | Byte   | Description                   |
+    |--------|-------------------------------|
+    | 0      | Response code                 |
+    | 1      | Number of characters          |
+    | ...    | Camera model (multiple bytes) |
+
+4. ### Camera password
+
+    * param1: `camera`
+    * OPTION: `sd`
+
+    | Byte   | Description                      |
+    |--------|----------------------------------|
+    | 0      | Response code                    |
+    | 1      | Number of characters             |
+    | ...    | Camera password (multiple bytes) |
+
+5. ### Bacpac battery
+
+    * param1: `bacpac`
+    * OPTION: `bl`
+
+    Most likely is the battery level of the battery bacpac (i don't have it and it returns 100% when i call it, need someone to test it)
+
+    | Byte   | Description          |
+    |--------|----------------------|
+    | 0      | Response code        |
+    | 1      | Battery level 0-100% |
+
+6. ### Wifi info
+
+    * param1: `bacpac`
+    * OPTION: `wp`
+
+    Returns Wifi password and SSID
+
+    | Byte      | Description                      |
+    |-----------|----------------------------------|
+    | 0         | Response code                    |
+    | 1         | Number of characters (n1)        |
+    | 2...n1    | Camera password (multiple bytes) |
+    | n1+1      | Number of characters (n2)        |
+    | n1+2...n2 | Camera SSID (multiple bytes)     |
+
+7. ### Ports
+
+    * param1: `bacpac`
+    * OPTION: `pf` (Port forwarding?)
+
+    Returns CSV rows of the different ports
+
+    | Byte      | Description                                    |
+    |-----------|------------------------------------------------|
+    | 0         | Response code                                  |
+    | ...       | Multiple CSV rows ended by `0A` (newline/`\n`) |
+
+8. ### Serial number
+
+    * param1: `bacpac`
+    * OPTION: `sn`
+
+    Returns the camera's serial number (without the preceding H for some reason) and mac address (3 times??)
+
+    | Byte   | Description                  |
+    |--------|------------------------------|
+    | 0      | Response code                |
+    | 1-6    | MAC Address                  |
+    | 7-12   | MAC Address                  |
+    | 13-18  | MAC Address                  |
+    | 19-32  | Serial Number                |
+    | 33     | `0x05` (unknown purpose)     |
+
+    > [!NOTE]
+    > I don't know why the MAC address is repeated 3 times, this endpoint is still a mystery
+
+9. ### Bacpac version?
+
+    * param1: `bacpac`
+    * OPTION: `cv`
+
+    Unknown purpose, returns 4 bytes
+
+    | Byte    | Description               |
+    |---------|---------------------------|
+    | 0       | Response code             |
+    | 1-11    | Unknown (`00 01 00 00 00 01 00 01 04 00 24`) in my test|
+    | 12-17   | MAC Address               |
+    | 18      | Number of characters (n1) |
+    | 19...n1 | Camera SSID               |
+
+10. ### Camera version
+
+    * param1: `camera`
+    * OPTION: `cv`
+
+    Returns firmware version (HD3.11.03.03) and camera type (HERO3+ Black Edition)
+
+    | Byte      | Description               |
+    |-----------|---------------------------|
+    | 0         | Response code             |
+    | 1-2       | Unknown (`02 0B`) in my test |
+    | 3         | Number of characters (n1) |
+    | 4...n1    | Firmware version          |
+    | n1+1      | Number of characters (n2) |
+    | n1+2...n2 | Camera type               |
 
 ---
 
@@ -597,15 +758,14 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 | ACTION | Description / Options                                     | param1 |
 |--------|-----------------------------------------------------------|--------|
-| sd     | Get wifi password                                         | bacpac |
+| tc     | Disconnects from the camera?                              | bacpac |
 | NO     | Returns `0x00` if no OPTION is given                      | bacpac |
 | RS     | Restart the camera's wifi, the bottom blue led flashes    | bacpac |
-| sx     | Gets the status of the camera, returns 56 bytes           | camera |
 | PI     | Returns `0x00` if no OPTION is given                      | camera |
 
 ---
 
-## Research
+## To research
 
 * ### camera `CN`
 
@@ -621,6 +781,85 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | XX       | `00 XX 00 * (times XX)` |
     | 1F       | `00 1F 00 * (31 times)` |
     | Above 1F | `00 1F 00 * (31 times)` |
+
+* ### camera `ai`
+
+* ### camera `bv`
+
+* ### camera `cc`
+
+* ### camera `ds`
+
+* ### camera `oo`
+
+* ### camera `rv`
+
+* ### camera `se`
+
+    | Byte      | Description                                                 |
+    |-----------|-------------------------------------------------------------|
+    | 0         | Response code                                               |
+    | 1         | Camera mode                                                 |
+    | 3         | Default camera mode                                         |
+    | 4         | Spot meter                                                  |
+    | 5         | Timelapse interval                                          |
+    | 6         | Auto power off                                              |
+    | 7         | FOV                                                         |
+    | 8         | Photo resolution                                            |
+    | 13        | Recording progress (int) high byte                          |
+    | 14        | Recording progress (int) low byte                           |
+    | 16        | Sound volume                                                |
+    | 17        | Leds status                                                 |
+    | 18        | (Bit 3) Video mode (Bit 2) Locate (Bit 5) One button mode (Bit 6) Orientation (Bit 8) Video preview |
+    | 19        | Battery level 0-100%                                        |
+    | 21        | Photos remaining (int) high byte                            |
+    | 22        | Photos remaining (int) low byte                             |
+    | 23        | Number of photos taken (int) high byte                      |
+    | 24        | Number of photos taken (int) low byte                       |
+    | 25        | Recording time left in minutes (int) high byte              |
+    | 26        | Recording time left in minutes (int) low byte               |
+    | 27        | Number of videos taken (int) high byte                      |
+    | 28        | Number of videos taken (int) low byte                       |
+    | 29        | Shutter                                                     |
+    | 30        | (Bit 7) Protune                                             |
+
+* ### camera `st`
+
+* ### camera `um`
+
+* ### camera `xs`
+
+    ---
+
+* ### bacpac `ba`
+
+* ### bacpac `bm`
+
+* ### bacpac `bo`
+
+* ### bacpac `cs`
+
+* ### bacpac `lc`
+
+    Returns HTTP error `410` Gone with `0x01 05`
+
+* ### bacpac `oo`
+
+* ### bacpac `pp`
+
+* ### bacpac `pv`
+
+* ### bacpac `se`
+
+* ### bacpac `sr`
+
+* ### bacpac `vs`
+
+* ### bacpac `wi`
+
+* ### bacpac `ws`
+
+* ### bacpac `wt`
 
 ---
 
