@@ -578,6 +578,9 @@ Exceptions:
 
 1. ### Camera status
 
+    * param1: `camera`
+    * OPTION: `sx`
+
     Returns 56 bytes of info of all sorts, not all bytes are documented
 
     | Byte      | Description                                                 |
