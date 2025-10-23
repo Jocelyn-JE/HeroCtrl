@@ -568,6 +568,16 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
 ## Camera info / status
 
+1. ### Battery level
+
+    * param1: `camera`
+    * OPTION: `bl`
+
+    | Byte   | Description          |
+    |--------|----------------------|
+    | 0      | Response code        |
+    | 1      | Battery level 0-100% |
+
 ---
 
 ## File management
