@@ -761,16 +761,20 @@ Exceptions:
 
 ## Miscellaneous
 
-| ACTION | Description / Options                                     | param1 |
+* ### Live view
+
+    You can access the live view of the camera as an HLS stream at <http://10.5.5.9//live/amba.m3u8>
+
+---
+
+## To research
+
+| ACTION | Description                                               | param1 |
 |--------|-----------------------------------------------------------|--------|
 | tc     | Disconnects from the camera?                              | bacpac |
 | NO     | Returns `0x00` if no OPTION is given                      | bacpac |
 | RS     | Restart the camera's wifi, the bottom blue led flashes    | bacpac |
 | PI     | Returns `0x00` if no OPTION is given                      | camera |
-
----
-
-## To research
 
 * ### camera `CN`
 
