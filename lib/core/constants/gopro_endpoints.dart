@@ -1,5 +1,6 @@
 class GoProEndpoints {
   static const String baseUrl = 'http://10.5.5.9';
+  static const String livestreamUrl = '$baseUrl/live/amba.m3u8';
   // Actions
   static const String power = 'pw';
   static const String shutter = 'sh';
@@ -10,7 +11,7 @@ class GoProEndpoints {
   static const String videoResolution = 'vv';
   static const String fov = 'fv';
   static const String fps = 'fs';
-  static const String simultaneousVideoAndPhoto = 'PN';
+  static const String simultaneousVideoAndPhoto = 'pn';
   static const String loopVideo = 'lo';
   static const String lowLight = 'lw';
   static const String spotMeter = 'ex';
