@@ -763,7 +763,7 @@ Exceptions:
 
 * ### Live view
 
-    You can access the live view of the camera as an HLS stream at <http://10.5.5.9//live/amba.m3u8>
+    You can access the live view of the camera as an HLS stream at <http://10.5.5.9/live/amba.m3u8>
 
 ---
 
