@@ -403,7 +403,7 @@ class ProtuneVideoResolution {
     ProtuneVideoResolution.res1080pSuperView: '1080p SuperView',
     ProtuneVideoResolution.res720pSuperView: '720p SuperView',
   };
-  static const ProtuneVideoResolutionSupportedFPS = {
+  static const protuneVideoResolutionSupportedFPS = {
     ProtuneVideoResolution.res720p: [
       FPS.fps50,
       FPS.fps60,
