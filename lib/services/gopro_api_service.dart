@@ -27,14 +27,9 @@ class GoProApiService {
 
   Future<CameraStatus> getStatus(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.status, password);
-    if (response.statusCode == 200) {
-      final bytes = response.bodyBytes;
-      AppLogger.info('GoPro Status: ${bytes.length} bytes');
-      return CameraStatus(bytes);
-    } else {
-      AppLogger.error('Failed to get GoPro status. Response: ${response.body}');
-      throw Exception('Failed to get GoPro status');
-    }
+    final bytes = response.bodyBytes;
+    AppLogger.info('GoPro Status: ${bytes.length} bytes');
+    return CameraStatus(bytes);
   }
 
   Future<http.Response> _getApi(
@@ -43,17 +38,16 @@ class GoProApiService {
     String? password,
   ) async {
     if (device != _camera && device != _bacpac) {
-      throw Exception('Invalid device: $device');
+      throw Exception('_getApi: Invalid device "$device"');
     }
 
     String path = '${GoProEndpoints.baseUrl}/$device/${command.toLowerCase()}';
     if (password != null) path += '?t=$password';
     final response = await http.get(Uri.parse(path));
     if (response.statusCode != 200 || response.bodyBytes[0] != 0) {
-      AppLogger.error(
-        'Failed to send command to GoPro: $path\n Response: ${response.bodyBytes.toString()}',
+      throw Exception(
+        '_getApi: Failed to send "$path" to GoPro\n Response: ${response.body} (hex: ${response.bodyBytes.toString()})',
       );
-      throw Exception('Command failed: $path');
     }
     return response;
   }
@@ -65,7 +59,7 @@ class GoProApiService {
     String? option,
   ) async {
     if (device != _camera && device != _bacpac) {
-      throw Exception('Invalid device: $device');
+      throw Exception('_postApi: Invalid device "$device"');
     }
 
     String path = '${GoProEndpoints.baseUrl}/$device/${command.toUpperCase()}';
@@ -73,10 +67,9 @@ class GoProApiService {
     if (option != null) path += '${password != null ? '&' : '?'}p=%$option';
     final response = await http.get(Uri.parse(path));
     if (response.statusCode != 200 || response.bodyBytes[0] != 0) {
-      AppLogger.error(
-        'Failed to send command to GoPro: $path\n Response: ${response.body}',
+      throw Exception(
+        '_postApi: Failed to send "$path" to GoPro\n Response: ${response.body} (hex: ${response.bodyBytes.toString()})',
       );
-      throw Exception('Command failed: $path');
     }
     return response;
   }
