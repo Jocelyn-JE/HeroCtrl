@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/core/utils/logger.dart';
-import 'package:heroctrl/screens/home_screen.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
+
+import 'package:heroctrl/screens/home_screen.dart';
+import 'package:heroctrl/screens/settings_screen.dart';
 
 void main() {
   AppLogger.init(); // Initialize logger
@@ -15,6 +17,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeScreen());
+    return MaterialApp(
+      home: HomeScreen(),
+      routes: {'/settings': (context) => SettingsScreen()},
+    );
   }
 }
