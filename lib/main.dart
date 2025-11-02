@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/core/utils/logger.dart';
 import 'package:heroctrl/screens/home_screen.dart';
+import 'package:heroctrl/services/gopro_api_service.dart';
 
 void main() {
-  AppLogger.init();
+  AppLogger.init(); // Initialize logger
+  GoProApiService(); // Initialize singleton
   AppLogger.info('App started');
   runApp(const MainApp());
 }
