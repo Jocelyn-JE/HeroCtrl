@@ -12,6 +12,14 @@ class GoProApiService {
 
   GoProApiService._internal();
 
+  Future<void> stopShutter(String password) async {
+    await _postApi(_camera, GoProEndpoints.shutter, password, Shutter.stop);
+  }
+
+  Future<void> startShutter(String password) async {
+    await _postApi(_camera, GoProEndpoints.shutter, password, Shutter.start);
+  }
+
   Future<void> turnOffCamera(String password) async {
     await _postApi(_bacpac, GoProEndpoints.power, password, Power.off);
   }
