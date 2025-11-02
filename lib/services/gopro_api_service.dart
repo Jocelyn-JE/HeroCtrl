@@ -5,9 +5,8 @@ import 'package:heroctrl/core/constants/gopro_endpoints.dart';
 
 class GoProApiService {
   static final GoProApiService _instance = GoProApiService._internal();
-  static const _camera = 0;
-  static const _bacpac = 1;
-  static const devices = ['camera', 'bacpac'];
+  static const _camera = 'camera';
+  static const _bacpac = 'bacpac';
 
   factory GoProApiService() => _instance;
 
@@ -39,7 +38,7 @@ class GoProApiService {
   }
 
   Future<http.Response> _getApi(
-    int device,
+    String device,
     String command,
     String? password,
   ) async {
@@ -47,8 +46,7 @@ class GoProApiService {
       throw Exception('Invalid device: $device');
     }
 
-    String path =
-        '${GoProEndpoints.baseUrl}/${devices[device]}/${command.toLowerCase()}';
+    String path = '${GoProEndpoints.baseUrl}/$device/${command.toLowerCase()}';
     if (password != null) path += '?t=$password';
     final response = await http.get(Uri.parse(path));
     if (response.statusCode != 200 || response.bodyBytes[0] != 0) {
@@ -61,7 +59,7 @@ class GoProApiService {
   }
 
   Future<http.Response> _postApi(
-    int device,
+    String device,
     String command,
     String? password,
     String? option,
@@ -70,8 +68,7 @@ class GoProApiService {
       throw Exception('Invalid device: $device');
     }
 
-    String path =
-        '${GoProEndpoints.baseUrl}/${devices[device]}/${command.toUpperCase()}';
+    String path = '${GoProEndpoints.baseUrl}/$device/${command.toUpperCase()}';
     if (password != null) path += '?t=$password';
     if (option != null) path += '${password != null ? '&' : '?'}p=%$option';
     final response = await http.get(Uri.parse(path));
