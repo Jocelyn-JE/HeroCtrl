@@ -21,7 +21,7 @@ class GoProApiService {
     await _postApi(_bacpac, GoProEndpoints.power, password, Power.on);
   }
 
-  Future<bool> cameraTurnedOn(String password) async {
+  Future<bool> cameraPowerStatus(String password) async {
     final response = await _getApi(_bacpac, GoProEndpoints.power, password);
     return response.bodyBytes[1] == 1;
   }
