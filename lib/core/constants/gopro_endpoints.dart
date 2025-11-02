@@ -115,13 +115,13 @@ class VideoResolution {
   static const videoResolutionStrings = {
     VideoResolution.wvga240fps: 'WVGA 240fps',
     VideoResolution.res720p: '720p',
-    VideoResolution.res960p: '960p',
+    VideoResolution.res960p: '960p (4:3)',
     VideoResolution.res1080p: '1080p',
-    VideoResolution.res1440p: '1440p',
+    VideoResolution.res1440p: '1440p (4:3)',
     VideoResolution.res2_7k: '2.7K',
     VideoResolution.res4k: '4K',
-    VideoResolution.res2_7k_17_9: '2.7K 17:9',
-    VideoResolution.res4k_17_9: '4K 17:9',
+    VideoResolution.res2_7k_17_9: '2.7K (17:9)',
+    VideoResolution.res4k_17_9: '4K (17:9)',
     VideoResolution.res1080pSuperView: '1080p SuperView',
     VideoResolution.res720pSuperView: '720p SuperView',
   };
@@ -393,13 +393,13 @@ class ProtuneVideoResolution {
   static const String res720pSuperView = '0a';
   static const protuneVideoResolutionStrings = {
     ProtuneVideoResolution.res720p: '720p',
-    ProtuneVideoResolution.res960p: '960p',
+    ProtuneVideoResolution.res960p: '960p (4:3)',
     ProtuneVideoResolution.res1080p: '1080p',
-    ProtuneVideoResolution.res1440p: '1440p',
+    ProtuneVideoResolution.res1440p: '1440p (4:3)',
     ProtuneVideoResolution.res2_7k: '2.7K',
     ProtuneVideoResolution.res4k: '4K',
-    ProtuneVideoResolution.res2_7k_17_9: '2.7K 17:9',
-    ProtuneVideoResolution.res4k_17_9: '4K 17:9',
+    ProtuneVideoResolution.res2_7k_17_9: '2.7K (17:9)',
+    ProtuneVideoResolution.res4k_17_9: '4K (17:9)',
     ProtuneVideoResolution.res1080pSuperView: '1080p SuperView',
     ProtuneVideoResolution.res720pSuperView: '720p SuperView',
   };
@@ -482,6 +482,29 @@ class VideoModes {
     VideoModes.ntsc: 'NTSC',
     VideoModes.pal: 'PAL',
   };
+  static const videoModesFrameRates = {
+    VideoModes.ntsc: [
+      FPS.fps15,
+      FPS.fps12,
+      FPS.fps24,
+      FPS.fps30,
+      FPS.fps48,
+      FPS.fps60,
+      FPS.fps100,
+      FPS.fps120,
+      FPS.fps240,
+    ],
+    VideoModes.pal: [
+      FPS.fps12_5,
+      FPS.fps12,
+      FPS.fps24,
+      FPS.fps25,
+      FPS.fps48,
+      FPS.fps50,
+      FPS.fps100,
+      FPS.fps240,
+    ],
+  };
 }
 
 class Orientation {
@@ -506,8 +529,8 @@ class AutoPowerOff {
   static const String after5Minutes = '03';
   static const autoPowerOffStrings = {
     AutoPowerOff.never: 'Never',
-    AutoPowerOff.after1Minute: 'After 1 Minute',
-    AutoPowerOff.after2Minutes: 'After 2 Minutes',
-    AutoPowerOff.after5Minutes: 'After 5 Minutes',
+    AutoPowerOff.after1Minute: 'After 1 minute',
+    AutoPowerOff.after2Minutes: 'After 2 minutes',
+    AutoPowerOff.after5Minutes: 'After 5 minutes',
   };
 }
