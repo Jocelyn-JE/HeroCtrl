@@ -164,6 +164,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
         return Card(
           child: ListTile(
             leading: CircleAvatar(child: Icon(Icons.videocam)),
+            trailing: Icon(Icons.chevron_right),
             title: Text(title),
             subtitle: Text('BSSID: $bssid'),
             onTap: () {
