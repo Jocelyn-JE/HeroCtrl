@@ -42,4 +42,13 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+    <!-- older devices: location (only needed <= 32) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="32"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="32"/>
+    <!-- generic wifi perms -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- Android 13+ specialized permission; you still must request it at runtime -->
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES"
+                 android:usesPermissionFlags="neverForLocation"/>
 </manifest>
