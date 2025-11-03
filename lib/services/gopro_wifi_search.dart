@@ -41,15 +41,20 @@ class GoProWifiSearch {
     return prefixes.any((p) => bssid.toUpperCase().startsWith(p));
   }
 
-  Future<bool> startScan() async {
-    bool result;
+  // filter scan results to only include GoPro devices
+  List<WiFiAccessPoint> _filterScanResults(List<WiFiAccessPoint> apList) {
+    return apList.where((ap) => isGoPro(ap.bssid)).toList();
+  }
 
+  Future<bool> startScan() async {
     if (_isScanning) throw Exception('WiFi scan already in progress.');
-    final can = await _wifiScan.canStartScan(askPermissions: true);
+
+    final can = await _wifiScan.canStartScan();
     switch (can) {
       case CanStartScan.yes:
+        await startListeningToScannedResults();
         _isScanning = true;
-        result = await _wifiScan.startScan();
+        final result = await _wifiScan.startScan();
         _isScanning = false;
         return result;
       case CanStartScan.noLocationPermissionDenied:
@@ -71,14 +76,9 @@ class GoProWifiSearch {
     }
   }
 
-  List<WiFiAccessPoint> _filterScanResults(List<WiFiAccessPoint> apList) {
-    return apList.where((ap) => isGoPro(ap.bssid)).toList();
-  }
-
-  void startListeningToScannedResults() async {
-    final can = await WiFiScan.instance.canGetScannedResults(
-      askPermissions: true,
-    );
+  Future<void> startListeningToScannedResults() async {
+    if (_subscription != null) return; // already listening
+    final can = await WiFiScan.instance.canGetScannedResults();
     switch (can) {
       case CanGetScannedResults.yes:
         _subscription = WiFiScan.instance.onScannedResultsAvailable.listen((
