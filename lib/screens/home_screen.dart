@@ -26,7 +26,7 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: ListView.builder(
-        padding: EdgeInsets.fromLTRB(8, 8, 8, bottomInset + 16),
+        padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
         itemCount: items.length,
         itemBuilder: (context, index) {
           final title = items[index];
@@ -35,7 +35,7 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
             child: ListTile(
               leading: CircleAvatar(child: Icon(Icons.videocam)),
               title: Text(title),
-              subtitle: const Text('Tap for details'),
+              subtitle: const Text('Tap to connect'),
               onTap: () {
                 // handle tap
               },
@@ -45,7 +45,7 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // handle button press
+          Navigator.pushNamed(context, '/camera_search');
         },
         child: const Icon(Icons.add),
       ),

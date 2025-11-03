@@ -4,6 +4,7 @@ import 'package:heroctrl/services/gopro_api_service.dart';
 
 import 'package:heroctrl/screens/home_screen.dart';
 import 'package:heroctrl/screens/settings_screen.dart';
+import 'package:heroctrl/screens/camera_search_screen.dart';
 
 void main() {
   AppLogger.init(); // Initialize logger
@@ -19,7 +20,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeScreen(),
-      routes: {'/settings': (context) => SettingsScreen()},
+      routes: {
+        '/settings': (context) => SettingsScreen(),
+        '/camera_search': (context) => CameraSearchScreen(),
+      },
     );
   }
 }
