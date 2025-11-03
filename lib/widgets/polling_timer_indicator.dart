@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 class PollingTimerIndicator extends StatefulWidget {
   final DateTime? nextPollTime;
-  // optional external notifier you can update from outside (preferred)
   final ValueListenable<DateTime?>? nextPollTimeListenable;
   final int pollIntervalSeconds;
   final double size;
@@ -34,7 +33,6 @@ class _PollingTimerIndicatorState extends State<PollingTimerIndicator> {
   @override
   void initState() {
     super.initState();
-    // if an external listable is provided, listen to it; otherwise run an internal tick timer
     if (widget.nextPollTimeListenable != null) {
       _externalListener = () {
         if (!mounted) return;
@@ -61,18 +59,14 @@ class _PollingTimerIndicatorState extends State<PollingTimerIndicator> {
   @override
   void didUpdateWidget(covariant PollingTimerIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // swap between external listable and internal timer if prop changed
     if (oldWidget.nextPollTimeListenable != widget.nextPollTimeListenable) {
-      // remove old
       if (oldWidget.nextPollTimeListenable != null &&
           _externalListener != null) {
         oldWidget.nextPollTimeListenable!.removeListener(_externalListener!);
       }
-      // cancel internal timer
       _tickTimer?.cancel();
       _tickTimer = null;
       _externalListener = null;
-      // attach new
       if (widget.nextPollTimeListenable != null) {
         _externalListener = () {
           if (!mounted) return;
