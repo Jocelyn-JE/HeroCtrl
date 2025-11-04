@@ -117,6 +117,44 @@ class GoProWifiSearch {
     }
   }
 
+  Future<void> connectAndStore(
+    String ssid,
+    String bssid,
+    String password,
+  ) async {
+    if (!isGoPro(bssid)) {
+      throw Exception('The specified BSSID does not belong to a GoPro device.');
+    }
+    if (await isRegisteredGoPro(bssid)) {
+      throw Exception('This GoPro device is already registered.');
+    }
+    final result = await WiFiForIoTPlugin.connect(
+      ssid,
+      bssid: bssid,
+      password: password,
+      security: NetworkSecurity.WPA,
+    );
+    if (!result) {
+      throw Exception('Failed to connect to the GoPro WiFi network.');
+    }
+    // Get serial number, MAC address, camera model and firmware version
+    // from the GoPro device via its API
+    final registration = GoProRegistration(
+      ssid: ssid,
+      bssid: bssid,
+      serialNumber: '',
+      cameraModel: '',
+      firmwareVersion: '',
+      macAddress: '',
+      password: password,
+    );
+    await GoProPrefs.add(registration);
+  }
+
+  Future<bool> isRegisteredGoPro(String bssid) async {
+    return await GoProPrefs.findByBssid(bssid) != null;
+  }
+
   void dispose() {
     _subscription?.cancel();
     _controller.close();
