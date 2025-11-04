@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:heroctrl/core/utils/snackbar.dart';
 import 'package:heroctrl/services/gopro_wifi_search.dart';
+import 'package:heroctrl/widgets/password_field.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 import 'package:heroctrl/widgets/polling_timer_indicator.dart';
 
@@ -31,24 +32,8 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
     _apSub = _wifiSearch.onResults.listen((_) {
       if (!mounted) return;
       setState(() {});
-      if (_wifiSearch.accessPoints.isNotEmpty) {
-        showSnackBar(
-          context,
-          'Found ${_wifiSearch.accessPoints.length} camera(s)',
-          color: Colors.green,
-        );
-      }
     });
-    _requestPermissionsAndStartSearch();
-  }
-
-  Future<void> _requestPermissionsAndStartSearch() async {
-    try {
-      await _wifiSearch.startListeningToScannedResults();
-      _startPeriodicSearch();
-    } catch (e) {
-      if (mounted) showSnackBar(context, '$e', color: Colors.red);
-    }
+    _startPeriodicSearch();
   }
 
   /*
@@ -57,6 +42,20 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
   */
   void _startPeriodicSearch() {
     _pollTimer?.cancel();
+    if (!_backgroundSearchInProgress) {
+      _backgroundSearchInProgress = true;
+      _searchForCameras().whenComplete(() {
+        // Update state only if still mounted.
+        if (mounted) {
+          _backgroundSearchInProgress = false;
+          _nextPollNotifier.value = DateTime.now().add(
+            Duration(seconds: _pollIntervalSeconds),
+          );
+        } else {
+          _backgroundSearchInProgress = false;
+        }
+      });
+    }
     _pollTimer = Timer.periodic(Duration(seconds: _pollIntervalSeconds), (
       timer,
     ) async {
@@ -66,20 +65,18 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
       }
       if (_backgroundSearchInProgress) return;
       _backgroundSearchInProgress = true;
-      try {
-        await _searchForCameras();
-      } finally {
-        _backgroundSearchInProgress = false;
-        _nextPollNotifier.value = DateTime.now().add(
-          Duration(seconds: _pollIntervalSeconds),
-        );
-      }
+      await _searchForCameras();
+      _backgroundSearchInProgress = false;
+      _nextPollNotifier.value = DateTime.now().add(
+        Duration(seconds: _pollIntervalSeconds),
+      );
     });
   }
 
   Future<void> _searchForCameras() async {
     try {
-      await _wifiSearch.startScan();
+      final result = await _wifiSearch.startScan();
+      if (!result) throw Exception('WiFi scan failed.');
     } catch (e) {
       if (mounted) showSnackBar(context, '$e', color: Colors.red);
     }
@@ -141,23 +138,72 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
     );
   }
 
+  AlertDialog _buildConnectionDialog(String ssid, String bssid) {
+    final controller = TextEditingController();
+    final navigator = Navigator.of(context);
+    PasswordField passwordField = PasswordField(controller: controller);
+    return AlertDialog(
+      title: Text('Connect to $ssid'),
+      content: passwordField,
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(false),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            bool result = false;
+            try {
+              result = await _wifiSearch.connectAndStore(
+                ssid,
+                bssid,
+                controller.text,
+              );
+            } catch (e) {
+              if (!mounted) return;
+              showSnackBar(context, 'Error: $e', color: Colors.red);
+              return navigator.pop(result);
+            }
+            if (result != true && mounted) {
+              showSnackBar(
+                context,
+                'Failed to connect to $ssid. Please check that the camera is powered on and that the password is correct.',
+                color: Colors.red,
+              );
+            }
+            navigator.pop(result);
+          },
+          child: const Text('Connect'),
+        ),
+      ],
+    );
+  }
+
   Widget _buildListView() {
     final double bottomInset = MediaQuery.of(context).padding.bottom;
+    ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(context);
     return ListView.builder(
       physics: const AlwaysScrollableScrollPhysics(),
       padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
       itemCount: _wifiSearch.accessPoints.length,
       itemBuilder: (context, index) {
-        final title = _wifiSearch.accessPoints[index].ssid;
+        final ssid = _wifiSearch.accessPoints[index].ssid;
         final bssid = _wifiSearch.accessPoints[index].bssid;
         return Card(
           child: ListTile(
             leading: CircleAvatar(child: Icon(Icons.videocam)),
             trailing: Icon(Icons.chevron_right),
-            title: Text(title),
+            title: Text(ssid),
             subtitle: Text('BSSID: $bssid'),
-            onTap: () {
-              // handle tap
+            onTap: () async {
+              final navigator = Navigator.of(context);
+              final connected = await showDialog<bool>(
+                context: context,
+                builder: (context) => _buildConnectionDialog(ssid, bssid),
+              );
+              if (connected != true) return;
+              navigator.popUntil((route) => route.isFirst);
+              scaffoldMessenger.clearSnackBars();
             },
           ),
         );
