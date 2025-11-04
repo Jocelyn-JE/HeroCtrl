@@ -22,6 +22,10 @@ class GoProPrefs {
     );
   }
 
+  static Future<void> clearAll() async {
+    await _secureStorage.delete(key: _key);
+  }
+
   static Future<List<GoProRegistration>> getAll() => _loadAll();
 
   static Future<void> add(GoProRegistration item) async {
