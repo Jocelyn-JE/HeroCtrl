@@ -93,7 +93,9 @@ class GoProWifiSearch {
         _subscription = WiFiScan.instance.onScannedResultsAvailable.listen((
           results,
         ) async {
-          _controller.add(await _filterScanResults(results));
+          final filtered = await _filterScanResults(results);
+          accessPoints = filtered;
+          _controller.add(filtered);
         });
         break;
       case CanGetScannedResults.noLocationPermissionDenied:
@@ -117,7 +119,7 @@ class GoProWifiSearch {
     }
   }
 
-  Future<void> connectAndStore(
+  Future<bool> connectAndStore(
     String ssid,
     String bssid,
     String password,
@@ -133,10 +135,9 @@ class GoProWifiSearch {
       bssid: bssid,
       password: password,
       security: NetworkSecurity.WPA,
+      timeoutInSeconds: 10,
     );
-    if (!result) {
-      throw Exception('Failed to connect to the GoPro WiFi network.');
-    }
+    if (!result) return false;
     // Get serial number, MAC address, camera model and firmware version
     // from the GoPro device via its API
     final registration = GoProRegistration(
@@ -149,6 +150,7 @@ class GoProWifiSearch {
       password: password,
     );
     await GoProPrefs.add(registration);
+    return true;
   }
 
   Future<bool> isRegisteredGoPro(String bssid) async {
