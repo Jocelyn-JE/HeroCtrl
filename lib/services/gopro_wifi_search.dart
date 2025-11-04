@@ -48,7 +48,6 @@ class GoProWifiSearch {
 
   Future<bool> startScan() async {
     if (_isScanning) throw Exception('WiFi scan already in progress.');
-
     final can = await _wifiScan.canStartScan();
     switch (can) {
       case CanStartScan.yes:

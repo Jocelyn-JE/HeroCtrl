@@ -44,22 +44,11 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
 
   Future<void> _requestPermissionsAndStartSearch() async {
     try {
-      // Skip canStartScan() check — it has a bug with location on Android 16
-      // Just try to start listening and scanning directly
       await _wifiSearch.startListeningToScannedResults();
       _startPeriodicSearch();
     } catch (e) {
       if (mounted) showSnackBar(context, '$e', color: Colors.red);
     }
-  }
-
-  @override
-  void dispose() {
-    _apSub?.cancel();
-    _wifiSearch.dispose();
-    _pollTimer?.cancel();
-    _nextPollNotifier.dispose();
-    super.dispose();
   }
 
   /*
@@ -191,5 +180,14 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _apSub?.cancel();
+    _wifiSearch.dispose();
+    _pollTimer?.cancel();
+    _nextPollNotifier.dispose();
+    super.dispose();
   }
 }
