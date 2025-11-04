@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:heroctrl/services/gopro_prefs.dart';
+import 'package:heroctrl/models/gopro_registration.dart';
+import 'package:wifi_iot/wifi_iot.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 
 /*
@@ -41,9 +44,16 @@ class GoProWifiSearch {
     return prefixes.any((p) => bssid.toUpperCase().startsWith(p));
   }
 
-  // filter scan results to only include GoPro devices
-  List<WiFiAccessPoint> _filterScanResults(List<WiFiAccessPoint> apList) {
-    return apList.where((ap) => isGoPro(ap.bssid)).toList();
+  // filter scan results to only include GoPro devices that are not yet registered
+  Future<List<WiFiAccessPoint>> _filterScanResults(
+    List<WiFiAccessPoint> apList,
+  ) async {
+    final filtered = <WiFiAccessPoint>[];
+    for (final ap in apList) {
+      if (!isGoPro(ap.bssid) || await isRegisteredGoPro(ap.bssid)) continue;
+      filtered.add(ap);
+    }
+    return filtered;
   }
 
   Future<bool> startScan() async {
@@ -82,10 +92,8 @@ class GoProWifiSearch {
       case CanGetScannedResults.yes:
         _subscription = WiFiScan.instance.onScannedResultsAvailable.listen((
           results,
-        ) {
-          accessPoints = _filterScanResults(results);
-          // push new results to listeners
-          _controller.add(accessPoints);
+        ) async {
+          _controller.add(await _filterScanResults(results));
         });
         break;
       case CanGetScannedResults.noLocationPermissionDenied:
