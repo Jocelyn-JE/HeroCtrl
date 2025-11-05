@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:heroctrl/core/utils/logger.dart';
 import 'package:heroctrl/core/utils/snackbar.dart';
 import 'package:heroctrl/services/gopro_wifi_search.dart';
 import 'package:heroctrl/widgets/password_field.dart';
@@ -162,6 +163,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
             } catch (e) {
               if (!mounted) return;
               showSnackBar(context, 'Error: $e', color: Colors.red);
+              AppLogger.error('Error connecting to $ssid: $e');
               return navigator.pop(result);
             }
             if (result != true && mounted) {
