@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/services/gopro_prefs.dart';
 import 'package:heroctrl/models/gopro_registration.dart';
 import 'package:wifi_iot/wifi_iot.dart';
@@ -130,26 +131,32 @@ class GoProWifiSearch {
     if (await isRegisteredGoPro(bssid)) {
       throw Exception('This GoPro device is already registered.');
     }
-    final result = await WiFiForIoTPlugin.connect(
+    if (!await WiFiForIoTPlugin.connect(
       ssid,
       bssid: bssid,
       password: password,
       security: NetworkSecurity.WPA,
       timeoutInSeconds: 10,
-    );
-    if (!result) return false;
+    )) {
+      return false;
+    }
     // Get serial number, MAC address, camera model and firmware version
     // from the GoPro device via its API
+    await GoProApiService.turnOnCamera(password);
+    final version = GoProApiService.getVersion(password);
+    final serialAndMac = GoProApiService.getSerialAndMacAddress(password);
+    final result = await Future.wait<dynamic>([version, serialAndMac]);
     final registration = GoProRegistration(
       ssid: ssid,
       bssid: bssid,
-      serialNumber: '',
-      cameraModel: '',
-      firmwareVersion: '',
-      macAddress: '',
+      serialNumber: 'H${result[1].serialNumber}',
+      cameraModel: result[0].cameraType,
+      firmwareVersion: result[0].firmwareVersion,
+      macAddress: result[1].macAddress,
       password: password,
     );
     await GoProPrefs.add(registration);
+    GoProApiService.turnOffCamera(password);
     return true;
   }
 
