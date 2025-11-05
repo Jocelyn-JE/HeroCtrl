@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/models/gopro_registration.dart';
+import 'package:heroctrl/services/gopro_prefs.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,7 +10,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _RegisterHomeScreenState extends State<HomeScreen> {
-  final List<String> items = List<String>.generate(20, (i) => 'Item ${i + 1}');
+  late Future<List<GoProRegistration>> registeredGopros;
+
+  @override
+  void initState() {
+    super.initState();
+    registeredGopros = GoProPrefs.getAll();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,34 +26,55 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
         title: const Text('HeroCtrl'),
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.pushNamed(context, '/settings');
+            icon: const Icon(Icons.settings),
+            onPressed: () async {
+              await Navigator.pushNamed(context, '/settings');
+              setState(() {
+                registeredGopros = GoProPrefs.getAll();
+              });
             },
           ),
         ],
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final title = items[index];
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 6),
-            child: ListTile(
-              leading: CircleAvatar(child: Icon(Icons.videocam)),
-              title: Text(title),
-              subtitle: const Text('Tap to connect'),
-              onTap: () {
-                // handle tap
-              },
-            ),
+      body: FutureBuilder<List<GoProRegistration>>(
+        future: registeredGopros,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: \\${snapshot.error}'));
+          }
+          final data = snapshot.data;
+          if (data == null || data.isEmpty) {
+            return const Center(child: Text('No registered GoPros'));
+          }
+          return ListView.builder(
+            padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final title = data[index].ssid;
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 6),
+                child: ListTile(
+                  leading: const CircleAvatar(child: Icon(Icons.videocam)),
+                  title: Text(title),
+                  subtitle: const Text('Tap to connect'),
+                  onTap: () {
+                    // handle tap
+                  },
+                ),
+              );
+            },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/camera_search');
+        onPressed: () async {
+          await Navigator.pushNamed(context, '/camera_search');
+          setState(() {
+            registeredGopros = GoProPrefs.getAll();
+          });
         },
         child: const Icon(Icons.add),
       ),
