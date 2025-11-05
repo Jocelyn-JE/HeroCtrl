@@ -37,6 +37,30 @@ class GoProApiService {
     return CameraStatus(bytes);
   }
 
+  static Future<CameraVersion> getVersion(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.cameraVersion,
+      password,
+    );
+    final bytes = response.bodyBytes;
+    AppLogger.info('GoPro Version: ${bytes.length} bytes');
+    return CameraVersion(bytes);
+  }
+
+  static Future<CameraSerialAndMac> getSerialAndMacAddress(
+    String password,
+  ) async {
+    final response = await _getApi(
+      _bacpac,
+      GoProEndpoints.serialNumber,
+      password,
+    );
+    final bytes = response.bodyBytes;
+    AppLogger.info('GoPro Serial and MAC: ${bytes.length} bytes');
+    return CameraSerialAndMac(bytes);
+  }
+
   static Future<http.Response> _getApi(
     String device,
     String command,
