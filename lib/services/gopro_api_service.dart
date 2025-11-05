@@ -1,46 +1,43 @@
+import 'package:heroctrl/models/camera_serial_and_mac.dart';
+import 'package:heroctrl/models/camera_version.dart';
 import 'package:http/http.dart' as http;
 import 'package:heroctrl/core/utils/logger.dart';
 import 'package:heroctrl/models/camera_status.dart';
 import 'package:heroctrl/core/constants/gopro_endpoints.dart';
 
 class GoProApiService {
-  static final GoProApiService _instance = GoProApiService._internal();
   static const _camera = 'camera';
   static const _bacpac = 'bacpac';
 
-  factory GoProApiService() => _instance;
-
-  GoProApiService._internal();
-
-  Future<void> stopShutter(String password) async {
+  static Future<void> stopShutter(String password) async {
     await _postApi(_camera, GoProEndpoints.shutter, password, Shutter.stop);
   }
 
-  Future<void> startShutter(String password) async {
+  static Future<void> startShutter(String password) async {
     await _postApi(_camera, GoProEndpoints.shutter, password, Shutter.start);
   }
 
-  Future<void> turnOffCamera(String password) async {
+  static Future<void> turnOffCamera(String password) async {
     await _postApi(_bacpac, GoProEndpoints.power, password, Power.off);
   }
 
-  Future<void> turnOnCamera(String password) async {
+  static Future<void> turnOnCamera(String password) async {
     await _postApi(_bacpac, GoProEndpoints.power, password, Power.on);
   }
 
-  Future<bool> cameraPowerStatus(String password) async {
+  static Future<bool> cameraPowerStatus(String password) async {
     final response = await _getApi(_bacpac, GoProEndpoints.power, password);
     return response.bodyBytes[1] == 1;
   }
 
-  Future<CameraStatus> getStatus(String password) async {
+  static Future<CameraStatus> getStatus(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.status, password);
     final bytes = response.bodyBytes;
     AppLogger.info('GoPro Status: ${bytes.length} bytes');
     return CameraStatus(bytes);
   }
 
-  Future<http.Response> _getApi(
+  static Future<http.Response> _getApi(
     String device,
     String command,
     String? password,
@@ -60,7 +57,7 @@ class GoProApiService {
     return response;
   }
 
-  Future<http.Response> _postApi(
+  static Future<http.Response> _postApi(
     String device,
     String command,
     String? password,
