@@ -140,23 +140,29 @@ class GoProWifiSearch {
     )) {
       return false;
     }
+    WiFiForIoTPlugin.forceWifiUsage(true);
     // Get serial number, MAC address, camera model and firmware version
     // from the GoPro device via its API
+    // Give the WiFi connection time to stabilize on mobile
+    await Future.delayed(const Duration(seconds: 3));
     await GoProApiService.turnOnCamera(password);
-    final version = GoProApiService.getVersion(password);
-    final serialAndMac = GoProApiService.getSerialAndMacAddress(password);
-    final result = await Future.wait<dynamic>([version, serialAndMac]);
+    // Small delay to let camera turn on
+    await Future.delayed(const Duration(seconds: 5));
+    final version = await GoProApiService.getVersion(password);
+    final serialAndMac = await GoProApiService.getSerialAndMacAddress(password);
     final registration = GoProRegistration(
       ssid: ssid,
       bssid: bssid,
-      serialNumber: 'H${result[1].serialNumber}',
-      cameraModel: result[0].cameraType,
-      firmwareVersion: result[0].firmwareVersion,
-      macAddress: result[1].macAddress,
+      serialNumber: 'H${serialAndMac.serialNumber}',
+      cameraModel: version.cameraType,
+      firmwareVersion: version.firmwareVersion,
+      macAddress: serialAndMac.macAddress,
       password: password,
     );
     await GoProPrefs.add(registration);
     GoProApiService.turnOffCamera(password);
+    WiFiForIoTPlugin.forceWifiUsage(false);
+    WiFiForIoTPlugin.disconnect();
     return true;
   }
 
