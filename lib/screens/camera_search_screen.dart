@@ -139,45 +139,89 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
     );
   }
 
-  AlertDialog _buildConnectionDialog(String ssid, String bssid) {
+  Widget _buildConnectionDialog(String ssid, String bssid) {
     final controller = TextEditingController();
     final navigator = Navigator.of(context);
-    PasswordField passwordField = PasswordField(controller: controller);
-    return AlertDialog(
-      title: Text('Connect to $ssid'),
-      content: passwordField,
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('Cancel'),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            bool result = false;
-            try {
-              result = await _wifiSearch.connectAndStore(
-                ssid,
-                bssid,
-                controller.text,
-              );
-            } catch (e) {
-              if (!mounted) return;
-              showSnackBar(context, 'Error: $e', color: Colors.red);
-              AppLogger.error('Error connecting to $ssid: $e');
-              return navigator.pop(result);
-            }
-            if (result != true && mounted) {
-              showSnackBar(
-                context,
-                'Failed to connect to $ssid. Please check that the camera is powered on and that the password is correct.',
-                color: Colors.red,
-              );
-            }
-            navigator.pop(result);
-          },
-          child: const Text('Connect'),
-        ),
-      ],
+    bool isLoading = false;
+
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return AlertDialog(
+          title: Text('Connect to $ssid'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (isLoading) ...[
+                const CircularProgressIndicator(),
+                const SizedBox(height: 8),
+                const Text(
+                  'Connecting to camera...\nIt will briefly turn on.',
+                  textAlign: TextAlign.center,
+                ),
+              ] else ...[
+                PasswordField(controller: controller),
+              ],
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: isLoading
+                  ? null
+                  : () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: isLoading
+                  ? null
+                  : () async {
+                      final messenger = ScaffoldMessenger.of(context);
+                      setState(() => isLoading = true);
+                      bool result = false;
+                      try {
+                        result = await _wifiSearch.connectAndStore(
+                          ssid,
+                          bssid,
+                          controller.text,
+                        );
+                      } catch (e) {
+                        if (!mounted) return;
+                        messenger.showSnackBar(
+                          SnackBar(
+                            content: Text('Error: $e'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        AppLogger.error('Error connecting to $ssid: $e');
+                        setState(() => isLoading = false);
+                        return navigator.pop(result);
+                      }
+                      if (result != true) {
+                        if (!mounted) return;
+                        messenger.showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Failed to connect to $ssid. Please check that the camera is powered on and that the password is correct.',
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                      navigator.pop(result);
+                    },
+              child: isLoading
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Text('Connect'),
+            ),
+          ],
+        );
+      },
     );
   }
 
