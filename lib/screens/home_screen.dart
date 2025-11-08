@@ -54,14 +54,19 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
             itemCount: data.length,
             itemBuilder: (context, index) {
               final title = data[index].ssid;
+              final subtitle = data[index].cameraModel;
               return Card(
                 margin: const EdgeInsets.symmetric(vertical: 6),
                 child: ListTile(
                   leading: const CircleAvatar(child: Icon(Icons.videocam)),
                   title: Text(title),
-                  subtitle: const Text('Tap to connect'),
+                  trailing: const Icon(Icons.chevron_right),
+                  subtitle: Text(subtitle),
                   onTap: () {
-                    // handle tap
+                    // switch to camera control screen
+                  },
+                  onLongPress: () {
+                    // camera info dialog with option to delete
                   },
                 ),
               );
