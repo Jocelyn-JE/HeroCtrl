@@ -1,5 +1,5 @@
 class GoProEndpoints {
-  static const String baseUrl = 'http://10.5.5.9';
+  static const String baseUrl = 'http://10.5.5.9:80';
   static const String livestreamUrl = '$baseUrl/live/amba.m3u8';
   // Actions
   static const String power = 'pw';
