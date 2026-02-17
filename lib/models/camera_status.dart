@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:heroctrl/core/constants/gopro_endpoints.dart';
+import 'package:heroctrl/constants/gopro_endpoints.dart';
 
 class CameraStatus {
   final String cameraMode;

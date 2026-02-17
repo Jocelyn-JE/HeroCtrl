@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:heroctrl/core/utils/logger.dart';
-import 'package:heroctrl/core/utils/snackbar.dart';
+import 'package:heroctrl/utils/logger.dart';
+import 'package:heroctrl/utils/snackbar.dart';
 import 'package:heroctrl/services/gopro_wifi_search.dart';
 import 'package:heroctrl/widgets/password_field.dart';
 import 'package:wifi_scan/wifi_scan.dart';

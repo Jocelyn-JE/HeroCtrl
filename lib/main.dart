@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/core/utils/logger.dart';
+import 'package:heroctrl/utils/logger.dart';
 
 import 'package:heroctrl/screens/home_screen.dart';
 import 'package:heroctrl/screens/settings_screen.dart';

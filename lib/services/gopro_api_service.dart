@@ -1,9 +1,9 @@
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
 import 'package:heroctrl/models/camera_version.dart';
 import 'package:http/http.dart' as http;
-import 'package:heroctrl/core/utils/logger.dart';
+import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/models/camera_status.dart';
-import 'package:heroctrl/core/constants/gopro_endpoints.dart';
+import 'package:heroctrl/constants/gopro_endpoints.dart';
 
 class GoProApiService {
   static const _camera = 'camera';
