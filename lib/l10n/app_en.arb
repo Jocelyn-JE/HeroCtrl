@@ -1,0 +1,108 @@
+{
+    "@@locale": "en",
+    "password": "Password",
+    "@password": {
+        "description": "Label for password input field"
+    },
+    "appTitle": "HeroCtrl",
+    "@appTitle": {
+        "description": "Application title"
+    },
+    "settings": "Settings",
+    "@settings": {
+        "description": "Settings menu item"
+    },
+    "noRegisteredGoPros": "No registered GoPros",
+    "@noRegisteredGoPros": {
+        "description": "Message when no GoPros are registered"
+    },
+    "errorLabel": "Error: {error}",
+    "@errorLabel": {
+        "description": "Error message label",
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "addCamera": "Add a camera",
+    "@addCamera": {
+        "description": "Title for add camera screen"
+    },
+    "aboutPeriodicScanning": "About periodic scanning",
+    "@aboutPeriodicScanning": {
+        "description": "Dialog title about scanning"
+    },
+    "periodicScanningInfo": "The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ",
+    "@periodicScanningInfo": {
+        "description": "Information about periodic WiFi scanning"
+    },
+    "ok": "OK",
+    "@ok": {
+        "description": "OK button text"
+    },
+    "noCamerasFound": "No cameras found.",
+    "@noCamerasFound": {
+        "description": "Message when no cameras are found"
+    },
+    "connectToCamera": "Connect to {ssid}",
+    "@connectToCamera": {
+        "description": "Dialog title for connecting to camera",
+        "placeholders": {
+            "ssid": {
+                "type": "String"
+            }
+        }
+    },
+    "connectingToCamera": "Connecting to camera...\nIt will briefly turn on.",
+    "@connectingToCamera": {
+        "description": "Message while connecting to camera"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Cancel button text"
+    },
+    "connect": "Connect",
+    "@connect": {
+        "description": "Connect button text"
+    },
+    "connectionError": "Error: {error}",
+    "@connectionError": {
+        "description": "Connection error message",
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "connectionFailed": "Failed to connect to {ssid}. Please check that the camera is powered on and that the password is correct.",
+    "@connectionFailed": {
+        "description": "Message when connection fails",
+        "placeholders": {
+            "ssid": {
+                "type": "String"
+            }
+        }
+    },
+    "bssidLabel": "BSSID: {bssid}",
+    "@bssidLabel": {
+        "description": "BSSID label",
+        "placeholders": {
+            "bssid": {
+                "type": "String"
+            }
+        }
+    },
+    "forgetAllCameras": "Forget all cameras",
+    "@forgetAllCameras": {
+        "description": "Button to forget all cameras"
+    },
+    "forgetAllCamerasConfirm": "Are you sure you want to forget all cameras?",
+    "@forgetAllCamerasConfirm": {
+        "description": "Confirmation message for forgetting all cameras"
+    },
+    "forget": "Forget",
+    "@forget": {
+        "description": "Forget button text"
+    }
+}

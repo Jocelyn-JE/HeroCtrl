@@ -7,6 +7,7 @@ import 'package:heroctrl/services/gopro_wifi_search.dart';
 import 'package:heroctrl/widgets/password_field.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 import 'package:heroctrl/widgets/polling_timer_indicator.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 
 class CameraSearchScreen extends StatefulWidget {
   const CameraSearchScreen({super.key});
@@ -85,9 +86,10 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add a camera'),
+        title: Text(l10n.addCamera),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -97,15 +99,12 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: const Text('About periodic scanning'),
-                      content: const Text(
-                        'The timer indicates when the next automatic scan will occur. '
-                        'WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ',
-                      ),
+                      title: Text(l10n.aboutPeriodicScanning),
+                      content: Text(l10n.periodicScanningInfo),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: const Text('OK'),
+                          child: Text(l10n.ok),
                         ),
                       ],
                     );
@@ -140,6 +139,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
   }
 
   Widget _buildConnectionDialog(String ssid, String bssid) {
+    final localizations = AppLocalizations.of(context)!;
     final controller = TextEditingController();
     final navigator = Navigator.of(context);
     bool isLoading = false;
@@ -147,15 +147,15 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
     return StatefulBuilder(
       builder: (context, setState) {
         return AlertDialog(
-          title: Text('Connect to $ssid'),
+          title: Text(localizations.connectToCamera(ssid)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isLoading) ...[
                 const CircularProgressIndicator(),
                 const SizedBox(height: 8),
-                const Text(
-                  'Connecting to camera...\nIt will briefly turn on.',
+                Text(
+                  localizations.connectingToCamera,
                   textAlign: TextAlign.center,
                 ),
               ] else ...[
@@ -168,7 +168,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
               onPressed: isLoading
                   ? null
                   : () => Navigator.of(context).pop(false),
-              child: const Text('Cancel'),
+              child: Text(localizations.cancel),
             ),
             ElevatedButton(
               onPressed: isLoading
@@ -187,7 +187,9 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
                         if (!mounted) return;
                         messenger.showSnackBar(
                           SnackBar(
-                            content: Text('Error: $e'),
+                            content: Text(
+                              localizations.connectionError(e.toString()),
+                            ),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -199,9 +201,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
                         if (!mounted) return;
                         messenger.showSnackBar(
                           SnackBar(
-                            content: Text(
-                              'Failed to connect to $ssid. Please check that the camera is powered on and that the password is correct.',
-                            ),
+                            content: Text(localizations.connectionFailed(ssid)),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -217,7 +217,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
                         color: Colors.white,
                       ),
                     )
-                  : const Text('Connect'),
+                  : Text(localizations.connect),
             ),
           ],
         );
@@ -226,6 +226,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
   }
 
   Widget _buildListView() {
+    final localizations = AppLocalizations.of(context)!;
     final double bottomInset = MediaQuery.of(context).padding.bottom;
     ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(context);
     return ListView.builder(
@@ -240,7 +241,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
             leading: CircleAvatar(child: Icon(Icons.videocam)),
             trailing: Icon(Icons.chevron_right),
             title: Text(ssid),
-            subtitle: Text('BSSID: $bssid'),
+            subtitle: Text(localizations.bssidLabel(bssid)),
             onTap: () async {
               final navigator = Navigator.of(context);
               final connected = await showDialog<bool>(
@@ -258,6 +259,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
   }
 
   Widget _buildEmpty() {
+    final localizations = AppLocalizations.of(context)!;
     final double bottomInset = MediaQuery.of(context).padding.bottom;
     return Padding(
       padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
@@ -267,7 +269,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
           children: [
             CircleAvatar(radius: 32, child: Icon(Icons.videocam_off, size: 32)),
             SizedBox(height: 16),
-            Text('No cameras found.', textAlign: TextAlign.center),
+            Text(localizations.noCamerasFound, textAlign: TextAlign.center),
           ],
         ),
       ),

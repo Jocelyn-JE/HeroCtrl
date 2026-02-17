@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/models/gopro_registration.dart';
 import 'package:heroctrl/services/gopro_prefs.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,10 +21,11 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final double bottomInset = MediaQuery.of(context).padding.bottom;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HeroCtrl'),
+        title: Text(l10n.appTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -43,11 +45,13 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(child: Text('Error: \\${snapshot.error}'));
+            return Center(
+              child: Text(l10n.errorLabel(snapshot.error.toString())),
+            );
           }
           final data = snapshot.data;
           if (data == null || data.isEmpty) {
-            return const Center(child: Text('No registered GoPros'));
+            return Center(child: Text(l10n.noRegisteredGoPros));
           }
           return ListView.builder(
             padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
