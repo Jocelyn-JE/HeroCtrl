@@ -45,3 +45,5 @@ Avec une bonne compréhension de l'API, j'ai commencé le développement de l'ap
 3. Pour gérer les flux vidéo j'ai cherché un package Flutter adapté et j'ai trouvé `better_player_plus`, qui offre une bonne prise en charge des flux HLS.
 
 4. Pareil pour la recherche automatique de la caméra parmis les réseaux Wi-Fi disponibles, j'ai utilisé le package `wifi_iot`.
+
+5. Ensuite il ne restait plus qu'à implémenter l'interface utilisateur pour permettre à l'utilisateur de contrôler la caméra et de visualiser le flux vidéo en direct.
