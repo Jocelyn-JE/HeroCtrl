@@ -20,6 +20,7 @@ dependencies:
   wifi_scan: ^0.4.1+2
   wifi_iot: ^0.3.19+2
   intl: any
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
