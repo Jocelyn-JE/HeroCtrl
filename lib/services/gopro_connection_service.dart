@@ -8,6 +8,8 @@ import 'package:wifi_iot/wifi_iot.dart';
 class GoProConnectionService {
   GoProConnectionService._();
 
+  static GoProRegistration? currentConnection;
+
   /// Connect to an unregistered GoPro camera
   static Future<bool> connectToUnregisteredGoPro(
     String ssid,
@@ -29,15 +31,18 @@ class GoProConnectionService {
   static Future<bool> connectToRegisteredGoPro(
     GoProRegistration registration,
   ) async {
-    return await connectToUnregisteredGoPro(
+    final bool connected = await connectToUnregisteredGoPro(
       registration.ssid,
       registration.bssid,
       registration.password,
     );
+    if (connected) currentConnection = registration;
+    return connected;
   }
 
   /// Disconnect from the current WiFi network
   static Future<void> disconnect() async {
+    currentConnection = null;
     WiFiForIoTPlugin.forceWifiUsage(false);
     WiFiForIoTPlugin.disconnect();
   }
