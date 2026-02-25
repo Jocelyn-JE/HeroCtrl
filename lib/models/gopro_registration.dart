@@ -1,10 +1,17 @@
 class GoProRegistration {
+  // The WiFi SSID of the camera (e.g. "GoPro-12345678")
   final String ssid;
+  // The BSSID (MAC address) of the camera's wi-fi network
   final String bssid;
+  // The camera's serial number (e.g. "12345678")
   final String serialNumber;
+  // The camera model (e.g. "HERO9 Black")
   final String cameraModel;
+  // The camera's firmware version (e.g. "1.60")
   final String firmwareVersion;
+  // The camera's MAC address (e.g. "D8:96:85:12:34:56")
   final String macAddress;
+  // The password for the camera's WiFi network (e.g. "12345678")
   final String password;
 
   GoProRegistration({
