@@ -160,6 +160,8 @@ class GoProWifiSearch {
       password: password,
     );
     await GoProPrefs.add(registration);
+    // Clean up WiFi connection
+    await Future.delayed(const Duration(seconds: 3));
     GoProApiService.turnOffCamera(password);
     WiFiForIoTPlugin.forceWifiUsage(false);
     WiFiForIoTPlugin.disconnect();
