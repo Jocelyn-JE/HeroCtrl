@@ -1,4 +1,5 @@
 import 'dart:developer' as developer;
+import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 
 class AppLogger {
@@ -9,8 +10,13 @@ class AppLogger {
   static AppLogger _create() {
     Logger.root.level = Level.ALL;
     Logger.root.onRecord.listen((rec) {
+      final message =
+          '[${rec.level.name}] ${rec.time.toIso8601String()} ${rec.loggerName} - ${rec.message}';
+      // Use debugPrint for visibility in flutter logs (lint-safe)
+      debugPrint(message);
+      // Also use developer.log for structured logging
       developer.log(
-        '[${rec.level.name}] ${rec.time.toIso8601String()} ${rec.loggerName} - ${rec.message}',
+        message,
         name: rec.loggerName,
         error: rec.error,
         stackTrace: rec.stackTrace,
