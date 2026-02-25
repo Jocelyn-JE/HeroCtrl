@@ -1,0 +1,97 @@
+import 'package:flutter/material.dart';
+import 'package:better_player_plus/better_player_plus.dart';
+import 'package:heroctrl/constants/gopro_endpoints.dart';
+
+class LiveView extends StatefulWidget {
+  const LiveView({super.key});
+
+  @override
+  State<LiveView> createState() => _LiveViewState();
+}
+
+class _LiveViewState extends State<LiveView> {
+  late BetterPlayerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    final dataSource = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      GoProEndpoints.livestreamUrl,
+      liveStream: true,
+      notificationConfiguration: const BetterPlayerNotificationConfiguration(
+        showNotification: false,
+      ),
+    );
+    controller = BetterPlayerController(
+      BetterPlayerConfiguration(
+        fit: BoxFit.contain,
+        autoPlay: true,
+        looping: true,
+        controlsConfiguration: const BetterPlayerControlsConfiguration(
+          showControls: true,
+          enablePlayPause: false,
+          enableFullscreen: true,
+          enableSkips: false,
+          enableProgressBar: false,
+          enableProgressText: false,
+          enableMute: true,
+          enablePlaybackSpeed: false,
+          enablePip: false,
+          enableOverflowMenu: false,
+          controlBarColor: Colors.transparent,
+          controlsHideTime: Duration.zero,
+          liveTextColor: Colors.transparent,
+        ),
+      ),
+      betterPlayerDataSource: dataSource,
+    );
+    // Set volume to 0 (muted) by default
+    controller.setVolume(0.0);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Wrap in Zone to catch and suppress position query errors from live stream
+    return ZoneGuard(child: BetterPlayer(controller: controller));
+  }
+}
+
+/// Wraps a widget in a Zone that catches and suppresses specific errors
+class ZoneGuard extends StatefulWidget {
+  final Widget child;
+
+  const ZoneGuard({required this.child, super.key});
+
+  @override
+  State<ZoneGuard> createState() => _ZoneGuardState();
+}
+
+class _ZoneGuardState extends State<ZoneGuard> {
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Set up zone to catch errors
+    FlutterError.onError = (FlutterErrorDetails details) {
+      final error = details.exception;
+      if (error is RangeError &&
+          error.toString().contains('millisecondsSinceEpoch')) {
+        // Suppress this specific error
+        return;
+      }
+      // Re-throw other errors
+      FlutterError.presentError(details);
+    };
+  }
+}

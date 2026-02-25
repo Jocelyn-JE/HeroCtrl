@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/models/gopro_registration.dart';
+import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/services/gopro_prefs.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
@@ -49,6 +50,8 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
           if (connected) {
             // switch to camera control screen
             showSnackBarSuccess(context, 'Successfully connected to camera');
+            await GoProApiService.turnOnCamera(camera.password);
+            await Navigator.pushNamed(context, '/control');
           } else {
             // show error message
             showSnackBarError(context, 'Failed to connect to camera');

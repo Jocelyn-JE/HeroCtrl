@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
@@ -7,7 +9,18 @@ import 'package:heroctrl/utils/logger.dart';
 void main() {
   AppLogger.init(); // Initialize logger
   AppLogger.info('App started');
-  runApp(const MainApp());
+
+  // Run app in a zone to catch better_player_plus live stream position errors
+  runZonedGuarded(() => runApp(const MainApp()), (error, stack) {
+    // Suppress better_player_plus position query errors for live streams
+    if (error is RangeError &&
+        error.toString().contains('millisecondsSinceEpoch')) {
+      // Known bug: live streams have invalid position values
+      return;
+    }
+    // Log other errors
+    AppLogger.error('Unhandled error', error, stack);
+  });
 }
 
 class MainApp extends StatelessWidget {
