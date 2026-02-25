@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:heroctrl/models/gopro_registration.dart';
 import 'package:heroctrl/services/gopro_prefs.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
+import 'package:heroctrl/services/gopro_connection_service.dart';
+import 'package:heroctrl/utils/snackbar.dart';
 import 'widgets/camera_list_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,8 +42,17 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
       ),
       body: CameraListView(
         camerasFuture: registeredGopros,
-        onCameraTap: (camera) {
-          // switch to camera control screen
+        onCameraTap: (camera) async {
+          final bool connected =
+              await GoProConnectionService.connectToRegisteredGoPro(camera);
+          if (!mounted) return;
+          if (connected) {
+            // switch to camera control screen
+            showSnackBarSuccess(context, 'Successfully connected to camera');
+          } else {
+            // show error message
+            showSnackBarError(context, 'Failed to connect to camera');
+          }
         },
         onCameraLongPress: (camera) {
           // camera info dialog with option to delete

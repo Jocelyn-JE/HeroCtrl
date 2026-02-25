@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
-import 'package:heroctrl/services/gopro_wifi_search.dart';
+import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/widgets/password_field.dart';
 
 class ConnectionDialog extends StatefulWidget {
   final String ssid;
   final String bssid;
-  final GoProWifiSearch wifiSearch;
 
-  const ConnectionDialog({
-    super.key,
-    required this.ssid,
-    required this.bssid,
-    required this.wifiSearch,
-  });
+  const ConnectionDialog({super.key, required this.ssid, required this.bssid});
 
   @override
   State<ConnectionDialog> createState() => _ConnectionDialogState();
@@ -38,7 +32,7 @@ class _ConnectionDialogState extends State<ConnectionDialog> {
     setState(() => _isLoading = true);
     bool result = false;
     try {
-      result = await widget.wifiSearch.connectAndStore(
+      result = await GoProConnectionService.connectAndStore(
         widget.ssid,
         widget.bssid,
         _controller.text,

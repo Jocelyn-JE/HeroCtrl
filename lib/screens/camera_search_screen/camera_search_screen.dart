@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:heroctrl/utils/snackbar.dart';
-import 'package:heroctrl/services/gopro_wifi_search.dart';
+import 'package:heroctrl/services/gopro_wifi_scanner.dart';
 import 'package:heroctrl/widgets/polling_timer_indicator.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:wifi_scan/wifi_scan.dart';
@@ -17,8 +17,6 @@ class CameraSearchScreen extends StatefulWidget {
 }
 
 class _CameraSearchScreenState extends State<CameraSearchScreen> {
-  final GoProWifiSearch _wifiSearch = GoProWifiSearch();
-
   // Subscription to access point results, updates UI when new results arrive
   StreamSubscription<List<WiFiAccessPoint>>? _apSub;
 
@@ -31,7 +29,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
   @override
   void initState() {
     super.initState();
-    _apSub = _wifiSearch.onResults.listen((_) {
+    _apSub = GoProWifiScanner.onResults.listen((_) {
       if (!mounted) return;
       setState(() {});
     });
@@ -77,7 +75,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
 
   Future<void> _searchForCameras() async {
     try {
-      final result = await _wifiSearch.startScan();
+      final result = await GoProWifiScanner.startScan();
       if (!result) throw Exception('WiFi scan failed.');
     } catch (e) {
       if (mounted) showSnackBar(context, '$e', color: Colors.red);
@@ -131,11 +129,8 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
         ],
       ),
       body: Center(
-        child: _wifiSearch.accessPoints.isNotEmpty
-            ? CameraList(
-                accessPoints: _wifiSearch.accessPoints,
-                wifiSearch: _wifiSearch,
-              )
+        child: GoProWifiScanner.accessPoints.isNotEmpty
+            ? CameraList(accessPoints: GoProWifiScanner.accessPoints)
             : const EmptyCameraState(),
       ),
     );
@@ -144,7 +139,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
   @override
   void dispose() {
     _apSub?.cancel();
-    _wifiSearch.dispose();
+    GoProWifiScanner.reset();
     _pollTimer?.cancel();
     _nextPollNotifier.dispose();
     super.dispose();

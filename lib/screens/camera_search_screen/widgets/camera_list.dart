@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
-import 'package:heroctrl/services/gopro_wifi_search.dart';
 import 'package:wifi_scan/wifi_scan.dart';
 import 'connection_dialog.dart';
 
 class CameraList extends StatelessWidget {
   final List<WiFiAccessPoint> accessPoints;
-  final GoProWifiSearch wifiSearch;
 
-  const CameraList({
-    super.key,
-    required this.accessPoints,
-    required this.wifiSearch,
-  });
+  const CameraList({super.key, required this.accessPoints});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +31,8 @@ class CameraList extends StatelessWidget {
               final navigator = Navigator.of(context);
               final connected = await showDialog<bool>(
                 context: context,
-                builder: (context) => ConnectionDialog(
-                  ssid: ssid,
-                  bssid: bssid,
-                  wifiSearch: wifiSearch,
-                ),
+                builder: (context) =>
+                    ConnectionDialog(ssid: ssid, bssid: bssid),
               );
               if (connected != true) return;
               navigator.popUntil((route) => route.isFirst);
