@@ -26,6 +26,8 @@ class MainApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
+      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
