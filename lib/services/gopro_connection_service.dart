@@ -24,6 +24,7 @@ class GoProConnectionService {
       timeoutInSeconds: 10,
     );
     WiFiForIoTPlugin.forceWifiUsage(true);
+    await Future.delayed(const Duration(seconds: 3));
     return connected;
   }
 
@@ -42,6 +43,7 @@ class GoProConnectionService {
 
   /// Disconnect from the current WiFi network
   static Future<void> disconnect() async {
+    await Future.delayed(const Duration(seconds: 3));
     currentConnection = null;
     WiFiForIoTPlugin.forceWifiUsage(false);
     WiFiForIoTPlugin.disconnect();
@@ -71,7 +73,6 @@ class GoProConnectionService {
     // Get serial number, MAC address, camera model and firmware version
     // from the GoPro device via its API
     // Give the WiFi connection time to stabilize on mobile
-    await Future.delayed(const Duration(seconds: 3));
     await GoProApiService.turnOnCamera(password);
     // Small delay to let camera turn on
     await Future.delayed(const Duration(seconds: 5));
@@ -89,7 +90,6 @@ class GoProConnectionService {
     await GoProPrefs.add(registration);
 
     // Clean up WiFi connection
-    await Future.delayed(const Duration(seconds: 3));
     await GoProApiService.turnOffCamera(password);
     await Future.delayed(const Duration(milliseconds: 500));
     disconnect();
