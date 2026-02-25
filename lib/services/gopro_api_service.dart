@@ -25,9 +25,92 @@ class GoProApiService {
     await _postApi(_bacpac, GoProEndpoints.power, password, Power.on);
   }
 
+  static Future<void> startVideoPreview(String password) async {
+    await _postApi(
+      _bacpac,
+      GoProEndpoints.videoPreview,
+      password,
+      VideoPreview.on,
+    );
+  }
+
+  static Future<void> stopVideoPreview(String password) async {
+    await _postApi(
+      _bacpac,
+      GoProEndpoints.videoPreview,
+      password,
+      VideoPreview.off,
+    );
+  }
+
+  static Future<bool> isVideoPreviewOn(String password) async {
+    final response = await _getApi(
+      _bacpac,
+      GoProEndpoints.videoPreview,
+      password,
+    );
+    return response.bodyBytes[1] == 2;
+  }
+
   static Future<bool> cameraPowerStatus(String password) async {
     final response = await _getApi(_bacpac, GoProEndpoints.power, password);
     return response.bodyBytes[1] == 1;
+  }
+
+  /// Waits until the camera is powered on, polling every 1 second
+  /// Throws Exception if timeout (15 seconds) is reached
+  static Future<void> waitUntilCameraOn(
+    String password, {
+    Duration pollInterval = const Duration(seconds: 1),
+    Duration timeout = const Duration(seconds: 15),
+  }) async {
+    final startTime = DateTime.now();
+    while (true) {
+      try {
+        final isOn = await cameraPowerStatus(password);
+        if (isOn) {
+          AppLogger.info('Camera is now powered on');
+          return;
+        }
+      } catch (e) {
+        // Ignore errors during polling, camera might not be ready yet
+        AppLogger.info('Waiting for camera to power on... ($e)');
+      }
+
+      if (DateTime.now().difference(startTime) > timeout) {
+        throw Exception('Timeout waiting for camera to power on');
+      }
+
+      await Future.delayed(pollInterval);
+    }
+  }
+
+  /// Waits until the video preview is enabled, polling every 1 second
+  /// Throws Exception if timeout (15 seconds) is reached
+  static Future<void> waitUntilPreviewOn(
+    String password, {
+    Duration pollInterval = const Duration(seconds: 1),
+    Duration timeout = const Duration(seconds: 15),
+  }) async {
+    final startTime = DateTime.now();
+    while (true) {
+      try {
+        final isOn = await isVideoPreviewOn(password);
+        if (isOn) {
+          AppLogger.info('Video preview is now enabled');
+          return;
+        }
+      } catch (e) {
+        // Ignore errors during polling, preview might not be ready yet
+        AppLogger.info('Waiting for video preview to enable... ($e)');
+      }
+
+      if (DateTime.now().difference(startTime) > timeout) {
+        throw Exception('Timeout waiting for video preview to enable');
+      }
+
+      await Future.delayed(pollInterval);
+    }
   }
 
   static Future<CameraStatus> getStatus(String password) async {
