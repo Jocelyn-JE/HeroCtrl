@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/screens/camera_search_screen/camera_search_screen.dart';
-import 'package:heroctrl/screens/home_screen.dart';
-import 'package:heroctrl/screens/settings_screen.dart';
+import 'package:heroctrl/screens/home_screen/home_screen.dart';
+import 'package:heroctrl/screens/settings_screen/settings_screen.dart';
 
 class AppRoutes {
   // Route names
