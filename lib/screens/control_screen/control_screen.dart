@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/models/camera_state.dart';
+import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
+import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
@@ -17,6 +19,7 @@ class ControlScreen extends StatefulWidget {
 class _RegisterControlScreenState extends State<ControlScreen> {
   final _password = GoProConnectionService.currentConnection!.password;
   CameraState? _cameraState;
+  BatteryMonitor? _batteryMonitor;
 
   @override
   void initState() {
@@ -32,12 +35,19 @@ class _RegisterControlScreenState extends State<ControlScreen> {
       final state = await GoProApiService.getStatus(_password);
       final batteryPercent = await GoProApiService.getBatteryLevel(_password);
       if (mounted) {
+        final monitor = BatteryMonitor(
+          camPassword: _password,
+          initialPercent: batteryPercent,
+        );
+        monitor.batteryPercent.addListener(_onBatteryChanged);
+        monitor.estimatedMinutesRemaining.addListener(_onBatteryChanged);
         setState(() {
           _cameraState = CameraState(state);
-          _cameraState!.batteryPercent = batteryPercent;
+          _batteryMonitor = monitor;
         });
+        await _checkPreviewStatus();
+        monitor.start();
       }
-      await _checkPreviewStatus();
     } catch (e, stackTrace) {
       AppLogger.error('Error fetching camera state', e, stackTrace);
       if (mounted) {
@@ -48,6 +58,10 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         );
       }
     }
+  }
+
+  void _onBatteryChanged() {
+    if (mounted) setState(() {});
   }
 
   Future<void> _checkPreviewStatus() async {
@@ -73,7 +87,17 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(GoProConnectionService.currentConnection!.ssid),
-        actions: [],
+        actions: [
+          if (_batteryMonitor != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: BatteryIndicator(
+                batteryPercent: _batteryMonitor!.batteryPercent.value,
+                estimatedMinutesRemaining:
+                    _batteryMonitor!.estimatedMinutesRemaining.value,
+              ),
+            ),
+        ],
       ),
       body: SafeArea(
         bottom: true,
@@ -94,6 +118,11 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
   @override
   void dispose() async {
+    _batteryMonitor?.batteryPercent.removeListener(_onBatteryChanged);
+    _batteryMonitor?.estimatedMinutesRemaining.removeListener(
+      _onBatteryChanged,
+    );
+    _batteryMonitor?.dispose();
     if (await AppPrefs.getSwitchOffCameraOnDisconnect()) {
       try {
         await GoProApiService.turnOffCamera(_password);
