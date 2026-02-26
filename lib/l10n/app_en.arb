@@ -112,5 +112,29 @@
     "switchOffCameraOnDisconnectSubtitle": "Automatically power off the camera when disconnecting from it (will stop any active recording).",
     "@switchOffCameraOnDisconnectSubtitle": {
         "description": "Subtitle explaining the switch off camera on disconnect option"
+    },
+    "cameraSettings": "Camera Settings",
+    "@cameraSettings": {
+        "description": "Title for camera settings screen"
+    },
+    "ledSetting": "LED Indicators",
+    "@ledSetting": {
+        "description": "Title for LED setting card"
+    },
+    "ledSettingSubtitle": "Control which status LEDs are active on the camera.",
+    "@ledSettingSubtitle": {
+        "description": "Subtitle explaining the LED setting"
+    },
+    "ledOff": "Off",
+    "@ledOff": {
+        "description": "LED off option"
+    },
+    "ledTwo": "2 LEDs",
+    "@ledTwo": {
+        "description": "Two LEDs option"
+    },
+    "ledFour": "4 LEDs",
+    "@ledFour": {
+        "description": "Four LEDs option"
     }
 }

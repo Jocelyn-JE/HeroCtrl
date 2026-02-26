@@ -146,6 +146,25 @@ class GoProApiService {
     return CameraSerialAndMac(bytes);
   }
 
+  static Future<void> setLeds(String password, String ledOption) async {
+    await _postApi(_camera, GoProEndpoints.leds, password, ledOption);
+  }
+
+  static Future<String> getLeds(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.leds, password);
+    final value = response.bodyBytes[1];
+    switch (value) {
+      case 0:
+        return LED.off;
+      case 1:
+        return LED.twoLeds;
+      case 2:
+        return LED.fourLeds;
+      default:
+        return LED.fourLeds;
+    }
+  }
+
   static Future<int> getBatteryLevel(String password) async {
     final response = await _getApi(
       _camera,

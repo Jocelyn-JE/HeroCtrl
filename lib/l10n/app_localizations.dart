@@ -224,6 +224,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Automatically power off the camera when disconnecting from it (will stop any active recording).'**
   String get switchOffCameraOnDisconnectSubtitle;
+
+  /// Title for camera settings screen
+  ///
+  /// In en, this message translates to:
+  /// **'Camera Settings'**
+  String get cameraSettings;
+
+  /// Title for LED setting card
+  ///
+  /// In en, this message translates to:
+  /// **'LED Indicators'**
+  String get ledSetting;
+
+  /// Subtitle explaining the LED setting
+  ///
+  /// In en, this message translates to:
+  /// **'Control which status LEDs are active on the camera.'**
+  String get ledSettingSubtitle;
+
+  /// LED off option
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get ledOff;
+
+  /// Two LEDs option
+  ///
+  /// In en, this message translates to:
+  /// **'2 LEDs'**
+  String get ledTwo;
+
+  /// Four LEDs option
+  ///
+  /// In en, this message translates to:
+  /// **'4 LEDs'**
+  String get ledFour;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

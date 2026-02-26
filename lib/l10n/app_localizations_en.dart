@@ -83,4 +83,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get switchOffCameraOnDisconnectSubtitle => 'Automatically power off the camera when disconnecting from it (will stop any active recording).';
+
+  @override
+  String get cameraSettings => 'Camera Settings';
+
+  @override
+  String get ledSetting => 'LED Indicators';
+
+  @override
+  String get ledSettingSubtitle => 'Control which status LEDs are active on the camera.';
+
+  @override
+  String get ledOff => 'Off';
+
+  @override
+  String get ledTwo => '2 LEDs';
+
+  @override
+  String get ledFour => '4 LEDs';
 }

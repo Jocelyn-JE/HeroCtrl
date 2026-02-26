@@ -89,14 +89,17 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         title: Text(GoProConnectionService.currentConnection!.ssid),
         actions: [
           if (_batteryMonitor != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: BatteryIndicator(
-                batteryPercent: _batteryMonitor!.batteryPercent.value,
-                estimatedMinutesRemaining:
-                    _batteryMonitor!.estimatedMinutesRemaining.value,
-              ),
+            BatteryIndicator(
+              batteryPercent: _batteryMonitor!.batteryPercent.value,
+              estimatedMinutesRemaining:
+                  _batteryMonitor!.estimatedMinutesRemaining.value,
             ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () async {
+              await Navigator.pushNamed(context, '/camera_settings');
+            },
+          ),
         ],
       ),
       body: SafeArea(
