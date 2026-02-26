@@ -63,9 +63,6 @@ class _LiveViewState extends State<LiveView> {
       case BetterPlayerEventType.finished:
         controller.setupDataSource(_dataSource);
         break;
-      case BetterPlayerEventType.bufferingStart:
-        controller.setupDataSource(_dataSource);
-        break;
       default:
         break;
     }
@@ -79,40 +76,6 @@ class _LiveViewState extends State<LiveView> {
 
   @override
   Widget build(BuildContext context) {
-    // Wrap in Zone to catch and suppress position query errors from live stream
-    return ZoneGuard(child: BetterPlayer(controller: controller));
-  }
-}
-
-/// Wraps a widget in a Zone that catches and suppresses specific errors
-class ZoneGuard extends StatefulWidget {
-  final Widget child;
-
-  const ZoneGuard({required this.child, super.key});
-
-  @override
-  State<ZoneGuard> createState() => _ZoneGuardState();
-}
-
-class _ZoneGuardState extends State<ZoneGuard> {
-  @override
-  Widget build(BuildContext context) {
-    return widget.child;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // Set up zone to catch errors
-    FlutterError.onError = (FlutterErrorDetails details) {
-      final error = details.exception;
-      if (error is RangeError &&
-          error.toString().contains('millisecondsSinceEpoch')) {
-        // Suppress this specific error
-        return;
-      }
-      // Re-throw other errors
-      FlutterError.presentError(details);
-    };
+    return BetterPlayer(controller: controller);
   }
 }
