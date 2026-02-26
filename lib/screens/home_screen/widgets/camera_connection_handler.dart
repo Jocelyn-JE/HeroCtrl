@@ -56,6 +56,7 @@ class CameraConnectionHandler {
 
     showSnackBarSuccess(context, 'Successfully connected to camera');
     await GoProApiService.turnOnCamera(camera.password);
+    if (!context.mounted) return;
     await Navigator.pushNamed(context, '/control');
   }
 
