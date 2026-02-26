@@ -77,4 +77,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forget => 'Forget';
+
+  @override
+  String get switchOffCameraOnDisconnect => 'Switch off camera on disconnect';
+
+  @override
+  String get switchOffCameraOnDisconnectSubtitle => 'Automatically power off the camera when disconnecting from it';
 }

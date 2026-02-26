@@ -212,6 +212,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forget'**
   String get forget;
+
+  /// Settings option to automatically power off camera when disconnecting
+  ///
+  /// In en, this message translates to:
+  /// **'Switch off camera on disconnect'**
+  String get switchOffCameraOnDisconnect;
+
+  /// Subtitle explaining the switch off camera on disconnect option
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically power off the camera when disconnecting from it'**
+  String get switchOffCameraOnDisconnectSubtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

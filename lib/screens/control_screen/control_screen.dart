@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
+import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
@@ -14,6 +15,7 @@ class ControlScreen extends StatefulWidget {
 
 class _RegisterControlScreenState extends State<ControlScreen> {
   bool _isPreviewStarted = false;
+  final password = GoProConnectionService.currentConnection!.password;
 
   @override
   void initState() {
@@ -24,7 +26,6 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
   Future<void> _checkPreviewStatus() async {
     try {
-      final password = GoProConnectionService.currentConnection!.password;
       AppLogger.info('Waiting for camera to power on...');
       await GoProApiService.waitUntilCameraOn(password);
       AppLogger.info('Camera is on, waiting for preview to be enabled...');
@@ -72,7 +73,18 @@ class _RegisterControlScreenState extends State<ControlScreen> {
   }
 
   @override
-  void dispose() {
+  void dispose() async {
+    if (await AppPrefs.getSwitchOffCameraOnDisconnect()) {
+      try {
+        await GoProApiService.turnOffCamera(password);
+      } catch (e, stackTrace) {
+        AppLogger.error(
+          'Error turning off camera on disconnect',
+          e,
+          stackTrace,
+        );
+      }
+    }
     GoProConnectionService.disconnect();
     super.dispose();
   }

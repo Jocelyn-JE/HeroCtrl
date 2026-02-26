@@ -104,5 +104,13 @@
     "forget": "Forget",
     "@forget": {
         "description": "Forget button text"
+    },
+    "switchOffCameraOnDisconnect": "Switch off camera on disconnect",
+    "@switchOffCameraOnDisconnect": {
+        "description": "Settings option to automatically power off camera when disconnecting"
+    },
+    "switchOffCameraOnDisconnectSubtitle": "Automatically power off the camera when disconnecting from it (will stop any active recording).",
+    "@switchOffCameraOnDisconnectSubtitle": {
+        "description": "Subtitle explaining the switch off camera on disconnect option"
     }
 }
