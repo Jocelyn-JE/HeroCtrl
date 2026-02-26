@@ -85,7 +85,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         );
       }
     }
-    GoProConnectionService.disconnect();
+    GoProConnectionService.disconnect(instant: true);
     super.dispose();
   }
 }
