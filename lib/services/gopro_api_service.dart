@@ -144,6 +144,20 @@ class GoProApiService {
     return CameraSerialAndMac(bytes);
   }
 
+  static Future<int> getBatteryLevel(String password) async {
+    final response = await _getApi(
+      _bacpac,
+      GoProEndpoints.batteryLevel,
+      password,
+    );
+    final bytes = response.bodyBytes;
+    AppLogger.info('GoPro Battery Level: ${bytes[1]}%');
+    if (bytes.length != 2) {
+      throw Exception('Invalid response for battery level: ${response.body}');
+    }
+    return bytes[1];
+  }
+
   static Future<http.Response> _getApi(
     String device,
     String command,
