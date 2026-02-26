@@ -11,11 +11,12 @@ class LiveView extends StatefulWidget {
 
 class _LiveViewState extends State<LiveView> {
   late BetterPlayerController controller;
+  late BetterPlayerDataSource _dataSource;
 
   @override
   void initState() {
     super.initState();
-    final dataSource = BetterPlayerDataSource(
+    _dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       GoProEndpoints.livestreamUrl,
       liveStream: true,
@@ -43,11 +44,20 @@ class _LiveViewState extends State<LiveView> {
           controlsHideTime: Duration.zero,
           liveTextColor: Colors.transparent,
         ),
+        eventListener: _onPlayerEvent,
       ),
-      betterPlayerDataSource: dataSource,
+      betterPlayerDataSource: _dataSource,
     );
     // Set volume to 0 (muted) by default
     controller.setVolume(0.0);
+  }
+
+  void _onPlayerEvent(BetterPlayerEvent event) {
+    if (event.betterPlayerEventType == BetterPlayerEventType.exception) {
+      // BehindLiveWindowException: player fell behind the live HLS window.
+      // Reinitialize the data source to reconnect from the live edge.
+      controller.setupDataSource(_dataSource);
+    }
   }
 
   @override
