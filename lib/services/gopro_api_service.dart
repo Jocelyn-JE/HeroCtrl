@@ -148,7 +148,7 @@ class GoProApiService {
 
   static Future<int> getBatteryLevel(String password) async {
     final response = await _getApi(
-      _bacpac,
+      _camera,
       GoProEndpoints.batteryLevel,
       password,
     );
