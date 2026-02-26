@@ -42,8 +42,8 @@ class GoProConnectionService {
   }
 
   /// Disconnect from the current WiFi network
-  static Future<void> disconnect() async {
-    await Future.delayed(const Duration(seconds: 3));
+  static Future<void> disconnect({bool instant = false}) async {
+    if (!instant) await Future.delayed(const Duration(seconds: 3));
     currentConnection = null;
     WiFiForIoTPlugin.forceWifiUsage(false);
     WiFiForIoTPlugin.disconnect();

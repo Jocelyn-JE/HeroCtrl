@@ -46,7 +46,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get connectingToCamera => 'Connecting to camera...\nIt will briefly turn on.';
+  String get connectingToCamera => 'Connecting to camera...';
 
   @override
   String get cancel => 'Cancel';
@@ -82,5 +82,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchOffCameraOnDisconnect => 'Switch off camera on disconnect';
 
   @override
-  String get switchOffCameraOnDisconnectSubtitle => 'Automatically power off the camera when disconnecting from it';
+  String get switchOffCameraOnDisconnectSubtitle => 'Automatically power off the camera when disconnecting from it (will stop any active recording).';
 }

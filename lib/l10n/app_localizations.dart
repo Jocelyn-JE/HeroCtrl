@@ -162,7 +162,7 @@ abstract class AppLocalizations {
   /// Message while connecting to camera
   ///
   /// In en, this message translates to:
-  /// **'Connecting to camera...\nIt will briefly turn on.'**
+  /// **'Connecting to camera...'**
   String get connectingToCamera;
 
   /// Cancel button text
@@ -222,7 +222,7 @@ abstract class AppLocalizations {
   /// Subtitle explaining the switch off camera on disconnect option
   ///
   /// In en, this message translates to:
-  /// **'Automatically power off the camera when disconnecting from it'**
+  /// **'Automatically power off the camera when disconnecting from it (will stop any active recording).'**
   String get switchOffCameraOnDisconnectSubtitle;
 }
 

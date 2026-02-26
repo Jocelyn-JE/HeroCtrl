@@ -54,7 +54,7 @@
             }
         }
     },
-    "connectingToCamera": "Connecting to camera...\nIt will briefly turn on.",
+    "connectingToCamera": "Connecting to camera...",
     "@connectingToCamera": {
         "description": "Message while connecting to camera"
     },
