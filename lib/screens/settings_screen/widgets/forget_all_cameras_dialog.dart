@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
-import 'package:heroctrl/services/gopro_prefs.dart';
+import 'package:heroctrl/services/gopro_registry.dart';
 import 'package:heroctrl/widgets/red_button.dart';
 
 class ForgetAllCamerasDialog extends StatelessWidget {

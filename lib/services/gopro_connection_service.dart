@@ -1,6 +1,6 @@
 import 'package:heroctrl/models/gopro_registration.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
-import 'package:heroctrl/services/gopro_prefs.dart';
+import 'package:heroctrl/services/gopro_registry.dart';
 import 'package:heroctrl/utils/gopro_validator.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 

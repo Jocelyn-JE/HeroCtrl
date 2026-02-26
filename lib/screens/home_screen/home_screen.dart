@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/models/gopro_registration.dart';
-import 'package:heroctrl/services/gopro_prefs.dart';
+import 'package:heroctrl/services/gopro_registry.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'widgets/camera_list_view.dart';
 import 'widgets/camera_connection_handler.dart';

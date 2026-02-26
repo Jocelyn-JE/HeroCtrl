@@ -1,4 +1,4 @@
-import 'package:heroctrl/services/gopro_prefs.dart';
+import 'package:heroctrl/services/gopro_registry.dart';
 
 /*
 ** OUI standard license header for GoPro, Inc.
