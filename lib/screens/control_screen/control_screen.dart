@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
@@ -14,30 +15,49 @@ class ControlScreen extends StatefulWidget {
 }
 
 class _RegisterControlScreenState extends State<ControlScreen> {
-  bool _isPreviewStarted = false;
-  final password = GoProConnectionService.currentConnection!.password;
+  final _password = GoProConnectionService.currentConnection!.password;
+  CameraState? _cameraState;
 
   @override
   void initState() {
     super.initState();
     AppLogger.info('ControlScreen: initState called');
-    _checkPreviewStatus();
+    _fetchCameraState();
+  }
+
+  Future<void> _fetchCameraState() async {
+    try {
+      AppLogger.info('Waiting for camera to power on...');
+      await GoProApiService.waitUntilCameraOn(_password);
+      final state = await GoProApiService.getStatus(_password);
+      final batteryPercent = await GoProApiService.getBatteryLevel(_password);
+      if (mounted) {
+        setState(() {
+          _cameraState = CameraState(state);
+          _cameraState!.batteryPercent = batteryPercent;
+        });
+      }
+      await _checkPreviewStatus();
+    } catch (e, stackTrace) {
+      AppLogger.error('Error fetching camera state', e, stackTrace);
+      if (mounted) {
+        showSnackBar(
+          context,
+          'Error fetching camera state: $e',
+          color: Colors.red,
+        );
+      }
+    }
   }
 
   Future<void> _checkPreviewStatus() async {
     try {
-      AppLogger.info('Waiting for camera to power on...');
-      await GoProApiService.waitUntilCameraOn(password);
       AppLogger.info('Camera is on, waiting for preview to be enabled...');
-      await GoProApiService.waitUntilPreviewOn(password);
-      AppLogger.info('Preview is enabled, waiting for stream to stabilize...');
-      // Give the camera a few seconds for the HLS stream to become available
-      await Future.delayed(const Duration(seconds: 3));
-      final isOn = true;
+      await GoProApiService.waitUntilPreviewOn(_password);
       AppLogger.info('Preview status: ON');
       if (mounted) {
         setState(() {
-          _isPreviewStarted = isOn;
+          _cameraState?.isPreviewOn = true;
         });
       }
     } catch (e, stackTrace) {
@@ -61,7 +81,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (_isPreviewStarted)
+              if (_cameraState?.isPreviewOn == true)
                 const LiveView()
               else
                 const CircularProgressIndicator(),
@@ -76,7 +96,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
   void dispose() async {
     if (await AppPrefs.getSwitchOffCameraOnDisconnect()) {
       try {
-        await GoProApiService.turnOffCamera(password);
+        await GoProApiService.turnOffCamera(_password);
       } catch (e, stackTrace) {
         AppLogger.error(
           'Error turning off camera on disconnect',
