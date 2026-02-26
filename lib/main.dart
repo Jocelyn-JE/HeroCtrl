@@ -19,7 +19,7 @@ void main() {
       return;
     }
     // Log other errors
-    AppLogger.error('Unhandled error', error, stack);
+    AppLogger.error('Unhandled error: $error', error, stack);
   });
 }
 
