@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/utils/app_routes.dart';
@@ -10,15 +11,23 @@ void main() {
   AppLogger.init(); // Initialize logger
   AppLogger.info('App started');
 
-  // Run app in a zone to catch better_player_plus live stream position errors
+  // Run app in a zone to catch better_player_plus live stream errors
   runZonedGuarded(() => runApp(const MainApp()), (error, stack) {
-    // Suppress better_player_plus position query errors for live streams
+    // Known bug: live streams have invalid position values
     if (error is RangeError &&
         error.toString().contains('millisecondsSinceEpoch')) {
-      // Known bug: live streams have invalid position values
       return;
     }
-    // Log other errors
+    // ExoPlayer source errors are expected on a lossy WiFi stream and are
+    // handled by LiveView's reconnect logic — no need to log as SEVERE here.
+    if (error is PlatformException && error.code == 'VideoError') {
+      return;
+    }
+    // 'Bad state: Future already completed' comes from BetterPlayer internals
+    // when a reconnect is already in progress — safe to suppress.
+    if (error.toString().contains('Bad state: Future already completed')) {
+      return;
+    }
     AppLogger.error('Unhandled error: $error', error, stack);
   });
 }

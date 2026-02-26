@@ -106,7 +106,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (_cameraState?.isPreviewOn == true)
-                const LiveView()
+                LiveView(camPassword: _password)
               else
                 const CircularProgressIndicator(),
             ],
