@@ -53,10 +53,21 @@ class _LiveViewState extends State<LiveView> {
   }
 
   void _onPlayerEvent(BetterPlayerEvent event) {
-    if (event.betterPlayerEventType == BetterPlayerEventType.exception) {
-      // BehindLiveWindowException: player fell behind the live HLS window.
-      // Reinitialize the data source to reconnect from the live edge.
-      controller.setupDataSource(_dataSource);
+    switch (event.betterPlayerEventType) {
+      case BetterPlayerEventType.hideFullscreen:
+        controller.setupDataSource(_dataSource);
+        break;
+      case BetterPlayerEventType.exception:
+        controller.setupDataSource(_dataSource);
+        break;
+      case BetterPlayerEventType.finished:
+        controller.setupDataSource(_dataSource);
+        break;
+      case BetterPlayerEventType.bufferingStart:
+        controller.setupDataSource(_dataSource);
+        break;
+      default:
+        break;
     }
   }
 

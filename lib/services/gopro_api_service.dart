@@ -70,6 +70,7 @@ class GoProApiService {
         final isOn = await cameraPowerStatus(password);
         if (isOn) {
           AppLogger.info('Camera is now powered on');
+          await Future.delayed(const Duration(milliseconds: 200));
           return;
         }
       } catch (e) {
@@ -98,6 +99,7 @@ class GoProApiService {
         final isOn = await isVideoPreviewOn(password);
         if (isOn) {
           AppLogger.info('Video preview is now enabled');
+          await Future.delayed(const Duration(seconds: 3));
           return;
         }
       } catch (e) {
