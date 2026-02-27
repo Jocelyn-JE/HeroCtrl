@@ -43,6 +43,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         monitor.estimatedMinutesRemaining.addListener(_onBatteryChanged);
         setState(() {
           _cameraState = CameraState(state);
+          _cameraState!.isCameraOn = true;
           _batteryMonitor = monitor;
         });
         await _checkPreviewStatus();
@@ -94,12 +95,13 @@ class _RegisterControlScreenState extends State<ControlScreen> {
               estimatedMinutesRemaining:
                   _batteryMonitor!.estimatedMinutesRemaining.value,
             ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () async {
-              await Navigator.pushNamed(context, '/camera_settings');
-            },
-          ),
+          if (_cameraState?.isCameraOn == true)
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () async {
+                await Navigator.pushNamed(context, '/camera_settings');
+              },
+            ),
         ],
       ),
       body: SafeArea(
