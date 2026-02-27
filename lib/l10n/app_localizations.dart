@@ -260,6 +260,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'4 LEDs'**
   String get ledFour;
+
+  /// Title for volume setting card
+  ///
+  /// In en, this message translates to:
+  /// **'Volume'**
+  String get volumeSetting;
+
+  /// Subtitle explaining the volume setting
+  ///
+  /// In en, this message translates to:
+  /// **'Control the camera\'s speaker volume.'**
+  String get volumeSettingSubtitle;
+
+  /// Volume off option
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get volumeOff;
+
+  /// Volume low option
+  ///
+  /// In en, this message translates to:
+  /// **'70%'**
+  String get volumeLow;
+
+  /// Volume high option
+  ///
+  /// In en, this message translates to:
+  /// **'100%'**
+  String get volumeHigh;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

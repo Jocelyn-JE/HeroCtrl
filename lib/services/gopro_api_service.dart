@@ -165,6 +165,25 @@ class GoProApiService {
     }
   }
 
+  static Future<void> setVolume(String password, String volumeOption) async {
+    await _postApi(_camera, GoProEndpoints.volume, password, volumeOption);
+  }
+
+  static Future<String> getVolume(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.volume, password);
+    final value = response.bodyBytes[1];
+    switch (value) {
+      case 0:
+        return Volume.mute;
+      case 1:
+        return Volume.percent70;
+      case 2:
+        return Volume.percent100;
+      default:
+        return Volume.percent100;
+    }
+  }
+
   static Future<int> getBatteryLevel(String password) async {
     final response = await _getApi(
       _camera,

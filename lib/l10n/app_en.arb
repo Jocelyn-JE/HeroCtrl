@@ -136,5 +136,25 @@
     "ledFour": "4 LEDs",
     "@ledFour": {
         "description": "Four LEDs option"
+    },
+    "volumeSetting": "Volume",
+    "@volumeSetting": {
+        "description": "Title for volume setting card"
+    },
+    "volumeSettingSubtitle": "Control the camera's speaker volume.",
+    "@volumeSettingSubtitle": {
+        "description": "Subtitle explaining the volume setting"
+    },
+    "volumeOff": "Off",
+    "@volumeOff": {
+        "description": "Volume off option"
+    },
+    "volumeLow": "70%",
+    "@volumeLow": {
+        "description": "Volume low option"
+    },
+    "volumeHigh": "100%",
+    "@volumeHigh": {
+        "description": "Volume high option"
     }
 }

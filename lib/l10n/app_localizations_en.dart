@@ -101,4 +101,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ledFour => '4 LEDs';
+
+  @override
+  String get volumeSetting => 'Volume';
+
+  @override
+  String get volumeSettingSubtitle => 'Control the camera\'s speaker volume.';
+
+  @override
+  String get volumeOff => 'Off';
+
+  @override
+  String get volumeLow => '70%';
+
+  @override
+  String get volumeHigh => '100%';
 }
