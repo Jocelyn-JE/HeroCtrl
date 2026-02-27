@@ -7,6 +7,7 @@ import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_car
 import 'package:heroctrl/screens/camera_settings/widgets/video_mode_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/volume_setting_card.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
+import 'widgets/disconnect_card.dart';
 import 'widgets/led_setting_card.dart';
 import 'widgets/time_setting_card.dart';
 
@@ -23,6 +24,7 @@ class CameraSettingsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 8),
         child: ListView(
           children: [
+            DisconnectCard(password: password),
             LedSettingCard(password: password),
             VolumeSettingCard(password: password),
             OrientationSettingCard(password: password),

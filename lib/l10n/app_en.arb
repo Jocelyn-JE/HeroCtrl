@@ -302,5 +302,25 @@
     "locateCameraStop": "Stop",
     "@locateCameraStop": {
         "description": "Button to stop locating the camera"
+    },
+    "disconnectTitle": "Disconnect & Turn Off",
+    "@disconnectTitle": {
+        "description": "Title for the disconnect and shut off card in camera settings"
+    },
+    "disconnectSubtitle": "Turn off the camera and return to the home screen.",
+    "@disconnectSubtitle": {
+        "description": "Subtitle for the disconnect and shut off card in camera settings"
+    },
+    "disconnectConfirmTitle": "Turn Off Camera?",
+    "@disconnectConfirmTitle": {
+        "description": "Title of the confirmation dialog before turning off the camera"
+    },
+    "disconnectConfirmMessage": "This will power off the camera and disconnect. Any active recording will be stopped.",
+    "@disconnectConfirmMessage": {
+        "description": "Body text of the confirmation dialog before turning off the camera"
+    },
+    "disconnectConfirmButton": "Turn Off",
+    "@disconnectConfirmButton": {
+        "description": "Confirm button label in the turn off camera dialog"
     }
 }

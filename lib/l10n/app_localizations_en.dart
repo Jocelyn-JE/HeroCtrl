@@ -215,4 +215,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get locateCameraStop => 'Stop';
+
+  @override
+  String get disconnectTitle => 'Disconnect & Turn Off';
+
+  @override
+  String get disconnectSubtitle => 'Turn off the camera and return to the home screen.';
+
+  @override
+  String get disconnectConfirmTitle => 'Turn Off Camera?';
+
+  @override
+  String get disconnectConfirmMessage => 'This will power off the camera and disconnect. Any active recording will be stopped.';
+
+  @override
+  String get disconnectConfirmButton => 'Turn Off';
 }

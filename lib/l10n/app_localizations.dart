@@ -464,6 +464,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stop'**
   String get locateCameraStop;
+
+  /// Title for the disconnect and shut off card in camera settings
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect & Turn Off'**
+  String get disconnectTitle;
+
+  /// Subtitle for the disconnect and shut off card in camera settings
+  ///
+  /// In en, this message translates to:
+  /// **'Turn off the camera and return to the home screen.'**
+  String get disconnectSubtitle;
+
+  /// Title of the confirmation dialog before turning off the camera
+  ///
+  /// In en, this message translates to:
+  /// **'Turn Off Camera?'**
+  String get disconnectConfirmTitle;
+
+  /// Body text of the confirmation dialog before turning off the camera
+  ///
+  /// In en, this message translates to:
+  /// **'This will power off the camera and disconnect. Any active recording will be stopped.'**
+  String get disconnectConfirmMessage;
+
+  /// Confirm button label in the turn off camera dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Turn Off'**
+  String get disconnectConfirmButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
