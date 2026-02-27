@@ -122,4 +122,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orientationUpsideDownSubtitle => 'Flip the camera image when mounted upside down.';
+
+  @override
+  String get timeSetting => 'Date & Time';
+
+  @override
+  String get timeSettingSubtitle => 'Sync the camera clock with the current device time.';
+
+  @override
+  String get timeSetToNow => 'Sync to Device Time';
+
+  @override
+  String get cameraCurrentTime => 'Camera time';
 }

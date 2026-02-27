@@ -302,6 +302,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flip the camera image when mounted upside down.'**
   String get orientationUpsideDownSubtitle;
+
+  /// Title for time setting card
+  ///
+  /// In en, this message translates to:
+  /// **'Date & Time'**
+  String get timeSetting;
+
+  /// Subtitle for the time setting card
+  ///
+  /// In en, this message translates to:
+  /// **'Sync the camera clock with the current device time.'**
+  String get timeSettingSubtitle;
+
+  /// Button label to sync camera time to device time
+  ///
+  /// In en, this message translates to:
+  /// **'Sync to Device Time'**
+  String get timeSetToNow;
+
+  /// Label shown next to the camera's current time
+  ///
+  /// In en, this message translates to:
+  /// **'Camera time'**
+  String get cameraCurrentTime;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

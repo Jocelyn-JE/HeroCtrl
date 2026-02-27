@@ -164,5 +164,21 @@
     "orientationUpsideDownSubtitle": "Flip the camera image when mounted upside down.",
     "@orientationUpsideDownSubtitle": {
         "description": "Subtitle for the upside-down orientation toggle"
+    },
+    "timeSetting": "Date & Time",
+    "@timeSetting": {
+        "description": "Title for time setting card"
+    },
+    "timeSettingSubtitle": "Sync the camera clock with the current device time.",
+    "@timeSettingSubtitle": {
+        "description": "Subtitle for the time setting card"
+    },
+    "timeSetToNow": "Sync to Device Time",
+    "@timeSetToNow": {
+        "description": "Button label to sync camera time to device time"
+    },
+    "cameraCurrentTime": "Camera time",
+    "@cameraCurrentTime": {
+        "description": "Label shown next to the camera's current time"
     }
 }

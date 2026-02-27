@@ -219,6 +219,37 @@ class GoProApiService {
     return value == 1;
   }
 
+  static Future<void> setTime(String password, DateTime time) async {
+    String h(int v) => v.toRadixString(16).padLeft(2, '0');
+    final formattedTime =
+        '${h(time.year % 100)}%${h(time.month)}%${h(time.day)}%${h(time.hour)}%${h(time.minute)}%${h(time.second)}';
+    await _postApi(
+      _camera,
+      GoProEndpoints.timeAndDate,
+      password,
+      formattedTime,
+    );
+  }
+
+  static Future<DateTime> getTime(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.timeAndDate,
+      password,
+    );
+    final bytes = response.bodyBytes;
+    if (bytes.length != 7) {
+      throw Exception('Invalid response for time: ${response.body}');
+    }
+    final year = 2000 + bytes[1];
+    final month = bytes[2];
+    final day = bytes[3];
+    final hour = bytes[4];
+    final minute = bytes[5];
+    final second = bytes[6];
+    return DateTime(year, month, day, hour, minute, second);
+  }
+
   static Future<int> getBatteryLevel(String password) async {
     final response = await _getApi(
       _camera,

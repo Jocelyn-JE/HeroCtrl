@@ -4,6 +4,7 @@ import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_car
 import 'package:heroctrl/screens/camera_settings/widgets/volume_setting_card.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'widgets/led_setting_card.dart';
+import 'widgets/time_setting_card.dart';
 
 class CameraSettingsScreen extends StatelessWidget {
   const CameraSettingsScreen({super.key});
@@ -22,6 +23,7 @@ class CameraSettingsScreen extends StatelessWidget {
             LedSettingCard(password: password),
             VolumeSettingCard(password: password),
             OrientationSettingCard(password: password),
+            TimeSettingCard(password: password),
           ],
         ),
       ),
