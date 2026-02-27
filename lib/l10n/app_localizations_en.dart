@@ -139,7 +139,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get videoModeSettingTitle => 'Video Mode';
 
   @override
-  String get videoModeSettingSubtitle => 'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.';
+  String get videoModeSettingSubtitle => 'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.';
 
   @override
   String get videoModeNtsc => 'NTSC (30fps)';

@@ -87,7 +87,7 @@ class GoProApiService {
         final isOn = await cameraPowerStatus(password);
         if (isOn) {
           AppLogger.info('Camera is now powered on');
-          await Future.delayed(const Duration(milliseconds: 200));
+          await Future.delayed(const Duration(seconds: 2));
           return;
         }
       } catch (e) {

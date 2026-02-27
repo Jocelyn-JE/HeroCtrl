@@ -336,7 +336,7 @@ abstract class AppLocalizations {
   /// Subtitle for video mode setting card
   ///
   /// In en, this message translates to:
-  /// **'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.'**
+  /// **'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.'**
   String get videoModeSettingSubtitle;
 
   /// NTSC video mode option

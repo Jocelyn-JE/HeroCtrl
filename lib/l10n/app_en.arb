@@ -185,7 +185,7 @@
     "@videoModeSettingTitle": {
         "description": "Title for video mode setting card"
     },
-    "videoModeSettingSubtitle": "Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.",
+    "videoModeSettingSubtitle": "Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.",
     "@videoModeSettingSubtitle": {
         "description": "Subtitle for video mode setting card"
     },
