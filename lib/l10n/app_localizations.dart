@@ -326,6 +326,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Camera time'**
   String get cameraCurrentTime;
+
+  /// Title for video mode setting card
+  ///
+  /// In en, this message translates to:
+  /// **'Video Mode'**
+  String get videoModeSettingTitle;
+
+  /// Subtitle for video mode setting card
+  ///
+  /// In en, this message translates to:
+  /// **'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.'**
+  String get videoModeSettingSubtitle;
+
+  /// NTSC video mode option
+  ///
+  /// In en, this message translates to:
+  /// **'NTSC (30fps)'**
+  String get videoModeNtsc;
+
+  /// PAL video mode option
+  ///
+  /// In en, this message translates to:
+  /// **'PAL (25fps)'**
+  String get videoModePal;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

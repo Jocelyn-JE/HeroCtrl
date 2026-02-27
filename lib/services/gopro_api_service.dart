@@ -250,6 +250,23 @@ class GoProApiService {
     return DateTime(year, month, day, hour, minute, second);
   }
 
+  static Future<void> setVideoMode(String password, String modeOption) async {
+    await _postApi(_camera, GoProEndpoints.videoMode, password, modeOption);
+  }
+
+  static Future<String> getVideoMode(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.videoMode, password);
+    final value = response.bodyBytes[1];
+    switch (value) {
+      case 0:
+        return VideoModes.ntsc;
+      case 1:
+        return VideoModes.pal;
+      default:
+        return VideoModes.ntsc;
+    }
+  }
+
   static Future<int> getBatteryLevel(String password) async {
     final response = await _getApi(
       _camera,

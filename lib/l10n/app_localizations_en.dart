@@ -134,4 +134,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cameraCurrentTime => 'Camera time';
+
+  @override
+  String get videoModeSettingTitle => 'Video Mode';
+
+  @override
+  String get videoModeSettingSubtitle => 'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.';
+
+  @override
+  String get videoModeNtsc => 'NTSC (30fps)';
+
+  @override
+  String get videoModePal => 'PAL (25fps)';
 }
