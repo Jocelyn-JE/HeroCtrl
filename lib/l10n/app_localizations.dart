@@ -428,6 +428,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Burst'**
   String get defaultModeBurst;
+
+  /// Title for locate camera card
+  ///
+  /// In en, this message translates to:
+  /// **'Locate Camera'**
+  String get locateCamera;
+
+  /// Subtitle for locate camera card
+  ///
+  /// In en, this message translates to:
+  /// **'Make the camera beep and flash its LEDs to help you find it.'**
+  String get locateCameraSubtitle;
+
+  /// Button to start locating the camera
+  ///
+  /// In en, this message translates to:
+  /// **'Start Locating'**
+  String get locateCameraButton;
+
+  /// Title of the locate camera dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Locating Camera'**
+  String get locateCameraDialogTitle;
+
+  /// Message shown in the locate camera dialog
+  ///
+  /// In en, this message translates to:
+  /// **'The camera is beeping and flashing. Tap Stop when you\'ve found it.'**
+  String get locateCameraDialogMessage;
+
+  /// Button to stop locating the camera
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get locateCameraStop;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

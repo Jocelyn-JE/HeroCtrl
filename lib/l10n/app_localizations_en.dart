@@ -197,4 +197,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get defaultModeBurst => 'Burst';
+
+  @override
+  String get locateCamera => 'Locate Camera';
+
+  @override
+  String get locateCameraSubtitle => 'Make the camera beep and flash its LEDs to help you find it.';
+
+  @override
+  String get locateCameraButton => 'Start Locating';
+
+  @override
+  String get locateCameraDialogTitle => 'Locating Camera';
+
+  @override
+  String get locateCameraDialogMessage => 'The camera is beeping and flashing. Tap Stop when you\'ve found it.';
+
+  @override
+  String get locateCameraStop => 'Stop';
 }

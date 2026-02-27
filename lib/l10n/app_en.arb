@@ -278,5 +278,29 @@
     "defaultModeBurst": "Burst",
     "@defaultModeBurst": {
         "description": "Default mode option for burst mode"
+    },
+    "locateCamera": "Locate Camera",
+    "@locateCamera": {
+        "description": "Title for locate camera card"
+    },
+    "locateCameraSubtitle": "Make the camera beep and flash its LEDs to help you find it.",
+    "@locateCameraSubtitle": {
+        "description": "Subtitle for locate camera card"
+    },
+    "locateCameraButton": "Start Locating",
+    "@locateCameraButton": {
+        "description": "Button to start locating the camera"
+    },
+    "locateCameraDialogTitle": "Locating Camera",
+    "@locateCameraDialogTitle": {
+        "description": "Title of the locate camera dialog"
+    },
+    "locateCameraDialogMessage": "The camera is beeping and flashing. Tap Stop when you've found it.",
+    "@locateCameraDialogMessage": {
+        "description": "Message shown in the locate camera dialog"
+    },
+    "locateCameraStop": "Stop",
+    "@locateCameraStop": {
+        "description": "Button to stop locating the camera"
     }
 }

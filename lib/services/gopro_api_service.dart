@@ -319,6 +319,15 @@ class GoProApiService {
     return bytes[1];
   }
 
+  static Future<void> setLocateCamera(String password, bool on) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.locate,
+      password,
+      on ? Locate.on : Locate.off,
+    );
+  }
+
   static Future<http.Response> _getApi(
     String device,
     String command,
