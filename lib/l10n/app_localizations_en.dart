@@ -116,4 +116,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get volumeHigh => '100%';
+
+  @override
+  String get orientationUpsideDown => 'Upside-Down Mode';
+
+  @override
+  String get orientationUpsideDownSubtitle => 'Flip the camera image when mounted upside down.';
 }

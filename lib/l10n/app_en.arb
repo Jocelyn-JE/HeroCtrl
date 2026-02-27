@@ -156,5 +156,13 @@
     "volumeHigh": "100%",
     "@volumeHigh": {
         "description": "Volume high option"
+    },
+    "orientationUpsideDown": "Upside-Down Mode",
+    "@orientationUpsideDown": {
+        "description": "Title for upside-down orientation toggle"
+    },
+    "orientationUpsideDownSubtitle": "Flip the camera image when mounted upside down.",
+    "@orientationUpsideDownSubtitle": {
+        "description": "Subtitle for the upside-down orientation toggle"
     }
 }

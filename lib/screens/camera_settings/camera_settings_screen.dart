@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/volume_setting_card.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'widgets/led_setting_card.dart';
@@ -20,6 +21,7 @@ class CameraSettingsScreen extends StatelessWidget {
           children: [
             LedSettingCard(password: password),
             VolumeSettingCard(password: password),
+            OrientationSettingCard(password: password),
           ],
         ),
       ),

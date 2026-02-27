@@ -200,6 +200,25 @@ class GoProApiService {
     }
   }
 
+  static Future<void> setOrientation(String password, bool upsideDown) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.orientation,
+      password,
+      upsideDown ? Orientation.down : Orientation.up,
+    );
+  }
+
+  static Future<bool> isUpsideDown(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.orientation,
+      password,
+    );
+    final value = response.bodyBytes[1];
+    return value == 1;
+  }
+
   static Future<int> getBatteryLevel(String password) async {
     final response = await _getApi(
       _camera,

@@ -290,6 +290,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'100%'**
   String get volumeHigh;
+
+  /// Title for upside-down orientation toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Upside-Down Mode'**
+  String get orientationUpsideDown;
+
+  /// Subtitle for the upside-down orientation toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Flip the camera image when mounted upside down.'**
+  String get orientationUpsideDownSubtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
