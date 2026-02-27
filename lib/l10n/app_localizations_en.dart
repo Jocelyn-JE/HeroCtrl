@@ -146,4 +146,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get videoModePal => 'PAL (25fps)';
+
+  @override
+  String get cameraInfoTitle => 'Camera Information';
+
+  @override
+  String cameraModel(String model) {
+    return 'Model: $model';
+  }
+
+  @override
+  String cameraSerial(String serial) {
+    return 'Serial number: $serial';
+  }
+
+  @override
+  String cameraMacAddress(String mac) {
+    return 'MAC address: $mac';
+  }
+
+  @override
+  String cameraVersion(String version) {
+    return 'Firmware version: $version';
+  }
+
+  @override
+  String cameraWifiSSID(String ssid) {
+    return 'WiFi SSID: $ssid';
+  }
+
+  @override
+  String cameraWifiPassword(String password) {
+    return 'WiFi Password: $password';
+  }
 }

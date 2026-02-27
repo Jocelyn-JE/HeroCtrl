@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/camera_info_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/video_mode_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/volume_setting_card.dart';
@@ -25,6 +26,7 @@ class CameraSettingsScreen extends StatelessWidget {
             OrientationSettingCard(password: password),
             VideoModeSettingCard(password: password),
             TimeSettingCard(password: password),
+            CameraInfoCard(password: password),
             SizedBox(height: 8),
           ],
         ),

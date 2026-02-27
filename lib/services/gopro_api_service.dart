@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
 import 'package:heroctrl/models/camera_version.dart';
+import 'package:heroctrl/models/camera_wifi_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/models/camera_status.dart';
@@ -160,6 +161,13 @@ class GoProApiService {
     final bytes = response.bodyBytes;
     AppLogger.info('GoPro Serial and MAC: ${bytes.length} bytes');
     return CameraSerialAndMac(bytes);
+  }
+
+  static Future<CameraWifiInfo> getCameraWifiInfo(String password) async {
+    final response = await _getApi(_bacpac, GoProEndpoints.wifiInfo, password);
+    final bytes = response.bodyBytes;
+    AppLogger.info('GoPro WiFi Info: ${bytes.length} bytes');
+    return CameraWifiInfo(bytes);
   }
 
   static Future<void> setLeds(String password, String ledOption) async {

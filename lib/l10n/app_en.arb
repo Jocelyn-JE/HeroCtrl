@@ -196,5 +196,63 @@
     "videoModePal": "PAL (25fps)",
     "@videoModePal": {
         "description": "PAL video mode option"
+    },
+    "cameraInfoTitle": "Camera Information",
+    "@cameraInfoTitle": {
+        "description": "Title for camera information card"
+    },
+    "cameraModel": "Model: {model}",
+    "@cameraModel": {
+        "description": "Label showing the camera model",
+        "placeholders": {
+            "model": {
+                "type": "String"
+            }
+        }
+    },
+    "cameraSerial": "Serial number: H{serial}",
+    "@cameraSerial": {
+        "description": "Label showing the camera serial number",
+        "placeholders": {
+            "serial": {
+                "type": "String"
+            }
+        }
+    },
+    "cameraMacAddress": "MAC address: {mac}",
+    "@cameraMacAddress": {
+        "description": "Label showing the camera MAC address",
+        "placeholders": {
+            "mac": {
+                "type": "String"
+            }
+        }
+    },
+    "cameraVersion": "Firmware version: {version}",
+    "@cameraVersion": {
+        "description": "Label showing the camera firmware version",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "cameraWifiSSID": "WiFi SSID: {ssid}",
+    "@cameraWifiSSID": {
+        "description": "Label showing the camera WiFi information",
+        "placeholders": {
+            "ssid": {
+                "type": "String"
+            }
+        }
+    },
+    "cameraWifiPassword": "WiFi Password: {password}",
+    "@cameraWifiPassword": {
+        "description": "Label showing the camera WiFi password",
+        "placeholders": {
+            "password": {
+                "type": "String"
+            }
+        }
     }
 }

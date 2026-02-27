@@ -350,6 +350,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PAL (25fps)'**
   String get videoModePal;
+
+  /// Title for camera information card
+  ///
+  /// In en, this message translates to:
+  /// **'Camera Information'**
+  String get cameraInfoTitle;
+
+  /// Label showing the camera model
+  ///
+  /// In en, this message translates to:
+  /// **'Model: {model}'**
+  String cameraModel(String model);
+
+  /// Label showing the camera serial number
+  ///
+  /// In en, this message translates to:
+  /// **'Serial number: {serial}'**
+  String cameraSerial(String serial);
+
+  /// Label showing the camera MAC address
+  ///
+  /// In en, this message translates to:
+  /// **'MAC address: {mac}'**
+  String cameraMacAddress(String mac);
+
+  /// Label showing the camera firmware version
+  ///
+  /// In en, this message translates to:
+  /// **'Firmware version: {version}'**
+  String cameraVersion(String version);
+
+  /// Label showing the camera WiFi information
+  ///
+  /// In en, this message translates to:
+  /// **'WiFi SSID: {ssid}'**
+  String cameraWifiSSID(String ssid);
+
+  /// Label showing the camera WiFi password
+  ///
+  /// In en, this message translates to:
+  /// **'WiFi Password: {password}'**
+  String cameraWifiPassword(String password);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
