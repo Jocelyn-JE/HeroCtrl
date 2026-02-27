@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 
 void showSnackBar(BuildContext context, String message, {Color? color}) {
   if (!context.mounted) return;
-  ScaffoldMessenger.of(context).clearSnackBars();
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(message, style: TextStyle(color: Colors.white)),
-      backgroundColor: color,
-    ),
-  );
+  final messenger = ScaffoldMessenger.maybeOf(context);
+  if (messenger == null) return;
+  messenger.clearSnackBars();
+  try {
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(message, style: TextStyle(color: Colors.white)),
+        backgroundColor: color,
+      ),
+    );
+  } catch (_) {
+    // ScaffoldMessenger was deactivated before showSnackBar could execute
+  }
 }
 
 void showSnackBarError(BuildContext context, String message) {
