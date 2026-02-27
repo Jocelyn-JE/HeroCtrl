@@ -254,5 +254,29 @@
                 "type": "String"
             }
         }
+    },
+    "defaultModeSetting": "Default Camera Mode",
+    "@defaultModeSetting": {
+        "description": "Title for default camera mode setting card"
+    },
+    "defaultModeSettingSubtitle": "Choose which mode the camera should start in when powered on.",
+    "@defaultModeSettingSubtitle": {
+        "description": "Subtitle for default camera mode setting card"
+    },
+    "defaultModeVideo": "Video",
+    "@defaultModeVideo": {
+        "description": "Default mode option for video mode"
+    },
+    "defaultModePhoto": "Photo",
+    "@defaultModePhoto": {
+        "description": "Default mode option for photo mode"
+    },
+    "defaultModeTimeLapse": "Time-Lapse",
+    "@defaultModeTimeLapse": {
+        "description": "Default mode option for time-lapse mode"
+    },
+    "defaultModeBurst": "Burst",
+    "@defaultModeBurst": {
+        "description": "Default mode option for burst mode"
     }
 }

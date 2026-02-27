@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/camera_info_card.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/default_mode_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/video_mode_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/volume_setting_card.dart';
@@ -24,6 +25,7 @@ class CameraSettingsScreen extends StatelessWidget {
             LedSettingCard(password: password),
             VolumeSettingCard(password: password),
             OrientationSettingCard(password: password),
+            DefaultModeCard(password: password),
             VideoModeSettingCard(password: password),
             TimeSettingCard(password: password),
             CameraInfoCard(password: password),

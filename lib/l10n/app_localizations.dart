@@ -366,7 +366,7 @@ abstract class AppLocalizations {
   /// Label showing the camera serial number
   ///
   /// In en, this message translates to:
-  /// **'Serial number: {serial}'**
+  /// **'Serial number: H{serial}'**
   String cameraSerial(String serial);
 
   /// Label showing the camera MAC address
@@ -392,6 +392,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'WiFi Password: {password}'**
   String cameraWifiPassword(String password);
+
+  /// Title for default camera mode setting card
+  ///
+  /// In en, this message translates to:
+  /// **'Default Camera Mode'**
+  String get defaultModeSetting;
+
+  /// Subtitle for default camera mode setting card
+  ///
+  /// In en, this message translates to:
+  /// **'Choose which mode the camera should start in when powered on.'**
+  String get defaultModeSettingSubtitle;
+
+  /// Default mode option for video mode
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get defaultModeVideo;
+
+  /// Default mode option for photo mode
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get defaultModePhoto;
+
+  /// Default mode option for time-lapse mode
+  ///
+  /// In en, this message translates to:
+  /// **'Time-Lapse'**
+  String get defaultModeTimeLapse;
+
+  /// Default mode option for burst mode
+  ///
+  /// In en, this message translates to:
+  /// **'Burst'**
+  String get defaultModeBurst;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

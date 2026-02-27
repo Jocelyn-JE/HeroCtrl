@@ -275,6 +275,36 @@ class GoProApiService {
     }
   }
 
+  static Future<void> setDefaultMode(String password, String modeOption) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.defaultCameraMode,
+      password,
+      modeOption,
+    );
+  }
+
+  static Future<String> getDefaultMode(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.defaultCameraMode,
+      password,
+    );
+    final value = response.bodyBytes[1];
+    switch (value) {
+      case 0:
+        return DefaultCameraMode.videoMode;
+      case 1:
+        return DefaultCameraMode.photoMode;
+      case 2:
+        return DefaultCameraMode.burstMode;
+      case 3:
+        return DefaultCameraMode.timeLapseMode;
+      default:
+        return DefaultCameraMode.videoMode;
+    }
+  }
+
   static Future<int> getBatteryLevel(String password) async {
     final response = await _getApi(
       _camera,

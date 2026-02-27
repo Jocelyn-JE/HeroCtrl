@@ -157,7 +157,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String cameraSerial(String serial) {
-    return 'Serial number: $serial';
+    return 'Serial number: H$serial';
   }
 
   @override
@@ -179,4 +179,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String cameraWifiPassword(String password) {
     return 'WiFi Password: $password';
   }
+
+  @override
+  String get defaultModeSetting => 'Default Camera Mode';
+
+  @override
+  String get defaultModeSettingSubtitle => 'Choose which mode the camera should start in when powered on.';
+
+  @override
+  String get defaultModeVideo => 'Video';
+
+  @override
+  String get defaultModePhoto => 'Photo';
+
+  @override
+  String get defaultModeTimeLapse => 'Time-Lapse';
+
+  @override
+  String get defaultModeBurst => 'Burst';
 }
