@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
 import 'package:heroctrl/models/camera_version.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,21 @@ import 'package:heroctrl/constants/gopro_endpoints.dart';
 class GoProApiService {
   static const _camera = 'camera';
   static const _bacpac = 'bacpac';
+
+  // Serialises all HTTP requests so the camera never receives overlapping calls.
+  static Future<void> _lock = Future.value();
+
+  static Future<T> _withLock<T>(Future<T> Function() fn) async {
+    final previous = _lock;
+    final completer = Completer<void>();
+    _lock = completer.future;
+    try {
+      await previous;
+      return await fn();
+    } finally {
+      completer.complete();
+    }
+  }
 
   static Future<void> stopShutter(String password) async {
     await _postApi(_camera, GoProEndpoints.shutter, password, Shutter.stop);
@@ -202,7 +218,7 @@ class GoProApiService {
     String device,
     String command,
     String? password,
-  ) async {
+  ) => _withLock(() async {
     if (device != _camera && device != _bacpac) {
       throw Exception('_getApi: Invalid device "$device"');
     }
@@ -216,14 +232,14 @@ class GoProApiService {
       );
     }
     return response;
-  }
+  });
 
   static Future<http.Response> _postApi(
     String device,
     String command,
     String? password,
     String? option,
-  ) async {
+  ) => _withLock(() async {
     if (device != _camera && device != _bacpac) {
       throw Exception('_postApi: Invalid device "$device"');
     }
@@ -238,5 +254,5 @@ class GoProApiService {
       );
     }
     return response;
-  }
+  });
 }
