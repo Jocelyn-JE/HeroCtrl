@@ -52,4 +52,6 @@
     <!-- Android 13+ specialized permission; you still must request it at runtime -->
     <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES"
                  android:usesPermissionFlags="neverForLocation"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 </manifest>
