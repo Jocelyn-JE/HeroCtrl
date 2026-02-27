@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heroctrl/models/gopro_registration.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
+import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/utils/snackbar.dart';
 import 'connection_loading_dialog.dart';
 
@@ -41,10 +42,21 @@ class CameraConnectionHandler {
       return;
     }
 
-    if (connected) {
-      await _handleSuccessfulConnection(context, camera);
-    } else {
+    try {
+      if (connected) {
+        await _handleSuccessfulConnection(context, camera);
+      } else {
+        await _handleFailedConnection(context);
+      }
+    } catch (e) {
+      // If verification fails, treat as failed connection
+      AppLogger.error('Connection verification failed: $e', e);
+      if (connected) {
+        await GoProConnectionService.disconnect(instant: true);
+      }
+      if (!context.mounted) return;
       await _handleFailedConnection(context);
+      return;
     }
   }
 
@@ -54,9 +66,9 @@ class CameraConnectionHandler {
   ) async {
     if (!context.mounted) return;
 
-    showSnackBarSuccess(context, 'Successfully connected to camera');
     await GoProApiService.turnOnCamera(camera.password);
     if (!context.mounted) return;
+    showSnackBarSuccess(context, 'Successfully connected to camera');
     await Navigator.pushNamed(context, '/control');
   }
 
