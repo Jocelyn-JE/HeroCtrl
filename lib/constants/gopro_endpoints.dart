@@ -321,8 +321,15 @@ class VideoResolution {
     res4k: [FPS.fps12_5, FPS.fps15],
     res2_7k_17_9: [FPS.fps24],
     res4k_17_9: [FPS.fps12],
-    res1080pSuperView: [FPS.fps24, FPS.fps25, FPS.fps30, FPS.fps48],
-    res720pSuperView: [FPS.fps50, FPS.fps60, FPS.fps100],
+    res1080pSuperView: [
+      FPS.fps24,
+      FPS.fps25,
+      FPS.fps30,
+      FPS.fps48,
+      FPS.fps50,
+      FPS.fps60,
+    ],
+    res720pSuperView: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
   };
 }
 

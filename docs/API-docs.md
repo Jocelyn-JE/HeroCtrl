@@ -146,7 +146,7 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | 06 | 0a       | 4k              | 15, 12.5               | Wide                   |
     | 07 | 03       | 2.7k 17:9 24fps | 24                     | Wide, Medium           |
     | 08 | 02       | 4k 17:9 12fps   | 12                     | Wide                   |
-    | 09 | N/A      | 1080p Superview | 48, 30, 25, 24         | Wide                   |
+    | 09 | N/A      | 1080p Superview | 60, 50, 48, 30, 25, 24 | Wide                   |
     | 0a | N/A      | 720p Superview  | 100, 60, 50, 48        | Wide                   |
 
 2. ### FOV
