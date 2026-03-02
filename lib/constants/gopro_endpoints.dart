@@ -409,31 +409,32 @@ class FPS {
   int get hashCode => _value.hashCode;
 
   String getLocalizedName(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (_value) {
       case 0x00:
-        return '12fps';
+        return l10n.fps12;
       case 0x0b:
-        return '12.5fps';
+        return l10n.fps12_5;
       case 0x01:
-        return '15fps';
+        return l10n.fps15;
       case 0x02:
-        return '24fps';
+        return l10n.fps24;
       case 0x03:
-        return '25fps';
+        return l10n.fps25;
       case 0x04:
-        return '30fps';
+        return l10n.fps30;
       case 0x05:
-        return '48fps';
+        return l10n.fps48;
       case 0x06:
-        return '50fps';
+        return l10n.fps50;
       case 0x07:
-        return '60fps';
+        return l10n.fps60;
       case 0x08:
-        return '100fps';
+        return l10n.fps100;
       case 0x09:
-        return '120fps';
+        return l10n.fps120;
       case 0x0a:
-        return '240fps';
+        return l10n.fps240;
       default:
         return '${toHex(_value)}fps';
     }

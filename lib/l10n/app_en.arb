@@ -658,5 +658,53 @@
     "batteryCriticallyLow": "Battery critically low. Disconnecting from camera.",
     "@batteryCriticallyLow": {
         "description": "Message shown when battery drops to 1% or 0%, triggering auto-disconnect"
+    },
+    "fps12": "12fps",
+    "@fps12": {
+        "description": "Frame rate: 12 frames per second"
+    },
+    "fps12_5": "12.5fps",
+    "@fps12_5": {
+        "description": "Frame rate: 12.5 frames per second"
+    },
+    "fps15": "15fps",
+    "@fps15": {
+        "description": "Frame rate: 15 frames per second"
+    },
+    "fps24": "24fps",
+    "@fps24": {
+        "description": "Frame rate: 24 frames per second"
+    },
+    "fps25": "25fps",
+    "@fps25": {
+        "description": "Frame rate: 25 frames per second"
+    },
+    "fps30": "30fps",
+    "@fps30": {
+        "description": "Frame rate: 30 frames per second"
+    },
+    "fps48": "48fps",
+    "@fps48": {
+        "description": "Frame rate: 48 frames per second"
+    },
+    "fps50": "50fps",
+    "@fps50": {
+        "description": "Frame rate: 50 frames per second"
+    },
+    "fps60": "60fps",
+    "@fps60": {
+        "description": "Frame rate: 60 frames per second"
+    },
+    "fps100": "100fps",
+    "@fps100": {
+        "description": "Frame rate: 100 frames per second"
+    },
+    "fps120": "120fps",
+    "@fps120": {
+        "description": "Frame rate: 120 frames per second"
+    },
+    "fps240": "240fps",
+    "@fps240": {
+        "description": "Frame rate: 240 frames per second"
     }
 }

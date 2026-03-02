@@ -381,6 +381,10 @@ class GoProApiService {
     );
   }
 
+  static Future<void> setFPS(String password, FPS fpsOption) async {
+    await _postApi(_camera, GoProEndpoints.fps, password, fpsOption.value);
+  }
+
   static Future<http.Response> _getApi(
     String device,
     String command,

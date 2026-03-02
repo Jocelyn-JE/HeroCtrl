@@ -5,6 +5,7 @@ import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
+import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
@@ -79,10 +80,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     if (batteryPercent <= 1) {
       _isAutoDisconnectingForLowBattery = true;
       final localizations = AppLocalizations.of(context)!;
-      showSnackBarWarning(
-        context,
-        localizations.batteryCriticallyLow,
-      );
+      showSnackBarWarning(context, localizations.batteryCriticallyLow);
       Navigator.of(context).popUntil(ModalRoute.withName(AppRoutes.home));
     }
   }
@@ -90,17 +88,25 @@ class _RegisterControlScreenState extends State<ControlScreen> {
   Future<void> _onResolutionChanged(VideoResolution newResolution) async {
     try {
       await GoProApiService.setVideoResolution(_password, newResolution);
-      // Refresh camera status to get the updated resolution
-      final updatedStatus = await GoProApiService.getStatus(_password);
-      if (mounted) {
-        setState(() {
-          _cameraState!.status = updatedStatus;
-        });
-      }
+      // Refresh camera status to get the updated resolution and available FPS
+      await _updateCameraStatus();
     } catch (e, stackTrace) {
       AppLogger.error('Error changing video resolution', e, stackTrace);
       if (mounted) {
         showSnackBarError(context, 'Error changing resolution: $e');
+      }
+    }
+  }
+
+  Future<void> _onFpsChanged(FPS newFps) async {
+    try {
+      await GoProApiService.setFPS(_password, newFps);
+      // Refresh camera status to get the updated FPS
+      await _updateCameraStatus();
+    } catch (e, stackTrace) {
+      AppLogger.error('Error changing FPS', e, stackTrace);
+      if (mounted) {
+        showSnackBarError(context, 'Error changing FPS: $e');
       }
     }
   }
@@ -123,6 +129,23 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     }
   }
 
+  Future<void> _updateCameraStatus() async {
+    final updatedStatus = await GoProApiService.getStatus(_password);
+    if (mounted && _cameraState != null) {
+      setState(() {
+        _cameraState!.status = updatedStatus;
+      });
+    }
+  }
+
+  Future<void> _refreshCameraStatus() async {
+    try {
+      await _updateCameraStatus();
+    } catch (e, stackTrace) {
+      AppLogger.error('Error refreshing camera status', e, stackTrace);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,6 +163,8 @@ class _RegisterControlScreenState extends State<ControlScreen> {
               icon: const Icon(Icons.settings),
               onPressed: () async {
                 await Navigator.pushNamed(context, '/camera_settings');
+                // Refresh camera status in case settings like video mode changed the FPS
+                await _refreshCameraStatus();
               },
             ),
         ],
@@ -155,10 +180,24 @@ class _RegisterControlScreenState extends State<ControlScreen> {
               else
                 const CircularProgressIndicator(),
               if (_cameraState != null)
-                ResolutionSelector(
-                  cameraState: _cameraState!,
-                  password: _password,
-                  onResolutionChanged: _onResolutionChanged,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ResolutionSelector(
+                        cameraState: _cameraState!,
+                        password: _password,
+                        onResolutionChanged: _onResolutionChanged,
+                      ),
+                    ),
+                    Expanded(
+                      child: FPSSelector(
+                        cameraState: _cameraState!,
+                        password: _password,
+                        onFpsChanged: _onFpsChanged,
+                      ),
+                    ),
+                  ],
                 ),
             ],
           ),

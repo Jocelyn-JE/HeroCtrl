@@ -482,4 +482,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get batteryCriticallyLow => 'Battery critically low. Disconnecting from camera.';
+
+  @override
+  String get fps12 => '12fps';
+
+  @override
+  String get fps12_5 => '12.5fps';
+
+  @override
+  String get fps15 => '15fps';
+
+  @override
+  String get fps24 => '24fps';
+
+  @override
+  String get fps25 => '25fps';
+
+  @override
+  String get fps30 => '30fps';
+
+  @override
+  String get fps48 => '48fps';
+
+  @override
+  String get fps50 => '50fps';
+
+  @override
+  String get fps60 => '60fps';
+
+  @override
+  String get fps100 => '100fps';
+
+  @override
+  String get fps120 => '120fps';
+
+  @override
+  String get fps240 => '240fps';
 }

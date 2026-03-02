@@ -998,6 +998,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Battery critically low. Disconnecting from camera.'**
   String get batteryCriticallyLow;
+
+  /// Frame rate: 12 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'12fps'**
+  String get fps12;
+
+  /// Frame rate: 12.5 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'12.5fps'**
+  String get fps12_5;
+
+  /// Frame rate: 15 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'15fps'**
+  String get fps15;
+
+  /// Frame rate: 24 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'24fps'**
+  String get fps24;
+
+  /// Frame rate: 25 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'25fps'**
+  String get fps25;
+
+  /// Frame rate: 30 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'30fps'**
+  String get fps30;
+
+  /// Frame rate: 48 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'48fps'**
+  String get fps48;
+
+  /// Frame rate: 50 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'50fps'**
+  String get fps50;
+
+  /// Frame rate: 60 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'60fps'**
+  String get fps60;
+
+  /// Frame rate: 100 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'100fps'**
+  String get fps100;
+
+  /// Frame rate: 120 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'120fps'**
+  String get fps120;
+
+  /// Frame rate: 240 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'240fps'**
+  String get fps240;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
