@@ -494,6 +494,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Turn Off'**
   String get disconnectConfirmButton;
+
+  /// Video resolution: WVGA at 240 frames per second
+  ///
+  /// In en, this message translates to:
+  /// **'WVGA 240fps'**
+  String get resolutionWvga240fps;
+
+  /// Video resolution: 720p
+  ///
+  /// In en, this message translates to:
+  /// **'720p'**
+  String get resolution720p;
+
+  /// Video resolution: 960p with 4:3 aspect ratio
+  ///
+  /// In en, this message translates to:
+  /// **'960p (4:3)'**
+  String get resolution960p;
+
+  /// Video resolution: 1080p
+  ///
+  /// In en, this message translates to:
+  /// **'1080p'**
+  String get resolution1080p;
+
+  /// Video resolution: 1440p with 4:3 aspect ratio
+  ///
+  /// In en, this message translates to:
+  /// **'1440p (4:3)'**
+  String get resolution1440p;
+
+  /// Video resolution: 2.7K
+  ///
+  /// In en, this message translates to:
+  /// **'2.7K'**
+  String get resolution2_7k;
+
+  /// Video resolution: 4K
+  ///
+  /// In en, this message translates to:
+  /// **'4K'**
+  String get resolution4k;
+
+  /// Video resolution: 2.7K with 17:9 aspect ratio
+  ///
+  /// In en, this message translates to:
+  /// **'2.7K (17:9)'**
+  String get resolution2_7k_17_9;
+
+  /// Video resolution: 4K with 17:9 aspect ratio
+  ///
+  /// In en, this message translates to:
+  /// **'4K (17:9)'**
+  String get resolution4k_17_9;
+
+  /// Video resolution: 1080p with SuperView wide angle mode
+  ///
+  /// In en, this message translates to:
+  /// **'1080p SuperView'**
+  String get resolution1080pSuperView;
+
+  /// Video resolution: 720p with SuperView wide angle mode
+  ///
+  /// In en, this message translates to:
+  /// **'720p SuperView'**
+  String get resolution720pSuperView;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

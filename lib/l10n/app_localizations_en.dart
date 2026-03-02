@@ -230,4 +230,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get disconnectConfirmButton => 'Turn Off';
+
+  @override
+  String get resolutionWvga240fps => 'WVGA 240fps';
+
+  @override
+  String get resolution720p => '720p';
+
+  @override
+  String get resolution960p => '960p (4:3)';
+
+  @override
+  String get resolution1080p => '1080p';
+
+  @override
+  String get resolution1440p => '1440p (4:3)';
+
+  @override
+  String get resolution2_7k => '2.7K';
+
+  @override
+  String get resolution4k => '4K';
+
+  @override
+  String get resolution2_7k_17_9 => '2.7K (17:9)';
+
+  @override
+  String get resolution4k_17_9 => '4K (17:9)';
+
+  @override
+  String get resolution1080pSuperView => '1080p SuperView';
+
+  @override
+  String get resolution720pSuperView => '720p SuperView';
 }

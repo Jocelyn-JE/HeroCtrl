@@ -322,5 +322,49 @@
     "disconnectConfirmButton": "Turn Off",
     "@disconnectConfirmButton": {
         "description": "Confirm button label in the turn off camera dialog"
+    },
+    "resolutionWvga240fps": "WVGA 240fps",
+    "@resolutionWvga240fps": {
+        "description": "Video resolution: WVGA at 240 frames per second"
+    },
+    "resolution720p": "720p",
+    "@resolution720p": {
+        "description": "Video resolution: 720p"
+    },
+    "resolution960p": "960p (4:3)",
+    "@resolution960p": {
+        "description": "Video resolution: 960p with 4:3 aspect ratio"
+    },
+    "resolution1080p": "1080p",
+    "@resolution1080p": {
+        "description": "Video resolution: 1080p"
+    },
+    "resolution1440p": "1440p (4:3)",
+    "@resolution1440p": {
+        "description": "Video resolution: 1440p with 4:3 aspect ratio"
+    },
+    "resolution2_7k": "2.7K",
+    "@resolution2_7k": {
+        "description": "Video resolution: 2.7K"
+    },
+    "resolution4k": "4K",
+    "@resolution4k": {
+        "description": "Video resolution: 4K"
+    },
+    "resolution2_7k_17_9": "2.7K (17:9)",
+    "@resolution2_7k_17_9": {
+        "description": "Video resolution: 2.7K with 17:9 aspect ratio"
+    },
+    "resolution4k_17_9": "4K (17:9)",
+    "@resolution4k_17_9": {
+        "description": "Video resolution: 4K with 17:9 aspect ratio"
+    },
+    "resolution1080pSuperView": "1080p SuperView",
+    "@resolution1080pSuperView": {
+        "description": "Video resolution: 1080p with SuperView wide angle mode"
+    },
+    "resolution720pSuperView": "720p SuperView",
+    "@resolution720pSuperView": {
+        "description": "Video resolution: 720p with SuperView wide angle mode"
     }
 }

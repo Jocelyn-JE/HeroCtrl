@@ -3,6 +3,7 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
+import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
@@ -114,6 +115,10 @@ class _RegisterControlScreenState extends State<ControlScreen> {
                 LiveView(camPassword: _password)
               else
                 const CircularProgressIndicator(),
+              ResolutionSelector(
+                cameraState: _cameraState!,
+                password: _password,
+              ),
             ],
           ),
         ),

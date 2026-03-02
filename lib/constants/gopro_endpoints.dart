@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
+
 class GoProEndpoints {
   static const String baseUrl = 'http://10.5.5.9:80';
   static const String livestreamUrl = 'http://10.5.5.9:8080/live/amba.m3u8';
@@ -112,19 +115,52 @@ class VideoResolution {
   static const String res4k_17_9 = '08';
   static const String res1080pSuperView = '09';
   static const String res720pSuperView = '0a';
-  static const videoResolutionStrings = {
-    VideoResolution.wvga240fps: 'WVGA 240fps',
-    VideoResolution.res720p: '720p',
-    VideoResolution.res960p: '960p (4:3)',
-    VideoResolution.res1080p: '1080p',
-    VideoResolution.res1440p: '1440p (4:3)',
-    VideoResolution.res2_7k: '2.7K',
-    VideoResolution.res4k: '4K',
-    VideoResolution.res2_7k_17_9: '2.7K (17:9)',
-    VideoResolution.res4k_17_9: '4K (17:9)',
-    VideoResolution.res1080pSuperView: '1080p SuperView',
-    VideoResolution.res720pSuperView: '720p SuperView',
-  };
+
+  static const videoResolutions = [
+    wvga240fps,
+    res720p,
+    res960p,
+    res1080p,
+    res1440p,
+    res2_7k,
+    res4k,
+    res2_7k_17_9,
+    res4k_17_9,
+    res1080pSuperView,
+    res720pSuperView,
+  ];
+
+  /// Returns the localized display name for a given resolution code
+  static String getLocalizedName(BuildContext context, String resolutionCode) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (resolutionCode) {
+      case wvga240fps:
+        return l10n.resolutionWvga240fps;
+      case res720p:
+        return l10n.resolution720p;
+      case res960p:
+        return l10n.resolution960p;
+      case res1080p:
+        return l10n.resolution1080p;
+      case res1440p:
+        return l10n.resolution1440p;
+      case res2_7k:
+        return l10n.resolution2_7k;
+      case res4k:
+        return l10n.resolution4k;
+      case res2_7k_17_9:
+        return l10n.resolution2_7k_17_9;
+      case res4k_17_9:
+        return l10n.resolution4k_17_9;
+      case res1080pSuperView:
+        return l10n.resolution1080pSuperView;
+      case res720pSuperView:
+        return l10n.resolution720pSuperView;
+      default:
+        return resolutionCode;
+    }
+  }
+
   static const videoResolutionSupportedFPS = {
     VideoResolution.wvga240fps: [FPS.fps240],
     VideoResolution.res720p: [FPS.fps50, FPS.fps60, FPS.fps120],

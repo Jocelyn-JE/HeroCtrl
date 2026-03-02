@@ -328,6 +328,33 @@ class GoProApiService {
     );
   }
 
+  static Future<String> getVideoResolution(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.videoResolution,
+      password,
+    );
+    final value = response.bodyBytes[1];
+    try {
+      return VideoResolution.videoResolutions[value];
+    } catch (e) {
+      AppLogger.error('Error parsing video resolution', e);
+      return VideoResolution.res1080p;
+    }
+  }
+
+  static Future<void> setVideoResolution(
+    String password,
+    String resolutionOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.videoResolution,
+      password,
+      resolutionOption,
+    );
+  }
+
   static Future<http.Response> _getApi(
     String device,
     String command,
