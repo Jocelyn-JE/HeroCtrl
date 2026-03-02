@@ -650,5 +650,13 @@
     "spotMeterOff": "Spot Meter: Off",
     "@spotMeterOff": {
         "description": "Spot metering: Disabled"
+    },
+    "fixStream": "Fix Stream",
+    "@fixStream": {
+        "description": "Button label to restart the live stream"
+    },
+    "batteryCriticallyLow": "Battery critically low. Disconnecting from camera.",
+    "@batteryCriticallyLow": {
+        "description": "Message shown when battery drops to 1% or 0%, triggering auto-disconnect"
     }
 }

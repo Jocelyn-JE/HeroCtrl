@@ -476,4 +476,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get spotMeterOff => 'Spot Meter: Off';
+
+  @override
+  String get fixStream => 'Fix Stream';
+
+  @override
+  String get batteryCriticallyLow => 'Battery critically low. Disconnecting from camera.';
 }

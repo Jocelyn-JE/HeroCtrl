@@ -986,6 +986,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Spot Meter: Off'**
   String get spotMeterOff;
+
+  /// Button label to restart the live stream
+  ///
+  /// In en, this message translates to:
+  /// **'Fix Stream'**
+  String get fixStream;
+
+  /// Message shown when battery drops to 1% or 0%, triggering auto-disconnect
+  ///
+  /// In en, this message translates to:
+  /// **'Battery critically low. Disconnecting from camera.'**
+  String get batteryCriticallyLow;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -8,6 +8,7 @@ import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/utils/app_routes.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/utils/snackbar.dart';
@@ -77,9 +78,10 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
     if (batteryPercent <= 1) {
       _isAutoDisconnectingForLowBattery = true;
+      final localizations = AppLocalizations.of(context)!;
       showSnackBarWarning(
         context,
-        'Battery critically low. Disconnecting from camera.',
+        localizations.batteryCriticallyLow,
       );
       Navigator.of(context).popUntil(ModalRoute.withName(AppRoutes.home));
     }

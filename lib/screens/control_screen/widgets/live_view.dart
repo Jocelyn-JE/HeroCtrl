@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:media_kit/media_kit.dart';
@@ -74,7 +75,7 @@ class _LiveViewState extends State<LiveView> {
           onPressed: () async {
             _openStream();
           },
-          child: const Text('Fix Stream'),
+          child: Text(AppLocalizations.of(context)!.fixStream),
         ),
       ],
     );
