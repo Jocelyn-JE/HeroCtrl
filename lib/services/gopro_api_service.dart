@@ -27,19 +27,29 @@ class GoProApiService {
   }
 
   static Future<void> stopShutter(String password) async {
-    await _postApi(_camera, GoProEndpoints.shutter, password, Shutter.stop);
+    await _postApi(
+      _camera,
+      GoProEndpoints.shutter,
+      password,
+      Shutter.stop.value,
+    );
   }
 
   static Future<void> startShutter(String password) async {
-    await _postApi(_camera, GoProEndpoints.shutter, password, Shutter.start);
+    await _postApi(
+      _camera,
+      GoProEndpoints.shutter,
+      password,
+      Shutter.start.value,
+    );
   }
 
   static Future<void> turnOffCamera(String password) async {
-    await _postApi(_bacpac, GoProEndpoints.power, password, Power.off);
+    await _postApi(_bacpac, GoProEndpoints.power, password, Power.off.value);
   }
 
   static Future<void> turnOnCamera(String password) async {
-    await _postApi(_bacpac, GoProEndpoints.power, password, Power.on);
+    await _postApi(_bacpac, GoProEndpoints.power, password, Power.on.value);
   }
 
   static Future<void> startVideoPreview(String password) async {
@@ -47,7 +57,7 @@ class GoProApiService {
       _bacpac,
       GoProEndpoints.videoPreview,
       password,
-      VideoPreview.on,
+      VideoPreview.on.value,
     );
   }
 
@@ -56,7 +66,7 @@ class GoProApiService {
       _bacpac,
       GoProEndpoints.videoPreview,
       password,
-      VideoPreview.off,
+      VideoPreview.off.value,
     );
   }
 
@@ -170,11 +180,11 @@ class GoProApiService {
     return CameraWifiInfo(bytes);
   }
 
-  static Future<void> setLeds(String password, int ledOption) async {
-    await _postApi(_camera, GoProEndpoints.leds, password, ledOption);
+  static Future<void> setLeds(String password, LED ledOption) async {
+    await _postApi(_camera, GoProEndpoints.leds, password, ledOption.value);
   }
 
-  static Future<int> getLeds(String password) async {
+  static Future<LED> getLeds(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.leds, password);
     final value = response.bodyBytes[1];
     switch (value) {
@@ -189,11 +199,16 @@ class GoProApiService {
     }
   }
 
-  static Future<void> setVolume(String password, int volumeOption) async {
-    await _postApi(_camera, GoProEndpoints.volume, password, volumeOption);
+  static Future<void> setVolume(String password, Volume volumeOption) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.volume,
+      password,
+      volumeOption.value,
+    );
   }
 
-  static Future<int> getVolume(String password) async {
+  static Future<Volume> getVolume(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.volume, password);
     final value = response.bodyBytes[1];
     switch (value) {
@@ -213,7 +228,7 @@ class GoProApiService {
       _camera,
       GoProEndpoints.orientation,
       password,
-      upsideDown ? Orientation.down : Orientation.up,
+      upsideDown ? Orientation.down.value : Orientation.up.value,
     );
   }
 
@@ -258,11 +273,19 @@ class GoProApiService {
     return DateTime(year, month, day, hour, minute, second);
   }
 
-  static Future<void> setVideoMode(String password, int modeOption) async {
-    await _postApi(_camera, GoProEndpoints.videoMode, password, modeOption);
+  static Future<void> setVideoMode(
+    String password,
+    VideoModes modeOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.videoMode,
+      password,
+      modeOption.value,
+    );
   }
 
-  static Future<int> getVideoMode(String password) async {
+  static Future<VideoModes> getVideoMode(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.videoMode, password);
     final value = response.bodyBytes[1];
     switch (value) {
@@ -275,16 +298,19 @@ class GoProApiService {
     }
   }
 
-  static Future<void> setDefaultMode(String password, int modeOption) async {
+  static Future<void> setDefaultMode(
+    String password,
+    DefaultCameraMode modeOption,
+  ) async {
     await _postApi(
       _camera,
       GoProEndpoints.defaultCameraMode,
       password,
-      modeOption,
+      modeOption.value,
     );
   }
 
-  static Future<int> getDefaultMode(String password) async {
+  static Future<DefaultCameraMode> getDefaultMode(String password) async {
     final response = await _getApi(
       _camera,
       GoProEndpoints.defaultCameraMode,
@@ -324,11 +350,11 @@ class GoProApiService {
       _camera,
       GoProEndpoints.locate,
       password,
-      on ? Locate.on : Locate.off,
+      on ? Locate.on.value : Locate.off.value,
     );
   }
 
-  static Future<int> getVideoResolution(String password) async {
+  static Future<VideoResolution> getVideoResolution(String password) async {
     final response = await _getApi(
       _camera,
       GoProEndpoints.videoResolution,
@@ -336,22 +362,22 @@ class GoProApiService {
     );
     final value = response.bodyBytes[1];
     try {
-      return VideoResolution.videoResolutions[value];
+      return VideoResolution.all.firstWhere((res) => res.value == value);
     } catch (e) {
       AppLogger.error('Error parsing video resolution', e);
-      return VideoResolution.res1080p;
+      return VideoResolution.wvga240fps;
     }
   }
 
   static Future<void> setVideoResolution(
     String password,
-    int resolutionOption,
+    VideoResolution resolutionOption,
   ) async {
     await _postApi(
       _camera,
       GoProEndpoints.videoResolution,
       password,
-      resolutionOption,
+      resolutionOption.value,
     );
   }
 

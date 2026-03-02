@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
@@ -66,7 +67,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     if (mounted) setState(() {});
   }
 
-  Future<void> _onResolutionChanged(int newResolution) async {
+  Future<void> _onResolutionChanged(VideoResolution newResolution) async {
     try {
       await GoProApiService.setVideoResolution(_password, newResolution);
       // Refresh camera status to get the updated resolution

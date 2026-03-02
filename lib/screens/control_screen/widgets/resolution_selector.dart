@@ -6,7 +6,7 @@ import 'package:heroctrl/utils/logger.dart';
 class ResolutionSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
-  final Future<void> Function(int) onResolutionChanged;
+  final Future<void> Function(VideoResolution) onResolutionChanged;
 
   const ResolutionSelector({
     super.key,
@@ -17,35 +17,34 @@ class ResolutionSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int currentResolution = cameraState.status.videoResolution;
+    final VideoResolution currentResolution =
+        cameraState.status.videoResolution;
 
     // Ensure the current value exists in the dropdown items
-    final int? selectedValue =
-        VideoResolution.videoResolutions.contains(currentResolution)
+    final VideoResolution? selectedValue =
+        VideoResolution.all.contains(currentResolution)
         ? currentResolution
         : null;
 
     return Container(
       padding: const EdgeInsets.all(8.0),
-      child: DropdownButton<int>(
+      child: DropdownButton<VideoResolution>(
         value: selectedValue,
         onChanged: (cameraState.isCameraOn)
             ? (newValue) {
                 if (newValue != null) {
                   AppLogger.info(
-                    'Changing video resolution to ${VideoResolution.getLocalizedName(context, newValue)}',
+                    'Changing video resolution to ${newValue.getLocalizedName(context)}',
                   );
                   onResolutionChanged(newValue);
                 }
               }
             : null,
-        items: VideoResolution.videoResolutions
+        items: VideoResolution.all
             .map(
               (resolution) => DropdownMenuItem(
                 value: resolution,
-                child: Text(
-                  VideoResolution.getLocalizedName(context, resolution),
-                ),
+                child: Text(resolution.getLocalizedName(context)),
               ),
             )
             .toList(),

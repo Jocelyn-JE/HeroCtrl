@@ -3,71 +3,71 @@ import 'package:heroctrl/constants/gopro_endpoints.dart';
 
 class CameraStatus {
   final int cameraMode;
-  final int defaultCameraMode;
-  final bool spotMeter;
-  final int timelapseInterval;
-  final int autoPowerOff;
-  final int fov;
-  final int photoResolution;
+  final DefaultCameraMode defaultCameraMode;
+  final SpotMeter spotMeter;
+  final TimelapseInterval timelapseInterval;
+  final AutoPowerOff autoPowerOff;
+  final FOV fov;
+  final PhotoResolution photoResolution;
   final int recordingProgress; // in seconds
-  final int volume;
-  final int ledsStatus;
-  final int videoMode;
-  final bool locateStatus;
-  final bool oneButtonMode;
-  final int orientation;
-  final int videoPreview;
+  final Volume volume;
+  final LED ledsStatus;
+  final VideoModes videoMode;
+  final Locate locateStatus;
+  final OneButton oneButtonMode;
+  final Orientation orientation;
+  final VideoPreview videoPreview;
   final int batteryLevel; // 0 - 3, need to call bl for percentage
   final int photosRemaining;
   final int photosTaken;
   final int recordingTimeRemaining; // in minutes
   final int videosTaken;
   final bool shutterStatus;
-  final int colorProfile;
-  final bool protuneStatus;
-  final bool lowLightMode;
-  final int burstRate;
-  final int continuousShotMode;
-  final int whiteBalance;
-  final int simultaneousVideoAndPhoto;
-  final int loopVideoDuration;
-  final int videoResolution;
-  final int fps;
-  final int sharpness;
-  final int iso;
-  final int exposureCompensation;
+  final ColorProfile colorProfile;
+  final ProTune protuneStatus;
+  final LowLight lowLightMode;
+  final BurstRate burstRate;
+  final ContinuousShot continuousShotMode;
+  final WhiteBalance whiteBalance;
+  final bool simultaneousVideoAndPhoto;
+  final LoopVideoDuration loopVideoDuration;
+  final VideoResolution videoResolution;
+  final FPS fps;
+  final Sharpness sharpness;
+  final ISOLimit iso;
+  final ExposureCompensation exposureCompensation;
 
   static int _parseInt(int high, int low) {
     return (high << 8) | low;
   }
 
   // Video mode is the third bit of the byte starting from the left
-  static int _parseVideoMode(int byte) {
+  static VideoModes _parseVideoMode(int byte) {
     return (byte & 0x20) != 0 ? VideoModes.pal : VideoModes.ntsc;
   }
 
   // Locate status is the second bit of the byte starting from the left
-  static int _parseLocateStatus(int byte) {
+  static Locate _parseLocateStatus(int byte) {
     return (byte & 0x40) != 0 ? Locate.on : Locate.off;
   }
 
   // One button mode is the fifth bit of the byte starting from the left
-  static int _parseOneButtonMode(int byte) {
+  static OneButton _parseOneButtonMode(int byte) {
     return (byte & 0x08) != 0 ? OneButton.on : OneButton.off;
   }
 
   // Orientation is the sixth bit of the byte starting from the left
-  static int _parseOrientation(int byte) {
+  static Orientation _parseOrientation(int byte) {
     return (byte & 0x04) == 0 ? Orientation.up : Orientation.down;
   }
 
   // Video preview is the eighth bit of the byte starting from the left
-  static int _parseVideoPreview(int byte) {
+  static VideoPreview _parseVideoPreview(int byte) {
     return (byte & 0x01) != 0 ? VideoPreview.on : VideoPreview.off;
   }
 
   // Sharpness is the fifth and sixth bits of the byte starting from the left
-  static int _parseSharpness(int byte) {
+  static Sharpness _parseSharpness(int byte) {
     int sharpnessBits = (byte & 0x0C) >> 2;
     switch (sharpnessBits) {
       case 0:
@@ -82,7 +82,7 @@ class CameraStatus {
   }
 
   // ISO is the seventh and eighth bits of the byte starting from the left
-  static int _parseIso(int byte) {
+  static ISOLimit _parseIso(int byte) {
     int isoBits = byte & 0x03;
     switch (isoBits) {
       case 0:
@@ -97,34 +97,58 @@ class CameraStatus {
   }
 
   // Color profile is the first bit of the byte starting from the left
-  static int _parseColorProfile(int byte) {
+  static ColorProfile _parseColorProfile(int byte) {
     return (byte & 0x80) != 0 ? ColorProfile.flat : ColorProfile.goPro;
   }
 
   // Protune status is the seventh bit of the byte starting from the left
-  static int _parseProtuneStatus(int byte) {
+  static ProTune _parseProtuneStatus(int byte) {
     return (byte & 0x02) != 0 ? ProTune.on : ProTune.off;
   }
 
   // Low light mode is the second bit of the byte starting from the left
-  static int _parseLowLightMode(int byte) {
+  static LowLight _parseLowLightMode(int byte) {
     return (byte & 0x40) != 0 ? LowLight.on : LowLight.off;
   }
 
   CameraStatus(Uint8List bytes)
     : cameraMode = bytes[1],
-      defaultCameraMode = bytes[3],
-      spotMeter = bytes[4] != 0,
-      timelapseInterval = bytes[5],
-      autoPowerOff = bytes[6],
-      fov = bytes[7],
-      photoResolution = bytes[8],
+      defaultCameraMode = DefaultCameraMode.all.firstWhere(
+        (mode) => mode.value == bytes[3],
+        orElse: () => DefaultCameraMode.videoMode,
+      ),
+      spotMeter = SpotMeter.all.firstWhere(
+        (meter) => meter.value == bytes[4],
+        orElse: () => SpotMeter.off,
+      ),
+      timelapseInterval = TimelapseInterval.all.firstWhere(
+        (interval) => interval.value == bytes[5],
+        orElse: () => TimelapseInterval.halfASecond,
+      ),
+      autoPowerOff = AutoPowerOff.all.firstWhere(
+        (powerOff) => powerOff.value == bytes[6],
+        orElse: () => AutoPowerOff.never,
+      ),
+      fov = FOV.all.firstWhere(
+        (f) => f.value == bytes[7],
+        orElse: () => FOV.wide,
+      ),
+      photoResolution = PhotoResolution.all.firstWhere(
+        (res) => res.value == bytes[8],
+        orElse: () => PhotoResolution.res5MPmedium,
+      ),
       recordingProgress = _parseInt(bytes[13], bytes[14]),
-      volume = bytes[16],
-      ledsStatus = bytes[17],
+      volume = Volume.all.firstWhere(
+        (vol) => vol.value == bytes[16],
+        orElse: () => Volume.percent100,
+      ),
+      ledsStatus = LED.all.firstWhere(
+        (led) => led.value == bytes[17],
+        orElse: () => LED.off,
+      ),
       videoMode = _parseVideoMode(bytes[18]),
-      locateStatus = _parseLocateStatus(bytes[18]) == Locate.on,
-      oneButtonMode = _parseOneButtonMode(bytes[18]) == OneButton.on,
+      locateStatus = _parseLocateStatus(bytes[18]),
+      oneButtonMode = _parseOneButtonMode(bytes[18]),
       orientation = _parseOrientation(bytes[18]),
       videoPreview = _parseVideoPreview(bytes[18]),
       batteryLevel = bytes[19],
@@ -134,16 +158,37 @@ class CameraStatus {
       videosTaken = _parseInt(bytes[27], bytes[28]),
       shutterStatus = bytes[29] != 0,
       colorProfile = _parseColorProfile(bytes[30]),
-      protuneStatus = _parseProtuneStatus(bytes[30]) == ProTune.on,
-      lowLightMode = _parseLowLightMode(bytes[30]) == LowLight.on,
-      burstRate = bytes[32],
-      continuousShotMode = bytes[33],
-      whiteBalance = bytes[34],
-      simultaneousVideoAndPhoto = bytes[36],
-      loopVideoDuration = bytes[37],
-      videoResolution = bytes[50],
-      fps = bytes[51],
+      protuneStatus = _parseProtuneStatus(bytes[30]),
+      lowLightMode = _parseLowLightMode(bytes[30]),
+      burstRate = BurstRate.all.firstWhere(
+        (rate) => rate.value == bytes[32],
+        orElse: () => BurstRate.threePerSecond,
+      ),
+      continuousShotMode = ContinuousShot.all.firstWhere(
+        (shot) => shot.value == bytes[33],
+        orElse: () => ContinuousShot.off,
+      ),
+      whiteBalance = WhiteBalance.all.firstWhere(
+        (wb) => wb.value == bytes[34],
+        orElse: () => WhiteBalance.auto,
+      ),
+      simultaneousVideoAndPhoto = bytes[36] != 0,
+      loopVideoDuration = LoopVideoDuration.all.firstWhere(
+        (duration) => duration.value == bytes[37],
+        orElse: () => LoopVideoDuration.off,
+      ),
+      videoResolution = VideoResolution.all.firstWhere(
+        (res) => res.value == bytes[50],
+        orElse: () => VideoResolution.wvga240fps,
+      ),
+      fps = FPS.all.firstWhere(
+        (f) => f.value == bytes[51],
+        orElse: () => FPS.fps30,
+      ),
       sharpness = _parseSharpness(bytes[52]),
       iso = _parseIso(bytes[52]),
-      exposureCompensation = bytes[53];
+      exposureCompensation = ExposureCompensation.all.firstWhere(
+        (ec) => ec.value == bytes[53],
+        orElse: () => ExposureCompensation.zero,
+      );
 }

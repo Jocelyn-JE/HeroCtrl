@@ -62,115 +62,196 @@ class GoProEndpoints {
 }
 
 class Power {
-  static const int off = 0x00;
-  static const int on = 0x01;
+  final int _value;
+  const Power._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const Power off = Power._(0x00);
+  static const Power on = Power._(0x01);
+
+  static const List<Power> all = [off, on];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Power && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case on:
+      case 0x01:
         return l10n.buttonOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class Shutter {
-  static const int stop = 0x00;
-  static const int start = 0x01;
+  final int _value;
+  const Shutter._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const Shutter stop = Shutter._(0x00);
+  static const Shutter start = Shutter._(0x01);
+
+  static const List<Shutter> all = [stop, start];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Shutter && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case stop:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case start:
+      case 0x01:
         return l10n.buttonOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class VideoPreview {
-  static const int off = 0x00;
-  static const int on = 0x02;
+  final int _value;
+  const VideoPreview._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const VideoPreview off = VideoPreview._(0x00);
+  static const VideoPreview on = VideoPreview._(0x02);
+
+  static const List<VideoPreview> all = [off, on];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is VideoPreview && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case on:
+      case 0x02:
         return l10n.buttonOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class Locate {
-  static const int off = 0x00;
-  static const int on = 0x01;
+  final int _value;
+  const Locate._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const Locate off = Locate._(0x00);
+  static const Locate on = Locate._(0x01);
+
+  static const List<Locate> all = [off, on];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Locate && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case on:
+      case 0x01:
         return l10n.buttonOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class CameraMode {
-  static const int videoMode = 0x00;
-  static const int photoMode = 0x01;
-  static const int burstMode = 0x02;
-  static const int timerMode = 0x04;
-  static const int hdmiMode = 0x05;
+  final int _value;
+  const CameraMode._(this._value);
 
-  static const modes = [videoMode, photoMode, burstMode, timerMode, hdmiMode];
+  int get value => _value;
 
-  static String getLocalizedName(BuildContext context, int value) {
+  static const CameraMode videoMode = CameraMode._(0x00);
+  static const CameraMode photoMode = CameraMode._(0x01);
+  static const CameraMode burstMode = CameraMode._(0x02);
+  static const CameraMode timerMode = CameraMode._(0x04);
+  static const CameraMode hdmiMode = CameraMode._(0x05);
+
+  static const List<CameraMode> all = [
+    videoMode,
+    photoMode,
+    burstMode,
+    timerMode,
+    hdmiMode,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is CameraMode && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case videoMode:
+    switch (_value) {
+      case 0x00:
         return l10n.defaultModeVideo;
-      case photoMode:
+      case 0x01:
         return l10n.defaultModePhoto;
-      case burstMode:
+      case 0x02:
         return l10n.defaultModeBurst;
-      case timerMode:
+      case 0x04:
         return l10n.cameraModeTimer;
-      case hdmiMode:
+      case 0x05:
         return l10n.cameraModeHdmi;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class VideoResolution {
-  static const int wvga240fps = 0x00;
-  static const int res720p = 0x01;
-  static const int res960p = 0x02;
-  static const int res1080p = 0x03;
-  static const int res1440p = 0x04;
-  static const int res2_7k = 0x05;
-  static const int res4k = 0x06;
-  static const int res2_7k_17_9 = 0x07;
-  static const int res4k_17_9 = 0x08;
-  static const int res1080pSuperView = 0x09;
-  static const int res720pSuperView = 0x0a;
+  final int _value;
 
-  static const videoResolutions = [
+  const VideoResolution._(this._value);
+
+  int get value => _value;
+
+  // Define all valid instances
+  static const VideoResolution wvga240fps = VideoResolution._(0x00);
+  static const VideoResolution res720p = VideoResolution._(0x01);
+  static const VideoResolution res960p = VideoResolution._(0x02);
+  static const VideoResolution res1080p = VideoResolution._(0x03);
+  static const VideoResolution res1440p = VideoResolution._(0x04);
+  static const VideoResolution res2_7k = VideoResolution._(0x05);
+  static const VideoResolution res4k = VideoResolution._(0x06);
+  static const VideoResolution res2_7k_17_9 = VideoResolution._(0x07);
+  static const VideoResolution res4k_17_9 = VideoResolution._(0x08);
+  static const VideoResolution res1080pSuperView = VideoResolution._(0x09);
+  static const VideoResolution res720pSuperView = VideoResolution._(0x0a);
+
+  static const List<VideoResolution> all = [
     wvga240fps,
     res720p,
     res960p,
@@ -184,38 +265,46 @@ class VideoResolution {
     res720pSuperView,
   ];
 
-  /// Returns the localized display name for a given resolution code
-  static String getLocalizedName(BuildContext context, int resolutionCode) {
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is VideoResolution && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  /// Returns the localized display name for this resolution
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (resolutionCode) {
-      case wvga240fps:
+    switch (_value) {
+      case 0x00:
         return l10n.resolutionWvga240fps;
-      case res720p:
+      case 0x01:
         return l10n.resolution720p;
-      case res960p:
+      case 0x02:
         return l10n.resolution960p;
-      case res1080p:
+      case 0x03:
         return l10n.resolution1080p;
-      case res1440p:
+      case 0x04:
         return l10n.resolution1440p;
-      case res2_7k:
+      case 0x05:
         return l10n.resolution2_7k;
-      case res4k:
+      case 0x06:
         return l10n.resolution4k;
-      case res2_7k_17_9:
+      case 0x07:
         return l10n.resolution2_7k_17_9;
-      case res4k_17_9:
+      case 0x08:
         return l10n.resolution4k_17_9;
-      case res1080pSuperView:
+      case 0x09:
         return l10n.resolution1080pSuperView;
-      case res720pSuperView:
+      case 0x0a:
         return l10n.resolution720pSuperView;
       default:
-        return toHex(resolutionCode);
+        return toHex(_value);
     }
   }
 
-  static const videoResolutionSupportedFPS = {
+  static final Map<VideoResolution, List<FPS>> supportedFPS = {
     wvga240fps: [FPS.fps240],
     res720p: [FPS.fps50, FPS.fps60, FPS.fps120],
     res960p: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
@@ -233,454 +322,783 @@ class VideoResolution {
     res2_7k_17_9: [FPS.fps24],
     res4k_17_9: [FPS.fps12],
     res1080pSuperView: [FPS.fps24, FPS.fps25, FPS.fps30, FPS.fps48],
-    res720pSuperView: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
+    res720pSuperView: [FPS.fps50, FPS.fps60, FPS.fps100],
   };
 }
 
 class FOV {
-  static const int wide = 0x00;
-  static const int medium = 0x01;
-  static const int narrow = 0x02;
+  final int _value;
+  const FOV._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const FOV wide = FOV._(0x00);
+  static const FOV medium = FOV._(0x01);
+  static const FOV narrow = FOV._(0x02);
+
+  static const List<FOV> all = [wide, medium, narrow];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is FOV && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case wide:
+    switch (_value) {
+      case 0x00:
         return l10n.fovWide;
-      case medium:
+      case 0x01:
         return l10n.fovMedium;
-      case narrow:
+      case 0x02:
         return l10n.fovNarrow;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class FPS {
-  static const int fps12 = 0x00;
-  static const int fps12_5 = 0x0b;
-  static const int fps15 = 0x01;
-  static const int fps24 = 0x02;
-  static const int fps25 = 0x03;
-  static const int fps30 = 0x04;
-  static const int fps48 = 0x05;
-  static const int fps50 = 0x06;
-  static const int fps60 = 0x07;
-  static const int fps100 = 0x08;
-  static const int fps120 = 0x09;
-  static const int fps240 = 0x0a;
+  final int _value;
+  const FPS._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
-    switch (value) {
-      case fps12:
+  int get value => _value;
+
+  static const FPS fps12 = FPS._(0x00);
+  static const FPS fps12_5 = FPS._(0x0b);
+  static const FPS fps15 = FPS._(0x01);
+  static const FPS fps24 = FPS._(0x02);
+  static const FPS fps25 = FPS._(0x03);
+  static const FPS fps30 = FPS._(0x04);
+  static const FPS fps48 = FPS._(0x05);
+  static const FPS fps50 = FPS._(0x06);
+  static const FPS fps60 = FPS._(0x07);
+  static const FPS fps100 = FPS._(0x08);
+  static const FPS fps120 = FPS._(0x09);
+  static const FPS fps240 = FPS._(0x0a);
+
+  static const List<FPS> all = [
+    fps12,
+    fps12_5,
+    fps15,
+    fps24,
+    fps25,
+    fps30,
+    fps48,
+    fps50,
+    fps60,
+    fps100,
+    fps120,
+    fps240,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is FPS && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
+    switch (_value) {
+      case 0x00:
         return '12fps';
-      case fps12_5:
+      case 0x0b:
         return '12.5fps';
-      case fps15:
+      case 0x01:
         return '15fps';
-      case fps24:
+      case 0x02:
         return '24fps';
-      case fps25:
+      case 0x03:
         return '25fps';
-      case fps30:
+      case 0x04:
         return '30fps';
-      case fps48:
+      case 0x05:
         return '48fps';
-      case fps50:
+      case 0x06:
         return '50fps';
-      case fps60:
+      case 0x07:
         return '60fps';
-      case fps100:
+      case 0x08:
         return '100fps';
-      case fps120:
+      case 0x09:
         return '120fps';
-      case fps240:
+      case 0x0a:
         return '240fps';
       default:
-        return '${toHex(value)}fps';
+        return '${toHex(_value)}fps';
     }
   }
 }
 
 class VideoAndPhotoInterval {
-  static const int off = 0x00;
-  static const int every5s = 0x01;
-  static const int every10s = 0x02;
-  static const int every30s = 0x03;
-  static const int every60s = 0x04;
+  final int _value;
+  const VideoAndPhotoInterval._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const VideoAndPhotoInterval off = VideoAndPhotoInterval._(0x00);
+  static const VideoAndPhotoInterval every5s = VideoAndPhotoInterval._(0x01);
+  static const VideoAndPhotoInterval every10s = VideoAndPhotoInterval._(0x02);
+  static const VideoAndPhotoInterval every30s = VideoAndPhotoInterval._(0x03);
+  static const VideoAndPhotoInterval every60s = VideoAndPhotoInterval._(0x04);
+
+  static const List<VideoAndPhotoInterval> all = [
+    off,
+    every5s,
+    every10s,
+    every30s,
+    every60s,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is VideoAndPhotoInterval && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case every5s:
+      case 0x01:
         return l10n.videoAndPhotoEvery5s;
-      case every10s:
+      case 0x02:
         return l10n.videoAndPhotoEvery10s;
-      case every30s:
+      case 0x03:
         return l10n.videoAndPhotoEvery30s;
-      case every60s:
+      case 0x04:
         return l10n.videoAndPhotoEvery60s;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class LoopVideoDuration {
-  static const int off = 0x00;
-  static const int fiveMinutes = 0x01;
-  static const int twentyMinutes = 0x02;
-  static const int oneHour = 0x03;
-  static const int twoHours = 0x04;
-  static const int maxStorage = 0x05;
+  final int _value;
+  const LoopVideoDuration._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const LoopVideoDuration off = LoopVideoDuration._(0x00);
+  static const LoopVideoDuration fiveMinutes = LoopVideoDuration._(0x01);
+  static const LoopVideoDuration twentyMinutes = LoopVideoDuration._(0x02);
+  static const LoopVideoDuration oneHour = LoopVideoDuration._(0x03);
+  static const LoopVideoDuration twoHours = LoopVideoDuration._(0x04);
+  static const LoopVideoDuration maxStorage = LoopVideoDuration._(0x05);
+
+  static const List<LoopVideoDuration> all = [
+    off,
+    fiveMinutes,
+    twentyMinutes,
+    oneHour,
+    twoHours,
+    maxStorage,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LoopVideoDuration && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case fiveMinutes:
+      case 0x01:
         return l10n.loopVideo5Min;
-      case twentyMinutes:
+      case 0x02:
         return l10n.loopVideo20Min;
-      case oneHour:
+      case 0x03:
         return l10n.loopVideo1Hour;
-      case twoHours:
+      case 0x04:
         return l10n.loopVideo2Hour;
-      case maxStorage:
+      case 0x05:
         return l10n.loopVideoMaxStorage;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class LowLight {
-  static const int off = 0x00;
-  static const int on = 0x01;
+  final int _value;
+  const LowLight._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const LowLight off = LowLight._(0x00);
+  static const LowLight on = LowLight._(0x01);
+
+  static const List<LowLight> all = [off, on];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is LowLight && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.lowLightOff;
-      case on:
+      case 0x01:
         return l10n.lowLightOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class SpotMeter {
-  static const int off = 0x00;
-  static const int on = 0x01;
+  final int _value;
+  const SpotMeter._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const SpotMeter off = SpotMeter._(0x00);
+  static const SpotMeter on = SpotMeter._(0x01);
+
+  static const List<SpotMeter> all = [off, on];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is SpotMeter && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.spotMeterOff;
-      case on:
+      case 0x01:
         return l10n.spotMeterOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class PhotoResolution {
-  static const int res5MPmedium = 0x03;
-  static const int res7MPwide = 0x04;
-  static const int res12MPwide = 0x05;
-  static const int res7MPmedium = 0x06;
+  final int _value;
+  const PhotoResolution._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const PhotoResolution res5MPmedium = PhotoResolution._(0x03);
+  static const PhotoResolution res7MPwide = PhotoResolution._(0x04);
+  static const PhotoResolution res12MPwide = PhotoResolution._(0x05);
+  static const PhotoResolution res7MPmedium = PhotoResolution._(0x06);
+
+  static const List<PhotoResolution> all = [
+    res5MPmedium,
+    res7MPwide,
+    res12MPwide,
+    res7MPmedium,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PhotoResolution && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case res5MPmedium:
+    switch (_value) {
+      case 0x03:
         return l10n.photoResolution5MpMedium;
-      case res7MPmedium:
-        return l10n.photoResolution7MpMedium;
-      case res7MPwide:
+      case 0x04:
         return l10n.photoResolution7MpWide;
-      case res12MPwide:
+      case 0x05:
         return l10n.photoResolution12MpWide;
+      case 0x06:
+        return l10n.photoResolution7MpMedium;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class TimelapseInterval {
-  static const int halfASecond = 0x00;
-  static const int oneSecond = 0x01;
-  static const int twoSeconds = 0x02;
-  static const int fiveSeconds = 0x05;
-  static const int tenSeconds = 0x0a;
-  static const int thirtySeconds = 0x1e;
-  static const int sixtySeconds = 0x3c;
+  final int _value;
+  const TimelapseInterval._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const TimelapseInterval halfASecond = TimelapseInterval._(0x00);
+  static const TimelapseInterval oneSecond = TimelapseInterval._(0x01);
+  static const TimelapseInterval twoSeconds = TimelapseInterval._(0x02);
+  static const TimelapseInterval fiveSeconds = TimelapseInterval._(0x05);
+  static const TimelapseInterval tenSeconds = TimelapseInterval._(0x0a);
+  static const TimelapseInterval thirtySeconds = TimelapseInterval._(0x1e);
+  static const TimelapseInterval sixtySeconds = TimelapseInterval._(0x3c);
+
+  static const List<TimelapseInterval> all = [
+    halfASecond,
+    oneSecond,
+    twoSeconds,
+    fiveSeconds,
+    tenSeconds,
+    thirtySeconds,
+    sixtySeconds,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TimelapseInterval && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case halfASecond:
+    switch (_value) {
+      case 0x00:
         return l10n.timelapse0_5Sec;
-      case oneSecond:
+      case 0x01:
         return l10n.timelapse1Sec;
-      case twoSeconds:
+      case 0x02:
         return l10n.timelapse2Sec;
-      case fiveSeconds:
+      case 0x05:
         return l10n.timelapse5Sec;
-      case tenSeconds:
+      case 0x0a:
         return l10n.timelapse10Sec;
-      case thirtySeconds:
+      case 0x1e:
         return l10n.timelapse30Sec;
-      case sixtySeconds:
+      case 0x3c:
         return l10n.timelapse60Sec;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class ContinuousShot {
-  static const int off = 0x00;
-  static const int threePhotos = 0x03;
-  static const int fivePhotos = 0x05;
-  static const int tenPhotos = 0x0a;
+  final int _value;
+  const ContinuousShot._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const ContinuousShot off = ContinuousShot._(0x00);
+  static const ContinuousShot threePhotos = ContinuousShot._(0x03);
+  static const ContinuousShot fivePhotos = ContinuousShot._(0x05);
+  static const ContinuousShot tenPhotos = ContinuousShot._(0x0a);
+
+  static const List<ContinuousShot> all = [
+    off,
+    threePhotos,
+    fivePhotos,
+    tenPhotos,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ContinuousShot && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case threePhotos:
+      case 0x03:
         return l10n.continuousShot3Photos;
-      case fivePhotos:
+      case 0x05:
         return l10n.continuousShot5Photos;
-      case tenPhotos:
+      case 0x0a:
         return l10n.continuousShot10Photos;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class BurstRate {
-  static const int threePerSecond = 0x00;
-  static const int fivePerSecond = 0x01;
-  static const int tenPerSecond = 0x02;
-  static const int tenPerTwoSeconds = 0x03;
-  static const int thirtyPerSecond = 0x04;
-  static const int thirtyPerTwoSeconds = 0x05;
-  static const int thirtyPerThreeSeconds = 0x06;
+  final int _value;
+  const BurstRate._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const BurstRate threePerSecond = BurstRate._(0x00);
+  static const BurstRate fivePerSecond = BurstRate._(0x01);
+  static const BurstRate tenPerSecond = BurstRate._(0x02);
+  static const BurstRate tenPerTwoSeconds = BurstRate._(0x03);
+  static const BurstRate thirtyPerSecond = BurstRate._(0x04);
+  static const BurstRate thirtyPerTwoSeconds = BurstRate._(0x05);
+  static const BurstRate thirtyPerThreeSeconds = BurstRate._(0x06);
+
+  static const List<BurstRate> all = [
+    threePerSecond,
+    fivePerSecond,
+    tenPerSecond,
+    tenPerTwoSeconds,
+    thirtyPerSecond,
+    thirtyPerTwoSeconds,
+    thirtyPerThreeSeconds,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is BurstRate && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case threePerSecond:
+    switch (_value) {
+      case 0x00:
         return l10n.burstRate3PerSec;
-      case fivePerSecond:
+      case 0x01:
         return l10n.burstRate5PerSec;
-      case tenPerSecond:
+      case 0x02:
         return l10n.burstRate10PerSec;
-      case tenPerTwoSeconds:
+      case 0x03:
         return l10n.burstRate10Per2Sec;
-      case thirtyPerSecond:
+      case 0x04:
         return l10n.burstRate30PerSec;
-      case thirtyPerTwoSeconds:
+      case 0x05:
         return l10n.burstRate30Per2Sec;
-      case thirtyPerThreeSeconds:
+      case 0x06:
         return l10n.burstRate30Per3Sec;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class ProTune {
-  static const int off = 0x00;
-  static const int on = 0x01;
+  final int _value;
+  const ProTune._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const ProTune off = ProTune._(0x00);
+  static const ProTune on = ProTune._(0x01);
+
+  static const List<ProTune> all = [off, on];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is ProTune && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.protuneOff;
-      case on:
+      case 0x01:
         return l10n.protuneOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class WhiteBalance {
-  static const int auto = 0x00;
-  static const int k3000 = 0x01;
-  static const int k5500 = 0x02;
-  static const int k6500 = 0x03;
-  static const int camRaw = 0x04;
+  final int _value;
+  const WhiteBalance._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const WhiteBalance auto = WhiteBalance._(0x00);
+  static const WhiteBalance k3000 = WhiteBalance._(0x01);
+  static const WhiteBalance k5500 = WhiteBalance._(0x02);
+  static const WhiteBalance k6500 = WhiteBalance._(0x03);
+  static const WhiteBalance camRaw = WhiteBalance._(0x04);
+
+  static const List<WhiteBalance> all = [auto, k3000, k5500, k6500, camRaw];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is WhiteBalance && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case auto:
+    switch (_value) {
+      case 0x00:
         return l10n.whiteBalanceAuto;
-      case k3000:
+      case 0x01:
         return l10n.whiteBalance3000K;
-      case k5500:
+      case 0x02:
         return l10n.whiteBalance5500K;
-      case k6500:
+      case 0x03:
         return l10n.whiteBalance6500K;
-      case camRaw:
+      case 0x04:
         return l10n.whiteBalanceCamRaw;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class ExposureCompensation {
-  static const int minusTwo = 0x06;
-  static const int minusOneAndHalf = 0x07;
-  static const int minusOne = 0x08;
-  static const int minusHalf = 0x09;
-  static const int zero = 0x0a;
-  static const int plusHalf = 0x0b;
-  static const int plusOne = 0x0c;
-  static const int plusOneAndHalf = 0x0d;
-  static const int plusTwo = 0x0e;
+  final int _value;
+  const ExposureCompensation._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const ExposureCompensation minusTwo = ExposureCompensation._(0x06);
+  static const ExposureCompensation minusOneAndHalf = ExposureCompensation._(
+    0x07,
+  );
+  static const ExposureCompensation minusOne = ExposureCompensation._(0x08);
+  static const ExposureCompensation minusHalf = ExposureCompensation._(0x09);
+  static const ExposureCompensation zero = ExposureCompensation._(0x0a);
+  static const ExposureCompensation plusHalf = ExposureCompensation._(0x0b);
+  static const ExposureCompensation plusOne = ExposureCompensation._(0x0c);
+  static const ExposureCompensation plusOneAndHalf = ExposureCompensation._(
+    0x0d,
+  );
+  static const ExposureCompensation plusTwo = ExposureCompensation._(0x0e);
+
+  static const List<ExposureCompensation> all = [
+    minusTwo,
+    minusOneAndHalf,
+    minusOne,
+    minusHalf,
+    zero,
+    plusHalf,
+    plusOne,
+    plusOneAndHalf,
+    plusTwo,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ExposureCompensation && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case minusTwo:
+    switch (_value) {
+      case 0x06:
         return l10n.exposureCompensation2Minus;
-      case minusOneAndHalf:
+      case 0x07:
         return l10n.exposureCompensation1_5Minus;
-      case minusOne:
+      case 0x08:
         return l10n.exposureCompensation1Minus;
-      case minusHalf:
+      case 0x09:
         return l10n.exposureCompensation0_5Minus;
-      case zero:
+      case 0x0a:
         return l10n.exposureCompensation0;
-      case plusHalf:
+      case 0x0b:
         return l10n.exposureCompensation0_5Plus;
-      case plusOne:
+      case 0x0c:
         return l10n.exposureCompensation1Plus;
-      case plusOneAndHalf:
+      case 0x0d:
         return l10n.exposureCompensation1_5Plus;
-      case plusTwo:
+      case 0x0e:
         return l10n.exposureCompensation2Plus;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class Sharpness {
-  static const int high = 0x00;
-  static const int medium = 0x01;
-  static const int low = 0x02;
+  final int _value;
+  const Sharpness._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const Sharpness high = Sharpness._(0x00);
+  static const Sharpness medium = Sharpness._(0x01);
+  static const Sharpness low = Sharpness._(0x02);
+
+  static const List<Sharpness> all = [high, medium, low];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Sharpness && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case high:
+    switch (_value) {
+      case 0x00:
         return l10n.sharpnessHigh;
-      case medium:
+      case 0x01:
         return l10n.sharpnessMedium;
-      case low:
+      case 0x02:
         return l10n.sharpnessLow;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class ISOLimit {
-  static const int iso6400 = 0x00;
-  static const int iso1600 = 0x01;
-  static const int iso400 = 0x02;
+  final int _value;
+  const ISOLimit._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const ISOLimit iso6400 = ISOLimit._(0x00);
+  static const ISOLimit iso1600 = ISOLimit._(0x01);
+  static const ISOLimit iso400 = ISOLimit._(0x02);
+
+  static const List<ISOLimit> all = [iso6400, iso1600, iso400];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is ISOLimit && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case iso6400:
+    switch (_value) {
+      case 0x00:
         return l10n.isoLimit6400;
-      case iso1600:
+      case 0x01:
         return l10n.isoLimit1600;
-      case iso400:
+      case 0x02:
         return l10n.isoLimit400;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class ColorProfile {
-  static const int goPro = 0x00;
-  static const int flat = 0x01;
+  final int _value;
+  const ColorProfile._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const ColorProfile goPro = ColorProfile._(0x00);
+  static const ColorProfile flat = ColorProfile._(0x01);
+
+  static const List<ColorProfile> all = [goPro, flat];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is ColorProfile && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case goPro:
+    switch (_value) {
+      case 0x00:
         return l10n.colorProfileGoPro;
-      case flat:
+      case 0x01:
         return l10n.colorProfileFlat;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class ProtuneVideoResolution {
-  static const int res720p = 0x00;
-  static const int res960p = 0x02;
-  static const int res1080p = 0x03;
-  static const int res1440p = 0x04;
-  static const int res2_7k = 0x05;
-  static const int res4k = 0x06;
-  static const int res2_7k_17_9 = 0x07;
-  static const int res4k_17_9 = 0x08;
-  static const int res1080pSuperView = 0x09;
-  static const int res720pSuperView = 0x0a;
+  final int _value;
+  const ProtuneVideoResolution._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const ProtuneVideoResolution res720p = ProtuneVideoResolution._(0x00);
+  static const ProtuneVideoResolution res960p = ProtuneVideoResolution._(0x02);
+  static const ProtuneVideoResolution res1080p = ProtuneVideoResolution._(0x03);
+  static const ProtuneVideoResolution res1440p = ProtuneVideoResolution._(0x04);
+  static const ProtuneVideoResolution res2_7k = ProtuneVideoResolution._(0x05);
+  static const ProtuneVideoResolution res4k = ProtuneVideoResolution._(0x06);
+  static const ProtuneVideoResolution res2_7k_17_9 = ProtuneVideoResolution._(
+    0x07,
+  );
+  static const ProtuneVideoResolution res4k_17_9 = ProtuneVideoResolution._(
+    0x08,
+  );
+  static const ProtuneVideoResolution res1080pSuperView =
+      ProtuneVideoResolution._(0x09);
+  static const ProtuneVideoResolution res720pSuperView =
+      ProtuneVideoResolution._(0x0a);
+
+  static const List<ProtuneVideoResolution> all = [
+    res720p,
+    res960p,
+    res1080p,
+    res1440p,
+    res2_7k,
+    res4k,
+    res2_7k_17_9,
+    res4k_17_9,
+    res1080pSuperView,
+    res720pSuperView,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProtuneVideoResolution && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case res720p:
+    switch (_value) {
+      case 0x00:
         return l10n.resolution720p;
-      case res960p:
+      case 0x02:
         return l10n.resolution960p;
-      case res1080p:
+      case 0x03:
         return l10n.resolution1080p;
-      case res1440p:
+      case 0x04:
         return l10n.resolution1440p;
-      case res2_7k:
+      case 0x05:
         return l10n.resolution2_7k;
-      case res4k:
+      case 0x06:
         return l10n.resolution4k;
-      case res2_7k_17_9:
+      case 0x07:
         return l10n.resolution2_7k_17_9;
-      case res4k_17_9:
+      case 0x08:
         return l10n.resolution4k_17_9;
-      case res1080pSuperView:
+      case 0x09:
         return l10n.resolution1080pSuperView;
-      case res720pSuperView:
+      case 0x0a:
         return l10n.resolution720pSuperView;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 
-  static const protuneVideoResolutionSupportedFPS = {
+  static final Map<ProtuneVideoResolution, List<FPS>>
+  protuneVideoResolutionSupportedFPS = {
     res720p: [FPS.fps50, FPS.fps60, FPS.fps100, FPS.fps120],
     res960p: [FPS.fps50, FPS.fps60, FPS.fps100],
     res1080p: [
@@ -702,85 +1120,149 @@ class ProtuneVideoResolution {
 }
 
 class Volume {
-  static const int mute = 0x00;
-  static const int percent70 = 0x01;
-  static const int percent100 = 0x02;
+  final int _value;
 
-  static String getLocalizedName(BuildContext context, int value) {
+  const Volume._(this._value);
+
+  int get value => _value;
+
+  static const Volume mute = Volume._(0x00);
+  static const Volume percent70 = Volume._(0x01);
+  static const Volume percent100 = Volume._(0x02);
+
+  static const List<Volume> all = [mute, percent70, percent100];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Volume && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case mute:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case percent70:
+      case 0x01:
         return l10n.volumeLow;
-      case percent100:
+      case 0x02:
         return l10n.volumeHigh;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class LED {
-  static const int off = 0x00;
-  static const int twoLeds = 0x01;
-  static const int fourLeds = 0x02;
+  final int _value;
 
-  static String getLocalizedName(BuildContext context, int value) {
+  const LED._(this._value);
+
+  int get value => _value;
+
+  static const LED off = LED._(0x00);
+  static const LED twoLeds = LED._(0x01);
+  static const LED fourLeds = LED._(0x02);
+
+  static const List<LED> all = [off, twoLeds, fourLeds];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is LED && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.ledOff;
-      case twoLeds:
+      case 0x01:
         return l10n.ledTwo;
-      case fourLeds:
+      case 0x02:
         return l10n.ledFour;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class DefaultCameraMode {
-  static const int videoMode = 0x00;
-  static const int photoMode = 0x01;
-  static const int burstMode = 0x02;
-  static const int timeLapseMode = 0x03;
+  final int _value;
+  const DefaultCameraMode._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const DefaultCameraMode videoMode = DefaultCameraMode._(0x00);
+  static const DefaultCameraMode photoMode = DefaultCameraMode._(0x01);
+  static const DefaultCameraMode burstMode = DefaultCameraMode._(0x02);
+  static const DefaultCameraMode timeLapseMode = DefaultCameraMode._(0x03);
+
+  static const List<DefaultCameraMode> all = [
+    videoMode,
+    photoMode,
+    burstMode,
+    timeLapseMode,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DefaultCameraMode && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case videoMode:
+    switch (_value) {
+      case 0x00:
         return l10n.defaultModeVideo;
-      case photoMode:
+      case 0x01:
         return l10n.defaultModePhoto;
-      case burstMode:
+      case 0x02:
         return l10n.defaultModeBurst;
-      case timeLapseMode:
+      case 0x03:
         return l10n.defaultModeTimeLapse;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class VideoModes {
-  static const int ntsc = 0x00;
-  static const int pal = 0x01;
+  final int _value;
+  const VideoModes._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const VideoModes ntsc = VideoModes._(0x00);
+  static const VideoModes pal = VideoModes._(0x01);
+
+  static const List<VideoModes> all = [ntsc, pal];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is VideoModes && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case ntsc:
+    switch (_value) {
+      case 0x00:
         return l10n.videoModeNtsc;
-      case pal:
+      case 0x01:
         return l10n.videoModePal;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 
-  static const videoModesFrameRates = {
+  static final videoModesFrameRates = {
     ntsc: [
       FPS.fps15,
       FPS.fps12,
@@ -806,58 +1288,105 @@ class VideoModes {
 }
 
 class Orientation {
-  static const int up = 0x00;
-  static const int down = 0x01;
+  final int _value;
+  const Orientation._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const Orientation up = Orientation._(0x00);
+  static const Orientation down = Orientation._(0x01);
+
+  static const List<Orientation> all = [up, down];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Orientation && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case up:
+    switch (_value) {
+      case 0x00:
         return l10n.orientationUp;
-      case down:
+      case 0x01:
         return l10n.orientationDown;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class OneButton {
-  static const int off = 0x00;
-  static const int on = 0x01;
+  final int _value;
+  const OneButton._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const OneButton off = OneButton._(0x00);
+  static const OneButton on = OneButton._(0x01);
+
+  static const List<OneButton> all = [off, on];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is OneButton && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case off:
+    switch (_value) {
+      case 0x00:
         return l10n.volumeOff;
-      case on:
+      case 0x01:
         return l10n.buttonOn;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
 
 class AutoPowerOff {
-  static const int never = 0x00;
-  static const int after1Minute = 0x01;
-  static const int after2Minutes = 0x02;
-  static const int after5Minutes = 0x03;
+  final int _value;
+  const AutoPowerOff._(this._value);
 
-  static String getLocalizedName(BuildContext context, int value) {
+  int get value => _value;
+
+  static const AutoPowerOff never = AutoPowerOff._(0x00);
+  static const AutoPowerOff after1Minute = AutoPowerOff._(0x01);
+  static const AutoPowerOff after2Minutes = AutoPowerOff._(0x02);
+  static const AutoPowerOff after5Minutes = AutoPowerOff._(0x03);
+
+  static const List<AutoPowerOff> all = [
+    never,
+    after1Minute,
+    after2Minutes,
+    after5Minutes,
+  ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is AutoPowerOff && _value == other._value;
+
+  @override
+  int get hashCode => _value.hashCode;
+
+  String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value) {
-      case never:
+    switch (_value) {
+      case 0x00:
         return l10n.autoPowerOffNever;
-      case after1Minute:
+      case 0x01:
         return l10n.autoPowerOff1Min;
-      case after2Minutes:
+      case 0x02:
         return l10n.autoPowerOff2Min;
-      case after5Minutes:
+      case 0x03:
         return l10n.autoPowerOff5Min;
       default:
-        return toHex(value);
+        return toHex(_value);
     }
   }
 }
