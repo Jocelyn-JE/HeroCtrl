@@ -37,11 +37,7 @@ class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
       AppLogger.error('Error fetching video mode setting', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBar(
-          context,
-          'Error fetching video mode setting: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching video mode setting: $e');
       }
     }
   }
@@ -55,11 +51,7 @@ class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
       AppLogger.error('Error setting video mode', e, stackTrace);
       if (mounted) {
         setState(() => _currentMode = previous);
-        showSnackBar(
-          context,
-          'Error setting video mode: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error setting video mode: $e');
       }
     }
   }

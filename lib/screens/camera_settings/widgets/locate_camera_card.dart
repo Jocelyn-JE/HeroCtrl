@@ -34,7 +34,7 @@ class _LocateCameraCardState extends State<LocateCameraCard> {
     } catch (e, stackTrace) {
       AppLogger.error('Error starting locate camera', e, stackTrace);
       if (mounted) {
-        showSnackBar(context, 'Error locating camera: $e', color: Colors.red);
+        showSnackBarError(context, 'Error locating camera: $e');
       }
     } finally {
       try {

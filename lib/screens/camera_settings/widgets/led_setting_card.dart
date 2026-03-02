@@ -37,11 +37,7 @@ class _LedSettingCardState extends State<LedSettingCard> {
       AppLogger.error('Error fetching LED setting', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBar(
-          context,
-          'Error fetching LED setting: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching LED setting: $e');
       }
     }
   }
@@ -55,7 +51,7 @@ class _LedSettingCardState extends State<LedSettingCard> {
       AppLogger.error('Error setting LEDs', e, stackTrace);
       if (mounted) {
         setState(() => _currentLed = previous);
-        showSnackBar(context, 'Error setting LEDs: $e', color: Colors.red);
+        showSnackBarError(context, 'Error setting LEDs: $e');
       }
     }
   }

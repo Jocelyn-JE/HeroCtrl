@@ -40,11 +40,7 @@ class _TimeSettingCardState extends State<TimeSettingCard> {
       AppLogger.error('Error fetching time setting', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBar(
-          context,
-          'Error fetching time setting: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching time setting: $e');
       }
     }
   }
@@ -61,7 +57,7 @@ class _TimeSettingCardState extends State<TimeSettingCard> {
       if (mounted) {
         setState(() => _cameraTime = previous);
         _startTicker();
-        showSnackBar(context, 'Error setting time: $e', color: Colors.red);
+        showSnackBarError(context, 'Error setting time: $e');
       }
     }
   }

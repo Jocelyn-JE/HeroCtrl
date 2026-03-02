@@ -78,7 +78,7 @@ class _CameraSearchScreenState extends State<CameraSearchScreen> {
       final result = await GoProWifiScanner.startScan();
       if (!result) throw Exception('WiFi scan failed.');
     } catch (e) {
-      if (mounted) showSnackBar(context, '$e', color: Colors.red);
+      if (mounted) showSnackBarError(context, '$e');
     }
   }
 

@@ -47,11 +47,7 @@ class _CameraInfoCardState extends State<CameraInfoCard> {
       AppLogger.error('Error fetching camera info', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBar(
-          context,
-          'Error fetching camera info: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching camera info: $e');
       }
     }
   }

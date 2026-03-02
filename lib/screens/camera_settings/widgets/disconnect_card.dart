@@ -60,11 +60,7 @@ class _DisconnectCardState extends State<DisconnectCard> {
     } catch (e, stackTrace) {
       AppLogger.error('Error turning off camera', e, stackTrace);
       if (mounted) {
-        showSnackBar(
-          context,
-          'Error turning off camera: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error turning off camera: $e');
         setState(() => _isBusy = false);
         return;
       }

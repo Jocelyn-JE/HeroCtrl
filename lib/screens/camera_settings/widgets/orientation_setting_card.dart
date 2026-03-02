@@ -36,11 +36,7 @@ class _OrientationSettingCardState extends State<OrientationSettingCard> {
       AppLogger.error('Error fetching orientation setting', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBar(
-          context,
-          'Error fetching orientation setting: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching orientation setting: $e');
       }
     }
   }
@@ -54,11 +50,7 @@ class _OrientationSettingCardState extends State<OrientationSettingCard> {
       AppLogger.error('Error setting orientation', e, stackTrace);
       if (mounted) {
         setState(() => _upsideDown = previous);
-        showSnackBar(
-          context,
-          'Error setting orientation: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error setting orientation: $e');
       }
     }
   }

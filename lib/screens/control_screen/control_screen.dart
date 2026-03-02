@@ -8,6 +8,7 @@ import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
+import 'package:heroctrl/utils/app_routes.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/utils/snackbar.dart';
 
@@ -22,6 +23,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
   final _password = GoProConnectionService.currentConnection!.password;
   CameraState? _cameraState;
   BatteryMonitor? _batteryMonitor;
+  bool _isAutoDisconnectingForLowBattery = false;
 
   @override
   void initState() {
@@ -48,23 +50,39 @@ class _RegisterControlScreenState extends State<ControlScreen> {
           _cameraState!.isCameraOn = true;
           _batteryMonitor = monitor;
         });
+        _checkLowBatteryAndDisconnect();
         await _checkPreviewStatus();
         monitor.start();
       }
     } catch (e, stackTrace) {
       AppLogger.error('Error fetching camera state', e, stackTrace);
       if (mounted) {
-        showSnackBar(
-          context,
-          'Error fetching camera state: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching camera state: $e');
       }
     }
   }
 
   void _onBatteryChanged() {
     if (mounted) setState(() {});
+    _checkLowBatteryAndDisconnect();
+  }
+
+  void _checkLowBatteryAndDisconnect() {
+    final batteryPercent = _batteryMonitor?.batteryPercent.value;
+    if (!mounted ||
+        _isAutoDisconnectingForLowBattery ||
+        batteryPercent == null) {
+      return;
+    }
+
+    if (batteryPercent <= 1) {
+      _isAutoDisconnectingForLowBattery = true;
+      showSnackBarWarning(
+        context,
+        'Battery critically low. Disconnecting from camera.',
+      );
+      Navigator.of(context).popUntil(ModalRoute.withName(AppRoutes.home));
+    }
   }
 
   Future<void> _onResolutionChanged(VideoResolution newResolution) async {
@@ -80,11 +98,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     } catch (e, stackTrace) {
       AppLogger.error('Error changing video resolution', e, stackTrace);
       if (mounted) {
-        showSnackBar(
-          context,
-          'Error changing resolution: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error changing resolution: $e');
       }
     }
   }
@@ -102,7 +116,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     } catch (e, stackTrace) {
       AppLogger.error('Error checking preview status', e, stackTrace);
       if (mounted) {
-        showSnackBar(context, 'Error: $e', color: Colors.red);
+        showSnackBarError(context, 'Error: $e');
       }
     }
   }

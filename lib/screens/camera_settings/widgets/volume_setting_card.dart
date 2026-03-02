@@ -37,11 +37,7 @@ class _VolumeSettingCardState extends State<VolumeSettingCard> {
       AppLogger.error('Error fetching volume setting', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBar(
-          context,
-          'Error fetching volume setting: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching volume setting: $e');
       }
     }
   }
@@ -55,7 +51,7 @@ class _VolumeSettingCardState extends State<VolumeSettingCard> {
       AppLogger.error('Error setting volume', e, stackTrace);
       if (mounted) {
         setState(() => _currentVolume = previous);
-        showSnackBar(context, 'Error setting volume: $e', color: Colors.red);
+        showSnackBarError(context, 'Error setting volume: $e');
       }
     }
   }

@@ -37,11 +37,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
       AppLogger.error('Error fetching default mode setting', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBar(
-          context,
-          'Error fetching default mode setting: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error fetching default mode setting: $e');
       }
     }
   }
@@ -55,11 +51,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
       AppLogger.error('Error setting default mode', e, stackTrace);
       if (mounted) {
         setState(() => _currentDefaultMode = previous);
-        showSnackBar(
-          context,
-          'Error setting default mode: $e',
-          color: Colors.red,
-        );
+        showSnackBarError(context, 'Error setting default mode: $e');
       }
     }
   }

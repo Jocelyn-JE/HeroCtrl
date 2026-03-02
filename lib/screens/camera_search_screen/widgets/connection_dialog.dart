@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/utils/logger.dart';
+import 'package:heroctrl/utils/snackbar.dart';
 import 'package:heroctrl/widgets/password_field.dart';
 
 class ConnectionDialog extends StatefulWidget {
@@ -25,7 +26,6 @@ class _ConnectionDialogState extends State<ConnectionDialog> {
   }
 
   Future<void> _handleConnect() async {
-    final messenger = ScaffoldMessenger.of(context);
     final navigator = Navigator.of(context);
     final localizations = AppLocalizations.of(context)!;
 
@@ -39,24 +39,14 @@ class _ConnectionDialogState extends State<ConnectionDialog> {
       );
     } catch (e) {
       if (!mounted) return;
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(localizations.connectionError(e.toString())),
-          backgroundColor: Colors.red,
-        ),
-      );
+      showSnackBarError(context, localizations.connectionError(e.toString()));
       AppLogger.error('Error connecting to ${widget.ssid}: $e');
       setState(() => _isLoading = false);
       return navigator.pop(result);
     }
     if (result != true) {
       if (!mounted) return;
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(localizations.connectionFailed(widget.ssid)),
-          backgroundColor: Colors.red,
-        ),
-      );
+      showSnackBarError(context, localizations.connectionFailed(widget.ssid));
     }
     navigator.pop(result);
   }
