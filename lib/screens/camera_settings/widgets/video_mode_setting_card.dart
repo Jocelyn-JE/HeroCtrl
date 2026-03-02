@@ -15,7 +15,7 @@ class VideoModeSettingCard extends StatefulWidget {
 }
 
 class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
-  String? _currentMode;
+  int? _currentMode;
   bool _isLoading = true;
 
   @override
@@ -46,7 +46,7 @@ class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
     }
   }
 
-  Future<void> _setVideoMode(String value) async {
+  Future<void> _setVideoMode(int value) async {
     final previous = _currentMode;
     setState(() => _currentMode = value);
     try {
@@ -97,7 +97,7 @@ class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
             else
               SizedBox(
                 width: double.infinity,
-                child: SegmentedButton<String>(
+                child: SegmentedButton<int>(
                   segments: [
                     ButtonSegment(
                       value: VideoModes.ntsc,

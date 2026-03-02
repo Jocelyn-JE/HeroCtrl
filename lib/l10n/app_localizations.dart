@@ -560,6 +560,432 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'720p SuperView'**
   String get resolution720pSuperView;
+
+  /// ON button label or toggle state
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get buttonOn;
+
+  /// OFF button label or toggle state
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get buttonOff;
+
+  /// Camera mode: Self-timer
+  ///
+  /// In en, this message translates to:
+  /// **'Timer'**
+  String get cameraModeTimer;
+
+  /// Camera mode: HDMI output
+  ///
+  /// In en, this message translates to:
+  /// **'HDMI Output'**
+  String get cameraModeHdmi;
+
+  /// Field of view: Wide angle
+  ///
+  /// In en, this message translates to:
+  /// **'Wide'**
+  String get fovWide;
+
+  /// Field of view: Medium angle
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get fovMedium;
+
+  /// Field of view: Narrow/telephoto
+  ///
+  /// In en, this message translates to:
+  /// **'Narrow'**
+  String get fovNarrow;
+
+  /// Interval: Every 5 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'Every 5 seconds'**
+  String get videoAndPhotoEvery5s;
+
+  /// Interval: Every 10 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'Every 10 seconds'**
+  String get videoAndPhotoEvery10s;
+
+  /// Interval: Every 30 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'Every 30 seconds'**
+  String get videoAndPhotoEvery30s;
+
+  /// Interval: Every 60 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'Every 60 seconds'**
+  String get videoAndPhotoEvery60s;
+
+  /// Loop video duration: 5 minutes
+  ///
+  /// In en, this message translates to:
+  /// **'5 Minutes'**
+  String get loopVideo5Min;
+
+  /// Loop video duration: 20 minutes
+  ///
+  /// In en, this message translates to:
+  /// **'20 Minutes'**
+  String get loopVideo20Min;
+
+  /// Loop video duration: 1 hour
+  ///
+  /// In en, this message translates to:
+  /// **'1 Hour'**
+  String get loopVideo1Hour;
+
+  /// Loop video duration: 2 hours
+  ///
+  /// In en, this message translates to:
+  /// **'2 Hours'**
+  String get loopVideo2Hour;
+
+  /// Loop video duration: Use maximum storage
+  ///
+  /// In en, this message translates to:
+  /// **'Max Storage'**
+  String get loopVideoMaxStorage;
+
+  /// Photo resolution: 5 megapixels medium
+  ///
+  /// In en, this message translates to:
+  /// **'5MP Medium'**
+  String get photoResolution5MpMedium;
+
+  /// Photo resolution: 7 megapixels medium
+  ///
+  /// In en, this message translates to:
+  /// **'7MP Medium'**
+  String get photoResolution7MpMedium;
+
+  /// Photo resolution: 7 megapixels wide
+  ///
+  /// In en, this message translates to:
+  /// **'7MP Wide'**
+  String get photoResolution7MpWide;
+
+  /// Photo resolution: 12 megapixels wide
+  ///
+  /// In en, this message translates to:
+  /// **'12MP Wide'**
+  String get photoResolution12MpWide;
+
+  /// Timelapse interval: 0.5 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'0.5 Seconds'**
+  String get timelapse0_5Sec;
+
+  /// Timelapse interval: 1 second
+  ///
+  /// In en, this message translates to:
+  /// **'1 Second'**
+  String get timelapse1Sec;
+
+  /// Timelapse interval: 2 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'2 Seconds'**
+  String get timelapse2Sec;
+
+  /// Timelapse interval: 5 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'5 Seconds'**
+  String get timelapse5Sec;
+
+  /// Timelapse interval: 10 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'10 Seconds'**
+  String get timelapse10Sec;
+
+  /// Timelapse interval: 30 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'30 Seconds'**
+  String get timelapse30Sec;
+
+  /// Timelapse interval: 60 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'60 Seconds'**
+  String get timelapse60Sec;
+
+  /// Continuous shot: 3 photos
+  ///
+  /// In en, this message translates to:
+  /// **'3 Photos'**
+  String get continuousShot3Photos;
+
+  /// Continuous shot: 5 photos
+  ///
+  /// In en, this message translates to:
+  /// **'5 Photos'**
+  String get continuousShot5Photos;
+
+  /// Continuous shot: 10 photos
+  ///
+  /// In en, this message translates to:
+  /// **'10 Photos'**
+  String get continuousShot10Photos;
+
+  /// Burst rate: 3 photos per second
+  ///
+  /// In en, this message translates to:
+  /// **'3 Photos/s'**
+  String get burstRate3PerSec;
+
+  /// Burst rate: 5 photos per second
+  ///
+  /// In en, this message translates to:
+  /// **'5 Photos/s'**
+  String get burstRate5PerSec;
+
+  /// Burst rate: 10 photos per second
+  ///
+  /// In en, this message translates to:
+  /// **'10 Photos/s'**
+  String get burstRate10PerSec;
+
+  /// Burst rate: 10 photos per 2 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'10 Photos/2s'**
+  String get burstRate10Per2Sec;
+
+  /// Burst rate: 30 photos per second
+  ///
+  /// In en, this message translates to:
+  /// **'30 Photos/s'**
+  String get burstRate30PerSec;
+
+  /// Burst rate: 30 photos per 2 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'30 Photos/2s'**
+  String get burstRate30Per2Sec;
+
+  /// Burst rate: 30 photos per 3 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'30 Photos/3s'**
+  String get burstRate30Per3Sec;
+
+  /// Pro Tune: Enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Pro Tune On'**
+  String get protuneOn;
+
+  /// Pro Tune: Disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Pro Tune Off'**
+  String get protuneOff;
+
+  /// White balance: Automatic
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get whiteBalanceAuto;
+
+  /// White balance: 3000K color temperature
+  ///
+  /// In en, this message translates to:
+  /// **'3000K'**
+  String get whiteBalance3000K;
+
+  /// White balance: 5500K color temperature
+  ///
+  /// In en, this message translates to:
+  /// **'5500K'**
+  String get whiteBalance5500K;
+
+  /// White balance: 6500K color temperature
+  ///
+  /// In en, this message translates to:
+  /// **'6500K'**
+  String get whiteBalance6500K;
+
+  /// White balance: Camera RAW
+  ///
+  /// In en, this message translates to:
+  /// **'Cam RAW'**
+  String get whiteBalanceCamRaw;
+
+  /// Exposure compensation: +2.0
+  ///
+  /// In en, this message translates to:
+  /// **'+2.0'**
+  String get exposureCompensation2Plus;
+
+  /// Exposure compensation: +1.5
+  ///
+  /// In en, this message translates to:
+  /// **'+1.5'**
+  String get exposureCompensation1_5Plus;
+
+  /// Exposure compensation: +1.0
+  ///
+  /// In en, this message translates to:
+  /// **'+1.0'**
+  String get exposureCompensation1Plus;
+
+  /// Exposure compensation: +0.5
+  ///
+  /// In en, this message translates to:
+  /// **'+0.5'**
+  String get exposureCompensation0_5Plus;
+
+  /// Exposure compensation: 0.0
+  ///
+  /// In en, this message translates to:
+  /// **'0.0'**
+  String get exposureCompensation0;
+
+  /// Exposure compensation: -0.5
+  ///
+  /// In en, this message translates to:
+  /// **'-0.5'**
+  String get exposureCompensation0_5Minus;
+
+  /// Exposure compensation: -1.0
+  ///
+  /// In en, this message translates to:
+  /// **'-1.0'**
+  String get exposureCompensation1Minus;
+
+  /// Exposure compensation: -1.5
+  ///
+  /// In en, this message translates to:
+  /// **'-1.5'**
+  String get exposureCompensation1_5Minus;
+
+  /// Exposure compensation: -2.0
+  ///
+  /// In en, this message translates to:
+  /// **'-2.0'**
+  String get exposureCompensation2Minus;
+
+  /// Sharpness: High
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get sharpnessHigh;
+
+  /// Sharpness: Medium
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get sharpnessMedium;
+
+  /// Sharpness: Low
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get sharpnessLow;
+
+  /// ISO limit: 6400
+  ///
+  /// In en, this message translates to:
+  /// **'ISO 6400'**
+  String get isoLimit6400;
+
+  /// ISO limit: 1600
+  ///
+  /// In en, this message translates to:
+  /// **'ISO 1600'**
+  String get isoLimit1600;
+
+  /// ISO limit: 400
+  ///
+  /// In en, this message translates to:
+  /// **'ISO 400'**
+  String get isoLimit400;
+
+  /// Color profile: GoPro standard colors
+  ///
+  /// In en, this message translates to:
+  /// **'GoPro Color'**
+  String get colorProfileGoPro;
+
+  /// Color profile: Flat/neutral colors
+  ///
+  /// In en, this message translates to:
+  /// **'Flat Color'**
+  String get colorProfileFlat;
+
+  /// Orientation: Normal/upright
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get orientationUp;
+
+  /// Orientation: Upside down
+  ///
+  /// In en, this message translates to:
+  /// **'Upside Down'**
+  String get orientationDown;
+
+  /// Auto power off: Never turn off
+  ///
+  /// In en, this message translates to:
+  /// **'Never'**
+  String get autoPowerOffNever;
+
+  /// Auto power off: After 1 minute
+  ///
+  /// In en, this message translates to:
+  /// **'After 1 minute'**
+  String get autoPowerOff1Min;
+
+  /// Auto power off: After 2 minutes
+  ///
+  /// In en, this message translates to:
+  /// **'After 2 minutes'**
+  String get autoPowerOff2Min;
+
+  /// Auto power off: After 5 minutes
+  ///
+  /// In en, this message translates to:
+  /// **'After 5 minutes'**
+  String get autoPowerOff5Min;
+
+  /// Low light mode: Enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Low Light: On'**
+  String get lowLightOn;
+
+  /// Low light mode: Disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Low Light: Off'**
+  String get lowLightOff;
+
+  /// Spot metering: Enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Spot Meter: On'**
+  String get spotMeterOn;
+
+  /// Spot metering: Disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Spot Meter: Off'**
+  String get spotMeterOff;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

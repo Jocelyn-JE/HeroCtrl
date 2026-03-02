@@ -1,7 +1,7 @@
 import 'package:heroctrl/models/camera_status.dart';
 
 class CameraState {
-  final CameraStatus status;
+  CameraStatus status;
   bool isCameraOn = false;
   bool isPreviewOn = false;
   int batteryPercent;

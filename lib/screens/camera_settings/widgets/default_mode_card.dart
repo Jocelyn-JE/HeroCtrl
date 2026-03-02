@@ -15,7 +15,7 @@ class DefaultModeCard extends StatefulWidget {
 }
 
 class _DefaultModeCardState extends State<DefaultModeCard> {
-  String? _currentDefaultMode;
+  int? _currentDefaultMode;
   bool _isLoading = true;
 
   @override
@@ -46,7 +46,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
     }
   }
 
-  Future<void> _setDefaultMode(String value) async {
+  Future<void> _setDefaultMode(int value) async {
     final previous = _currentDefaultMode;
     setState(() => _currentDefaultMode = value);
     try {
@@ -97,7 +97,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
             else
               SizedBox(
                 width: double.infinity,
-                child: DropdownButton<String>(
+                child: DropdownButton<int>(
                   isExpanded: true,
                   items: [
                     DropdownMenuItem(

@@ -15,7 +15,7 @@ class VolumeSettingCard extends StatefulWidget {
 }
 
 class _VolumeSettingCardState extends State<VolumeSettingCard> {
-  String? _currentVolume;
+  int? _currentVolume;
   bool _isLoading = true;
 
   @override
@@ -46,7 +46,7 @@ class _VolumeSettingCardState extends State<VolumeSettingCard> {
     }
   }
 
-  Future<void> _setVolume(String value) async {
+  Future<void> _setVolume(int value) async {
     final previous = _currentVolume;
     setState(() => _currentVolume = value);
     try {
@@ -93,7 +93,7 @@ class _VolumeSettingCardState extends State<VolumeSettingCard> {
             else
               SizedBox(
                 width: double.infinity,
-                child: SegmentedButton<String>(
+                child: SegmentedButton<int>(
                   segments: [
                     ButtonSegment(
                       value: Volume.mute,

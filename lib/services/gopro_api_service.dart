@@ -170,11 +170,11 @@ class GoProApiService {
     return CameraWifiInfo(bytes);
   }
 
-  static Future<void> setLeds(String password, String ledOption) async {
+  static Future<void> setLeds(String password, int ledOption) async {
     await _postApi(_camera, GoProEndpoints.leds, password, ledOption);
   }
 
-  static Future<String> getLeds(String password) async {
+  static Future<int> getLeds(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.leds, password);
     final value = response.bodyBytes[1];
     switch (value) {
@@ -189,11 +189,11 @@ class GoProApiService {
     }
   }
 
-  static Future<void> setVolume(String password, String volumeOption) async {
+  static Future<void> setVolume(String password, int volumeOption) async {
     await _postApi(_camera, GoProEndpoints.volume, password, volumeOption);
   }
 
-  static Future<String> getVolume(String password) async {
+  static Future<int> getVolume(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.volume, password);
     final value = response.bodyBytes[1];
     switch (value) {
@@ -258,11 +258,11 @@ class GoProApiService {
     return DateTime(year, month, day, hour, minute, second);
   }
 
-  static Future<void> setVideoMode(String password, String modeOption) async {
+  static Future<void> setVideoMode(String password, int modeOption) async {
     await _postApi(_camera, GoProEndpoints.videoMode, password, modeOption);
   }
 
-  static Future<String> getVideoMode(String password) async {
+  static Future<int> getVideoMode(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.videoMode, password);
     final value = response.bodyBytes[1];
     switch (value) {
@@ -275,7 +275,7 @@ class GoProApiService {
     }
   }
 
-  static Future<void> setDefaultMode(String password, String modeOption) async {
+  static Future<void> setDefaultMode(String password, int modeOption) async {
     await _postApi(
       _camera,
       GoProEndpoints.defaultCameraMode,
@@ -284,7 +284,7 @@ class GoProApiService {
     );
   }
 
-  static Future<String> getDefaultMode(String password) async {
+  static Future<int> getDefaultMode(String password) async {
     final response = await _getApi(
       _camera,
       GoProEndpoints.defaultCameraMode,
@@ -328,7 +328,7 @@ class GoProApiService {
     );
   }
 
-  static Future<String> getVideoResolution(String password) async {
+  static Future<int> getVideoResolution(String password) async {
     final response = await _getApi(
       _camera,
       GoProEndpoints.videoResolution,
@@ -345,7 +345,7 @@ class GoProApiService {
 
   static Future<void> setVideoResolution(
     String password,
-    String resolutionOption,
+    int resolutionOption,
   ) async {
     await _postApi(
       _camera,
@@ -379,7 +379,7 @@ class GoProApiService {
     String device,
     String command,
     String? password,
-    String? option,
+    dynamic option,
   ) => _withLock(() async {
     if (device != _camera && device != _bacpac) {
       throw Exception('_postApi: Invalid device "$device"');
@@ -387,7 +387,10 @@ class GoProApiService {
 
     String path = '${GoProEndpoints.baseUrl}/$device/${command.toUpperCase()}';
     if (password != null) path += '?t=$password';
-    if (option != null) path += '${password != null ? '&' : '?'}p=%$option';
+    if (option != null) {
+      final optionStr = (option is int) ? toHex(option) : option.toString();
+      path += '${password != null ? '&' : '?'}p=%$optionStr';
+    }
     final response = await http.get(Uri.parse(path));
     if (response.statusCode != 200 || response.bodyBytes[0] != 0) {
       throw Exception(

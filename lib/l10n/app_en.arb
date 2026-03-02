@@ -366,5 +366,289 @@
     "resolution720pSuperView": "720p SuperView",
     "@resolution720pSuperView": {
         "description": "Video resolution: 720p with SuperView wide angle mode"
+    },
+    "buttonOn": "On",
+    "@buttonOn": {
+        "description": "ON button label or toggle state"
+    },
+    "buttonOff": "Off",
+    "@buttonOff": {
+        "description": "OFF button label or toggle state"
+    },
+    "cameraModeTimer": "Timer",
+    "@cameraModeTimer": {
+        "description": "Camera mode: Self-timer"
+    },
+    "cameraModeHdmi": "HDMI Output",
+    "@cameraModeHdmi": {
+        "description": "Camera mode: HDMI output"
+    },
+    "fovWide": "Wide",
+    "@fovWide": {
+        "description": "Field of view: Wide angle"
+    },
+    "fovMedium": "Medium",
+    "@fovMedium": {
+        "description": "Field of view: Medium angle"
+    },
+    "fovNarrow": "Narrow",
+    "@fovNarrow": {
+        "description": "Field of view: Narrow/telephoto"
+    },
+    "videoAndPhotoEvery5s": "Every 5 seconds",
+    "@videoAndPhotoEvery5s": {
+        "description": "Interval: Every 5 seconds"
+    },
+    "videoAndPhotoEvery10s": "Every 10 seconds",
+    "@videoAndPhotoEvery10s": {
+        "description": "Interval: Every 10 seconds"
+    },
+    "videoAndPhotoEvery30s": "Every 30 seconds",
+    "@videoAndPhotoEvery30s": {
+        "description": "Interval: Every 30 seconds"
+    },
+    "videoAndPhotoEvery60s": "Every 60 seconds",
+    "@videoAndPhotoEvery60s": {
+        "description": "Interval: Every 60 seconds"
+    },
+    "loopVideo5Min": "5 Minutes",
+    "@loopVideo5Min": {
+        "description": "Loop video duration: 5 minutes"
+    },
+    "loopVideo20Min": "20 Minutes",
+    "@loopVideo20Min": {
+        "description": "Loop video duration: 20 minutes"
+    },
+    "loopVideo1Hour": "1 Hour",
+    "@loopVideo1Hour": {
+        "description": "Loop video duration: 1 hour"
+    },
+    "loopVideo2Hour": "2 Hours",
+    "@loopVideo2Hour": {
+        "description": "Loop video duration: 2 hours"
+    },
+    "loopVideoMaxStorage": "Max Storage",
+    "@loopVideoMaxStorage": {
+        "description": "Loop video duration: Use maximum storage"
+    },
+    "photoResolution5MpMedium": "5MP Medium",
+    "@photoResolution5MpMedium": {
+        "description": "Photo resolution: 5 megapixels medium"
+    },
+    "photoResolution7MpMedium": "7MP Medium",
+    "@photoResolution7MpMedium": {
+        "description": "Photo resolution: 7 megapixels medium"
+    },
+    "photoResolution7MpWide": "7MP Wide",
+    "@photoResolution7MpWide": {
+        "description": "Photo resolution: 7 megapixels wide"
+    },
+    "photoResolution12MpWide": "12MP Wide",
+    "@photoResolution12MpWide": {
+        "description": "Photo resolution: 12 megapixels wide"
+    },
+    "timelapse0_5Sec": "0.5 Seconds",
+    "@timelapse0_5Sec": {
+        "description": "Timelapse interval: 0.5 seconds"
+    },
+    "timelapse1Sec": "1 Second",
+    "@timelapse1Sec": {
+        "description": "Timelapse interval: 1 second"
+    },
+    "timelapse2Sec": "2 Seconds",
+    "@timelapse2Sec": {
+        "description": "Timelapse interval: 2 seconds"
+    },
+    "timelapse5Sec": "5 Seconds",
+    "@timelapse5Sec": {
+        "description": "Timelapse interval: 5 seconds"
+    },
+    "timelapse10Sec": "10 Seconds",
+    "@timelapse10Sec": {
+        "description": "Timelapse interval: 10 seconds"
+    },
+    "timelapse30Sec": "30 Seconds",
+    "@timelapse30Sec": {
+        "description": "Timelapse interval: 30 seconds"
+    },
+    "timelapse60Sec": "60 Seconds",
+    "@timelapse60Sec": {
+        "description": "Timelapse interval: 60 seconds"
+    },
+    "continuousShot3Photos": "3 Photos",
+    "@continuousShot3Photos": {
+        "description": "Continuous shot: 3 photos"
+    },
+    "continuousShot5Photos": "5 Photos",
+    "@continuousShot5Photos": {
+        "description": "Continuous shot: 5 photos"
+    },
+    "continuousShot10Photos": "10 Photos",
+    "@continuousShot10Photos": {
+        "description": "Continuous shot: 10 photos"
+    },
+    "burstRate3PerSec": "3 Photos/s",
+    "@burstRate3PerSec": {
+        "description": "Burst rate: 3 photos per second"
+    },
+    "burstRate5PerSec": "5 Photos/s",
+    "@burstRate5PerSec": {
+        "description": "Burst rate: 5 photos per second"
+    },
+    "burstRate10PerSec": "10 Photos/s",
+    "@burstRate10PerSec": {
+        "description": "Burst rate: 10 photos per second"
+    },
+    "burstRate10Per2Sec": "10 Photos/2s",
+    "@burstRate10Per2Sec": {
+        "description": "Burst rate: 10 photos per 2 seconds"
+    },
+    "burstRate30PerSec": "30 Photos/s",
+    "@burstRate30PerSec": {
+        "description": "Burst rate: 30 photos per second"
+    },
+    "burstRate30Per2Sec": "30 Photos/2s",
+    "@burstRate30Per2Sec": {
+        "description": "Burst rate: 30 photos per 2 seconds"
+    },
+    "burstRate30Per3Sec": "30 Photos/3s",
+    "@burstRate30Per3Sec": {
+        "description": "Burst rate: 30 photos per 3 seconds"
+    },
+    "protuneOn": "Pro Tune On",
+    "@protuneOn": {
+        "description": "Pro Tune: Enabled"
+    },
+    "protuneOff": "Pro Tune Off",
+    "@protuneOff": {
+        "description": "Pro Tune: Disabled"
+    },
+    "whiteBalanceAuto": "Auto",
+    "@whiteBalanceAuto": {
+        "description": "White balance: Automatic"
+    },
+    "whiteBalance3000K": "3000K",
+    "@whiteBalance3000K": {
+        "description": "White balance: 3000K color temperature"
+    },
+    "whiteBalance5500K": "5500K",
+    "@whiteBalance5500K": {
+        "description": "White balance: 5500K color temperature"
+    },
+    "whiteBalance6500K": "6500K",
+    "@whiteBalance6500K": {
+        "description": "White balance: 6500K color temperature"
+    },
+    "whiteBalanceCamRaw": "Cam RAW",
+    "@whiteBalanceCamRaw": {
+        "description": "White balance: Camera RAW"
+    },
+    "exposureCompensation2Plus": "+2.0",
+    "@exposureCompensation2Plus": {
+        "description": "Exposure compensation: +2.0"
+    },
+    "exposureCompensation1_5Plus": "+1.5",
+    "@exposureCompensation1_5Plus": {
+        "description": "Exposure compensation: +1.5"
+    },
+    "exposureCompensation1Plus": "+1.0",
+    "@exposureCompensation1Plus": {
+        "description": "Exposure compensation: +1.0"
+    },
+    "exposureCompensation0_5Plus": "+0.5",
+    "@exposureCompensation0_5Plus": {
+        "description": "Exposure compensation: +0.5"
+    },
+    "exposureCompensation0": "0.0",
+    "@exposureCompensation0": {
+        "description": "Exposure compensation: 0.0"
+    },
+    "exposureCompensation0_5Minus": "-0.5",
+    "@exposureCompensation0_5Minus": {
+        "description": "Exposure compensation: -0.5"
+    },
+    "exposureCompensation1Minus": "-1.0",
+    "@exposureCompensation1Minus": {
+        "description": "Exposure compensation: -1.0"
+    },
+    "exposureCompensation1_5Minus": "-1.5",
+    "@exposureCompensation1_5Minus": {
+        "description": "Exposure compensation: -1.5"
+    },
+    "exposureCompensation2Minus": "-2.0",
+    "@exposureCompensation2Minus": {
+        "description": "Exposure compensation: -2.0"
+    },
+    "sharpnessHigh": "High",
+    "@sharpnessHigh": {
+        "description": "Sharpness: High"
+    },
+    "sharpnessMedium": "Medium",
+    "@sharpnessMedium": {
+        "description": "Sharpness: Medium"
+    },
+    "sharpnessLow": "Low",
+    "@sharpnessLow": {
+        "description": "Sharpness: Low"
+    },
+    "isoLimit6400": "ISO 6400",
+    "@isoLimit6400": {
+        "description": "ISO limit: 6400"
+    },
+    "isoLimit1600": "ISO 1600",
+    "@isoLimit1600": {
+        "description": "ISO limit: 1600"
+    },
+    "isoLimit400": "ISO 400",
+    "@isoLimit400": {
+        "description": "ISO limit: 400"
+    },
+    "colorProfileGoPro": "GoPro Color",
+    "@colorProfileGoPro": {
+        "description": "Color profile: GoPro standard colors"
+    },
+    "colorProfileFlat": "Flat Color",
+    "@colorProfileFlat": {
+        "description": "Color profile: Flat/neutral colors"
+    },
+    "orientationUp": "Normal",
+    "@orientationUp": {
+        "description": "Orientation: Normal/upright"
+    },
+    "orientationDown": "Upside Down",
+    "@orientationDown": {
+        "description": "Orientation: Upside down"
+    },
+    "autoPowerOffNever": "Never",
+    "@autoPowerOffNever": {
+        "description": "Auto power off: Never turn off"
+    },
+    "autoPowerOff1Min": "After 1 minute",
+    "@autoPowerOff1Min": {
+        "description": "Auto power off: After 1 minute"
+    },
+    "autoPowerOff2Min": "After 2 minutes",
+    "@autoPowerOff2Min": {
+        "description": "Auto power off: After 2 minutes"
+    },
+    "autoPowerOff5Min": "After 5 minutes",
+    "@autoPowerOff5Min": {
+        "description": "Auto power off: After 5 minutes"
+    },
+    "lowLightOn": "Low Light: On",
+    "@lowLightOn": {
+        "description": "Low light mode: Enabled"
+    },
+    "lowLightOff": "Low Light: Off",
+    "@lowLightOff": {
+        "description": "Low light mode: Disabled"
+    },
+    "spotMeterOn": "Spot Meter: On",
+    "@spotMeterOn": {
+        "description": "Spot metering: Enabled"
+    },
+    "spotMeterOff": "Spot Meter: Off",
+    "@spotMeterOff": {
+        "description": "Spot metering: Disabled"
     }
 }

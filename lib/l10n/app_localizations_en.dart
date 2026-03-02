@@ -263,4 +263,217 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resolution720pSuperView => '720p SuperView';
+
+  @override
+  String get buttonOn => 'On';
+
+  @override
+  String get buttonOff => 'Off';
+
+  @override
+  String get cameraModeTimer => 'Timer';
+
+  @override
+  String get cameraModeHdmi => 'HDMI Output';
+
+  @override
+  String get fovWide => 'Wide';
+
+  @override
+  String get fovMedium => 'Medium';
+
+  @override
+  String get fovNarrow => 'Narrow';
+
+  @override
+  String get videoAndPhotoEvery5s => 'Every 5 seconds';
+
+  @override
+  String get videoAndPhotoEvery10s => 'Every 10 seconds';
+
+  @override
+  String get videoAndPhotoEvery30s => 'Every 30 seconds';
+
+  @override
+  String get videoAndPhotoEvery60s => 'Every 60 seconds';
+
+  @override
+  String get loopVideo5Min => '5 Minutes';
+
+  @override
+  String get loopVideo20Min => '20 Minutes';
+
+  @override
+  String get loopVideo1Hour => '1 Hour';
+
+  @override
+  String get loopVideo2Hour => '2 Hours';
+
+  @override
+  String get loopVideoMaxStorage => 'Max Storage';
+
+  @override
+  String get photoResolution5MpMedium => '5MP Medium';
+
+  @override
+  String get photoResolution7MpMedium => '7MP Medium';
+
+  @override
+  String get photoResolution7MpWide => '7MP Wide';
+
+  @override
+  String get photoResolution12MpWide => '12MP Wide';
+
+  @override
+  String get timelapse0_5Sec => '0.5 Seconds';
+
+  @override
+  String get timelapse1Sec => '1 Second';
+
+  @override
+  String get timelapse2Sec => '2 Seconds';
+
+  @override
+  String get timelapse5Sec => '5 Seconds';
+
+  @override
+  String get timelapse10Sec => '10 Seconds';
+
+  @override
+  String get timelapse30Sec => '30 Seconds';
+
+  @override
+  String get timelapse60Sec => '60 Seconds';
+
+  @override
+  String get continuousShot3Photos => '3 Photos';
+
+  @override
+  String get continuousShot5Photos => '5 Photos';
+
+  @override
+  String get continuousShot10Photos => '10 Photos';
+
+  @override
+  String get burstRate3PerSec => '3 Photos/s';
+
+  @override
+  String get burstRate5PerSec => '5 Photos/s';
+
+  @override
+  String get burstRate10PerSec => '10 Photos/s';
+
+  @override
+  String get burstRate10Per2Sec => '10 Photos/2s';
+
+  @override
+  String get burstRate30PerSec => '30 Photos/s';
+
+  @override
+  String get burstRate30Per2Sec => '30 Photos/2s';
+
+  @override
+  String get burstRate30Per3Sec => '30 Photos/3s';
+
+  @override
+  String get protuneOn => 'Pro Tune On';
+
+  @override
+  String get protuneOff => 'Pro Tune Off';
+
+  @override
+  String get whiteBalanceAuto => 'Auto';
+
+  @override
+  String get whiteBalance3000K => '3000K';
+
+  @override
+  String get whiteBalance5500K => '5500K';
+
+  @override
+  String get whiteBalance6500K => '6500K';
+
+  @override
+  String get whiteBalanceCamRaw => 'Cam RAW';
+
+  @override
+  String get exposureCompensation2Plus => '+2.0';
+
+  @override
+  String get exposureCompensation1_5Plus => '+1.5';
+
+  @override
+  String get exposureCompensation1Plus => '+1.0';
+
+  @override
+  String get exposureCompensation0_5Plus => '+0.5';
+
+  @override
+  String get exposureCompensation0 => '0.0';
+
+  @override
+  String get exposureCompensation0_5Minus => '-0.5';
+
+  @override
+  String get exposureCompensation1Minus => '-1.0';
+
+  @override
+  String get exposureCompensation1_5Minus => '-1.5';
+
+  @override
+  String get exposureCompensation2Minus => '-2.0';
+
+  @override
+  String get sharpnessHigh => 'High';
+
+  @override
+  String get sharpnessMedium => 'Medium';
+
+  @override
+  String get sharpnessLow => 'Low';
+
+  @override
+  String get isoLimit6400 => 'ISO 6400';
+
+  @override
+  String get isoLimit1600 => 'ISO 1600';
+
+  @override
+  String get isoLimit400 => 'ISO 400';
+
+  @override
+  String get colorProfileGoPro => 'GoPro Color';
+
+  @override
+  String get colorProfileFlat => 'Flat Color';
+
+  @override
+  String get orientationUp => 'Normal';
+
+  @override
+  String get orientationDown => 'Upside Down';
+
+  @override
+  String get autoPowerOffNever => 'Never';
+
+  @override
+  String get autoPowerOff1Min => 'After 1 minute';
+
+  @override
+  String get autoPowerOff2Min => 'After 2 minutes';
+
+  @override
+  String get autoPowerOff5Min => 'After 5 minutes';
+
+  @override
+  String get lowLightOn => 'Low Light: On';
+
+  @override
+  String get lowLightOff => 'Low Light: Off';
+
+  @override
+  String get spotMeterOn => 'Spot Meter: On';
+
+  @override
+  String get spotMeterOff => 'Spot Meter: Off';
 }

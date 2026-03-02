@@ -66,6 +66,28 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     if (mounted) setState(() {});
   }
 
+  Future<void> _onResolutionChanged(int newResolution) async {
+    try {
+      await GoProApiService.setVideoResolution(_password, newResolution);
+      // Refresh camera status to get the updated resolution
+      final updatedStatus = await GoProApiService.getStatus(_password);
+      if (mounted) {
+        setState(() {
+          _cameraState!.status = updatedStatus;
+        });
+      }
+    } catch (e, stackTrace) {
+      AppLogger.error('Error changing video resolution', e, stackTrace);
+      if (mounted) {
+        showSnackBar(
+          context,
+          'Error changing resolution: $e',
+          color: Colors.red,
+        );
+      }
+    }
+  }
+
   Future<void> _checkPreviewStatus() async {
     try {
       AppLogger.info('Camera is on, waiting for preview to be enabled...');
@@ -115,10 +137,12 @@ class _RegisterControlScreenState extends State<ControlScreen> {
                 LiveView(camPassword: _password)
               else
                 const CircularProgressIndicator(),
-              ResolutionSelector(
-                cameraState: _cameraState!,
-                password: _password,
-              ),
+              if (_cameraState != null)
+                ResolutionSelector(
+                  cameraState: _cameraState!,
+                  password: _password,
+                  onResolutionChanged: _onResolutionChanged,
+                ),
             ],
           ),
         ),

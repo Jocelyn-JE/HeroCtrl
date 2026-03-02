@@ -15,7 +15,7 @@ class LedSettingCard extends StatefulWidget {
 }
 
 class _LedSettingCardState extends State<LedSettingCard> {
-  String? _currentLed;
+  int? _currentLed;
   bool _isLoading = true;
 
   @override
@@ -46,7 +46,7 @@ class _LedSettingCardState extends State<LedSettingCard> {
     }
   }
 
-  Future<void> _setLed(String value) async {
+  Future<void> _setLed(int value) async {
     final previous = _currentLed;
     setState(() => _currentLed = value);
     try {
@@ -93,7 +93,7 @@ class _LedSettingCardState extends State<LedSettingCard> {
             else
               SizedBox(
                 width: double.infinity,
-                child: SegmentedButton<String>(
+                child: SegmentedButton<int>(
                   segments: [
                     ButtonSegment(
                       value: LED.off,
