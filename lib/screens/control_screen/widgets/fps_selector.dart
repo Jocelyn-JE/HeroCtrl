@@ -21,19 +21,19 @@ class FPSSelector extends StatelessWidget {
   /// - FPS supported by the current video mode (NTSC/PAL)
   List<FPS> _getValidFpsOptions() {
     final currentResolution = cameraState.status.videoResolution;
-    final currentVideoMode = cameraState.status.videoMode;
+    final currentVideoStandard = cameraState.status.videoMode;
 
     // Get FPS supported by the current resolution
     final fpsForResolution =
         VideoResolution.supportedFPS[currentResolution] ?? [];
 
     // Get FPS supported by the current video mode
-    final fpsForVideoMode =
-        VideoModes.videoModesFrameRates[currentVideoMode] ?? [];
+    final fpsForVideoStandard =
+        VideoStandard.videoStandardFrameRates[currentVideoStandard] ?? [];
 
     // Find the intersection
     return fpsForResolution
-        .where((fps) => fpsForVideoMode.contains(fps))
+        .where((fps) => fpsForVideoStandard.contains(fps))
         .toList();
   }
 

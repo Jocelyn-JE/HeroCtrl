@@ -5,53 +5,54 @@ import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/utils/snackbar.dart';
 
-class VideoModeSettingCard extends StatefulWidget {
+class VideoStandardSettingCard extends StatefulWidget {
   final String password;
 
-  const VideoModeSettingCard({super.key, required this.password});
+  const VideoStandardSettingCard({super.key, required this.password});
 
   @override
-  State<VideoModeSettingCard> createState() => _VideoModeSettingCardState();
+  State<VideoStandardSettingCard> createState() =>
+      _VideoStandardSettingCardState();
 }
 
-class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
-  VideoModes? _currentMode;
+class _VideoStandardSettingCardState extends State<VideoStandardSettingCard> {
+  VideoStandard? _currentStandard;
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchVideoModeSetting();
+    _fetchVideoStandardSetting();
   }
 
-  Future<void> _fetchVideoModeSetting() async {
+  Future<void> _fetchVideoStandardSetting() async {
     try {
-      final mode = await GoProApiService.getVideoMode(widget.password);
+      final standard = await GoProApiService.getVideoMode(widget.password);
       if (mounted) {
         setState(() {
-          _currentMode = mode;
+          _currentStandard = standard;
           _isLoading = false;
         });
       }
     } catch (e, stackTrace) {
-      AppLogger.error('Error fetching video mode setting', e, stackTrace);
+      AppLogger.error('Error fetching video standard setting', e, stackTrace);
       if (mounted) {
         setState(() => _isLoading = false);
-        showSnackBarError(context, 'Error fetching video mode setting: $e');
+        showSnackBarError(context, 'Error fetching video standard setting: $e');
       }
     }
   }
 
-  Future<void> _setVideoMode(VideoModes value) async {
-    final previous = _currentMode;
-    setState(() => _currentMode = value);
+  Future<void> _setVideoStandard(VideoStandard value) async {
+    final previous = _currentStandard;
+    setState(() => _currentStandard = value);
     try {
       await GoProApiService.setVideoMode(widget.password, value);
     } catch (e, stackTrace) {
-      AppLogger.error('Error setting video mode', e, stackTrace);
+      AppLogger.error('Error setting video standard', e, stackTrace);
       if (mounted) {
-        setState(() => _currentMode = previous);
-        showSnackBarError(context, 'Error setting video mode: $e');
+        setState(() => _currentStandard = previous);
+        showSnackBarError(context, 'Error setting video standard: $e');
       }
     }
   }
@@ -66,12 +67,12 @@ class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.videoModeSettingTitle,
+              localizations.videoStandardSettingTitle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
             Text(
-              localizations.videoModeSettingSubtitle,
+              localizations.videoStandardSettingSubtitle,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -89,22 +90,22 @@ class _VideoModeSettingCardState extends State<VideoModeSettingCard> {
             else
               SizedBox(
                 width: double.infinity,
-                child: SegmentedButton<VideoModes>(
+                child: SegmentedButton<VideoStandard>(
                   segments: [
                     ButtonSegment(
-                      value: VideoModes.ntsc,
-                      label: Text(localizations.videoModeNtsc),
+                      value: VideoStandard.ntsc,
+                      label: Text(localizations.videoStandardNtsc),
                       icon: const Icon(Icons.videocam),
                     ),
                     ButtonSegment(
-                      value: VideoModes.pal,
-                      label: Text(localizations.videoModePal),
+                      value: VideoStandard.pal,
+                      label: Text(localizations.videoStandardPal),
                       icon: const Icon(Icons.videocam_outlined),
                     ),
                   ],
-                  selected: {_currentMode ?? VideoModes.pal},
+                  selected: {_currentStandard ?? VideoStandard.pal},
                   onSelectionChanged: (selected) =>
-                      _setVideoMode(selected.first),
+                      _setVideoStandard(selected.first),
                 ),
               ),
           ],

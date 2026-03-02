@@ -275,7 +275,7 @@ class GoProApiService {
 
   static Future<void> setVideoMode(
     String password,
-    VideoModes modeOption,
+    VideoStandard modeOption,
   ) async {
     await _postApi(
       _camera,
@@ -285,16 +285,16 @@ class GoProApiService {
     );
   }
 
-  static Future<VideoModes> getVideoMode(String password) async {
+  static Future<VideoStandard> getVideoMode(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.videoMode, password);
     final value = response.bodyBytes[1];
     switch (value) {
       case 0:
-        return VideoModes.ntsc;
+        return VideoStandard.ntsc;
       case 1:
-        return VideoModes.pal;
+        return VideoStandard.pal;
       default:
-        return VideoModes.ntsc;
+        return VideoStandard.ntsc;
     }
   }
 

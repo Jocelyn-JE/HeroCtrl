@@ -181,20 +181,20 @@
     "@cameraCurrentTime": {
         "description": "Label shown next to the camera's current time"
     },
-    "videoModeSettingTitle": "Video Mode",
-    "@videoModeSettingTitle": {
+    "videoStandardSettingTitle": "Video Mode",
+    "@videoStandardSettingTitle": {
         "description": "Title for video mode setting card"
     },
-    "videoModeSettingSubtitle": "Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.",
-    "@videoModeSettingSubtitle": {
+    "videoStandardSettingSubtitle": "Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.",
+    "@videoStandardSettingSubtitle": {
         "description": "Subtitle for video mode setting card"
     },
-    "videoModeNtsc": "NTSC (30fps)",
-    "@videoModeNtsc": {
+    "videoStandardNtsc": "NTSC (30fps)",
+    "@videoStandardNtsc": {
         "description": "NTSC video mode option"
     },
-    "videoModePal": "PAL (25fps)",
-    "@videoModePal": {
+    "videoStandardPal": "PAL (25fps)",
+    "@videoStandardPal": {
         "description": "PAL video mode option"
     },
     "cameraInfoTitle": "Camera Information",

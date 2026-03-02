@@ -1240,20 +1240,21 @@ class DefaultCameraMode {
   }
 }
 
-class VideoModes {
+class VideoStandard {
   final int _value;
-  const VideoModes._(this._value);
+  const VideoStandard._(this._value);
 
   int get value => _value;
 
-  static const VideoModes ntsc = VideoModes._(0x00);
-  static const VideoModes pal = VideoModes._(0x01);
+  static const VideoStandard ntsc = VideoStandard._(0x00);
+  static const VideoStandard pal = VideoStandard._(0x01);
 
-  static const List<VideoModes> all = [ntsc, pal];
+  static const List<VideoStandard> all = [ntsc, pal];
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is VideoModes && _value == other._value;
+      identical(this, other) ||
+      other is VideoStandard && _value == other._value;
 
   @override
   int get hashCode => _value.hashCode;
@@ -1262,15 +1263,15 @@ class VideoModes {
     final l10n = AppLocalizations.of(context)!;
     switch (_value) {
       case 0x00:
-        return l10n.videoModeNtsc;
+        return l10n.videoStandardNtsc;
       case 0x01:
-        return l10n.videoModePal;
+        return l10n.videoStandardPal;
       default:
         return toHex(_value);
     }
   }
 
-  static final videoModesFrameRates = {
+  static final videoStandardFrameRates = {
     ntsc: [
       FPS.fps15,
       FPS.fps12,

@@ -12,7 +12,7 @@ class CameraStatus {
   final int recordingProgress; // in seconds
   final Volume volume;
   final LED ledsStatus;
-  final VideoModes videoMode;
+  final VideoStandard videoMode;
   final Locate locateStatus;
   final OneButton oneButtonMode;
   final Orientation orientation;
@@ -42,8 +42,8 @@ class CameraStatus {
   }
 
   // Video mode is the third bit of the byte starting from the left
-  static VideoModes _parseVideoMode(int byte) {
-    return (byte & 0x20) != 0 ? VideoModes.pal : VideoModes.ntsc;
+  static VideoStandard _parseVideoStandard(int byte) {
+    return (byte & 0x20) != 0 ? VideoStandard.pal : VideoStandard.ntsc;
   }
 
   // Locate status is the second bit of the byte starting from the left
@@ -146,7 +146,7 @@ class CameraStatus {
         (led) => led.value == bytes[17],
         orElse: () => LED.off,
       ),
-      videoMode = _parseVideoMode(bytes[18]),
+      videoMode = _parseVideoStandard(bytes[18]),
       locateStatus = _parseLocateStatus(bytes[18]),
       oneButtonMode = _parseOneButtonMode(bytes[18]),
       orientation = _parseOrientation(bytes[18]),

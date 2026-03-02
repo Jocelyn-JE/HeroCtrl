@@ -4,7 +4,7 @@ import 'package:heroctrl/screens/camera_settings/widgets/camera_info_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/default_mode_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/locate_camera_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_card.dart';
-import 'package:heroctrl/screens/camera_settings/widgets/video_mode_setting_card.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/video_standard_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/volume_setting_card.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'widgets/disconnect_card.dart';
@@ -29,7 +29,7 @@ class CameraSettingsScreen extends StatelessWidget {
             VolumeSettingCard(password: password),
             OrientationSettingCard(password: password),
             DefaultModeCard(password: password),
-            VideoModeSettingCard(password: password),
+            VideoStandardSettingCard(password: password),
             TimeSettingCard(password: password),
             LocateCameraCard(password: password),
             CameraInfoCard(password: password),
