@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/gopro_endpoints.dart';
+import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';

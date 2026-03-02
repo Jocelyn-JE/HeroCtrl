@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:heroctrl/constants/gopro_action_enums.dart';
+import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
 import 'package:heroctrl/models/camera_version.dart';
 import 'package:heroctrl/models/camera_wifi_info.dart';
