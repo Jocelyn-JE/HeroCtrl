@@ -48,29 +48,27 @@ class FPSSelector extends StatelessWidget {
         ? currentFps
         : null;
 
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      child: DropdownButton<FPS>(
-        value: selectedValue,
-        onChanged: (cameraState.isCameraOn && validFpsOptions.isNotEmpty)
-            ? (newValue) {
-                if (newValue != null) {
-                  AppLogger.info(
-                    'Changing FPS to ${newValue.getLocalizedName(context)}',
-                  );
-                  onFpsChanged(newValue);
-                }
+    return DropdownButton<FPS>(
+      isExpanded: true,
+      value: selectedValue,
+      onChanged: (cameraState.isCameraOn && validFpsOptions.isNotEmpty)
+          ? (newValue) {
+              if (newValue != null) {
+                AppLogger.info(
+                  'Changing FPS to ${newValue.getLocalizedName(context)}',
+                );
+                onFpsChanged(newValue);
               }
-            : null,
-        items: validFpsOptions
-            .map(
-              (fps) => DropdownMenuItem(
-                value: fps,
-                child: Text(fps.getLocalizedName(context)),
-              ),
-            )
-            .toList(),
-      ),
+            }
+          : null,
+      items: validFpsOptions
+          .map(
+            (fps) => DropdownMenuItem(
+              value: fps,
+              child: Text(fps.getLocalizedName(context)),
+            ),
+          )
+          .toList(),
     );
   }
 }

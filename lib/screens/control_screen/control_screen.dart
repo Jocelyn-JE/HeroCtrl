@@ -184,17 +184,23 @@ class _RegisterControlScreenState extends State<ControlScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: ResolutionSelector(
-                        cameraState: _cameraState!,
-                        password: _password,
-                        onResolutionChanged: _onResolutionChanged,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ResolutionSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onResolutionChanged: _onResolutionChanged,
+                        ),
                       ),
                     ),
                     Expanded(
-                      child: FPSSelector(
-                        cameraState: _cameraState!,
-                        password: _password,
-                        onFpsChanged: _onFpsChanged,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FPSSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onFpsChanged: _onFpsChanged,
+                        ),
                       ),
                     ),
                   ],

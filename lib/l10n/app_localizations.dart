@@ -61,8 +61,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,8 +69,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,16 +81,17 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en')
+  ];
 
   /// Label for password input field
   ///
@@ -499,7 +498,7 @@ abstract class AppLocalizations {
   /// Video resolution: WVGA at 240 frames per second
   ///
   /// In en, this message translates to:
-  /// **'WVGA 240fps'**
+  /// **'WVGA 240  fps'**
   String get resolutionWvga240fps;
 
   /// Video resolution: 720p
@@ -1003,78 +1002,77 @@ abstract class AppLocalizations {
   /// Frame rate: 12 frames per second
   ///
   /// In en, this message translates to:
-  /// **'12fps'**
+  /// **'12 fps'**
   String get fps12;
 
   /// Frame rate: 12.5 frames per second
   ///
   /// In en, this message translates to:
-  /// **'12.5fps'**
+  /// **'12.5 fps'**
   String get fps12_5;
 
   /// Frame rate: 15 frames per second
   ///
   /// In en, this message translates to:
-  /// **'15fps'**
+  /// **'15 fps'**
   String get fps15;
 
   /// Frame rate: 24 frames per second
   ///
   /// In en, this message translates to:
-  /// **'24fps'**
+  /// **'24 fps'**
   String get fps24;
 
   /// Frame rate: 25 frames per second
   ///
   /// In en, this message translates to:
-  /// **'25fps'**
+  /// **'25 fps'**
   String get fps25;
 
   /// Frame rate: 30 frames per second
   ///
   /// In en, this message translates to:
-  /// **'30fps'**
+  /// **'30 fps'**
   String get fps30;
 
   /// Frame rate: 48 frames per second
   ///
   /// In en, this message translates to:
-  /// **'48fps'**
+  /// **'48 fps'**
   String get fps48;
 
   /// Frame rate: 50 frames per second
   ///
   /// In en, this message translates to:
-  /// **'50fps'**
+  /// **'50 fps'**
   String get fps50;
 
   /// Frame rate: 60 frames per second
   ///
   /// In en, this message translates to:
-  /// **'60fps'**
+  /// **'60 fps'**
   String get fps60;
 
   /// Frame rate: 100 frames per second
   ///
   /// In en, this message translates to:
-  /// **'100fps'**
+  /// **'100 fps'**
   String get fps100;
 
   /// Frame rate: 120 frames per second
   ///
   /// In en, this message translates to:
-  /// **'120fps'**
+  /// **'120 fps'**
   String get fps120;
 
   /// Frame rate: 240 frames per second
   ///
   /// In en, this message translates to:
-  /// **'240fps'**
+  /// **'240 fps'**
   String get fps240;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1083,24 +1081,24 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
+    case 'en': return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

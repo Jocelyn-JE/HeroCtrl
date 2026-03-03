@@ -4,23 +4,59 @@ import 'package:heroctrl/l10n/app_localizations.dart';
 
 class VideoResolution {
   final int _value;
+  final Icon _icon;
 
-  const VideoResolution._(this._value);
+  const VideoResolution._(this._value, this._icon);
 
   int get value => _value;
+  Icon get icon => _icon;
 
   // Define all valid instances
-  static const VideoResolution wvga240fps = VideoResolution._(0x00);
-  static const VideoResolution res720p = VideoResolution._(0x01);
-  static const VideoResolution res960p = VideoResolution._(0x02);
-  static const VideoResolution res1080p = VideoResolution._(0x03);
-  static const VideoResolution res1440p = VideoResolution._(0x04);
-  static const VideoResolution res2_7k = VideoResolution._(0x05);
-  static const VideoResolution res4k = VideoResolution._(0x06);
-  static const VideoResolution res2_7k_17_9 = VideoResolution._(0x07);
-  static const VideoResolution res4k_17_9 = VideoResolution._(0x08);
-  static const VideoResolution res1080pSuperView = VideoResolution._(0x09);
-  static const VideoResolution res720pSuperView = VideoResolution._(0x0a);
+  // TODO: Find better icons for each resolution
+  static const VideoResolution wvga240fps = VideoResolution._(
+    0x00,
+    Icon(Icons.hd_outlined),
+  );
+  static const VideoResolution res720p = VideoResolution._(
+    0x01,
+    Icon(Icons.hd),
+  );
+  static const VideoResolution res960p = VideoResolution._(
+    0x02,
+    Icon(Icons.hd_outlined),
+  );
+  static const VideoResolution res1080p = VideoResolution._(
+    0x03,
+    Icon(Icons.high_quality),
+  );
+  static const VideoResolution res1440p = VideoResolution._(
+    0x04,
+    Icon(Icons.two_k_outlined),
+  );
+  static const VideoResolution res2_7k = VideoResolution._(
+    0x05,
+    Icon(Icons.two_k_plus),
+  );
+  static const VideoResolution res4k = VideoResolution._(
+    0x06,
+    Icon(Icons.four_k),
+  );
+  static const VideoResolution res2_7k_17_9 = VideoResolution._(
+    0x07,
+    Icon(Icons.two_k_plus_outlined),
+  );
+  static const VideoResolution res4k_17_9 = VideoResolution._(
+    0x08,
+    Icon(Icons.four_k_outlined),
+  );
+  static const VideoResolution res1080pSuperView = VideoResolution._(
+    0x09,
+    Icon(Icons.width_wide),
+  );
+  static const VideoResolution res720pSuperView = VideoResolution._(
+    0x0a,
+    Icon(Icons.width_normal),
+  );
 
   static const List<VideoResolution> all = [
     wvga240fps,

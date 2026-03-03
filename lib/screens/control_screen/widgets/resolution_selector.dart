@@ -26,29 +26,40 @@ class ResolutionSelector extends StatelessWidget {
         ? currentResolution
         : null;
 
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      child: DropdownButton<VideoResolution>(
-        value: selectedValue,
-        onChanged: (cameraState.isCameraOn)
-            ? (newValue) {
-                if (newValue != null) {
-                  AppLogger.info(
-                    'Changing video resolution to ${newValue.getLocalizedName(context)}',
-                  );
-                  onResolutionChanged(newValue);
-                }
+    return DropdownButton<VideoResolution>(
+      isExpanded: true,
+      value: selectedValue,
+      onChanged: (cameraState.isCameraOn)
+          ? (newValue) {
+              if (newValue != null) {
+                AppLogger.info(
+                  'Changing video resolution to ${newValue.getLocalizedName(context)}',
+                );
+                onResolutionChanged(newValue);
               }
-            : null,
-        items: VideoResolution.all
-            .map(
-              (resolution) => DropdownMenuItem(
-                value: resolution,
-                child: Text(resolution.getLocalizedName(context)),
+            }
+          : null,
+      items: VideoResolution.all
+          .map(
+            (resolution) => DropdownMenuItem(
+              value: resolution,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  resolution.icon,
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      resolution.getLocalizedName(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
-            )
-            .toList(),
-      ),
+            ),
+          )
+          .toList(),
     );
   }
 }

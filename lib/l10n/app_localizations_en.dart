@@ -32,8 +32,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutPeriodicScanning => 'About periodic scanning';
 
   @override
-  String get periodicScanningInfo =>
-      'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ';
+  String get periodicScanningInfo => 'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ';
 
   @override
   String get ok => 'OK';
@@ -74,8 +73,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgetAllCameras => 'Forget all cameras';
 
   @override
-  String get forgetAllCamerasConfirm =>
-      'Are you sure you want to forget all cameras?';
+  String get forgetAllCamerasConfirm => 'Are you sure you want to forget all cameras?';
 
   @override
   String get forget => 'Forget';
@@ -84,8 +82,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchOffCameraOnDisconnect => 'Switch off camera on disconnect';
 
   @override
-  String get switchOffCameraOnDisconnectSubtitle =>
-      'Automatically power off the camera when disconnecting from it (will stop any active recording).';
+  String get switchOffCameraOnDisconnectSubtitle => 'Automatically power off the camera when disconnecting from it (will stop any active recording).';
 
   @override
   String get cameraSettings => 'Camera Settings';
@@ -94,8 +91,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ledSetting => 'LED Indicators';
 
   @override
-  String get ledSettingSubtitle =>
-      'Control which status LEDs are active on the camera.';
+  String get ledSettingSubtitle => 'Control which status LEDs are active on the camera.';
 
   @override
   String get ledOff => 'Off';
@@ -125,15 +121,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get orientationUpsideDown => 'Upside-Down Mode';
 
   @override
-  String get orientationUpsideDownSubtitle =>
-      'Flip the camera image when mounted upside down.';
+  String get orientationUpsideDownSubtitle => 'Flip the camera image when mounted upside down.';
 
   @override
   String get timeSetting => 'Date & Time';
 
   @override
-  String get timeSettingSubtitle =>
-      'Sync the camera clock with the current device time.';
+  String get timeSettingSubtitle => 'Sync the camera clock with the current device time.';
 
   @override
   String get timeSetToNow => 'Sync to Device Time';
@@ -145,8 +139,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get videoStandardSettingTitle => 'Video Mode';
 
   @override
-  String get videoStandardSettingSubtitle =>
-      'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.';
+  String get videoStandardSettingSubtitle => 'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.';
 
   @override
   String get videoStandardNtsc => 'NTSC (30fps)';
@@ -191,8 +184,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get defaultModeSetting => 'Default Camera Mode';
 
   @override
-  String get defaultModeSettingSubtitle =>
-      'Choose which mode the camera should start in when powered on.';
+  String get defaultModeSettingSubtitle => 'Choose which mode the camera should start in when powered on.';
 
   @override
   String get defaultModeVideo => 'Video';
@@ -210,8 +202,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locateCamera => 'Locate Camera';
 
   @override
-  String get locateCameraSubtitle =>
-      'Make the camera beep and flash its LEDs to help you find it.';
+  String get locateCameraSubtitle => 'Make the camera beep and flash its LEDs to help you find it.';
 
   @override
   String get locateCameraButton => 'Start Locating';
@@ -220,8 +211,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locateCameraDialogTitle => 'Locating Camera';
 
   @override
-  String get locateCameraDialogMessage =>
-      'The camera is beeping and flashing. Tap Stop when you\'ve found it.';
+  String get locateCameraDialogMessage => 'The camera is beeping and flashing. Tap Stop when you\'ve found it.';
 
   @override
   String get locateCameraStop => 'Stop';
@@ -230,21 +220,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get disconnectTitle => 'Disconnect & Turn Off';
 
   @override
-  String get disconnectSubtitle =>
-      'Turn off the camera and return to the home screen.';
+  String get disconnectSubtitle => 'Turn off the camera and return to the home screen.';
 
   @override
   String get disconnectConfirmTitle => 'Turn Off Camera?';
 
   @override
-  String get disconnectConfirmMessage =>
-      'This will power off the camera and disconnect. Any active recording will be stopped.';
+  String get disconnectConfirmMessage => 'This will power off the camera and disconnect. Any active recording will be stopped.';
 
   @override
   String get disconnectConfirmButton => 'Turn Off';
 
   @override
-  String get resolutionWvga240fps => 'WVGA 240fps';
+  String get resolutionWvga240fps => 'WVGA 240  fps';
 
   @override
   String get resolution720p => '720p';
@@ -493,42 +481,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fixStream => 'Fix Stream';
 
   @override
-  String get batteryCriticallyLow =>
-      'Battery critically low. Disconnecting from camera.';
+  String get batteryCriticallyLow => 'Battery critically low. Disconnecting from camera.';
 
   @override
-  String get fps12 => '12fps';
+  String get fps12 => '12 fps';
 
   @override
-  String get fps12_5 => '12.5fps';
+  String get fps12_5 => '12.5 fps';
 
   @override
-  String get fps15 => '15fps';
+  String get fps15 => '15 fps';
 
   @override
-  String get fps24 => '24fps';
+  String get fps24 => '24 fps';
 
   @override
-  String get fps25 => '25fps';
+  String get fps25 => '25 fps';
 
   @override
-  String get fps30 => '30fps';
+  String get fps30 => '30 fps';
 
   @override
-  String get fps48 => '48fps';
+  String get fps48 => '48 fps';
 
   @override
-  String get fps50 => '50fps';
+  String get fps50 => '50 fps';
 
   @override
-  String get fps60 => '60fps';
+  String get fps60 => '60 fps';
 
   @override
-  String get fps100 => '100fps';
+  String get fps100 => '100 fps';
 
   @override
-  String get fps120 => '120fps';
+  String get fps120 => '120 fps';
 
   @override
-  String get fps240 => '240fps';
+  String get fps240 => '240 fps';
 }
