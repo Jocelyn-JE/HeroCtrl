@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
@@ -150,6 +152,64 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
+
+    final Widget previewArea;
+    if (_cameraState?.isPreviewOn == true &&
+        _cameraState?.isCameraOn == true &&
+        _cameraState?.status.cameraMode != CameraMode.settings) {
+      previewArea = LiveView(
+        camPassword: _password,
+        isRecording: _cameraState!.status.shutterStatus,
+      );
+    } else if (_cameraState?.status.cameraMode == CameraMode.settings) {
+      previewArea = Text(
+        AppLocalizations.of(context)!.liveViewUnavailableInSettings,
+      );
+    } else {
+      previewArea = const CircularProgressIndicator();
+    }
+
+    final content = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child:
+              _cameraState?.isPreviewOn == true &&
+                  _cameraState?.isCameraOn == true &&
+                  _cameraState?.status.cameraMode != CameraMode.settings
+              ? previewArea
+              : Center(child: previewArea),
+        ),
+        if (_cameraState != null)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ResolutionSelector(
+                    cameraState: _cameraState!,
+                    password: _password,
+                    onResolutionChanged: _onResolutionChanged,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FPSSelector(
+                    cameraState: _cameraState!,
+                    password: _password,
+                    onFpsChanged: _onFpsChanged,
+                  ),
+                ),
+              ),
+            ],
+          ),
+      ],
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(GoProConnectionService.currentConnection!.ssid),
@@ -172,55 +232,14 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         ],
       ),
       body: SafeArea(
-        bottom: true,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (_cameraState?.isPreviewOn == true &&
-                  _cameraState?.isCameraOn == true &&
-                  _cameraState?.status.cameraMode != CameraMode.settings)
-                LiveView(
-                  camPassword: _password,
-                  isRecording: _cameraState!.status.shutterStatus,
-                )
-              else if (_cameraState?.status.cameraMode == CameraMode.settings)
-                Text(
-                  AppLocalizations.of(context)!.liveViewUnavailableInSettings,
-                )
-              else
-                const CircularProgressIndicator(),
-              if (_cameraState != null)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ResolutionSelector(
-                          cameraState: _cameraState!,
-                          password: _password,
-                          onResolutionChanged: _onResolutionChanged,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: FPSSelector(
-                          cameraState: _cameraState!,
-                          password: _password,
-                          onFpsChanged: _onFpsChanged,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-            ],
-          ),
-        ),
+        left: false,
+        right: false,
+        top: false,
+        child: Center(child: content),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: orientation == Orientation.landscape
+          ? FloatingActionButtonLocation.miniEndFloat
+          : FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _cameraState != null
           ? Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
@@ -235,12 +254,21 @@ class _RegisterControlScreenState extends State<ControlScreen> {
   }
 
   @override
-  void dispose() async {
+  void dispose() {
     _batteryMonitor?.batteryPercent.removeListener(_onBatteryChanged);
     _batteryMonitor?.estimatedMinutesRemaining.removeListener(
       _onBatteryChanged,
     );
     _batteryMonitor?.dispose();
+
+    // Fire off async cleanup without awaiting to keep dispose synchronous
+    unawaited(_cleanupAsync());
+
+    GoProConnectionService.disconnect(instant: true);
+    super.dispose();
+  }
+
+  Future<void> _cleanupAsync() async {
     if (await AppPrefs.getSwitchOffCameraOnDisconnect()) {
       try {
         await GoProApiService.turnOffCamera(_password);
@@ -252,7 +280,5 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         );
       }
     }
-    GoProConnectionService.disconnect(instant: true);
-    super.dispose();
   }
 }
