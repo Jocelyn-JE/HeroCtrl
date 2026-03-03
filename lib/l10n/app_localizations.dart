@@ -489,6 +489,12 @@ abstract class AppLocalizations {
   /// **'This will power off the camera and disconnect. Any active recording will be stopped.'**
   String get disconnectConfirmMessage;
 
+  /// Message shown when live view cannot be displayed while the camera is recording
+  ///
+  /// In en, this message translates to:
+  /// **'Live view is not available while recording.'**
+  String get liveViewUnavailableWhileRecording;
+
   /// Confirm button label in the turn off camera dialog
   ///
   /// In en, this message translates to:

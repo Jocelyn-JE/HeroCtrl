@@ -229,6 +229,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get disconnectConfirmMessage => 'This will power off the camera and disconnect. Any active recording will be stopped.';
 
   @override
+  String get liveViewUnavailableWhileRecording => 'Live view is not available while recording.';
+
+  @override
   String get disconnectConfirmButton => 'Turn Off';
 
   @override

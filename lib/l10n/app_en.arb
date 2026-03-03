@@ -319,6 +319,10 @@
     "@disconnectConfirmMessage": {
         "description": "Body text of the confirmation dialog before turning off the camera"
     },
+    "liveViewUnavailableWhileRecording": "Live view is not available while recording.",
+    "@liveViewUnavailableWhileRecording": {
+        "description": "Message shown when live view cannot be displayed while the camera is recording"
+    },
     "disconnectConfirmButton": "Turn Off",
     "@disconnectConfirmButton": {
         "description": "Confirm button label in the turn off camera dialog"

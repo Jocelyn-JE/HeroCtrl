@@ -175,10 +175,18 @@ class _RegisterControlScreenState extends State<ControlScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (_cameraState?.isPreviewOn == true)
+              if (_cameraState?.isPreviewOn == true &&
+                  _cameraState!.isCameraOn &&
+                  _cameraState!.status.shutterStatus == false)
                 LiveView(camPassword: _password)
+              else if (_cameraState!.status.shutterStatus == false)
+                const CircularProgressIndicator()
               else
-                const CircularProgressIndicator(),
+                Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.liveViewUnavailableWhileRecording,
+                ),
               if (_cameraState != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
