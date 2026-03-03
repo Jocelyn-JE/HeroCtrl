@@ -72,12 +72,11 @@ class _LiveViewState extends State<LiveView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AspectRatio(
-          aspectRatio: 16 / 9,
+        Expanded(
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Video(controller: _controller),
+              Video(controller: _controller, fit: BoxFit.contain),
               if (widget.isRecording)
                 IgnorePointer(
                   child: Container(
