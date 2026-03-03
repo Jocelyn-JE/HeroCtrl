@@ -37,6 +37,7 @@ class _LiveViewState extends State<LiveView> {
     } catch (e) {
       // Preview may already be on or camera is returning an error — proceed anyway
     }
+    if (!mounted) return;
     await _player.open(Media(GoProEndpoints.livestreamUrl));
   }
 
