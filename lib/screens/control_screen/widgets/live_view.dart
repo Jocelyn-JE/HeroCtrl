@@ -10,8 +10,13 @@ import 'package:media_kit_video/media_kit_video.dart';
 
 class LiveView extends StatefulWidget {
   final String camPassword;
+  final bool isRecording;
 
-  const LiveView({super.key, required this.camPassword});
+  const LiveView({
+    super.key,
+    required this.camPassword,
+    this.isRecording = false,
+  });
 
   @override
   State<LiveView> createState() => _LiveViewState();
@@ -69,7 +74,20 @@ class _LiveViewState extends State<LiveView> {
       children: [
         AspectRatio(
           aspectRatio: 16 / 9,
-          child: Video(controller: _controller),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Video(controller: _controller),
+              if (widget.isRecording)
+                IgnorePointer(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red, width: 3.0),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
         ElevatedButton(
           onPressed: () async {

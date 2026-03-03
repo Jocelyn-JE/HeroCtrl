@@ -5,6 +5,7 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
+import 'package:heroctrl/screens/control_screen/widgets/record_button.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
 import 'package:heroctrl/services/app_prefs.dart';
@@ -178,14 +179,14 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             children: [
               if (_cameraState?.isPreviewOn == true &&
                   _cameraState?.isCameraOn == true &&
-                  _cameraState?.status.shutterStatus == false)
-                LiveView(camPassword: _password)
-              else if (_cameraState?.status.shutterStatus == true ||
-                  _cameraState?.status.cameraMode == CameraMode.settings)
+                  _cameraState?.status.cameraMode != CameraMode.settings)
+                LiveView(
+                  camPassword: _password,
+                  isRecording: _cameraState!.status.shutterStatus,
+                )
+              else if (_cameraState?.status.cameraMode == CameraMode.settings)
                 Text(
-                  AppLocalizations.of(
-                    context,
-                  )!.liveViewUnavailableWhileRecording,
+                  AppLocalizations.of(context)!.liveViewUnavailableInSettings,
                 )
               else
                 const CircularProgressIndicator(),
@@ -219,6 +220,17 @@ class _RegisterControlScreenState extends State<ControlScreen> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _cameraState != null
+          ? Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: RecordButton(
+                cameraState: _cameraState!,
+                password: _password,
+                onStatusUpdated: _updateCameraStatus,
+              ),
+            )
+          : null,
     );
   }
 
