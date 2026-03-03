@@ -274,10 +274,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get buttonOff => 'Off';
 
   @override
-  String get cameraModeTimer => 'Timer';
+  String get cameraModeTimelapse => 'Time-Lapse';
 
   @override
   String get cameraModeHdmi => 'HDMI Output';
+
+  @override
+  String get cameraModeSettings => 'Settings';
+
+  @override
+  String get powerOff => 'Off';
+
+  @override
+  String get powerOn => 'On';
+
+  @override
+  String get shutterStop => 'Stop';
+
+  @override
+  String get shutterStart => 'Start';
+
+  @override
+  String get previewOff => 'Off';
+
+  @override
+  String get previewOn => 'On';
+
+  @override
+  String get locateOff => 'Off';
+
+  @override
+  String get locateOn => 'On';
 
   @override
   String get fovWide => 'Wide';

@@ -379,13 +379,49 @@
     "@buttonOff": {
         "description": "OFF button label or toggle state"
     },
-    "cameraModeTimer": "Timer",
-    "@cameraModeTimer": {
-        "description": "Camera mode: Self-timer"
+    "cameraModeTimelapse": "Time-Lapse",
+    "@cameraModeTimelapse": {
+        "description": "Camera mode: Time-lapse"
     },
     "cameraModeHdmi": "HDMI Output",
     "@cameraModeHdmi": {
         "description": "Camera mode: HDMI output"
+    },
+    "cameraModeSettings": "Settings",
+    "@cameraModeSettings": {
+        "description": "Camera mode: Settings menu"
+    },
+    "powerOff": "Off",
+    "@powerOff": {
+        "description": "Power state: Off"
+    },
+    "powerOn": "On",
+    "@powerOn": {
+        "description": "Power state: On"
+    },
+    "shutterStop": "Stop",
+    "@shutterStop": {
+        "description": "Shutter action: Stop recording"
+    },
+    "shutterStart": "Start",
+    "@shutterStart": {
+        "description": "Shutter action: Start recording"
+    },
+    "previewOff": "Off",
+    "@previewOff": {
+        "description": "Preview state: Off"
+    },
+    "previewOn": "On",
+    "@previewOn": {
+        "description": "Preview state: On"
+    },
+    "locateOff": "Off",
+    "@locateOff": {
+        "description": "Locate function: Off"
+    },
+    "locateOn": "On",
+    "@locateOn": {
+        "description": "Locate function: On"
     },
     "fovWide": "Wide",
     "@fovWide": {

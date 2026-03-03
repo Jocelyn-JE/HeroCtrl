@@ -6,7 +6,7 @@ import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/constants/gopro_system_enums.dart';
 
 class CameraStatus {
-  final int cameraMode;
+  final CameraMode cameraMode;
   final DefaultCameraMode defaultCameraMode;
   final SpotMeter spotMeter;
   final TimelapseInterval timelapseInterval;
@@ -16,7 +16,7 @@ class CameraStatus {
   final int recordingProgress; // in seconds
   final Volume volume;
   final LED ledsStatus;
-  final VideoStandard videoMode;
+  final VideoStandard videoStandard;
   final Locate locateStatus;
   final OneButton oneButtonMode;
   final Orientation orientation;
@@ -116,7 +116,10 @@ class CameraStatus {
   }
 
   CameraStatus(Uint8List bytes)
-    : cameraMode = bytes[1],
+    : cameraMode = CameraMode.all.firstWhere(
+        (mode) => mode.value == bytes[1],
+        orElse: () => CameraMode.videoMode,
+      ),
       defaultCameraMode = DefaultCameraMode.all.firstWhere(
         (mode) => mode.value == bytes[3],
         orElse: () => DefaultCameraMode.videoMode,
@@ -150,7 +153,7 @@ class CameraStatus {
         (led) => led.value == bytes[17],
         orElse: () => LED.off,
       ),
-      videoMode = _parseVideoStandard(bytes[18]),
+      videoStandard = _parseVideoStandard(bytes[18]),
       locateStatus = _parseLocateStatus(bytes[18]),
       oneButtonMode = _parseOneButtonMode(bytes[18]),
       orientation = _parseOrientation(bytes[18]),

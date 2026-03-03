@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
@@ -176,17 +177,18 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (_cameraState?.isPreviewOn == true &&
-                  _cameraState!.isCameraOn &&
-                  _cameraState!.status.shutterStatus == false)
+                  _cameraState?.isCameraOn == true &&
+                  _cameraState?.status.shutterStatus == false)
                 LiveView(camPassword: _password)
-              else if (_cameraState!.status.shutterStatus == false)
-                const CircularProgressIndicator()
-              else
+              else if (_cameraState?.status.shutterStatus == true ||
+                  _cameraState?.status.cameraMode == CameraMode.settings)
                 Text(
                   AppLocalizations.of(
                     context,
                   )!.liveViewUnavailableWhileRecording,
-                ),
+                )
+              else
+                const CircularProgressIndicator(),
               if (_cameraState != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -24,9 +24,9 @@ class Power {
     final l10n = AppLocalizations.of(context)!;
     switch (_value) {
       case 0x00:
-        return l10n.volumeOff;
+        return l10n.powerOff;
       case 0x01:
-        return l10n.buttonOn;
+        return l10n.powerOn;
       default:
         return toHex(_value);
     }
@@ -55,9 +55,9 @@ class Shutter {
     final l10n = AppLocalizations.of(context)!;
     switch (_value) {
       case 0x00:
-        return l10n.volumeOff;
+        return l10n.shutterStop;
       case 0x01:
-        return l10n.buttonOn;
+        return l10n.shutterStart;
       default:
         return toHex(_value);
     }
@@ -86,9 +86,9 @@ class VideoPreview {
     final l10n = AppLocalizations.of(context)!;
     switch (_value) {
       case 0x00:
-        return l10n.volumeOff;
+        return l10n.previewOff;
       case 0x02:
-        return l10n.buttonOn;
+        return l10n.previewOn;
       default:
         return toHex(_value);
     }
@@ -117,9 +117,9 @@ class Locate {
     final l10n = AppLocalizations.of(context)!;
     switch (_value) {
       case 0x00:
-        return l10n.volumeOff;
+        return l10n.locateOff;
       case 0x01:
-        return l10n.buttonOn;
+        return l10n.locateOn;
       default:
         return toHex(_value);
     }
@@ -135,15 +135,17 @@ class CameraMode {
   static const CameraMode videoMode = CameraMode._(0x00);
   static const CameraMode photoMode = CameraMode._(0x01);
   static const CameraMode burstMode = CameraMode._(0x02);
-  static const CameraMode timerMode = CameraMode._(0x04);
+  static const CameraMode timelapseMode = CameraMode._(0x03);
   static const CameraMode hdmiMode = CameraMode._(0x05);
+  static const CameraMode settings = CameraMode._(0x07);
 
   static const List<CameraMode> all = [
     videoMode,
     photoMode,
     burstMode,
-    timerMode,
+    timelapseMode,
     hdmiMode,
+    settings,
   ];
 
   @override
@@ -162,10 +164,12 @@ class CameraMode {
         return l10n.defaultModePhoto;
       case 0x02:
         return l10n.defaultModeBurst;
-      case 0x04:
-        return l10n.cameraModeTimer;
+      case 0x03:
+        return l10n.cameraModeTimelapse;
       case 0x05:
         return l10n.cameraModeHdmi;
+      case 0x07:
+        return l10n.cameraModeSettings;
       default:
         return toHex(_value);
     }

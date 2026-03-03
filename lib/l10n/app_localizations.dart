@@ -579,17 +579,71 @@ abstract class AppLocalizations {
   /// **'Off'**
   String get buttonOff;
 
-  /// Camera mode: Self-timer
+  /// Camera mode: Time-lapse
   ///
   /// In en, this message translates to:
-  /// **'Timer'**
-  String get cameraModeTimer;
+  /// **'Time-Lapse'**
+  String get cameraModeTimelapse;
 
   /// Camera mode: HDMI output
   ///
   /// In en, this message translates to:
   /// **'HDMI Output'**
   String get cameraModeHdmi;
+
+  /// Camera mode: Settings menu
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get cameraModeSettings;
+
+  /// Power state: Off
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get powerOff;
+
+  /// Power state: On
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get powerOn;
+
+  /// Shutter action: Stop recording
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get shutterStop;
+
+  /// Shutter action: Start recording
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get shutterStart;
+
+  /// Preview state: Off
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get previewOff;
+
+  /// Preview state: On
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get previewOn;
+
+  /// Locate function: Off
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get locateOff;
+
+  /// Locate function: On
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get locateOn;
 
   /// Field of view: Wide angle
   ///
