@@ -54,49 +54,46 @@ class HorizontalLayout extends StatelessWidget {
         : false;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 8.0,
         children: [
           if (cameraState != null && !cameraState!.status.shutterStatus)
-            SizedBox(
-              width: 200,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ResolutionSelector(
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ResolutionSelector(
+                    cameraState: cameraState!,
+                    password: password,
+                    onResolutionChanged: onResolutionChanged,
+                    padding: EdgeInsets.zero,
+                  ),
+                  if (showFps || showFov) const SizedBox(height: 8),
+                  if (showFps)
+                    FPSSelector(
                       cameraState: cameraState!,
                       password: password,
-                      onResolutionChanged: onResolutionChanged,
+                      onFpsChanged: onFpsChanged,
                       padding: EdgeInsets.zero,
+                      isExpanded: true,
                     ),
-                    if (showFps || showFov) const SizedBox(height: 8),
-                    if (showFps)
-                      FPSSelector(
-                        cameraState: cameraState!,
-                        password: password,
-                        onFpsChanged: onFpsChanged,
-                        padding: EdgeInsets.zero,
-                        isExpanded: true,
-                      ),
-                    if (showFps && showFov) const SizedBox(height: 8),
-                    if (showFov)
-                      FOVSelector(
-                        cameraState: cameraState!,
-                        password: password,
-                        onFovChanged: onFovChanged,
-                        padding: EdgeInsets.zero,
-                        isExpanded: true,
-                      ),
-                    const SizedBox(height: 8),
-                    FixStreamButton(camPassword: password),
-                  ],
-                ),
+                  if (showFps && showFov) const SizedBox(height: 8),
+                  if (showFov)
+                    FOVSelector(
+                      cameraState: cameraState!,
+                      password: password,
+                      onFovChanged: onFovChanged,
+                      padding: EdgeInsets.zero,
+                      isExpanded: true,
+                    ),
+                  const SizedBox(height: 8),
+                  FixStreamButton(camPassword: password),
+                ],
               ),
             ),
-          Flexible(child: previewArea),
+          Expanded(flex: 0, child: previewArea),
         ],
       ),
     );
