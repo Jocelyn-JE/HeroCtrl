@@ -185,55 +185,98 @@ class _RegisterControlScreenState extends State<ControlScreen> {
       previewArea = const CircularProgressIndicator();
     }
 
-    final content = Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child:
-              _cameraState?.isPreviewOn == true &&
-                  _cameraState?.isCameraOn == true &&
-                  _cameraState?.status.cameraMode != CameraMode.settings
-              ? previewArea
-              : Center(child: previewArea),
-        ),
-        if (_cameraState != null && !_cameraState!.status.shutterStatus)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    final content = orientation == Orientation.landscape
+        ? Row(
             children: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ResolutionSelector(
-                    cameraState: _cameraState!,
-                    password: _password,
-                    onResolutionChanged: _onResolutionChanged,
+                child:
+                    _cameraState?.isPreviewOn == true &&
+                        _cameraState?.isCameraOn == true &&
+                        _cameraState?.status.cameraMode != CameraMode.settings
+                    ? previewArea
+                    : Center(child: previewArea),
+              ),
+              if (_cameraState != null && !_cameraState!.status.shutterStatus)
+                SizedBox(
+                  width: 200,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ResolutionSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onResolutionChanged: _onResolutionChanged,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FPSSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onFpsChanged: _onFpsChanged,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FOVSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onFovChanged: _onFovChanged,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FPSSelector(
-                    cameraState: _cameraState!,
-                    password: _password,
-                    onFpsChanged: _onFpsChanged,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FOVSelector(
-                    cameraState: _cameraState!,
-                    password: _password,
-                    onFovChanged: _onFovChanged,
-                  ),
-                ),
-              ),
             ],
-          ),
-      ],
-    );
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _cameraState?.isPreviewOn == true &&
+                      _cameraState?.isCameraOn == true &&
+                      _cameraState?.status.cameraMode != CameraMode.settings
+                  ? previewArea
+                  : Center(child: previewArea),
+              if (_cameraState != null && !_cameraState!.status.shutterStatus)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ResolutionSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onResolutionChanged: _onResolutionChanged,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FPSSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onFpsChanged: _onFpsChanged,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FOVSelector(
+                          cameraState: _cameraState!,
+                          password: _password,
+                          onFovChanged: _onFovChanged,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+            ],
+          );
 
     return Scaffold(
       appBar: AppBar(
@@ -256,12 +299,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             ),
         ],
       ),
-      body: SafeArea(
-        left: false,
-        right: false,
-        top: false,
-        child: Center(child: content),
-      ),
+      body: SafeArea(top: false, child: Center(child: content)),
       floatingActionButtonLocation: orientation == Orientation.landscape
           ? FloatingActionButtonLocation.miniEndFloat
           : FloatingActionButtonLocation.centerFloat,

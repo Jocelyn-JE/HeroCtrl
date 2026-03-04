@@ -79,20 +79,22 @@ class _LiveViewState extends State<LiveView> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        AspectRatio(
-          aspectRatio: aspectRatio,
-          child: Stack(
-            children: [
-              Video(controller: _controller, fit: BoxFit.contain),
-              if (widget.isRecording)
-                IgnorePointer(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red, width: 3.0),
+        Flexible(
+          child: AspectRatio(
+            aspectRatio: aspectRatio,
+            child: Stack(
+              children: [
+                Video(controller: _controller, fit: BoxFit.contain),
+                if (widget.isRecording)
+                  IgnorePointer(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.red, width: 3.0),
+                      ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
         ElevatedButton(
