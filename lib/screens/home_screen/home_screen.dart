@@ -61,10 +61,12 @@ class _RegisterHomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: CameraListView(
-        camerasFuture: registeredGopros,
-        onCameraTap: _handleCameraTap,
-        onCameraLongPress: _handleCameraLongPress,
+      body: SafeArea(
+        child: CameraListView(
+          camerasFuture: registeredGopros,
+          onCameraTap: _handleCameraTap,
+          onCameraLongPress: _handleCameraLongPress,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToAddCamera,
