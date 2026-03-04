@@ -126,7 +126,7 @@ class VideoResolution {
 
   static final Map<VideoResolution, List<FPS>> supportedFPS = {
     wvga240fps: [FPS.fps240],
-    res720p: [FPS.fps50, FPS.fps60, FPS.fps120],
+    res720p: [FPS.fps50, FPS.fps60, FPS.fps100, FPS.fps120],
     res960p: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
     res1080p: [
       FPS.fps24,

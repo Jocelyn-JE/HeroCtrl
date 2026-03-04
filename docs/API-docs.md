@@ -135,10 +135,12 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
     Changes the current video resolution
 
+    \* 720p120 and 720p100 only support Wide and Narrow FOV
+
     | VV | VR       | Resolution      | Available FPS (NTSC)   | Available FOV          |
     |----|----------|-----------------|------------------------|------------------------|
     | 00 | N/A      | WVGA 240fps     | 240                    | Wide                   |
-    | 01 | N/A      | 720p            | 120, 60, 50            | Wide, Medium, Narrow   |
+    | 01 | N/A      | 720p            | 120, 100, 60, 50       | Wide, Medium*, Narrow  |
     | 02 | 06/07/0b | 960p            | 100, 60, 50, 48        | Wide                   |
     | 03 | N/A      | 1080p           | 60, 50, 48, 30, 25, 24 | Wide, Medium, Narrow   |
     | 04 | N/A      | 1440p           | 48, 30, 25, 24         | Wide                   |
