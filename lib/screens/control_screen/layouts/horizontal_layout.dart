@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
@@ -26,47 +27,78 @@ class HorizontalLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(child: previewArea),
-        if (cameraState != null && !cameraState!.status.shutterStatus)
-          SizedBox(
-            width: 200,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ResolutionSelector(
-                    cameraState: cameraState!,
-                    password: password,
-                    onResolutionChanged: onResolutionChanged,
-                  ),
+    final currentState = cameraState;
+
+    final showFps = currentState != null
+        ? (() {
+            final currentResolution = currentState.status.videoResolution;
+            final currentVideoStandard = currentState.status.videoStandard;
+            final fpsForResolution =
+                VideoResolution.supportedFPS[currentResolution] ?? [];
+            final fpsForVideoStandard =
+                VideoStandard.videoStandardFrameRates[currentVideoStandard] ??
+                [];
+            final validFpsOptions = fpsForResolution
+                .where((fps) => fpsForVideoStandard.contains(fps))
+                .toList();
+            return validFpsOptions.length > 1;
+          })()
+        : false;
+
+    final showFov = currentState != null
+        ? VideoResolution.getSupportedFOV(
+                currentState.status.videoResolution,
+                currentState.status.fps,
+              ).length >
+              1
+        : false;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (cameraState != null && !cameraState!.status.shutterStatus)
+            SizedBox(
+              width: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ResolutionSelector(
+                      cameraState: cameraState!,
+                      password: password,
+                      onResolutionChanged: onResolutionChanged,
+                      padding: EdgeInsets.zero,
+                    ),
+                    if (showFps || showFov) const SizedBox(height: 8),
+                    if (showFps)
+                      FPSSelector(
+                        cameraState: cameraState!,
+                        password: password,
+                        onFpsChanged: onFpsChanged,
+                        padding: EdgeInsets.zero,
+                        isExpanded: true,
+                      ),
+                    if (showFps && showFov) const SizedBox(height: 8),
+                    if (showFov)
+                      FOVSelector(
+                        cameraState: cameraState!,
+                        password: password,
+                        onFovChanged: onFovChanged,
+                        padding: EdgeInsets.zero,
+                        isExpanded: true,
+                      ),
+                    const SizedBox(height: 8),
+                    FixStreamButton(camPassword: password),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FPSSelector(
-                    cameraState: cameraState!,
-                    password: password,
-                    onFpsChanged: onFpsChanged,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FOVSelector(
-                    cameraState: cameraState!,
-                    password: password,
-                    onFovChanged: onFovChanged,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FixStreamButton(camPassword: password),
-                ),
-              ],
+              ),
             ),
-          ),
-      ],
+          Flexible(child: previewArea),
+        ],
+      ),
     );
   }
 }

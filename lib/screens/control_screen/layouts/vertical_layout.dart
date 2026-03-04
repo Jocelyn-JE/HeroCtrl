@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
@@ -26,6 +27,32 @@ class VerticalLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentState = cameraState;
+
+    final showFps = currentState != null
+        ? (() {
+            final currentResolution = currentState.status.videoResolution;
+            final currentVideoStandard = currentState.status.videoStandard;
+            final fpsForResolution =
+                VideoResolution.supportedFPS[currentResolution] ?? [];
+            final fpsForVideoStandard =
+                VideoStandard.videoStandardFrameRates[currentVideoStandard] ??
+                [];
+            final validFpsOptions = fpsForResolution
+                .where((fps) => fpsForVideoStandard.contains(fps))
+                .toList();
+            return validFpsOptions.length > 1;
+          })()
+        : false;
+
+    final showFov = currentState != null
+        ? VideoResolution.getSupportedFOV(
+                currentState.status.videoResolution,
+                currentState.status.fps,
+              ).length >
+              1
+        : false;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -34,43 +61,40 @@ class VerticalLayout extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
                       child: ResolutionSelector(
                         cameraState: cameraState!,
                         password: password,
                         onResolutionChanged: onResolutionChanged,
+                        padding: EdgeInsets.zero,
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FPSSelector(
+                    if (showFps || showFov) const SizedBox(width: 8),
+                    if (showFps)
+                      FPSSelector(
                         cameraState: cameraState!,
                         password: password,
                         onFpsChanged: onFpsChanged,
+                        padding: EdgeInsets.zero,
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FOVSelector(
+                    if (showFps && showFov) const SizedBox(width: 8),
+                    if (showFov)
+                      FOVSelector(
                         cameraState: cameraState!,
                         password: password,
                         onFovChanged: onFovChanged,
+                        padding: EdgeInsets.zero,
                       ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: FixStreamButton(camPassword: password),
               ),
             ],

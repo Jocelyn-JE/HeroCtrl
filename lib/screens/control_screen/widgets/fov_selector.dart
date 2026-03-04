@@ -7,12 +7,16 @@ class FOVSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
   final Future<void> Function(FOV) onFovChanged;
+  final EdgeInsetsGeometry padding;
+  final bool isExpanded;
 
   const FOVSelector({
     super.key,
     required this.cameraState,
     required this.password,
     required this.onFovChanged,
+    this.padding = const EdgeInsets.all(8.0),
+    this.isExpanded = false,
   });
 
   /// Get the valid FOV options for the current resolution and FPS combination
@@ -33,27 +37,32 @@ class FOVSelector extends StatelessWidget {
         ? currentFov
         : null;
 
-    return DropdownButton<FOV>(
-      isExpanded: true,
-      value: selectedValue,
-      onChanged: (cameraState.isCameraOn && validFovOptions.isNotEmpty)
-          ? (newValue) {
-              if (newValue != null) {
-                AppLogger.info(
-                  'Changing FOV to ${newValue.getLocalizedName(context)}',
-                );
-                onFovChanged(newValue);
-              }
-            }
-          : null,
-      items: validFovOptions
-          .map(
-            (fov) => DropdownMenuItem(
-              value: fov,
-              child: Text(fov.getLocalizedName(context)),
+    return validFovOptions.length <= 1
+        ? const SizedBox.shrink()
+        : Padding(
+            padding: padding,
+            child: DropdownButton<FOV>(
+              isExpanded: isExpanded,
+              value: selectedValue,
+              onChanged: (cameraState.isCameraOn && validFovOptions.isNotEmpty)
+                  ? (newValue) {
+                      if (newValue != null) {
+                        AppLogger.info(
+                          'Changing FOV to ${newValue.getLocalizedName(context)}',
+                        );
+                        onFovChanged(newValue);
+                      }
+                    }
+                  : null,
+              items: validFovOptions
+                  .map(
+                    (fov) => DropdownMenuItem(
+                      value: fov,
+                      child: Text(fov.getLocalizedName(context)),
+                    ),
+                  )
+                  .toList(),
             ),
-          )
-          .toList(),
-    );
+          );
   }
 }

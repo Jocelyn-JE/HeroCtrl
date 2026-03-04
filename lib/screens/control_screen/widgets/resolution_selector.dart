@@ -7,12 +7,14 @@ class ResolutionSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
   final Future<void> Function(VideoResolution) onResolutionChanged;
+  final EdgeInsetsGeometry padding;
 
   const ResolutionSelector({
     super.key,
     required this.cameraState,
     required this.password,
     required this.onResolutionChanged,
+    this.padding = const EdgeInsets.all(8.0),
   });
 
   @override
@@ -26,40 +28,43 @@ class ResolutionSelector extends StatelessWidget {
         ? currentResolution
         : null;
 
-    return DropdownButton<VideoResolution>(
-      isExpanded: true,
-      value: selectedValue,
-      onChanged: (cameraState.isCameraOn)
-          ? (newValue) {
-              if (newValue != null) {
-                AppLogger.info(
-                  'Changing video resolution to ${newValue.getLocalizedName(context)}',
-                );
-                onResolutionChanged(newValue);
+    return Padding(
+      padding: padding,
+      child: DropdownButton<VideoResolution>(
+        isExpanded: true,
+        value: selectedValue,
+        onChanged: (cameraState.isCameraOn)
+            ? (newValue) {
+                if (newValue != null) {
+                  AppLogger.info(
+                    'Changing video resolution to ${newValue.getLocalizedName(context)}',
+                  );
+                  onResolutionChanged(newValue);
+                }
               }
-            }
-          : null,
-      items: VideoResolution.all
-          .map(
-            (resolution) => DropdownMenuItem(
-              value: resolution,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  resolution.icon,
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: Text(
-                      resolution.getLocalizedName(context),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+            : null,
+        items: VideoResolution.all
+            .map(
+              (resolution) => DropdownMenuItem(
+                value: resolution,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    resolution.icon,
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: Text(
+                        resolution.getLocalizedName(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          )
-          .toList(),
+            )
+            .toList(),
+      ),
     );
   }
 }

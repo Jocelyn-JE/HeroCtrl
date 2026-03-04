@@ -8,12 +8,16 @@ class FPSSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
   final Future<void> Function(FPS) onFpsChanged;
+  final EdgeInsetsGeometry padding;
+  final bool isExpanded;
 
   const FPSSelector({
     super.key,
     required this.cameraState,
     required this.password,
     required this.onFpsChanged,
+    this.padding = const EdgeInsets.all(8.0),
+    this.isExpanded = false,
   });
 
   /// Get the valid FPS options for the current resolution and video mode.
@@ -48,27 +52,32 @@ class FPSSelector extends StatelessWidget {
         ? currentFps
         : null;
 
-    return DropdownButton<FPS>(
-      isExpanded: true,
-      value: selectedValue,
-      onChanged: (cameraState.isCameraOn && validFpsOptions.isNotEmpty)
-          ? (newValue) {
-              if (newValue != null) {
-                AppLogger.info(
-                  'Changing FPS to ${newValue.getLocalizedName(context)}',
-                );
-                onFpsChanged(newValue);
-              }
-            }
-          : null,
-      items: validFpsOptions
-          .map(
-            (fps) => DropdownMenuItem(
-              value: fps,
-              child: Text(fps.getLocalizedName(context)),
+    return validFpsOptions.length <= 1
+        ? const SizedBox.shrink()
+        : Padding(
+            padding: padding,
+            child: DropdownButton<FPS>(
+              isExpanded: isExpanded,
+              value: selectedValue,
+              onChanged: (cameraState.isCameraOn && validFpsOptions.isNotEmpty)
+                  ? (newValue) {
+                      if (newValue != null) {
+                        AppLogger.info(
+                          'Changing FPS to ${newValue.getLocalizedName(context)}',
+                        );
+                        onFpsChanged(newValue);
+                      }
+                    }
+                  : null,
+              items: validFpsOptions
+                  .map(
+                    (fps) => DropdownMenuItem(
+                      value: fps,
+                      child: Text(fps.getLocalizedName(context)),
+                    ),
+                  )
+                  .toList(),
             ),
-          )
-          .toList(),
-    );
+          );
   }
 }

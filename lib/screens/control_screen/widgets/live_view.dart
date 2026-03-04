@@ -75,22 +75,20 @@ class _LiveViewState extends State<LiveView> {
   Widget build(BuildContext context) {
     final aspectRatio = widget.currentResolution?.aspectRatio ?? 16 / 9;
 
-    return Flexible(
-      child: AspectRatio(
-        aspectRatio: aspectRatio,
-        child: Stack(
-          children: [
-            Video(controller: _controller, fit: BoxFit.contain),
-            if (widget.isRecording)
-              IgnorePointer(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.red, width: 3.0),
-                  ),
+    return AspectRatio(
+      aspectRatio: aspectRatio,
+      child: Stack(
+        children: [
+          Video(controller: _controller, fit: BoxFit.contain),
+          if (widget.isRecording)
+            IgnorePointer(
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.red, width: 3.0),
                 ),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
