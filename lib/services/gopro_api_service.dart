@@ -74,6 +74,31 @@ class GoProApiService {
     );
   }
 
+  static Future<void> setCameraMode(
+    String password,
+    CameraMode modeOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.cameraMode,
+      password,
+      modeOption.value,
+    );
+  }
+
+  static Future<CameraMode> getCameraMode(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.cameraMode,
+      password,
+    );
+    final value = response.bodyBytes[1];
+    return CameraMode.all.firstWhere(
+      (mode) => mode.value == value,
+      orElse: () => CameraMode.videoMode,
+    );
+  }
+
   static Future<bool> isVideoPreviewOn(String password) async {
     final response = await _getApi(
       _bacpac,

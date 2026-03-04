@@ -5,7 +5,6 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fov_selector.dart';
-import 'package:heroctrl/screens/control_screen/widgets/fix_stream_button.dart';
 
 class HorizontalLayout extends StatelessWidget {
   final Widget previewArea;
@@ -88,8 +87,6 @@ class HorizontalLayout extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       isExpanded: true,
                     ),
-                  const SizedBox(height: 8),
-                  FixStreamButton(camPassword: password),
                 ],
               ),
             ),

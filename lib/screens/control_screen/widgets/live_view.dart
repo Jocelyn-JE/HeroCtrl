@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/screens/control_screen/widgets/live_view_controls.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:media_kit/media_kit.dart';
@@ -34,29 +36,32 @@ class _LiveViewState extends State<LiveView> {
   Duration _duration = Duration.zero;
   bool _resettingStream = false;
 
-  // Custom minimal controls that only show buffering indicator when buffering
-  Widget _buildMinimalControls(VideoState state) {
-    return StreamBuilder<bool>(
-      stream: state.widget.controller.player.stream.buffering,
-      builder: (context, snapshot) {
-        final isBuffering = snapshot.data ?? false;
-        if (!isBuffering) {
-          return const SizedBox.shrink();
-        }
-        return Center(
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.black45,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            ),
-          ),
-        );
-      },
-    );
+  Future<void> _fixStream() async {
+    try {
+      final currentMode = await GoProApiService.getCameraMode(
+        widget.camPassword,
+      );
+
+      AppLogger.info(
+        'Fixing stream by toggling camera mode: ${currentMode.value} -> ${CameraMode.settings.value} -> ${currentMode.value}',
+      );
+
+      await GoProApiService.setCameraMode(
+        widget.camPassword,
+        CameraMode.settings,
+      );
+      await Future.delayed(const Duration(seconds: 3));
+      await GoProApiService.setCameraMode(widget.camPassword, currentMode);
+      await Future.delayed(const Duration(seconds: 3));
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Error toggling camera mode while fixing stream',
+        e,
+        stackTrace,
+      );
+    }
+
+    await _openStream();
   }
 
   Future<void> _openStream() async {
@@ -111,7 +116,11 @@ class _LiveViewState extends State<LiveView> {
             Video(
               controller: _controller,
               fit: BoxFit.contain,
-              controls: _buildMinimalControls,
+              controls: (state) => LiveViewControls(
+                player: state.widget.controller.player,
+                camPassword: widget.camPassword,
+                onFixStreamPressed: _fixStream,
+              ),
               pauseUponEnteringBackgroundMode: false,
             ),
             if (widget.isRecording)
