@@ -11,6 +11,7 @@ class BatteryMonitor {
   final Duration pollInterval;
 
   final ValueNotifier<int> batteryPercent;
+  final ValueNotifier<int> trueReading = ValueNotifier(0);
   final ValueNotifier<int?> estimatedMinutesRemaining = ValueNotifier(null);
 
   // EMA smoothing factor: each new confirmed-drop sample contributes 25% to
@@ -41,6 +42,7 @@ class BatteryMonitor {
     try {
       final now = DateTime.now();
       final newPercent = await GoProApiService.getBatteryLevel(camPassword);
+      trueReading.value = newPercent;
 
       if (newPercent < batteryPercent.value) {
         if (_pendingPercent != null) {

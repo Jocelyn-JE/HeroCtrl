@@ -75,13 +75,16 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
   void _checkLowBatteryAndDisconnect() {
     final batteryPercent = _batteryMonitor?.batteryPercent.value;
+    final trueReading = _batteryMonitor?.trueReading.value;
+
     if (!mounted ||
         _isAutoDisconnectingForLowBattery ||
-        batteryPercent == null) {
+        batteryPercent == null ||
+        trueReading == null) {
       return;
     }
 
-    if (batteryPercent <= 1) {
+    if (batteryPercent <= 1 || trueReading <= 1) {
       _isAutoDisconnectingForLowBattery = true;
       final localizations = AppLocalizations.of(context)!;
       showSnackBarWarning(context, localizations.batteryCriticallyLow);
