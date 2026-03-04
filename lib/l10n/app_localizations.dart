@@ -504,7 +504,7 @@ abstract class AppLocalizations {
   /// Video resolution: WVGA at 240 frames per second
   ///
   /// In en, this message translates to:
-  /// **'WVGA 240  fps'**
+  /// **'WVGA 240 fps'**
   String get resolutionWvga240fps;
 
   /// Video resolution: 720p

@@ -327,7 +327,7 @@
     "@disconnectConfirmButton": {
         "description": "Confirm button label in the turn off camera dialog"
     },
-    "resolutionWvga240fps": "WVGA 240  fps",
+    "resolutionWvga240fps": "WVGA 240 fps",
     "@resolutionWvga240fps": {
         "description": "Video resolution: WVGA at 240 frames per second"
     },

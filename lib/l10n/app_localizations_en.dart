@@ -235,7 +235,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get disconnectConfirmButton => 'Turn Off';
 
   @override
-  String get resolutionWvga240fps => 'WVGA 240  fps';
+  String get resolutionWvga240fps => 'WVGA 240 fps';
 
   @override
   String get resolution720p => '720p';
