@@ -151,6 +151,30 @@ class VideoResolution {
     ],
     res720pSuperView: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
   };
+
+  static final Map<VideoResolution, List<FOV>> supportedFOV = {
+    wvga240fps: [FOV.wide],
+    res720p: [FOV.wide, FOV.medium, FOV.narrow],
+    // Note: 720p at 100fps and 120fps only support Wide and Narrow (no Medium)
+    res960p: [FOV.wide],
+    res1080p: [FOV.wide, FOV.medium, FOV.narrow],
+    res1440p: [FOV.wide],
+    res2_7k: [FOV.wide, FOV.medium],
+    res4k: [FOV.wide],
+    res2_7k_17_9: [FOV.wide, FOV.medium],
+    res4k_17_9: [FOV.wide],
+    res1080pSuperView: [FOV.wide],
+    res720pSuperView: [FOV.wide],
+  };
+
+  /// Returns supported FOV for a given resolution and FPS combination
+  /// Special case: 720p at 100/120fps only supports Wide and Narrow
+  static List<FOV> getSupportedFOV(VideoResolution resolution, FPS fps) {
+    if (resolution == res720p && (fps == FPS.fps100 || fps == FPS.fps120)) {
+      return [FOV.wide, FOV.narrow];
+    }
+    return supportedFOV[resolution] ?? [FOV.wide];
+  }
 }
 
 class FOV {

@@ -10,6 +10,7 @@ import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
 import 'package:heroctrl/screens/control_screen/widgets/record_button.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
+import 'package:heroctrl/screens/control_screen/widgets/fov_selector.dart';
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
@@ -115,6 +116,19 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     }
   }
 
+  Future<void> _onFovChanged(FOV newFov) async {
+    try {
+      await GoProApiService.setFOV(_password, newFov);
+      // Refresh camera status to get the updated FOV
+      await _updateCameraStatus();
+    } catch (e, stackTrace) {
+      AppLogger.error('Error changing FOV', e, stackTrace);
+      if (mounted) {
+        showSnackBarError(context, 'Error changing FOV: $e');
+      }
+    }
+  }
+
   Future<void> _checkPreviewStatus() async {
     try {
       AppLogger.info('Camera is on, waiting for preview to be enabled...');
@@ -203,6 +217,16 @@ class _RegisterControlScreenState extends State<ControlScreen> {
                     cameraState: _cameraState!,
                     password: _password,
                     onFpsChanged: _onFpsChanged,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FOVSelector(
+                    cameraState: _cameraState!,
+                    password: _password,
+                    onFovChanged: _onFovChanged,
                   ),
                 ),
               ),

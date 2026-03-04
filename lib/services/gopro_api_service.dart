@@ -390,6 +390,21 @@ class GoProApiService {
     await _postApi(_camera, GoProEndpoints.fps, password, fpsOption.value);
   }
 
+  static Future<FOV> getFOV(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.fov, password);
+    final value = response.bodyBytes[1];
+    try {
+      return FOV.all.firstWhere((fov) => fov.value == value);
+    } catch (e) {
+      AppLogger.error('Error parsing FOV', e);
+      return FOV.wide;
+    }
+  }
+
+  static Future<void> setFOV(String password, FOV fovOption) async {
+    await _postApi(_camera, GoProEndpoints.fov, password, fovOption.value);
+  }
+
   static Future<http.Response> _getApi(
     String device,
     String command,
