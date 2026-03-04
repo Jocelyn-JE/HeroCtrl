@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
-import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:media_kit/media_kit.dart';
@@ -76,34 +75,23 @@ class _LiveViewState extends State<LiveView> {
   Widget build(BuildContext context) {
     final aspectRatio = widget.currentResolution?.aspectRatio ?? 16 / 9;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Flexible(
-          child: AspectRatio(
-            aspectRatio: aspectRatio,
-            child: Stack(
-              children: [
-                Video(controller: _controller, fit: BoxFit.contain),
-                if (widget.isRecording)
-                  IgnorePointer(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.red, width: 3.0),
-                      ),
-                    ),
+    return Flexible(
+      child: AspectRatio(
+        aspectRatio: aspectRatio,
+        child: Stack(
+          children: [
+            Video(controller: _controller, fit: BoxFit.contain),
+            if (widget.isRecording)
+              IgnorePointer(
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.red, width: 3.0),
                   ),
-              ],
-            ),
-          ),
+                ),
+              ),
+          ],
         ),
-        ElevatedButton(
-          onPressed: () async {
-            _openStream();
-          },
-          child: Text(AppLocalizations.of(context)!.fixStream),
-        ),
-      ],
+      ),
     );
   }
 
