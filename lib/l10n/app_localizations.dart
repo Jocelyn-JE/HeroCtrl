@@ -645,24 +645,6 @@ abstract class AppLocalizations {
   /// **'On'**
   String get locateOn;
 
-  /// Field of view: Wide angle
-  ///
-  /// In en, this message translates to:
-  /// **'Wide'**
-  String get fovWide;
-
-  /// Field of view: Medium angle
-  ///
-  /// In en, this message translates to:
-  /// **'Medium'**
-  String get fovMedium;
-
-  /// Field of view: Narrow/telephoto
-  ///
-  /// In en, this message translates to:
-  /// **'Narrow'**
-  String get fovNarrow;
-
   /// Interval: Every 5 seconds
   ///
   /// In en, this message translates to:

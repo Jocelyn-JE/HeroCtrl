@@ -307,15 +307,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locateOn => 'On';
 
   @override
-  String get fovWide => 'Wide';
-
-  @override
-  String get fovMedium => 'Medium';
-
-  @override
-  String get fovNarrow => 'Narrow';
-
-  @override
   String get videoAndPhotoEvery5s => 'Every 5 seconds';
 
   @override

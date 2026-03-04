@@ -176,21 +176,11 @@ class FOV {
   int get hashCode => _value.hashCode;
 
   String getLocalizedName(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final factorStr = factor == factor.toInt()
         ? '${factor.toInt()}x'
         : '${factor.toStringAsFixed(2)}x';
 
-    switch (_value) {
-      case 0x00:
-        return '${l10n.fovWide} ($factorStr)';
-      case 0x01:
-        return '${l10n.fovMedium} ($factorStr)';
-      case 0x02:
-        return '${l10n.fovNarrow} ($factorStr)';
-      default:
-        return toHex(_value);
-    }
+    return factorStr;
   }
 }
 

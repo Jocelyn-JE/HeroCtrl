@@ -423,18 +423,6 @@
     "@locateOn": {
         "description": "Locate function: On"
     },
-    "fovWide": "Wide",
-    "@fovWide": {
-        "description": "Field of view: Wide angle"
-    },
-    "fovMedium": "Medium",
-    "@fovMedium": {
-        "description": "Field of view: Medium angle"
-    },
-    "fovNarrow": "Narrow",
-    "@fovNarrow": {
-        "description": "Field of view: Narrow/telephoto"
-    },
     "videoAndPhotoEvery5s": "Every 5 seconds",
     "@videoAndPhotoEvery5s": {
         "description": "Interval: Every 5 seconds"
