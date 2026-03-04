@@ -12,12 +12,14 @@ class LiveView extends StatefulWidget {
   final String camPassword;
   final bool isRecording;
   final VideoResolution? currentResolution;
+  final BorderRadius previewBorderRadius;
 
   const LiveView({
     super.key,
     required this.camPassword,
     this.isRecording = false,
     this.currentResolution,
+    this.previewBorderRadius = const BorderRadius.all(Radius.circular(0)),
   });
 
   @override
@@ -77,18 +79,22 @@ class _LiveViewState extends State<LiveView> {
 
     return AspectRatio(
       aspectRatio: aspectRatio,
-      child: Stack(
-        children: [
-          Video(controller: _controller, fit: BoxFit.contain),
-          if (widget.isRecording)
-            IgnorePointer(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.red, width: 3.0),
+      child: ClipRRect(
+        borderRadius: widget.previewBorderRadius,
+        child: Stack(
+          children: [
+            Video(controller: _controller, fit: BoxFit.contain),
+            if (widget.isRecording)
+              IgnorePointer(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: widget.previewBorderRadius,
+                    border: Border.all(color: Colors.red, width: 3.0),
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

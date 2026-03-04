@@ -178,6 +178,9 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         camPassword: _password,
         isRecording: _cameraState!.status.shutterStatus,
         currentResolution: _cameraState!.status.videoResolution,
+        previewBorderRadius: orientation == Orientation.landscape
+            ? const BorderRadius.all(Radius.circular(12))
+            : const BorderRadius.all(Radius.circular(0)),
       );
     } else if (_cameraState?.status.cameraMode == CameraMode.settings) {
       previewArea = Text(
