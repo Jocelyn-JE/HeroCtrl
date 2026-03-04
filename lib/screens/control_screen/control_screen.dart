@@ -196,7 +196,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
               ? previewArea
               : Center(child: previewArea),
         ),
-        if (_cameraState != null)
+        if (_cameraState != null && !_cameraState!.status.shutterStatus)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
