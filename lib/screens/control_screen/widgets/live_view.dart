@@ -34,6 +34,31 @@ class _LiveViewState extends State<LiveView> {
   Duration _duration = Duration.zero;
   bool _resettingStream = false;
 
+  // Custom minimal controls that only show buffering indicator when buffering
+  Widget _buildMinimalControls(VideoState state) {
+    return StreamBuilder<bool>(
+      stream: state.widget.controller.player.stream.buffering,
+      builder: (context, snapshot) {
+        final isBuffering = snapshot.data ?? false;
+        if (!isBuffering) {
+          return const SizedBox.shrink();
+        }
+        return Center(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.black45,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _openStream() async {
     AppLogger.info('Opening live stream');
     try {
@@ -83,7 +108,12 @@ class _LiveViewState extends State<LiveView> {
         borderRadius: widget.previewBorderRadius,
         child: Stack(
           children: [
-            Video(controller: _controller, fit: BoxFit.contain, controls: null),
+            Video(
+              controller: _controller,
+              fit: BoxFit.contain,
+              controls: _buildMinimalControls,
+              pauseUponEnteringBackgroundMode: false,
+            ),
             if (widget.isRecording)
               IgnorePointer(
                 child: Container(
