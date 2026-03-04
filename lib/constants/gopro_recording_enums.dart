@@ -155,13 +155,16 @@ class VideoResolution {
 
 class FOV {
   final int _value;
-  const FOV._(this._value);
+  final double _factor;
+
+  const FOV._(this._value, this._factor);
 
   int get value => _value;
+  double get factor => _factor;
 
-  static const FOV wide = FOV._(0x00);
-  static const FOV medium = FOV._(0x01);
-  static const FOV narrow = FOV._(0x02);
+  static const FOV wide = FOV._(0x00, 1.0);
+  static const FOV medium = FOV._(0x01, 1.42);
+  static const FOV narrow = FOV._(0x02, 2.0);
 
   static const List<FOV> all = [wide, medium, narrow];
 
@@ -174,13 +177,17 @@ class FOV {
 
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final factorStr = factor == factor.toInt()
+        ? '${factor.toInt()}x'
+        : '${factor.toStringAsFixed(2)}x';
+
     switch (_value) {
       case 0x00:
-        return l10n.fovWide;
+        return '${l10n.fovWide} ($factorStr)';
       case 0x01:
-        return l10n.fovMedium;
+        return '${l10n.fovMedium} ($factorStr)';
       case 0x02:
-        return l10n.fovNarrow;
+        return '${l10n.fovNarrow} ($factorStr)';
       default:
         return toHex(_value);
     }
