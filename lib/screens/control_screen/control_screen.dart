@@ -8,10 +8,8 @@ import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
 import 'package:heroctrl/screens/control_screen/widgets/record_button.dart';
-import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
-import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
-import 'package:heroctrl/screens/control_screen/widgets/fov_selector.dart';
-import 'package:heroctrl/screens/control_screen/widgets/fix_stream_button.dart';
+import 'package:heroctrl/screens/control_screen/widgets/horizontal_layout.dart';
+import 'package:heroctrl/screens/control_screen/widgets/vertical_layout.dart';
 import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
@@ -187,109 +185,31 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     }
 
     final content = orientation == Orientation.landscape
-        ? Row(
-            children: [
-              Expanded(
-                child:
-                    _cameraState?.isPreviewOn == true &&
-                        _cameraState?.isCameraOn == true &&
-                        _cameraState?.status.cameraMode != CameraMode.settings
-                    ? previewArea
-                    : Center(child: previewArea),
-              ),
-              if (_cameraState != null && !_cameraState!.status.shutterStatus)
-                SizedBox(
-                  width: 200,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ResolutionSelector(
-                          cameraState: _cameraState!,
-                          password: _password,
-                          onResolutionChanged: _onResolutionChanged,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: FPSSelector(
-                          cameraState: _cameraState!,
-                          password: _password,
-                          onFpsChanged: _onFpsChanged,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: FOVSelector(
-                          cameraState: _cameraState!,
-                          password: _password,
-                          onFovChanged: _onFovChanged,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: FixStreamButton(camPassword: _password),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
+        ? HorizontalLayout(
+            previewArea:
+                _cameraState?.isPreviewOn == true &&
+                    _cameraState?.isCameraOn == true &&
+                    _cameraState?.status.cameraMode != CameraMode.settings
+                ? previewArea
+                : Center(child: previewArea),
+            cameraState: _cameraState,
+            password: _password,
+            onResolutionChanged: _onResolutionChanged,
+            onFpsChanged: _onFpsChanged,
+            onFovChanged: _onFovChanged,
           )
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _cameraState?.isPreviewOn == true &&
-                      _cameraState?.isCameraOn == true &&
-                      _cameraState?.status.cameraMode != CameraMode.settings
-                  ? previewArea
-                  : Center(child: previewArea),
-              if (_cameraState != null && !_cameraState!.status.shutterStatus)
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ResolutionSelector(
-                              cameraState: _cameraState!,
-                              password: _password,
-                              onResolutionChanged: _onResolutionChanged,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: FPSSelector(
-                              cameraState: _cameraState!,
-                              password: _password,
-                              onFpsChanged: _onFpsChanged,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: FOVSelector(
-                              cameraState: _cameraState!,
-                              password: _password,
-                              onFovChanged: _onFovChanged,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FixStreamButton(camPassword: _password),
-                    ),
-                  ],
-                ),
-            ],
+        : VerticalLayout(
+            previewArea:
+                _cameraState?.isPreviewOn == true &&
+                    _cameraState?.isCameraOn == true &&
+                    _cameraState?.status.cameraMode != CameraMode.settings
+                ? previewArea
+                : Center(child: previewArea),
+            cameraState: _cameraState,
+            password: _password,
+            onResolutionChanged: _onResolutionChanged,
+            onFpsChanged: _onFpsChanged,
+            onFovChanged: _onFovChanged,
           );
 
     return Scaffold(
