@@ -83,7 +83,7 @@ class _LiveViewState extends State<LiveView> {
         borderRadius: widget.previewBorderRadius,
         child: Stack(
           children: [
-            Video(controller: _controller, fit: BoxFit.contain),
+            Video(controller: _controller, fit: BoxFit.contain, controls: null),
             if (widget.isRecording)
               IgnorePointer(
                 child: Container(
