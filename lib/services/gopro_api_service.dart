@@ -5,6 +5,7 @@ import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
 import 'package:heroctrl/models/camera_version.dart';
 import 'package:heroctrl/models/camera_wifi_info.dart';
+import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/models/camera_status.dart';
@@ -97,8 +98,9 @@ class GoProApiService {
     final startTime = DateTime.now();
     while (true) {
       try {
+        if (GoProConnectionService.isDisconnecting) continue;
         final isOn = await cameraPowerStatus(password);
-        if (isOn) {
+        if (isOn && !GoProConnectionService.isDisconnecting) {
           AppLogger.info('Camera is now powered on');
           await Future.delayed(const Duration(seconds: 2));
           return;

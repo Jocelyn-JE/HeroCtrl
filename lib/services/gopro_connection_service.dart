@@ -9,6 +9,7 @@ class GoProConnectionService {
   GoProConnectionService._();
 
   static GoProRegistration? currentConnection;
+  static bool isDisconnecting = false;
 
   /// Connect to an unregistered GoPro camera
   static Future<bool> connectToUnregisteredGoPro(
@@ -16,6 +17,10 @@ class GoProConnectionService {
     String bssid,
     String password,
   ) async {
+    // Wait for isDisconnecting to be false in case we're in the middle of disconnecting from another camera
+    while (isDisconnecting) {
+      await Future.delayed(const Duration(seconds: 1));
+    }
     final bool connected = await WiFiForIoTPlugin.connect(
       ssid,
       bssid: bssid,
@@ -43,10 +48,12 @@ class GoProConnectionService {
 
   /// Disconnect from the current WiFi network
   static Future<void> disconnect({bool instant = false}) async {
+    isDisconnecting = true;
     if (!instant) await Future.delayed(const Duration(seconds: 3));
     currentConnection = null;
     WiFiForIoTPlugin.forceWifiUsage(false);
     WiFiForIoTPlugin.disconnect();
+    isDisconnecting = false;
   }
 
   /// Connect to a GoPro camera, retrieve its information, and register it

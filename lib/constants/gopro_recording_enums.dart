@@ -5,57 +5,70 @@ import 'package:heroctrl/l10n/app_localizations.dart';
 class VideoResolution {
   final int _value;
   final Icon _icon;
+  final double _aspectRatio;
 
-  const VideoResolution._(this._value, this._icon);
+  const VideoResolution._(this._value, this._icon, this._aspectRatio);
 
   int get value => _value;
   Icon get icon => _icon;
+  double get aspectRatio => _aspectRatio;
 
   // Define all valid instances
   // TODO: Find better icons for each resolution
   static const VideoResolution wvga240fps = VideoResolution._(
     0x00,
     Icon(Icons.hd_outlined),
+    16 / 9,
   );
   static const VideoResolution res720p = VideoResolution._(
     0x01,
     Icon(Icons.hd),
+    16 / 9,
   );
   static const VideoResolution res960p = VideoResolution._(
     0x02,
     Icon(Icons.hd_outlined),
+    4 / 3,
   );
   static const VideoResolution res1080p = VideoResolution._(
     0x03,
     Icon(Icons.high_quality),
+    16 / 9,
   );
   static const VideoResolution res1440p = VideoResolution._(
     0x04,
     Icon(Icons.two_k_outlined),
+    4 / 3,
   );
   static const VideoResolution res2_7k = VideoResolution._(
     0x05,
     Icon(Icons.two_k_plus),
+    16 / 9,
   );
   static const VideoResolution res4k = VideoResolution._(
     0x06,
     Icon(Icons.four_k),
+    16 / 9,
   );
   static const VideoResolution res2_7k_17_9 = VideoResolution._(
     0x07,
     Icon(Icons.two_k_plus_outlined),
+    16 / 9,
   );
   static const VideoResolution res4k_17_9 = VideoResolution._(
     0x08,
     Icon(Icons.four_k_outlined),
+    16 / 9,
   );
   static const VideoResolution res1080pSuperView = VideoResolution._(
     0x09,
     Icon(Icons.width_wide),
+    16 / 9,
   );
   static const VideoResolution res720pSuperView = VideoResolution._(
     0x0a,
     Icon(Icons.width_normal),
+    16 / 9,
   );
 
   static const List<VideoResolution> all = [

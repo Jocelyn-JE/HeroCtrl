@@ -161,6 +161,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
       previewArea = LiveView(
         camPassword: _password,
         isRecording: _cameraState!.status.shutterStatus,
+        currentResolution: _cameraState!.status.videoResolution,
       );
     } else if (_cameraState?.status.cameraMode == CameraMode.settings) {
       previewArea = Text(
@@ -264,7 +265,6 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     // Fire off async cleanup without awaiting to keep dispose synchronous
     unawaited(_cleanupAsync());
 
-    GoProConnectionService.disconnect(instant: true);
     super.dispose();
   }
 
@@ -280,5 +280,6 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         );
       }
     }
+    GoProConnectionService.disconnect(instant: true);
   }
 }

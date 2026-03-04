@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
+import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
@@ -11,11 +12,13 @@ import 'package:media_kit_video/media_kit_video.dart';
 class LiveView extends StatefulWidget {
   final String camPassword;
   final bool isRecording;
+  final VideoResolution? currentResolution;
 
   const LiveView({
     super.key,
     required this.camPassword,
     this.isRecording = false,
+    this.currentResolution,
   });
 
   @override
@@ -71,11 +74,14 @@ class _LiveViewState extends State<LiveView> {
 
   @override
   Widget build(BuildContext context) {
+    final aspectRatio = widget.currentResolution?.aspectRatio ?? 16 / 9;
+
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Expanded(
+        AspectRatio(
+          aspectRatio: aspectRatio,
           child: Stack(
-            fit: StackFit.expand,
             children: [
               Video(controller: _controller, fit: BoxFit.contain),
               if (widget.isRecording)
