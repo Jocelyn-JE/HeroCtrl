@@ -187,7 +187,10 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         AppLocalizations.of(context)!.liveViewUnavailableInSettings,
       );
     } else {
-      previewArea = const CircularProgressIndicator();
+      previewArea = Padding(
+        padding: const EdgeInsets.all(100.0),
+        child: CircularProgressIndicator(),
+      );
     }
 
     final content = orientation == Orientation.landscape
