@@ -101,9 +101,9 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
     Turns on/off the locate mode to find the camera
 
-    | OPTION | Description                                            | Notes |
-    |--------|--------------------------------------------------------|-------|
-    | 00     | Turns off location mode                                | N/A   |
+    | OPTION | Description                                            | Notes                                                                            |
+    |--------|--------------------------------------------------------|----------------------------------------------------------------------------------|
+    | 00     | Turns off location mode                                | N/A                                                                              |
     | 01     | Makes the red led flash and the camera beep to find it | Will beep regardless of volume setting but will not flash if leds are turned off |
 
 5. ### Camera mode
@@ -113,16 +113,16 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
     Changes the camera's current mode
 
-    | OPTION | Description                                  |
-    |--------|----------------------------------------------|
-    | 00     | Video mode                                   |
-    | 01     | Photo mode                                   |
-    | 02     | Burst mode                                   |
-    | 03     | Timelapse mode                               |
-    | 04     | Video mode (HERO 2 timer mode)               |
-    | 05     | Preview mode (touchscreen bacpac or HDMI)    |
+    | OPTION | Description                                                                                 |
+    |--------|---------------------------------------------------------------------------------------------|
+    | 00     | Video mode                                                                                  |
+    | 01     | Photo mode                                                                                  |
+    | 02     | Burst mode                                                                                  |
+    | 03     | Timelapse mode                                                                              |
+    | 04     | Video mode (HERO 2 timer mode)                                                              |
+    | 05     | Preview mode (touchscreen bacpac or HDMI)                                                   |
     | 06     | Video mode but forces it each time (if you do `00` multiple times nothing happens normally) |
-    | 07     | Settings                                     |
+    | 07     | Settings                                                                                    |
 
 ---
 
@@ -587,41 +587,41 @@ Exceptions:
 
     All bit position are from index 1 read from left to right
 
-    | Byte      | Description                                                 |
-    |-----------|-------------------------------------------------------------|
-    | 0         | Response code                                               |
-    | 1         | Camera mode                                                 |
-    | 3         | Default camera mode                                         |
-    | 4         | Spot meter                                                  |
-    | 5         | Timelapse interval                                          |
-    | 6         | Auto power off                                              |
-    | 7         | FOV                                                         |
-    | 8         | Photo resolution                                            |
-    | 13        | Recording progress (int) high byte                          |
-    | 14        | Recording progress (int) low byte                           |
-    | 16        | Volume                                                      |
-    | 17        | Leds status                                                 |
+    | Byte      | Description                                                                                         |
+    |-----------|-----------------------------------------------------------------------------------------------------|
+    | 0         | Response code                                                                                       |
+    | 1         | Camera mode                                                                                         |
+    | 3         | Default camera mode                                                                                 |
+    | 4         | Spot meter                                                                                          |
+    | 5         | Timelapse interval                                                                                  |
+    | 6         | Auto power off                                                                                      |
+    | 7         | FOV                                                                                                 |
+    | 8         | Photo resolution                                                                                    |
+    | 13        | Recording progress (int) high byte                                                                  |
+    | 14        | Recording progress (int) low byte                                                                   |
+    | 16        | Volume                                                                                              |
+    | 17        | Leds status                                                                                         |
     | 18        | (Bit 3) Video mode (Bit 2) Locate (Bit 5) One button mode (Bit 6) Orientation (Bit 8) Video preview |
-    | 19        | Battery level 0-3                                           |
-    | 21        | Photos remaining (int) high byte                            |
-    | 22        | Photos remaining (int) low byte                             |
-    | 23        | Number of photos taken (int) high byte                      |
-    | 24        | Number of photos taken (int) low byte                       |
-    | 25        | Recording time left in minutes (int) high byte              |
-    | 26        | Recording time left in minutes (int) low byte               |
-    | 27        | Number of videos taken (int) high byte                      |
-    | 28        | Number of videos taken (int) low byte                       |
-    | 29        | Shutter                                                     |
-    | 30        | (Bit 1) Color profile (Bit 7) Protune (Bit 2) Low light     |
-    | 32        | Burst rate                                                  |
-    | 33        | Continuous shot                                             |
-    | 34        | White balance                                               |
-    | 36        | Simultaneous video and photo interval                       |
-    | 37        | Loop video                                                  |
-    | 50        | Video resolution                                            |
-    | 51        | Framerate                                                   |
-    | 52        | (Bits 5/6) Sharpness (Bits 7/8) ISO limit                  |
-    | 53        | Exposure                                                    |
+    | 19        | Battery level 0-3                                                                                   |
+    | 21        | Photos remaining (int) high byte                                                                    |
+    | 22        | Photos remaining (int) low byte                                                                     |
+    | 23        | Number of photos taken (int) high byte                                                              |
+    | 24        | Number of photos taken (int) low byte                                                               |
+    | 25        | Recording time left in minutes (int) high byte                                                      |
+    | 26        | Recording time left in minutes (int) low byte                                                       |
+    | 27        | Number of videos taken (int) high byte                                                              |
+    | 28        | Number of videos taken (int) low byte                                                               |
+    | 29        | Shutter                                                                                             |
+    | 30        | (Bit 1) Color profile (Bit 7) Protune (Bit 2) Low light                                             |
+    | 32        | Burst rate                                                                                          |
+    | 33        | Continuous shot                                                                                     |
+    | 34        | White balance                                                                                       |
+    | 36        | Simultaneous video and photo interval                                                               |
+    | 37        | Loop video                                                                                          |
+    | 50        | Video resolution                                                                                    |
+    | 51        | Framerate                                                                                           |
+    | 52        | (Bits 5/6) Sharpness (Bits 7/8) ISO limit                                                           |
+    | 53        | Exposure                                                                                            |
 
 2. ### Battery level
 
@@ -722,13 +722,13 @@ Exceptions:
 
     Unknown purpose, returns 4 bytes
 
-    | Byte    | Description               |
-    |---------|---------------------------|
-    | 0       | Response code             |
-    | 1-11    | Unknown (`00 01 00 00 00 01 00 01 04 00 24`) in my test|
-    | 12-17   | MAC Address               |
-    | 18      | Number of characters (n1) |
-    | 19...n1 | Camera SSID               |
+    | Byte    | Description                                             |
+    |---------|---------------------------------------------------------|
+    | 0       | Response code                                           |
+    | 1-11    | Unknown (`00 01 00 00 00 01 00 01 04 00 24`) in my test |
+    | 12-17   | MAC Address                                             |
+    | 18      | Number of characters (n1)                               |
+    | 19...n1 | Camera SSID                                             |
 
 10. ### Camera version
 
@@ -737,14 +737,14 @@ Exceptions:
 
     Returns firmware version (HD3.11.03.03) and camera type (HERO3+ Black Edition)
 
-    | Byte      | Description               |
-    |-----------|---------------------------|
-    | 0         | Response code             |
+    | Byte      | Description                  |
+    |-----------|------------------------------|
+    | 0         | Response code                |
     | 1-2       | Unknown (`02 0B`) in my test |
-    | 3         | Number of characters (n1) |
-    | 4...n1    | Firmware version          |
-    | n1+1      | Number of characters (n2) |
-    | n1+2...n2 | Camera type               |
+    | 3         | Number of characters (n1)    |
+    | 4...n1    | Firmware version             |
+    | n1+1      | Number of characters (n2)    |
+    | n1+2...n2 | Camera type                  |
 
 ---
 
@@ -752,12 +752,12 @@ Exceptions:
 
 * param1: `camera`
 
-| ACTION | Description                     |
-|--------|---------------------------------|
-| DL     | Delete last media file          |
-| DA     | Delete all media files          |
+| ACTION | Description                                                         |
+|--------|---------------------------------------------------------------------|
+| DL     | Delete last media file                                              |
+| DA     | Delete all media files                                              |
 | DF     | Delete a specific file (requires replacing `%OPTION` with filepath) |
-| FO     | Format SD card                  |
+| FO     | Format SD card                                                      |
 
 ---
 
@@ -807,32 +807,32 @@ Exceptions:
 
 * ### camera `se`
 
-    | Byte      | Description                                                 |
-    |-----------|-------------------------------------------------------------|
-    | 0         | Response code                                               |
-    | 1         | Camera mode                                                 |
-    | 3         | Default camera mode                                         |
-    | 4         | Spot meter                                                  |
-    | 5         | Timelapse interval                                          |
-    | 6         | Auto power off                                              |
-    | 7         | FOV                                                         |
-    | 8         | Photo resolution                                            |
-    | 13        | Recording progress (int) high byte                          |
-    | 14        | Recording progress (int) low byte                           |
-    | 16        | Sound volume                                                |
-    | 17        | Leds status                                                 |
+    | Byte      | Description                                                                                         |
+    |-----------|-----------------------------------------------------------------------------------------------------|
+    | 0         | Response code                                                                                       |
+    | 1         | Camera mode                                                                                         |
+    | 3         | Default camera mode                                                                                 |
+    | 4         | Spot meter                                                                                          |
+    | 5         | Timelapse interval                                                                                  |
+    | 6         | Auto power off                                                                                      |
+    | 7         | FOV                                                                                                 |
+    | 8         | Photo resolution                                                                                    |
+    | 13        | Recording progress (int) high byte                                                                  |
+    | 14        | Recording progress (int) low byte                                                                   |
+    | 16        | Sound volume                                                                                        |
+    | 17        | Leds status                                                                                         |
     | 18        | (Bit 3) Video mode (Bit 2) Locate (Bit 5) One button mode (Bit 6) Orientation (Bit 8) Video preview |
-    | 19        | Battery level 0-100%                                        |
-    | 21        | Photos remaining (int) high byte                            |
-    | 22        | Photos remaining (int) low byte                             |
-    | 23        | Number of photos taken (int) high byte                      |
-    | 24        | Number of photos taken (int) low byte                       |
-    | 25        | Recording time left in minutes (int) high byte              |
-    | 26        | Recording time left in minutes (int) low byte               |
-    | 27        | Number of videos taken (int) high byte                      |
-    | 28        | Number of videos taken (int) low byte                       |
-    | 29        | Shutter                                                     |
-    | 30        | (Bit 7) Protune                                             |
+    | 19        | Battery level 0-100%                                                                                |
+    | 21        | Photos remaining (int) high byte                                                                    |
+    | 22        | Photos remaining (int) low byte                                                                     |
+    | 23        | Number of photos taken (int) high byte                                                              |
+    | 24        | Number of photos taken (int) low byte                                                               |
+    | 25        | Recording time left in minutes (int) high byte                                                      |
+    | 26        | Recording time left in minutes (int) low byte                                                       |
+    | 27        | Number of videos taken (int) high byte                                                              |
+    | 28        | Number of videos taken (int) low byte                                                               |
+    | 29        | Shutter                                                                                             |
+    | 30        | (Bit 7) Protune                                                                                     |
 
 * ### camera `st`
 
