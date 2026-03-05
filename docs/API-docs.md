@@ -137,19 +137,19 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
 
     \* 720p120 and 720p100 only support Wide and Narrow FOV
 
-    | VV | VR       | Resolution      | Available FPS (NTSC)   | Available FOV          |
-    |----|----------|-----------------|------------------------|------------------------|
-    | 00 | N/A      | WVGA 240fps     | 240                    | Wide                   |
-    | 01 | N/A      | 720p            | 120, 100, 60, 50       | Wide, Medium*, Narrow  |
-    | 02 | 06/07/0b | 960p            | 100, 60, 50, 48        | Wide                   |
-    | 03 | N/A      | 1080p           | 60, 50, 48, 30, 25, 24 | Wide, Medium, Narrow   |
-    | 04 | N/A      | 1440p           | 48, 30, 25, 24         | Wide                   |
-    | 05 | N/A      | 2.7k            | 30, 25                 | Wide, Medium           |
-    | 06 | 0a       | 4k              | 15, 12.5               | Wide                   |
-    | 07 | 03       | 2.7k 17:9 24fps | 24                     | Wide, Medium           |
-    | 08 | 02       | 4k 17:9 12fps   | 12                     | Wide                   |
-    | 09 | N/A      | 1080p Superview | 60, 50, 48, 30, 25, 24 | Wide                   |
-    | 0a | N/A      | 720p Superview  | 100, 60, 50, 48        | Wide                   |
+    | VV | VR       | Resolution      | FPS (NTSC)     | FPS (PAL)      | Available FOV         |
+    |----|----------|-----------------|----------------|----------------|-----------------------|
+    | 00 | N/A      | WVGA 240fps     | 240            | 240            | Wide                  |
+    | 01 | N/A      | 720p            | 120, 60        | 100, 50        | Wide, Medium*, Narrow |
+    | 02 | 06/07/0b | 960p            | 100, 60, 48    | 100, 50, 48    | Wide                  |
+    | 03 | N/A      | 1080p           | 60, 48, 30, 24 | 50, 48, 25, 24 | Wide, Medium, Narrow  |
+    | 04 | N/A      | 1440p           | 48, 30, 24     | 48, 25, 24     | Wide                  |
+    | 05 | N/A      | 2.7k            | 30, 24         | 25, 24         | Wide, Medium          |
+    | 06 | 0a       | 4k              | 15, 12         | 12.5, 12       | Wide                  |
+    | 07 | 03       | 2.7k 17:9 24fps | 30, 24         | 25, 24         | Wide, Medium          |
+    | 08 | 02       | 4k 17:9 12fps   | 15, 12         | 12.5, 12       | Wide                  |
+    | 09 | N/A      | 1080p Superview | 60, 48, 30, 24 | 50, 48, 25, 24 | Wide                  |
+    | 0a | N/A      | 720p Superview  | 100, 60, 48    | 100, 50, 48    | Wide                  |
 
 2. ### FOV
 
@@ -766,6 +766,12 @@ Exceptions:
 * ### Live view
 
     You can access the live view of the camera as an HLS stream at <http://10.5.5.9/live/amba.m3u8>
+
+    Due to the GoPro's performance limits (presumably), only the following resolutions can be live previewed when recording:
+  * 720p 60fps
+  * 1080p <= 60fps
+  * 960p <= 60fps
+  * 1440p (4:3) <= 30fps
 
 ---
 
