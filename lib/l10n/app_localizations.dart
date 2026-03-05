@@ -61,7 +61,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -69,7 +70,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -81,17 +83,16 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en')
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
 
   /// Label for password input field
   ///
@@ -1112,9 +1113,70 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'240 fps'**
   String get fps240;
+
+  /// Title for format SD card card
+  ///
+  /// In en, this message translates to:
+  /// **'Format SD Card'**
+  String get formatSdCardTitle;
+
+  /// Subtitle for format SD card card
+  ///
+  /// In en, this message translates to:
+  /// **'Erase all data from the SD card'**
+  String get formatSdCardSubtitle;
+
+  /// Confirmation dialog title for formatting SD card
+  ///
+  /// In en, this message translates to:
+  /// **'Format SD Card?'**
+  String get formatSdCardConfirmTitle;
+
+  /// Confirmation dialog message for formatting SD card
+  ///
+  /// In en, this message translates to:
+  /// **'This will erase all data from the SD card. This action cannot be undone.'**
+  String get formatSdCardConfirmMessage;
+
+  /// Confirmation button label for formatting SD card
+  ///
+  /// In en, this message translates to:
+  /// **'Format'**
+  String get formatSdCardConfirmButton;
+
+  /// Title for delete all media card
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All Media'**
+  String get deleteAllMediaTitle;
+
+  /// Subtitle for delete all media card
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all photos and videos'**
+  String get deleteAllMediaSubtitle;
+
+  /// Confirmation dialog title for deleting all media
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All Media?'**
+  String get deleteAllMediaConfirmTitle;
+
+  /// Confirmation dialog message for deleting all media
+  ///
+  /// In en, this message translates to:
+  /// **'This will delete all photos and videos from the camera. This action cannot be undone.'**
+  String get deleteAllMediaConfirmMessage;
+
+  /// Confirmation button label for deleting all media
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All'**
+  String get deleteAllMediaConfirmButton;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1123,24 +1185,24 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return AppLocalizationsEn();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

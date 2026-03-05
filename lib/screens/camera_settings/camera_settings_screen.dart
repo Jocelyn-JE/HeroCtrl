@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/camera_info_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/default_mode_card.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/delete_all_media_card.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/format_sd_card_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/locate_camera_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/video_standard_setting_card.dart';
@@ -20,21 +22,25 @@ class CameraSettingsScreen extends StatelessWidget {
     final password = GoProConnectionService.currentConnection!.password;
     return Scaffold(
       appBar: AppBar(title: Text(localizations.cameraSettings)),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        child: ListView(
-          children: [
-            DisconnectCard(password: password),
-            LedSettingCard(password: password),
-            VolumeSettingCard(password: password),
-            OrientationSettingCard(password: password),
-            DefaultModeCard(password: password),
-            VideoStandardSettingCard(password: password),
-            TimeSettingCard(password: password),
-            LocateCameraCard(password: password),
-            CameraInfoCard(password: password),
-            SizedBox(height: 8),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: ListView(
+            children: [
+              DisconnectCard(password: password),
+              LedSettingCard(password: password),
+              VolumeSettingCard(password: password),
+              OrientationSettingCard(password: password),
+              DefaultModeCard(password: password),
+              VideoStandardSettingCard(password: password),
+              TimeSettingCard(password: password),
+              LocateCameraCard(password: password),
+              FormatSdCardCard(password: password),
+              DeleteAllMediaCard(password: password),
+              CameraInfoCard(password: password),
+              SizedBox(height: 8),
+            ],
+          ),
         ),
       ),
     );

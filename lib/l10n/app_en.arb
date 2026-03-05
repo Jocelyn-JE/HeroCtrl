@@ -734,5 +734,45 @@
     "fps240": "240 fps",
     "@fps240": {
         "description": "Frame rate: 240 frames per second"
+    },
+    "formatSdCardTitle": "Format SD Card",
+    "@formatSdCardTitle": {
+        "description": "Title for format SD card card"
+    },
+    "formatSdCardSubtitle": "Erase all data from the SD card",
+    "@formatSdCardSubtitle": {
+        "description": "Subtitle for format SD card card"
+    },
+    "formatSdCardConfirmTitle": "Format SD Card?",
+    "@formatSdCardConfirmTitle": {
+        "description": "Confirmation dialog title for formatting SD card"
+    },
+    "formatSdCardConfirmMessage": "This will erase all data from the SD card. This action cannot be undone.",
+    "@formatSdCardConfirmMessage": {
+        "description": "Confirmation dialog message for formatting SD card"
+    },
+    "formatSdCardConfirmButton": "Format",
+    "@formatSdCardConfirmButton": {
+        "description": "Confirmation button label for formatting SD card"
+    },
+    "deleteAllMediaTitle": "Delete All Media",
+    "@deleteAllMediaTitle": {
+        "description": "Title for delete all media card"
+    },
+    "deleteAllMediaSubtitle": "Delete all photos and videos",
+    "@deleteAllMediaSubtitle": {
+        "description": "Subtitle for delete all media card"
+    },
+    "deleteAllMediaConfirmTitle": "Delete All Media?",
+    "@deleteAllMediaConfirmTitle": {
+        "description": "Confirmation dialog title for deleting all media"
+    },
+    "deleteAllMediaConfirmMessage": "This will delete all photos and videos from the camera. This action cannot be undone.",
+    "@deleteAllMediaConfirmMessage": {
+        "description": "Confirmation dialog message for deleting all media"
+    },
+    "deleteAllMediaConfirmButton": "Delete All",
+    "@deleteAllMediaConfirmButton": {
+        "description": "Confirmation button label for deleting all media"
     }
 }
