@@ -69,7 +69,10 @@ class _LiveViewState extends State<LiveView> {
     try {
       await GoProApiService.startVideoPreview(widget.camPassword);
     } catch (e) {
-      // Preview may already be on or camera is returning an error — proceed anyway
+      AppLogger.error(
+        'Error starting video preview while opening stream: $e',
+        e,
+      );
     }
     if (!mounted) return;
     await _player.open(Media(GoProEndpoints.livestreamUrl));
@@ -88,7 +91,7 @@ class _LiveViewState extends State<LiveView> {
       setState(() => _duration = length);
     });
     _positionSub = _player.stream.position.listen((playback) {
-      if (playback < _duration - const Duration(seconds: 5) &&
+      if (playback < _duration - const Duration(seconds: 10) &&
           !_resettingStream) {
         _resettingStream = true;
         AppLogger.info(
