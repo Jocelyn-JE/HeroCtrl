@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
-import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/utils/logger.dart';
 
@@ -20,26 +19,11 @@ class FPSSelector extends StatelessWidget {
     this.isExpanded = false,
   });
 
-  /// Get the valid FPS options for the current resolution and video mode.
-  /// This is the intersection of:
-  /// - FPS supported by the current resolution
-  /// - FPS supported by the current video mode (NTSC/PAL)
   List<FPS> _getValidFpsOptions() {
-    final currentResolution = cameraState.status.videoResolution;
-    final currentVideoStandard = cameraState.status.videoStandard;
-
-    // Get FPS supported by the current resolution
-    final fpsForResolution =
-        VideoResolution.supportedFPS[currentResolution] ?? [];
-
-    // Get FPS supported by the current video mode
-    final fpsForVideoStandard =
-        VideoStandard.videoStandardFrameRates[currentVideoStandard] ?? [];
-
-    // Find the intersection
-    return fpsForResolution
-        .where((fps) => fpsForVideoStandard.contains(fps))
-        .toList();
+    return VideoResolution.getSupportedFPS(
+      cameraState.status.videoResolution,
+      cameraState.status.videoStandard,
+    );
   }
 
   @override

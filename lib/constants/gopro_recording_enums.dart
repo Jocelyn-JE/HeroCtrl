@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
+import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
 class VideoResolution {
@@ -126,6 +127,7 @@ class VideoResolution {
 
   static final Map<VideoResolution, List<FPS>> supportedFPS = {
     wvga240fps: [FPS.fps240],
+    // Note: 720p in NTSC only supports 60fps and 120fps, while in PAL it supports 50fps and 100fps
     res720p: [FPS.fps50, FPS.fps60, FPS.fps100, FPS.fps120],
     res960p: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
     res1080p: [
@@ -137,10 +139,10 @@ class VideoResolution {
       FPS.fps60,
     ],
     res1440p: [FPS.fps24, FPS.fps25, FPS.fps30, FPS.fps48],
-    res2_7k: [FPS.fps25, FPS.fps30],
-    res4k: [FPS.fps12_5, FPS.fps15],
-    res2_7k_17_9: [FPS.fps24],
-    res4k_17_9: [FPS.fps12],
+    res2_7k: [FPS.fps24, FPS.fps25, FPS.fps30],
+    res4k: [FPS.fps12, FPS.fps12_5, FPS.fps15],
+    res2_7k_17_9: [FPS.fps24, FPS.fps25, FPS.fps30],
+    res4k_17_9: [FPS.fps12, FPS.fps12_5, FPS.fps15],
     res1080pSuperView: [
       FPS.fps24,
       FPS.fps25,
@@ -151,6 +153,27 @@ class VideoResolution {
     ],
     res720pSuperView: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
   };
+
+  /// Get the valid FPS options for the current resolution and video mode.
+  /// This is the intersection of:
+  /// - FPS supported by the current resolution
+  /// - FPS supported by the current video mode (NTSC/PAL)
+  static List<FPS> getSupportedFPS(
+    VideoResolution resolution,
+    VideoStandard standard,
+  ) {
+    if (resolution == res720p) {
+      return standard == VideoStandard.ntsc
+          ? [FPS.fps60, FPS.fps120]
+          : [FPS.fps50, FPS.fps100];
+    }
+    var fpsForResolution = supportedFPS[resolution] ?? [];
+    var fpsForStandard = VideoStandard.videoStandardFrameRates[standard] ?? [];
+
+    return fpsForResolution
+        .where((fps) => fpsForStandard.contains(fps))
+        .toList();
+  }
 
   static final Map<VideoResolution, List<FOV>> supportedFOV = {
     wvga240fps: [FOV.wide],
