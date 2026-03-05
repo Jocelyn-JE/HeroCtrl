@@ -40,33 +40,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final double bottomInset = MediaQuery.of(context).padding.bottom;
     return Scaffold(
       appBar: AppBar(title: Text(localizations.settings)),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
-        child: Column(
-          children: [
-            Card(
-              child: SwitchListTile(
-                title: Text(localizations.switchOffCameraOnDisconnect),
-                subtitle: Text(
-                  localizations.switchOffCameraOnDisconnectSubtitle,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
+          child: Column(
+            children: [
+              Card(
+                child: SwitchListTile(
+                  title: Text(localizations.switchOffCameraOnDisconnect),
+                  subtitle: Text(
+                    localizations.switchOffCameraOnDisconnectSubtitle,
+                  ),
+                  value: _switchOffCameraOnDisconnect,
+                  onChanged: _updateSwitchOffCameraOnDisconnect,
                 ),
-                value: _switchOffCameraOnDisconnect,
-                onChanged: _updateSwitchOffCameraOnDisconnect,
               ),
-            ),
-            const Spacer(),
-            Center(
-              child: RedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const ForgetAllCamerasDialog(),
-                  );
-                },
-                child: Text(localizations.forgetAllCameras),
+              const Spacer(),
+              Center(
+                child: RedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const ForgetAllCamerasDialog(),
+                    );
+                  },
+                  child: Text(localizations.forgetAllCameras),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
