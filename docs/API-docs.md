@@ -146,8 +146,8 @@ Most common URL scheme:  <http://10.5.5.9/param1/ACTION?t=PASSWORD&p=%OPTION>
     | 04 | N/A      | 1440p           | 48, 30, 24     | 48, 25, 24     | Wide                  |
     | 05 | N/A      | 2.7k            | 30, 24         | 25, 24         | Wide, Medium          |
     | 06 | 0a       | 4k              | 15, 12         | 12.5, 12       | Wide                  |
-    | 07 | 03       | 2.7k 17:9 24fps | 30, 24         | 25, 24         | Wide, Medium          |
-    | 08 | 02       | 4k 17:9 12fps   | 15, 12         | 12.5, 12       | Wide                  |
+    | 07 | 03       | 2.7k 17:9 24fps | 24             | 24             | Wide, Medium          |
+    | 08 | 02       | 4k 17:9 12fps   | 12             | 12             | Wide                  |
     | 09 | N/A      | 1080p Superview | 60, 48, 30, 24 | 50, 48, 25, 24 | Wide                  |
     | 0a | N/A      | 720p Superview  | 100, 60, 48    | 100, 50, 48    | Wide                  |
 
