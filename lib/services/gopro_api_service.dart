@@ -127,7 +127,7 @@ class GoProApiService {
         final isOn = await cameraPowerStatus(password);
         if (isOn && !GoProConnectionService.isDisconnecting) {
           AppLogger.info('Camera is now powered on');
-          await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 3));
           return;
         }
       } catch (e) {
@@ -428,6 +428,14 @@ class GoProApiService {
 
   static Future<void> setFOV(String password, FOV fovOption) async {
     await _postApi(_camera, GoProEndpoints.fov, password, fovOption.value);
+  }
+
+  static Future<void> formatSDCard(String password) async {
+    await _postApi(_camera, GoProEndpoints.formatSDCard, password, null);
+  }
+
+  static Future<void> deleteAllMedia(String password) async {
+    await _postApi(_camera, GoProEndpoints.deleteAllMedia, password, null);
   }
 
   static Future<http.Response> _getApi(
