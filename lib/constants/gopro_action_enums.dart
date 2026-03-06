@@ -128,16 +128,18 @@ class Locate {
 
 class CameraMode {
   final int _value;
-  const CameraMode._(this._value);
+  final IconData _icon;
+  const CameraMode._(this._value, this._icon);
 
   int get value => _value;
+  IconData get icon => _icon;
 
-  static const CameraMode videoMode = CameraMode._(0x00);
-  static const CameraMode photoMode = CameraMode._(0x01);
-  static const CameraMode burstMode = CameraMode._(0x02);
-  static const CameraMode timelapseMode = CameraMode._(0x03);
-  static const CameraMode hdmiMode = CameraMode._(0x05);
-  static const CameraMode settings = CameraMode._(0x07);
+  static const CameraMode videoMode = CameraMode._(0x00, Icons.videocam);
+  static const CameraMode photoMode = CameraMode._(0x01, Icons.camera_alt);
+  static const CameraMode burstMode = CameraMode._(0x02, Icons.burst_mode);
+  static const CameraMode timelapseMode = CameraMode._(0x03, Icons.schedule);
+  static const CameraMode hdmiMode = CameraMode._(0x05, Icons.tv);
+  static const CameraMode settings = CameraMode._(0x07, Icons.settings);
 
   static const List<CameraMode> all = [
     videoMode,
