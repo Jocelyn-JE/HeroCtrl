@@ -5,6 +5,7 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fov_selector.dart';
+import 'package:heroctrl/screens/control_screen/widgets/camera_mode_carousel.dart';
 import 'package:heroctrl/utils/camera_state_conditions.dart';
 
 class VerticalLayout extends StatelessWidget {
@@ -14,6 +15,7 @@ class VerticalLayout extends StatelessWidget {
   final Future<void> Function(VideoResolution) onResolutionChanged;
   final Future<void> Function(FPS) onFpsChanged;
   final Future<void> Function(FOV) onFovChanged;
+  final Future<void> Function() onStatusUpdated;
 
   const VerticalLayout({
     super.key,
@@ -23,6 +25,7 @@ class VerticalLayout extends StatelessWidget {
     required this.onResolutionChanged,
     required this.onFpsChanged,
     required this.onFovChanged,
+    required this.onStatusUpdated,
   });
 
   @override
@@ -65,44 +68,56 @@ class VerticalLayout extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         previewArea,
-        if (cameraState != null && !cameraState!.status.shutterStatus)
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (showVideoRes)
-                      Expanded(
-                        child: ResolutionSelector(
-                          cameraState: cameraState!,
-                          password: password,
-                          onResolutionChanged: onResolutionChanged,
-                          padding: EdgeInsets.zero,
-                        ),
-                      ),
-                    if (showFps || showFov) const SizedBox(width: 8),
-                    if (showFps)
-                      FPSSelector(
-                        cameraState: cameraState!,
-                        password: password,
-                        onFpsChanged: onFpsChanged,
-                        padding: EdgeInsets.zero,
-                      ),
-                    if (showFps && showFov) const SizedBox(width: 8),
-                    if (showFov)
-                      FOVSelector(
-                        cameraState: cameraState!,
-                        password: password,
-                        onFovChanged: onFovChanged,
-                        padding: EdgeInsets.zero,
-                      ),
-                  ],
+        if (cameraState != null)
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                if (!cameraState!.status.shutterStatus)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (showVideoRes)
+                          Expanded(
+                            child: ResolutionSelector(
+                              cameraState: cameraState!,
+                              password: password,
+                              onResolutionChanged: onResolutionChanged,
+                              padding: EdgeInsets.zero,
+                            ),
+                          ),
+                        if (showFps || showFov) const SizedBox(width: 8),
+                        if (showFps)
+                          FPSSelector(
+                            cameraState: cameraState!,
+                            password: password,
+                            onFpsChanged: onFpsChanged,
+                            padding: EdgeInsets.zero,
+                          ),
+                        if (showFps && showFov) const SizedBox(width: 8),
+                        if (showFov)
+                          FOVSelector(
+                            cameraState: cameraState!,
+                            password: password,
+                            onFovChanged: onFovChanged,
+                            padding: EdgeInsets.zero,
+                          ),
+                      ],
+                    ),
+                  ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  child: CameraModeCarousel(
+                    cameraState: cameraState!,
+                    password: password,
+                    onStatusUpdated: onStatusUpdated,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
       ],
     );

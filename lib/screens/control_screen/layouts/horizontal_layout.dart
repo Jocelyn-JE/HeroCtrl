@@ -5,6 +5,7 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fov_selector.dart';
+import 'package:heroctrl/screens/control_screen/widgets/camera_mode_carousel.dart';
 import 'package:heroctrl/utils/camera_state_conditions.dart';
 
 class HorizontalLayout extends StatelessWidget {
@@ -14,6 +15,7 @@ class HorizontalLayout extends StatelessWidget {
   final Future<void> Function(VideoResolution) onResolutionChanged;
   final Future<void> Function(FPS) onFpsChanged;
   final Future<void> Function(FOV) onFovChanged;
+  final Future<void> Function() onStatusUpdated;
 
   const HorizontalLayout({
     super.key,
@@ -23,6 +25,7 @@ class HorizontalLayout extends StatelessWidget {
     required this.onResolutionChanged,
     required this.onFpsChanged,
     required this.onFovChanged,
+    required this.onStatusUpdated,
   });
 
   @override
@@ -67,36 +70,44 @@ class HorizontalLayout extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 8.0,
         children: [
-          if (cameraState != null && !cameraState!.status.shutterStatus)
+          if (cameraState != null)
             Flexible(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  if (showVideoRes)
-                    ResolutionSelector(
-                      cameraState: cameraState!,
-                      password: password,
-                      onResolutionChanged: onResolutionChanged,
-                      padding: EdgeInsets.zero,
-                    ),
-                  if (showFps || showFov) const SizedBox(height: 8),
-                  if (showFps)
-                    FPSSelector(
-                      cameraState: cameraState!,
-                      password: password,
-                      onFpsChanged: onFpsChanged,
-                      padding: EdgeInsets.zero,
-                      isExpanded: true,
-                    ),
-                  if (showFps && showFov) const SizedBox(height: 8),
-                  if (showFov)
-                    FOVSelector(
-                      cameraState: cameraState!,
-                      password: password,
-                      onFovChanged: onFovChanged,
-                      padding: EdgeInsets.zero,
-                      isExpanded: true,
-                    ),
+                  if (!cameraState!.status.shutterStatus) ...[
+                    if (showVideoRes)
+                      ResolutionSelector(
+                        cameraState: cameraState!,
+                        password: password,
+                        onResolutionChanged: onResolutionChanged,
+                        padding: EdgeInsets.zero,
+                      ),
+                    if (showFps || showFov) const SizedBox(height: 8),
+                    if (showFps)
+                      FPSSelector(
+                        cameraState: cameraState!,
+                        password: password,
+                        onFpsChanged: onFpsChanged,
+                        padding: EdgeInsets.zero,
+                        isExpanded: true,
+                      ),
+                    if (showFps && showFov) const SizedBox(height: 8),
+                    if (showFov)
+                      FOVSelector(
+                        cameraState: cameraState!,
+                        password: password,
+                        onFovChanged: onFovChanged,
+                        padding: EdgeInsets.zero,
+                        isExpanded: true,
+                      ),
+                  ],
+                  const Spacer(),
+                  CameraModeCarousel(
+                    cameraState: cameraState!,
+                    password: password,
+                    onStatusUpdated: onStatusUpdated,
+                  ),
                 ],
               ),
             ),

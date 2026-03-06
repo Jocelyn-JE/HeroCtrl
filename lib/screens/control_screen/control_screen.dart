@@ -6,7 +6,6 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
-import 'package:heroctrl/screens/control_screen/widgets/record_button.dart';
 import 'package:heroctrl/screens/control_screen/layouts/horizontal_layout.dart';
 import 'package:heroctrl/screens/control_screen/layouts/vertical_layout.dart';
 import 'package:heroctrl/services/app_prefs.dart';
@@ -206,6 +205,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             onResolutionChanged: _onResolutionChanged,
             onFpsChanged: _onFpsChanged,
             onFovChanged: _onFovChanged,
+            onStatusUpdated: _updateCameraStatus,
           )
         : VerticalLayout(
             previewArea:
@@ -219,6 +219,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             onResolutionChanged: _onResolutionChanged,
             onFpsChanged: _onFpsChanged,
             onFovChanged: _onFovChanged,
+            onStatusUpdated: _updateCameraStatus,
           );
 
     return Scaffold(
@@ -243,19 +244,6 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         ],
       ),
       body: SafeArea(top: false, child: Center(child: content)),
-      floatingActionButtonLocation: isLandscape(context)
-          ? FloatingActionButtonLocation.miniEndFloat
-          : FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _cameraState != null
-          ? Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: RecordButton(
-                cameraState: _cameraState!,
-                password: _password,
-                onStatusUpdated: _updateCameraStatus,
-              ),
-            )
-          : null,
     );
   }
 
