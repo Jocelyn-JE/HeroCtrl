@@ -23,6 +23,7 @@ class LiveViewControls extends StatefulWidget {
 class _LiveViewControlsState extends State<LiveViewControls> {
   bool _controlsVisible = false;
   Timer? _controlsHideTimer;
+  bool _isMuted = true;
 
   void _toggleControls() {
     setState(() {
@@ -44,6 +45,24 @@ class _LiveViewControlsState extends State<LiveViewControls> {
         _controlsVisible = false;
       });
     });
+  }
+
+  void _toggleMute() {
+    setState(() {
+      _isMuted = !_isMuted;
+    });
+    if (_isMuted) {
+      widget.player.setVolume(0);
+    } else {
+      widget.player.setVolume(100);
+    }
+    _restartControlsAutoHide();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.player.setVolume(0);
   }
 
   @override
@@ -75,20 +94,38 @@ class _LiveViewControlsState extends State<LiveViewControls> {
               );
             },
           ),
-          Center(
+          Positioned(
+            bottom: 16,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: IgnorePointer(
+                ignoring: !_controlsVisible,
+                child: AnimatedOpacity(
+                  opacity: _controlsVisible ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 220),
+                  curve: Curves.easeInOut,
+                  child: FixStreamButton(
+                    camPassword: widget.camPassword,
+                    onFixStreamPressed: widget.onFixStreamPressed,
+                    onPressedComplete: _toggleControls,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 16,
+            left: 16,
             child: IgnorePointer(
               ignoring: !_controlsVisible,
               child: AnimatedOpacity(
                 opacity: _controlsVisible ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 220),
                 curve: Curves.easeInOut,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: FixStreamButton(
-                    camPassword: widget.camPassword,
-                    onFixStreamPressed: widget.onFixStreamPressed,
-                    onPressedComplete: _toggleControls,
-                  ),
+                child: FloatingActionButton(
+                  onPressed: _toggleMute,
+                  child: Icon(_isMuted ? Icons.volume_off : Icons.volume_up),
                 ),
               ),
             ),
