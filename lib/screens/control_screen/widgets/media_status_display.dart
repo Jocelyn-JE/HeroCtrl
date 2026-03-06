@@ -17,6 +17,21 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
   int _elapsedSeconds = 0;
   Timer? _recordingTimer;
 
+  bool get _isVideoRecording =>
+      CameraStateConditions.isShutterDown(widget.cameraState) &&
+      CameraStateConditions.isInVideoMode(widget.cameraState);
+
+  void _syncRecordingTimer() {
+    if (_isVideoRecording) {
+      if (_recordingTimer == null) {
+        _startRecordingTimer(resetElapsed: true);
+      }
+      return;
+    }
+
+    _stopRecordingTimer(resetElapsed: true);
+  }
+
   void _startRecordingTimer({bool resetElapsed = false}) {
     if (resetElapsed) {
       _elapsedSeconds = 0;
@@ -34,42 +49,25 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
     });
   }
 
-  void _stopRecordingTimer() {
+  void _stopRecordingTimer({bool resetElapsed = false}) {
     _recordingTimer?.cancel();
     _recordingTimer = null;
+
+    if (resetElapsed) {
+      _elapsedSeconds = 0;
+    }
   }
 
   @override
   void initState() {
     super.initState();
-
-    if (CameraStateConditions.isRecording(widget.cameraState)) {
-      _startRecordingTimer(resetElapsed: true);
-    }
+    _syncRecordingTimer();
   }
 
   @override
   void didUpdateWidget(covariant MediaStatusDisplay oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    final wasRecording = CameraStateConditions.isRecording(
-      oldWidget.cameraState,
-    );
-    final isRecording = CameraStateConditions.isRecording(widget.cameraState);
-
-    if (isRecording && !wasRecording) {
-      _startRecordingTimer(resetElapsed: true);
-      return;
-    }
-
-    if (!isRecording && wasRecording) {
-      _stopRecordingTimer();
-      return;
-    }
-
-    if (isRecording && _recordingTimer == null) {
-      _startRecordingTimer();
-    }
+    _syncRecordingTimer();
   }
 
   @override
@@ -116,8 +114,7 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
     }
 
     // If recording in video mode, show recording progress
-    if (CameraStateConditions.isShutterDown(widget.cameraState) &&
-        CameraStateConditions.isInVideoMode(widget.cameraState)) {
+    if (_isVideoRecording) {
       final recordingTimeFormatted = _formatDuration(_elapsedSeconds);
       return Positioned(
         top: 8,
