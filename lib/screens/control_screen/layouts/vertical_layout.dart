@@ -5,6 +5,7 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/resolution_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fps_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/fov_selector.dart';
+import 'package:heroctrl/utils/camera_state_conditions.dart';
 
 class VerticalLayout extends StatelessWidget {
   final Widget previewArea;
@@ -28,7 +29,9 @@ class VerticalLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentState = cameraState;
 
-    final showFps = currentState != null
+    final showFps =
+        currentState != null &&
+            CameraStateConditions.isInVideoMode(currentState)
         ? (() {
             final currentResolution = currentState.status.videoResolution;
             final currentVideoStandard = currentState.status.videoStandard;
@@ -44,13 +47,19 @@ class VerticalLayout extends StatelessWidget {
           })()
         : false;
 
-    final showFov = currentState != null
+    final showFov =
+        currentState != null &&
+            CameraStateConditions.isInVideoMode(currentState)
         ? VideoResolution.getSupportedFOV(
                 currentState.status.videoResolution,
                 currentState.status.fps,
               ).length >
               1
         : false;
+
+    final showVideoRes =
+        currentState != null &&
+        CameraStateConditions.isInVideoMode(currentState);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -65,14 +74,15 @@ class VerticalLayout extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: ResolutionSelector(
-                        cameraState: cameraState!,
-                        password: password,
-                        onResolutionChanged: onResolutionChanged,
-                        padding: EdgeInsets.zero,
+                    if (showVideoRes)
+                      Expanded(
+                        child: ResolutionSelector(
+                          cameraState: cameraState!,
+                          password: password,
+                          onResolutionChanged: onResolutionChanged,
+                          padding: EdgeInsets.zero,
+                        ),
                       ),
-                    ),
                     if (showFps || showFov) const SizedBox(width: 8),
                     if (showFps)
                       FPSSelector(

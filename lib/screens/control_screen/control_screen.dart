@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
@@ -17,6 +16,7 @@ import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/utils/app_routes.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/utils/snackbar.dart';
+import 'package:heroctrl/utils/camera_state_conditions.dart';
 
 class ControlScreen extends StatefulWidget {
   const ControlScreen({super.key});
@@ -168,22 +168,20 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-
     final Widget previewArea;
-    if (_cameraState?.isPreviewOn == true &&
-        _cameraState?.isCameraOn == true &&
-        _cameraState?.status.cameraMode != CameraMode.settings) {
+    if (CameraStateConditions.isPreviewOn(_cameraState) &&
+        CameraStateConditions.isCameraOn(_cameraState) &&
+        !CameraStateConditions.isInSettingsMode(_cameraState)) {
       previewArea = LiveView(
         camPassword: _password,
-        isRecording: _cameraState!.status.shutterStatus,
+        isRecording: CameraStateConditions.isRecording(_cameraState),
         currentResolution: _cameraState!.status.videoResolution,
-        previewBorderRadius: orientation == Orientation.landscape
+        previewBorderRadius: isLandscape(context)
             ? const BorderRadius.all(Radius.circular(12))
             : const BorderRadius.all(Radius.circular(0)),
         cameraState: _cameraState,
       );
-    } else if (_cameraState?.status.cameraMode == CameraMode.settings) {
+    } else if (CameraStateConditions.isInSettingsMode(_cameraState)) {
       previewArea = Text(
         AppLocalizations.of(context)!.liveViewUnavailableInSettings,
       );
@@ -194,12 +192,12 @@ class _RegisterControlScreenState extends State<ControlScreen> {
       );
     }
 
-    final content = orientation == Orientation.landscape
+    final content = isLandscape(context)
         ? HorizontalLayout(
             previewArea:
-                _cameraState?.isPreviewOn == true &&
-                    _cameraState?.isCameraOn == true &&
-                    _cameraState?.status.cameraMode != CameraMode.settings
+                CameraStateConditions.isPreviewOn(_cameraState) &&
+                    CameraStateConditions.isCameraOn(_cameraState) &&
+                    !CameraStateConditions.isInSettingsMode(_cameraState)
                 ? previewArea
                 : Center(child: previewArea),
             cameraState: _cameraState,
@@ -210,9 +208,9 @@ class _RegisterControlScreenState extends State<ControlScreen> {
           )
         : VerticalLayout(
             previewArea:
-                _cameraState?.isPreviewOn == true &&
-                    _cameraState?.isCameraOn == true &&
-                    _cameraState?.status.cameraMode != CameraMode.settings
+                CameraStateConditions.isPreviewOn(_cameraState) &&
+                    CameraStateConditions.isCameraOn(_cameraState) &&
+                    !CameraStateConditions.isInSettingsMode(_cameraState)
                 ? previewArea
                 : Center(child: previewArea),
             cameraState: _cameraState,
@@ -232,7 +230,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
               estimatedMinutesRemaining:
                   _batteryMonitor!.estimatedMinutesRemaining.value,
             ),
-          if (_cameraState?.isCameraOn == true)
+          if (CameraStateConditions.isCameraOn(_cameraState))
             IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () async {
@@ -244,7 +242,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         ],
       ),
       body: SafeArea(top: false, child: Center(child: content)),
-      floatingActionButtonLocation: orientation == Orientation.landscape
+      floatingActionButtonLocation: isLandscape(context)
           ? FloatingActionButtonLocation.miniEndFloat
           : FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _cameraState != null
