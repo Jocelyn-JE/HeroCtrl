@@ -2,7 +2,22 @@
 
 ## Description
 
-This is a Flutter mobile app to remotely control a GoPro Hero 3+ Black camera
+This is a Flutter mobile app for Android to remotely control GoPro Hero 3+ Black cameras
+
+## Installation and usage
+
+To run the app, make sure you have Flutter installed and set up on your machine as well as a device or emulator running. Then, navigate to the project directory and run:
+
+```bash
+flutter pub get
+flutter run
+```
+
+To get logs from the app without the native Android logs, you can use:
+
+```bash
+flutter logs
+```
 
 ## Documentation
 
