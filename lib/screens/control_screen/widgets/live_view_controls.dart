@@ -95,7 +95,7 @@ class _LiveViewControlsState extends State<LiveViewControls> {
             },
           ),
           Positioned(
-            bottom: 16,
+            bottom: 8,
             left: 0,
             right: 0,
             child: Center(
@@ -115,8 +115,8 @@ class _LiveViewControlsState extends State<LiveViewControls> {
             ),
           ),
           Positioned(
-            bottom: 16,
-            left: 16,
+            bottom: 8,
+            left: 8,
             child: IgnorePointer(
               ignoring: !_controlsVisible,
               child: AnimatedOpacity(
