@@ -49,8 +49,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
           camPassword: _password,
           initialPercent: batteryPercent,
         );
-        monitor.batteryPercent.addListener(_onBatteryChanged);
-        monitor.estimatedMinutesRemaining.addListener(_onBatteryChanged);
+        monitor.trueReading.addListener(_onBatteryChanged);
         setState(() {
           _cameraState = CameraState(state);
           _cameraState!.isCameraOn = true;
@@ -70,6 +69,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
   void _onBatteryChanged() {
     if (mounted) setState(() {});
+    _refreshCameraStatus();
     _checkLowBatteryAndDisconnect();
   }
 
@@ -180,6 +180,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             ? const BorderRadius.all(Radius.circular(12))
             : const BorderRadius.all(Radius.circular(0)),
         cameraState: _cameraState,
+        onReconnect: _updateCameraStatus,
       );
     } else if (CameraStateConditions.isInSettingsMode(_cameraState)) {
       previewArea = Text(

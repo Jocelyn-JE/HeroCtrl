@@ -18,6 +18,7 @@ class LiveView extends StatefulWidget {
   final VideoResolution? currentResolution;
   final BorderRadius previewBorderRadius;
   final CameraState? cameraState;
+  final Future<void> Function() onReconnect;
 
   const LiveView({
     super.key,
@@ -26,6 +27,7 @@ class LiveView extends StatefulWidget {
     this.currentResolution,
     this.previewBorderRadius = const BorderRadius.all(Radius.circular(0)),
     this.cameraState,
+    required this.onReconnect,
   });
 
   @override
@@ -80,6 +82,7 @@ class _LiveViewState extends State<LiveView> {
     }
     if (!mounted) return;
     await _player.open(Media(GoProEndpoints.livestreamUrl));
+    widget.onReconnect();
   }
 
   @override
