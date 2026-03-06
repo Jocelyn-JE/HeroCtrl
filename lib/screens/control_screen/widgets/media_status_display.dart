@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
+import 'package:heroctrl/utils/camera_state_conditions.dart';
 
 class MediaStatusDisplay extends StatefulWidget {
   final CameraState? cameraState;
@@ -16,15 +16,6 @@ class MediaStatusDisplay extends StatefulWidget {
 class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
   int _elapsedSeconds = 0;
   Timer? _recordingTimer;
-
-  bool _isRecording(CameraState? cameraState) {
-    if (cameraState == null) {
-      return false;
-    }
-
-    final status = cameraState.status;
-    return status.cameraMode == CameraMode.videoMode && status.shutterStatus;
-  }
 
   void _startRecordingTimer({bool resetElapsed = false}) {
     if (resetElapsed) {
@@ -52,7 +43,7 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
   void initState() {
     super.initState();
 
-    if (_isRecording(widget.cameraState)) {
+    if (CameraStateConditions.isRecording(widget.cameraState)) {
       _startRecordingTimer(resetElapsed: true);
     }
   }
@@ -61,8 +52,10 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
   void didUpdateWidget(covariant MediaStatusDisplay oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    final wasRecording = _isRecording(oldWidget.cameraState);
-    final isRecording = _isRecording(widget.cameraState);
+    final wasRecording = CameraStateConditions.isRecording(
+      oldWidget.cameraState,
+    );
+    final isRecording = CameraStateConditions.isRecording(widget.cameraState);
 
     if (isRecording && !wasRecording) {
       _startRecordingTimer(resetElapsed: true);
@@ -115,14 +108,16 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
 
     final status = widget.cameraState!.status;
     final isCameraOnAndPreviewOn =
-        widget.cameraState!.isCameraOn && widget.cameraState!.isPreviewOn;
+        CameraStateConditions.isCameraOn(widget.cameraState) &&
+        CameraStateConditions.isPreviewOn(widget.cameraState);
 
     if (!isCameraOnAndPreviewOn) {
       return const SizedBox.shrink();
     }
 
     // If recording in video mode, show recording progress
-    if (status.shutterStatus && status.cameraMode == CameraMode.videoMode) {
+    if (CameraStateConditions.isShutterDown(widget.cameraState) &&
+        CameraStateConditions.isInVideoMode(widget.cameraState)) {
       final recordingTimeFormatted = _formatDuration(_elapsedSeconds);
       return Positioned(
         top: 8,
@@ -153,9 +148,8 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
     }
 
     // Show remaining photos for photo/burst/timelapse modes
-    if (status.cameraMode == CameraMode.photoMode ||
-        status.cameraMode == CameraMode.burstMode ||
-        status.cameraMode == CameraMode.timelapseMode) {
+    if (CameraStateConditions.isInPhotoOrBurstMode(widget.cameraState) ||
+        CameraStateConditions.isInTimelapseMode(widget.cameraState)) {
       return Positioned(
         top: 8,
         right: 8,
@@ -185,7 +179,7 @@ class _MediaStatusDisplayState extends State<MediaStatusDisplay> {
     }
 
     // Show remaining video time for video mode (when not recording)
-    if (status.cameraMode == CameraMode.videoMode) {
+    if (CameraStateConditions.isInVideoMode(widget.cameraState)) {
       final videoTimeFormatted = _formatVideoTime(
         status.recordingTimeRemaining,
       );
