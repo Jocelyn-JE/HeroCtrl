@@ -181,6 +181,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         previewBorderRadius: orientation == Orientation.landscape
             ? const BorderRadius.all(Radius.circular(12))
             : const BorderRadius.all(Radius.circular(0)),
+        cameraState: _cameraState,
       );
     } else if (_cameraState?.status.cameraMode == CameraMode.settings) {
       previewArea = Text(

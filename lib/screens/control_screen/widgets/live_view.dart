@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view_controls.dart';
+import 'package:heroctrl/screens/control_screen/widgets/media_status_display.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:media_kit/media_kit.dart';
@@ -15,6 +17,7 @@ class LiveView extends StatefulWidget {
   final bool isRecording;
   final VideoResolution? currentResolution;
   final BorderRadius previewBorderRadius;
+  final CameraState? cameraState;
 
   const LiveView({
     super.key,
@@ -22,6 +25,7 @@ class LiveView extends StatefulWidget {
     this.isRecording = false,
     this.currentResolution,
     this.previewBorderRadius = const BorderRadius.all(Radius.circular(0)),
+    this.cameraState,
   });
 
   @override
@@ -135,6 +139,7 @@ class _LiveViewState extends State<LiveView> {
                   ),
                 ),
               ),
+            MediaStatusDisplay(cameraState: widget.cameraState),
           ],
         ),
       ),
