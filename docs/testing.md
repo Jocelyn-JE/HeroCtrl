@@ -41,6 +41,18 @@ flutter test --watch
 
 ## Coverage Report (HTML)
 
+Recommended (single command):
+
+```bash
+dart run tool/coverage.dart
+```
+
+Generate report without opening browser:
+
+```bash
+dart run tool/coverage.dart --no-open
+```
+
 Generate the coverage data:
 
 ```bash
