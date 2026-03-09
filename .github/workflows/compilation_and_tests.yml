@@ -30,7 +30,7 @@ jobs:
   check_tests_changes:
     runs-on: ubuntu-latest
     outputs:
-      tests_changed: ${{ steps.changes.outputs.tests }}
+      tests_changed: ${{ steps.changes.outputs.test }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -41,8 +41,8 @@ jobs:
         id: changes
         with:
           filters: |
-            tests:
-              - 'tests/**'
+            test:
+              - 'test/**'
 
   build:
     needs: check_changes
