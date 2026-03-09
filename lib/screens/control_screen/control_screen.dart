@@ -25,7 +25,7 @@ class ControlScreen extends StatefulWidget {
 }
 
 class _RegisterControlScreenState extends State<ControlScreen> {
-  final _password = GoProConnectionService.currentConnection!.password;
+  final _password = GoProConnectionService.password!;
   CameraState? _cameraState;
   BatteryMonitor? _batteryMonitor;
   bool _isAutoDisconnectingForLowBattery = false;
@@ -34,7 +34,22 @@ class _RegisterControlScreenState extends State<ControlScreen> {
   void initState() {
     super.initState();
     AppLogger.info('ControlScreen: initState called');
-    _fetchCameraState();
+    if (!GoProConnectionService.isConnected) {
+      AppLogger.warning(
+        'ControlScreen initialized without an active camera connection',
+      );
+      showSnackBarError(context, 'No camera connection found');
+      // Pop back to home screen since we can't operate without a connection
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          Navigator.of(context).pop();
+        }
+      });
+      return;
+    } else {
+      AppLogger.info('Camera connection found, fetching initial camera state');
+      _fetchCameraState();
+    }
   }
 
   Future<void> _fetchCameraState() async {
