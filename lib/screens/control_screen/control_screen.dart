@@ -25,10 +25,24 @@ class ControlScreen extends StatefulWidget {
 }
 
 class _RegisterControlScreenState extends State<ControlScreen> {
-  final _password = GoProConnectionService.password!;
+  final String _password = GoProConnectionService.password ?? '';
   CameraState? _cameraState;
   BatteryMonitor? _batteryMonitor;
   bool _isAutoDisconnectingForLowBattery = false;
+  bool _hasScheduledDisconnectRedirect = false;
+
+  void _redirectToHomeOnDisconnected({bool showMessage = true}) {
+    if (_hasScheduledDisconnectRedirect) return;
+    _hasScheduledDisconnectRedirect = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (showMessage) {
+        showSnackBarError(context, 'No camera connection found');
+      }
+      Navigator.of(context).popUntil(ModalRoute.withName(AppRoutes.home));
+    });
+  }
 
   @override
   void initState() {
@@ -38,13 +52,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
       AppLogger.warning(
         'ControlScreen initialized without an active camera connection',
       );
-      showSnackBarError(context, 'No camera connection found');
-      // Pop back to home screen since we can't operate without a connection
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          Navigator.of(context).pop();
-        }
-      });
+      _redirectToHomeOnDisconnected();
       return;
     } else {
       AppLogger.info('Camera connection found, fetching initial camera state');
@@ -182,6 +190,14 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (!GoProConnectionService.isConnected) {
+      _redirectToHomeOnDisconnected(showMessage: false);
+      return Scaffold(
+        appBar: AppBar(title: const Text('Camera Control')),
+        body: const SizedBox.shrink(),
+      );
+    }
+
     final Widget previewArea;
     if (CameraStateConditions.isPreviewOn(_cameraState) &&
         CameraStateConditions.isCameraOn(_cameraState) &&
@@ -277,7 +293,8 @@ class _RegisterControlScreenState extends State<ControlScreen> {
   }
 
   Future<void> _cleanupAsync() async {
-    if (await AppPrefs.getSwitchOffCameraOnDisconnect()) {
+    if (GoProConnectionService.isConnected &&
+        await AppPrefs.getSwitchOffCameraOnDisconnect()) {
       try {
         await GoProApiService.turnOffCamera(_password);
       } catch (e, stackTrace) {

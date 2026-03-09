@@ -25,7 +25,7 @@ class CameraSettingsScreen extends StatelessWidget {
         body: Center(child: Text('Localization not available')),
       );
     }
-    final password = GoProConnectionService.password!;
+    final password = GoProConnectionService.password ?? '';
     return Scaffold(
       appBar: AppBar(title: Text(l10n.cameraSettings)),
       body: SafeArea(
