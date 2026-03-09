@@ -19,9 +19,19 @@ To get logs from the app without the native Android logs, you can use:
 flutter logs
 ```
 
+## Building the app
+
+To build a release APK for Android, run:
+
+```bash
+flutter build apk --release
+```
+
 ## Documentation
 
-Check out the API [documentation](/docs/API-docs.md) for more information about the GoPro HERO3+ Black API and how to use it.
+- Check out the API [documentation](/docs/API-docs.md) for more information about the GoPro HERO3+ Black API and how to use it.
+
+- For test strategy and how to run tests, see [`testing.md`](/docs/testing.md).
 
 ## Resources used
 
