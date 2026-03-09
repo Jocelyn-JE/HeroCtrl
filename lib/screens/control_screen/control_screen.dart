@@ -100,8 +100,8 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
     if (batteryPercent <= 1 || trueReading <= 1) {
       _isAutoDisconnectingForLowBattery = true;
-      final localizations = AppLocalizations.of(context)!;
-      showSnackBarWarning(context, localizations.batteryCriticallyLow);
+      final l10n = AppLocalizations.of(context)!;
+      showSnackBarWarning(context, l10n.batteryCriticallyLow);
       Navigator.of(context).popUntil(ModalRoute.withName(AppRoutes.home));
     }
   }
@@ -239,7 +239,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(GoProConnectionService.currentConnection!.ssid),
+        title: Text(GoProConnectionService.ssid ?? 'Camera Control'),
         actions: [
           if (_batteryMonitor != null)
             BatteryIndicator(

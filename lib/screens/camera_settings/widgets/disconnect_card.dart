@@ -31,21 +31,21 @@ class _DisconnectCardState extends State<DisconnectCard> {
   }
 
   Future<void> _confirmAndDisconnect() async {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         icon: const Icon(Icons.power_settings_new),
-        title: Text(localizations.disconnectConfirmTitle),
-        content: Text(localizations.disconnectConfirmMessage),
+        title: Text(l10n.disconnectConfirmTitle),
+        content: Text(l10n.disconnectConfirmMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: Text(localizations.cancel),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: Text(localizations.disconnectConfirmButton),
+            child: Text(l10n.disconnectConfirmButton),
           ),
         ],
       ),
@@ -81,7 +81,7 @@ class _DisconnectCardState extends State<DisconnectCard> {
       return const SizedBox.shrink();
     }
 
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -92,12 +92,12 @@ class _DisconnectCardState extends State<DisconnectCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    localizations.disconnectTitle,
+                    l10n.disconnectTitle,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    localizations.disconnectSubtitle,
+                    l10n.disconnectSubtitle,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

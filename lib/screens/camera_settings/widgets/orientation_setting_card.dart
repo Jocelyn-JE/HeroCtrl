@@ -57,7 +57,7 @@ class _OrientationSettingCardState extends State<OrientationSettingCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -69,12 +69,12 @@ class _OrientationSettingCardState extends State<OrientationSettingCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    localizations.orientationUpsideDown,
+                    l10n.orientationUpsideDown,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    localizations.orientationUpsideDownSubtitle,
+                    l10n.orientationUpsideDownSubtitle,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

@@ -10,7 +10,7 @@ class CameraList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final double bottomInset = MediaQuery.of(context).padding.bottom;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
@@ -26,7 +26,7 @@ class CameraList extends StatelessWidget {
             leading: CircleAvatar(child: Icon(Icons.videocam)),
             trailing: Icon(Icons.chevron_right),
             title: Text(ssid),
-            subtitle: Text(localizations.bssidLabel(bssid)),
+            subtitle: Text(l10n.bssidLabel(bssid)),
             onTap: () async {
               final navigator = Navigator.of(context);
               final connected = await showDialog<bool>(

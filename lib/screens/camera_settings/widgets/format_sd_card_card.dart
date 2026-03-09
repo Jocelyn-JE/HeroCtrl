@@ -17,22 +17,22 @@ class _FormatSdCardCardState extends State<FormatSdCardCard> {
   bool _isBusy = false;
 
   Future<void> _confirmAndFormat() async {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         icon: const Icon(Icons.sd_storage),
-        title: Text(localizations.formatSdCardConfirmTitle),
-        content: Text(localizations.formatSdCardConfirmMessage),
+        title: Text(l10n.formatSdCardConfirmTitle),
+        content: Text(l10n.formatSdCardConfirmMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: Text(localizations.cancel),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: Text(localizations.formatSdCardConfirmButton),
+            child: Text(l10n.formatSdCardConfirmButton),
           ),
         ],
       ),
@@ -61,7 +61,7 @@ class _FormatSdCardCardState extends State<FormatSdCardCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -72,12 +72,12 @@ class _FormatSdCardCardState extends State<FormatSdCardCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    localizations.formatSdCardTitle,
+                    l10n.formatSdCardTitle,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    localizations.formatSdCardSubtitle,
+                    l10n.formatSdCardSubtitle,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

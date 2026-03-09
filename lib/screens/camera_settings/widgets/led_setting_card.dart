@@ -58,7 +58,7 @@ class _LedSettingCardState extends State<LedSettingCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -66,12 +66,12 @@ class _LedSettingCardState extends State<LedSettingCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.ledSetting,
+              l10n.ledSetting,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
             Text(
-              localizations.ledSettingSubtitle,
+              l10n.ledSettingSubtitle,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -93,17 +93,17 @@ class _LedSettingCardState extends State<LedSettingCard> {
                   segments: [
                     ButtonSegment(
                       value: LED.off,
-                      label: Text(localizations.ledOff),
+                      label: Text(l10n.ledOff),
                       icon: const Icon(Icons.flash_off),
                     ),
                     ButtonSegment(
                       value: LED.twoLeds,
-                      label: Text(localizations.ledTwo),
+                      label: Text(l10n.ledTwo),
                       icon: const Icon(Icons.flash_on),
                     ),
                     ButtonSegment(
                       value: LED.fourLeds,
-                      label: Text(localizations.ledFour),
+                      label: Text(l10n.ledFour),
                       icon: const Icon(Icons.flashlight_on),
                     ),
                   ],

@@ -54,7 +54,7 @@ class _CameraInfoCardState extends State<CameraInfoCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -62,7 +62,7 @@ class _CameraInfoCardState extends State<CameraInfoCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.cameraInfoTitle,
+              l10n.cameraInfoTitle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
@@ -80,33 +80,31 @@ class _CameraInfoCardState extends State<CameraInfoCard> {
             else ...[
               if (_cameraVersion != null) ...[
                 Text(
-                  localizations.cameraModel(_cameraVersion!.cameraType),
+                  l10n.cameraModel(_cameraVersion!.cameraType),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  localizations.cameraVersion(_cameraVersion!.firmwareVersion),
+                  l10n.cameraVersion(_cameraVersion!.firmwareVersion),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
               if (_cameraSerialAndMac != null) ...[
                 Text(
-                  localizations.cameraSerial(_cameraSerialAndMac!.serialNumber),
+                  l10n.cameraSerial(_cameraSerialAndMac!.serialNumber),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  localizations.cameraMacAddress(
-                    _cameraSerialAndMac!.macAddress,
-                  ),
+                  l10n.cameraMacAddress(_cameraSerialAndMac!.macAddress),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
               if (_cameraWifiInfo != null) ...[
                 Text(
-                  localizations.cameraWifiSSID(_cameraWifiInfo!.ssid),
+                  l10n.cameraWifiSSID(_cameraWifiInfo!.ssid),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  localizations.cameraWifiPassword(_cameraWifiInfo!.password),
+                  l10n.cameraWifiPassword(_cameraWifiInfo!.password),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

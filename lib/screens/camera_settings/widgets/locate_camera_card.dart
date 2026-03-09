@@ -49,7 +49,7 @@ class _LocateCameraCardState extends State<LocateCameraCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -57,12 +57,12 @@ class _LocateCameraCardState extends State<LocateCameraCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.locateCamera,
+              l10n.locateCamera,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
             Text(
-              localizations.locateCameraSubtitle,
+              l10n.locateCameraSubtitle,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -77,7 +77,7 @@ class _LocateCameraCardState extends State<LocateCameraCard> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : const Icon(Icons.my_location_outlined),
-                label: Text(localizations.locateCameraButton),
+                label: Text(l10n.locateCameraButton),
               ),
             ),
           ],
@@ -94,23 +94,20 @@ class _LocatingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
       icon: const Icon(Icons.my_location_outlined, size: 40),
-      title: Text(localizations.locateCameraDialogTitle),
+      title: Text(l10n.locateCameraDialogTitle),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const LinearProgressIndicator(),
           const SizedBox(height: 16),
-          Text(localizations.locateCameraDialogMessage),
+          Text(l10n.locateCameraDialogMessage),
         ],
       ),
       actions: [
-        FilledButton(
-          onPressed: onStop,
-          child: Text(localizations.locateCameraStop),
-        ),
+        FilledButton(onPressed: onStop, child: Text(l10n.locateCameraStop)),
       ],
     );
   }

@@ -59,7 +59,7 @@ class _VideoStandardSettingCardState extends State<VideoStandardSettingCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -67,12 +67,12 @@ class _VideoStandardSettingCardState extends State<VideoStandardSettingCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.videoStandardSettingTitle,
+              l10n.videoStandardSettingTitle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
             Text(
-              localizations.videoStandardSettingSubtitle,
+              l10n.videoStandardSettingSubtitle,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -94,12 +94,12 @@ class _VideoStandardSettingCardState extends State<VideoStandardSettingCard> {
                   segments: [
                     ButtonSegment(
                       value: VideoStandard.ntsc,
-                      label: Text(localizations.videoStandardNtsc),
+                      label: Text(l10n.videoStandardNtsc),
                       icon: const Icon(Icons.videocam),
                     ),
                     ButtonSegment(
                       value: VideoStandard.pal,
-                      label: Text(localizations.videoStandardPal),
+                      label: Text(l10n.videoStandardPal),
                       icon: const Icon(Icons.videocam_outlined),
                     ),
                   ],

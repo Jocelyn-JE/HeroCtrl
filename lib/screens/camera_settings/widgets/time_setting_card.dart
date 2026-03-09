@@ -81,7 +81,7 @@ class _TimeSettingCardState extends State<TimeSettingCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -89,12 +89,12 @@ class _TimeSettingCardState extends State<TimeSettingCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.timeSetting,
+              l10n.timeSetting,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
             Text(
-              localizations.timeSettingSubtitle,
+              l10n.timeSettingSubtitle,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -119,7 +119,7 @@ class _TimeSettingCardState extends State<TimeSettingCard> {
                       const Icon(Icons.access_time, size: 16),
                       const SizedBox(width: 6),
                       Text(
-                        '${localizations.cameraCurrentTime}: '
+                        '${l10n.cameraCurrentTime}: '
                         '${DateFormat('yyyy-MM-dd  HH:mm:ss').format(_cameraTime!)}',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
@@ -130,7 +130,7 @@ class _TimeSettingCardState extends State<TimeSettingCard> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () => _setTime(DateTime.now()),
-                      child: Text(localizations.timeSetToNow),
+                      child: Text(l10n.timeSetToNow),
                     ),
                   ),
                 ],

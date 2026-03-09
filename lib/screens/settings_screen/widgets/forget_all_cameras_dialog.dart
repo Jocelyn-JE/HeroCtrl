@@ -8,25 +8,25 @@ class ForgetAllCamerasDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final navigatorState = Navigator.of(context);
 
     return AlertDialog(
-      title: Text(localizations.forgetAllCameras),
-      content: Text(localizations.forgetAllCamerasConfirm),
+      title: Text(l10n.forgetAllCameras),
+      content: Text(l10n.forgetAllCamerasConfirm),
       actions: [
         TextButton(
           onPressed: () {
             navigatorState.pop();
           },
-          child: Text(localizations.cancel),
+          child: Text(l10n.cancel),
         ),
         RedButton(
           onPressed: () async {
             await GoProPrefs.clearAll();
             navigatorState.pop();
           },
-          child: Text(localizations.forget),
+          child: Text(l10n.forget),
         ),
       ],
     );

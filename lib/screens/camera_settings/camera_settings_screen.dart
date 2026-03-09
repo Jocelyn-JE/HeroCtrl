@@ -18,30 +18,38 @@ class CameraSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-    final password = GoProConnectionService.currentConnection!.password;
+    final l10n = AppLocalizations.of(context);
+    if (l10n == null) {
+      return Scaffold(
+        appBar: AppBar(title: Text('Camera Settings')),
+        body: Center(child: Text('Localization not available')),
+      );
+    }
+    final password = GoProConnectionService.password!;
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.cameraSettings)),
+      appBar: AppBar(title: Text(l10n.cameraSettings)),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          child: ListView(
-            children: [
-              DisconnectCard(password: password),
-              LedSettingCard(password: password),
-              VolumeSettingCard(password: password),
-              OrientationSettingCard(password: password),
-              DefaultModeCard(password: password),
-              VideoStandardSettingCard(password: password),
-              TimeSettingCard(password: password),
-              LocateCameraCard(password: password),
-              FormatSdCardCard(password: password),
-              DeleteAllMediaCard(password: password),
-              CameraInfoCard(password: password),
-              SizedBox(height: 8),
-            ],
-          ),
-        ),
+        child: GoProConnectionService.isConnected
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: ListView(
+                  children: [
+                    DisconnectCard(password: password),
+                    LedSettingCard(password: password),
+                    VolumeSettingCard(password: password),
+                    OrientationSettingCard(password: password),
+                    DefaultModeCard(password: password),
+                    VideoStandardSettingCard(password: password),
+                    TimeSettingCard(password: password),
+                    LocateCameraCard(password: password),
+                    FormatSdCardCard(password: password),
+                    DeleteAllMediaCard(password: password),
+                    CameraInfoCard(password: password),
+                    SizedBox(height: 8),
+                  ],
+                ),
+              )
+            : Center(child: Text('No camera connected')),
       ),
     );
   }

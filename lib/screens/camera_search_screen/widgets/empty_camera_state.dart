@@ -6,7 +6,7 @@ class EmptyCameraState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final double bottomInset = MediaQuery.of(context).padding.bottom;
 
     return Padding(
@@ -17,7 +17,7 @@ class EmptyCameraState extends StatelessWidget {
           children: [
             CircleAvatar(radius: 32, child: Icon(Icons.videocam_off, size: 32)),
             SizedBox(height: 16),
-            Text(localizations.noCamerasFound, textAlign: TextAlign.center),
+            Text(l10n.noCamerasFound, textAlign: TextAlign.center),
           ],
         ),
       ),

@@ -58,7 +58,7 @@ class _VolumeSettingCardState extends State<VolumeSettingCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -66,12 +66,12 @@ class _VolumeSettingCardState extends State<VolumeSettingCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.volumeSetting,
+              l10n.volumeSetting,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
             Text(
-              localizations.volumeSettingSubtitle,
+              l10n.volumeSettingSubtitle,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -93,17 +93,17 @@ class _VolumeSettingCardState extends State<VolumeSettingCard> {
                   segments: [
                     ButtonSegment(
                       value: Volume.mute,
-                      label: Text(localizations.volumeOff),
+                      label: Text(l10n.volumeOff),
                       icon: const Icon(Icons.volume_off),
                     ),
                     ButtonSegment(
                       value: Volume.percent70,
-                      label: Text(localizations.volumeLow),
+                      label: Text(l10n.volumeLow),
                       icon: const Icon(Icons.volume_down),
                     ),
                     ButtonSegment(
                       value: Volume.percent100,
-                      label: Text(localizations.volumeHigh),
+                      label: Text(l10n.volumeHigh),
                       icon: const Icon(Icons.volume_up),
                     ),
                   ],

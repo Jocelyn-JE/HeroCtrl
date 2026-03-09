@@ -58,7 +58,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -66,12 +66,12 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.defaultModeSetting,
+              l10n.defaultModeSetting,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
             Text(
-              localizations.defaultModeSettingSubtitle,
+              l10n.defaultModeSettingSubtitle,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -98,7 +98,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
                         children: [
                           const Icon(Icons.videocam),
                           const SizedBox(width: 12),
-                          Text(localizations.defaultModeVideo),
+                          Text(l10n.defaultModeVideo),
                         ],
                       ),
                     ),
@@ -108,7 +108,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
                         children: [
                           const Icon(Icons.photo_camera),
                           const SizedBox(width: 12),
-                          Text(localizations.defaultModePhoto),
+                          Text(l10n.defaultModePhoto),
                         ],
                       ),
                     ),
@@ -118,7 +118,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
                         children: [
                           const Icon(Icons.burst_mode),
                           const SizedBox(width: 12),
-                          Text(localizations.defaultModeBurst),
+                          Text(l10n.defaultModeBurst),
                         ],
                       ),
                     ),
@@ -128,7 +128,7 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
                         children: [
                           const Icon(Icons.timelapse),
                           const SizedBox(width: 12),
-                          Text(localizations.defaultModeTimeLapse),
+                          Text(l10n.defaultModeTimeLapse),
                         ],
                       ),
                     ),

@@ -36,10 +36,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final double bottomInset = MediaQuery.of(context).padding.bottom;
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.settings)),
+      appBar: AppBar(title: Text(l10n.settings)),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
@@ -47,10 +47,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               Card(
                 child: SwitchListTile(
-                  title: Text(localizations.switchOffCameraOnDisconnect),
-                  subtitle: Text(
-                    localizations.switchOffCameraOnDisconnectSubtitle,
-                  ),
+                  title: Text(l10n.switchOffCameraOnDisconnect),
+                  subtitle: Text(l10n.switchOffCameraOnDisconnectSubtitle),
                   value: _switchOffCameraOnDisconnect,
                   onChanged: _updateSwitchOffCameraOnDisconnect,
                 ),
@@ -64,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       builder: (context) => const ForgetAllCamerasDialog(),
                     );
                   },
-                  child: Text(localizations.forgetAllCameras),
+                  child: Text(l10n.forgetAllCameras),
                 ),
               ),
             ],

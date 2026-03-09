@@ -17,22 +17,22 @@ class _DeleteAllMediaCardState extends State<DeleteAllMediaCard> {
   bool _isBusy = false;
 
   Future<void> _confirmAndDelete() async {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         icon: const Icon(Icons.delete_forever),
-        title: Text(localizations.deleteAllMediaConfirmTitle),
-        content: Text(localizations.deleteAllMediaConfirmMessage),
+        title: Text(l10n.deleteAllMediaConfirmTitle),
+        content: Text(l10n.deleteAllMediaConfirmMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: Text(localizations.cancel),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: Text(localizations.deleteAllMediaConfirmButton),
+            child: Text(l10n.deleteAllMediaConfirmButton),
           ),
         ],
       ),
@@ -61,7 +61,7 @@ class _DeleteAllMediaCardState extends State<DeleteAllMediaCard> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -72,12 +72,12 @@ class _DeleteAllMediaCardState extends State<DeleteAllMediaCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    localizations.deleteAllMediaTitle,
+                    l10n.deleteAllMediaTitle,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    localizations.deleteAllMediaSubtitle,
+                    l10n.deleteAllMediaSubtitle,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

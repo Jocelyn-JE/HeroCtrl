@@ -27,7 +27,7 @@ class _ConnectionDialogState extends State<ConnectionDialog> {
 
   Future<void> _handleConnect() async {
     final navigator = Navigator.of(context);
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
 
     setState(() => _isLoading = true);
     bool result = false;
@@ -39,31 +39,31 @@ class _ConnectionDialogState extends State<ConnectionDialog> {
       );
     } catch (e) {
       if (!mounted) return;
-      showSnackBarError(context, localizations.connectionError(e.toString()));
+      showSnackBarError(context, l10n.connectionError(e.toString()));
       AppLogger.error('Error connecting to ${widget.ssid}: $e');
       setState(() => _isLoading = false);
       return navigator.pop(result);
     }
     if (result != true) {
       if (!mounted) return;
-      showSnackBarError(context, localizations.connectionFailed(widget.ssid));
+      showSnackBarError(context, l10n.connectionFailed(widget.ssid));
     }
     navigator.pop(result);
   }
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog(
-      title: Text(localizations.connectToCamera(widget.ssid)),
+      title: Text(l10n.connectToCamera(widget.ssid)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (_isLoading) ...[
             const CircularProgressIndicator(),
             const SizedBox(height: 8),
-            Text(localizations.connectingToCamera, textAlign: TextAlign.center),
+            Text(l10n.connectingToCamera, textAlign: TextAlign.center),
           ] else ...[
             PasswordField(controller: _controller),
           ],
@@ -72,7 +72,7 @@ class _ConnectionDialogState extends State<ConnectionDialog> {
       actions: [
         TextButton(
           onPressed: _isLoading ? null : () => Navigator.of(context).pop(false),
-          child: Text(localizations.cancel),
+          child: Text(l10n.cancel),
         ),
         ElevatedButton(
           onPressed: _isLoading ? null : _handleConnect,
@@ -85,7 +85,7 @@ class _ConnectionDialogState extends State<ConnectionDialog> {
                     color: Colors.white,
                   ),
                 )
-              : Text(localizations.connect),
+              : Text(l10n.connect),
         ),
       ],
     );
