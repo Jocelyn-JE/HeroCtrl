@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:heroctrl/constants/gopro_action_enums.dart';
+import 'package:heroctrl/constants/gopro_photo_enums.dart';
 import 'package:heroctrl/constants/gopro_protune_enums.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/constants/gopro_system_enums.dart';
@@ -153,6 +154,193 @@ void main() {
       final status3 = CameraStatus(bytes);
       expect(status3.sharpness, equals(Sharpness.high));
       expect(status3.iso, equals(ISOLimit.iso400));
+
+      // Test invalid/default sharpness value (11)
+      bytes[52] = 0x0C; // 00001100 - bits 3-4 = 11 (invalid)
+      final status4 = CameraStatus(bytes);
+      expect(
+        status4.sharpness,
+        equals(Sharpness.medium),
+      ); // Should default to medium
+
+      // Test invalid/default ISO value (11)
+      bytes[52] = 0x03; // 00000011 - bits 1-2 = 11 (invalid)
+      final status5 = CameraStatus(bytes);
+      expect(
+        status5.iso,
+        equals(ISOLimit.iso6400),
+      ); // Should default to iso6400
+    });
+
+    test('parses one button mode from bit field correctly', () {
+      final bytes = Uint8List(64);
+
+      // Test one button off (bit 5 = 0)
+      bytes[18] = 0x00;
+      final statusOff = CameraStatus(bytes);
+      expect(statusOff.oneButtonMode, equals(OneButton.off));
+
+      // Test one button on (bit 5 = 1)
+      bytes[18] = 0x08;
+      final statusOn = CameraStatus(bytes);
+      expect(statusOn.oneButtonMode, equals(OneButton.on));
+    });
+
+    test('parses video preview from bit field correctly', () {
+      final bytes = Uint8List(64);
+
+      // Test video preview off (bit 8 = 0)
+      bytes[18] = 0x00;
+      final statusOff = CameraStatus(bytes);
+      expect(statusOff.videoPreview, equals(VideoPreview.off));
+
+      // Test video preview on (bit 8 = 1)
+      bytes[18] = 0x01;
+      final statusOn = CameraStatus(bytes);
+      expect(statusOn.videoPreview, equals(VideoPreview.on));
+    });
+
+    test('parses simultaneous video and photo correctly', () {
+      final bytes = Uint8List(64);
+
+      bytes[36] = 0x00;
+      final statusOff = CameraStatus(bytes);
+      expect(statusOff.simultaneousVideoAndPhoto, isFalse);
+
+      bytes[36] = 0x01;
+      final statusOn = CameraStatus(bytes);
+      expect(statusOn.simultaneousVideoAndPhoto, isTrue);
+    });
+
+    test('handles multiple bit fields in same byte correctly', () {
+      final bytes = Uint8List(64);
+
+      // Test multiple flags in byte 18
+      // Set all flags: PAL (0x20), Locate (0x40), OneButton (0x08), Orientation (0x04), VideoPreview (0x01)
+      bytes[18] = 0x6D; // 01101101
+      final status = CameraStatus(bytes);
+
+      expect(status.videoStandard, equals(VideoStandard.pal));
+      expect(status.locateStatus, equals(Locate.on));
+      expect(status.oneButtonMode, equals(OneButton.on));
+      expect(status.orientation, equals(Orientation.down));
+      expect(status.videoPreview, equals(VideoPreview.on));
+    });
+
+    test('handles unknown enum values with defaults', () {
+      final bytes = Uint8List(64);
+
+      // Set invalid values that don't match any enum
+      bytes[1] = 0xFF; // Invalid camera mode
+      bytes[3] = 0xFF; // Invalid default mode
+      bytes[4] = 0xFF; // Invalid spot meter
+      bytes[5] = 0xFF; // Invalid timelapse interval
+      bytes[6] = 0xFF; // Invalid auto power off
+      bytes[7] = 0xFF; // Invalid FOV
+      bytes[8] = 0xFF; // Invalid photo resolution
+      bytes[16] = 0xFF; // Invalid volume
+      bytes[17] = 0xFF; // Invalid LED
+      bytes[32] = 0xFF; // Invalid burst rate
+      bytes[33] = 0xFF; // Invalid continuous shot
+      bytes[34] = 0xFF; // Invalid white balance
+      bytes[37] = 0xFF; // Invalid loop video duration
+      bytes[50] = 0xFF; // Invalid video resolution
+      bytes[51] = 0xFF; // Invalid FPS
+      bytes[53] = 0xFF; // Invalid exposure compensation
+
+      final status = CameraStatus(bytes);
+
+      // Should use defaults from orElse
+      expect(status.cameraMode, equals(CameraMode.videoMode));
+      expect(status.defaultCameraMode, equals(DefaultCameraMode.videoMode));
+      expect(status.spotMeter, equals(SpotMeter.off));
+      expect(status.timelapseInterval, equals(TimelapseInterval.halfASecond));
+      expect(status.autoPowerOff, equals(AutoPowerOff.never));
+      expect(status.fov, equals(FOV.wide));
+      expect(status.photoResolution, equals(PhotoResolution.res5MPmedium));
+      expect(status.volume, equals(Volume.percent100));
+      expect(status.ledsStatus, equals(LED.off));
+      expect(status.burstRate, equals(BurstRate.threePerSecond));
+      expect(status.continuousShotMode, equals(ContinuousShot.off));
+      expect(status.whiteBalance, equals(WhiteBalance.auto));
+      expect(status.loopVideoDuration, equals(LoopVideoDuration.off));
+      expect(status.videoResolution, equals(VideoResolution.wvga240fps));
+      expect(status.fps, equals(FPS.fps30));
+      expect(status.exposureCompensation, equals(ExposureCompensation.zero));
+    });
+
+    test('parses all integer fields correctly', () {
+      final bytes = Uint8List(64);
+
+      // Test recording progress (bytes 13-14)
+      bytes[13] = 0x12; // High byte
+      bytes[14] = 0x34; // Low byte (18*256 + 52 = 4660 seconds)
+
+      // Test battery level
+      bytes[19] = 0x03;
+
+      // Test photos remaining (bytes 21-22)
+      bytes[21] = 0x01;
+      bytes[22] = 0xC8; // 1*256 + 200 = 456
+
+      // Test photos taken (bytes 23-24)
+      bytes[23] = 0x00;
+      bytes[24] = 0x32; // 50
+
+      // Test recording time remaining (bytes 25-26)
+      bytes[25] = 0x00;
+      bytes[26] = 0x3C; // 60 minutes
+
+      // Test videos taken (bytes 27-28)
+      bytes[27] = 0x00;
+      bytes[28] = 0x0A; // 10
+
+      final status = CameraStatus(bytes);
+
+      expect(status.recordingProgress, equals(4660));
+      expect(status.batteryLevel, equals(3));
+      expect(status.photosRemaining, equals(456));
+      expect(status.photosTaken, equals(50));
+      expect(status.recordingTimeRemaining, equals(60));
+      expect(status.videosTaken, equals(10));
+    });
+
+    test('handles maximum values for integer fields', () {
+      final bytes = Uint8List(64);
+
+      // Test with maximum 16-bit values
+      bytes[13] = 0xFF;
+      bytes[14] = 0xFF; // 65535
+      bytes[21] = 0xFF;
+      bytes[22] = 0xFF;
+      bytes[23] = 0xFF;
+      bytes[24] = 0xFF;
+      bytes[25] = 0xFF;
+      bytes[26] = 0xFF;
+      bytes[27] = 0xFF;
+      bytes[28] = 0xFF;
+
+      final status = CameraStatus(bytes);
+
+      expect(status.recordingProgress, equals(65535));
+      expect(status.photosRemaining, equals(65535));
+      expect(status.photosTaken, equals(65535));
+      expect(status.recordingTimeRemaining, equals(65535));
+      expect(status.videosTaken, equals(65535));
+    });
+
+    test('parses ProTune color profile correctly', () {
+      final bytes = Uint8List(64);
+
+      // Test GoPro color (bit 1 = 0)
+      bytes[30] = 0x00;
+      final statusGoPro = CameraStatus(bytes);
+      expect(statusGoPro.colorProfile, equals(ColorProfile.goPro));
+
+      // Test Flat color (bit 1 = 1)
+      bytes[30] = 0x80;
+      final statusFlat = CameraStatus(bytes);
+      expect(statusFlat.colorProfile, equals(ColorProfile.flat));
     });
   });
 }
