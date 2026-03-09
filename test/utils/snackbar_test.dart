@@ -150,6 +150,27 @@ void main() {
       expect(functionCalled, isTrue);
     });
 
+    testWidgets('showSnackBar swallows show errors during build', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                // Calling during build can throw from showSnackBar internals.
+                showSnackBar(context, 'Build time message');
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      expect(find.byType(Scaffold), findsOneWidget);
+    });
+
     testWidgets('showSnackBarError displays red snackbar', (tester) async {
       await tester.pumpWidget(
         MaterialApp(

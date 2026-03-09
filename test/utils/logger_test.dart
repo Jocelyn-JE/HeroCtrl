@@ -21,10 +21,20 @@ void main() {
       logRecords.clear();
     });
 
-    test('init creates singleton instance', () {
+    test('init creates singleton and listener processes records', () {
       AppLogger.init();
-      // Should not throw and should be callable multiple times
+      // Should not throw and should be callable multiple times.
       AppLogger.init();
+
+      final exception = Exception('listener path');
+      final stackTrace = StackTrace.current;
+      AppLogger.error('listener test message', exception, stackTrace);
+
+      expect(logRecords, isNotEmpty);
+      expect(logRecords.last.level, Level.SEVERE);
+      expect(logRecords.last.message, 'listener test message');
+      expect(logRecords.last.error, exception);
+      expect(logRecords.last.stackTrace, stackTrace);
     });
 
     test('init sets up logger with proper listener', () {

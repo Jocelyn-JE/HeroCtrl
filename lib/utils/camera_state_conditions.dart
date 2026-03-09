@@ -3,8 +3,6 @@ import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 
 class CameraStateConditions {
-  CameraStateConditions._();
-
   // Static helper methods for use without instance
   static bool isCameraOn(CameraState? state) => state?.isCameraOn == true;
 

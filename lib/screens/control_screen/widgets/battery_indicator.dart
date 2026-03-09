@@ -32,10 +32,10 @@ class BatteryIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isCritical = batteryPercent < 5;
     final bool isLow = batteryPercent < 10;
+    final Color fallbackColor = Theme.of(context).colorScheme.onSurface;
     final Color color = isLow
         ? Colors.red
-        : IconTheme.of(context).color ??
-              Theme.of(context).colorScheme.onSurface;
+        : IconTheme.of(context).color ?? fallbackColor;
     final IconData icon = isCritical
         ? Icons.battery_alert
         : _icons[((batteryPercent / 100) * 6).round().clamp(0, 6)];
