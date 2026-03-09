@@ -1,6 +1,6 @@
 #!/bin/bash
-# ...existing code...
-logfile="./log/gopro_scan.log"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+logfile="$SCRIPT_DIR/log/gopro_scan.log"
 
 # ignore list: space-separated entries
 # entries may be:
@@ -105,7 +105,7 @@ process_endpoint() {
     rm -f "$body" "$hdr"
 }
 
-# ensure log dir exists (may require sudo for /var/log)
+# ensure log dir exists
 mkdir -p "$(dirname "$logfile")"
 
 # test all combinations possible in lowercase for both camera and bacpac

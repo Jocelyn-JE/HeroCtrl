@@ -20,7 +20,7 @@ J'ai utilisé un script Bash pour envoyer des requêtes HTTP à la caméra et ob
 
 Pour faire simple j'ai compris que l'API n'utilise que des requêtes HTTP `GET` pour interagir avec la caméra. Et que les commandes en minuscules sont utilisées pour récupérer des informations (`GET`), tandis que les commandes en majuscules sont utilisées pour modifier des paramètres (`POST`).
 
-Explication rapide de l'exécution du script de test `scan.sh` :
+Explication rapide de l'exécution du script de test [scan.sh](/docs/research/endpoint-scan/scan.sh) :
 
 - Le script envoie des requêtes HTTP à la caméra en utilisant différentes combinaisons de lettres pour les commandes.
 - Il enregistre les réponses dans un fichier journal pour une analyse ultérieure, seulement si le premier octet de la réponse est différent de `0x01` (ce qui indique une réponse vide ou non valide) et que la réponse est d'une taille supérieure à 1 octet.
@@ -42,7 +42,7 @@ Avec une bonne compréhension de l'API, j'ai commencé le développement de l'ap
 
 2. Ensuite, j'ai implémenté des fonctions pour envoyer des requêtes HTTP à la caméra en utilisant le package `http` de Dart.
 
-3. Pour gérer les flux vidéo j'ai cherché un package Flutter adapté et j'ai trouvé `better_player_plus`, qui offre une bonne prise en charge des flux HLS.
+3. Pour gérer les flux vidéo j'ai cherché un package Flutter adapté et j'ai trouvé `media_kit`, qui offre une bonne prise en charge des flux HLS.
 
 4. Pareil pour la recherche automatique de la caméra parmis les réseaux Wi-Fi disponibles, j'ai utilisé le package `wifi_iot`.
 

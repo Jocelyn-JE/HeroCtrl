@@ -44,4 +44,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-/tests/output
+/docs/research/endpoint-scan/output
+/docs/research/endpoint-scan/log/
