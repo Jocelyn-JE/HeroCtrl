@@ -1,5 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:heroctrl/models/gopro_registration.dart';
+import 'package:heroctrl/services/gopro_registry.dart';
 import 'package:heroctrl/utils/gopro_validator.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() {
   group('GoProValidator', () {
@@ -54,6 +57,60 @@ void main() {
             reason: 'Prefix $prefix should match XX:XX:XX format',
           );
         }
+      });
+    });
+
+    group('isRegistered', () {
+      setUp(() async {
+        // Mock secure storage for testing
+        FlutterSecureStorage.setMockInitialValues({});
+        // Clear any existing registrations
+        await GoProPrefs.clearAll();
+      });
+
+      tearDown(() async {
+        // Clean up after tests
+        await GoProPrefs.clearAll();
+      });
+
+      test('returns false for unregistered camera', () async {
+        final result = await GoProValidator.isRegistered('D8:96:85:11:22:33');
+        expect(result, isFalse);
+      });
+
+      test('returns true for registered camera', () async {
+        // Register a test camera
+        final registration = GoProRegistration(
+          bssid: 'D8:96:85:11:22:33',
+          password: 'test123',
+          ssid: 'TestGoPro',
+          serialNumber: '12345678',
+          cameraModel: 'HERO3+',
+          firmwareVersion: '1.0',
+          macAddress: 'D8:96:85:11:22:33',
+        );
+        await GoProPrefs.add(registration);
+
+        final result = await GoProValidator.isRegistered('D8:96:85:11:22:33');
+        expect(result, isTrue);
+      });
+
+      test('returns false after camera is removed', () async {
+        // Register and then remove a test camera
+        final registration = GoProRegistration(
+          bssid: 'D8:96:85:44:55:66',
+          password: 'test456',
+          ssid: 'TestGoPro2',
+          serialNumber: '87654321',
+          cameraModel: 'HERO3+',
+          firmwareVersion: '1.0',
+          macAddress: 'D8:96:85:44:55:66',
+        );
+        await GoProPrefs.add(registration);
+        await GoProPrefs.removeByBssid('D8:96:85:44:55:66');
+
+        final result = await GoProValidator.isRegistered('D8:96:85:44:55:66');
+        expect(result, isFalse);
       });
     });
   });

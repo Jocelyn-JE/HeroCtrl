@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
@@ -213,6 +214,40 @@ void main() {
       test('returns false when state is null', () {
         expect(CameraStateConditions.isInTimelapseMode(null), isFalse);
       });
+    });
+  });
+
+  group('isLandscape', () {
+    testWidgets('returns true when orientation is landscape', (tester) async {
+      tester.view.physicalSize = const Size(800, 600);
+      tester.view.devicePixelRatio = 1.0;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) {
+              expect(isLandscape(context), isTrue);
+              return Container();
+            },
+          ),
+        ),
+      );
+      addTearDown(tester.view.reset);
+    });
+
+    testWidgets('returns false when orientation is portrait', (tester) async {
+      tester.view.physicalSize = const Size(400, 800);
+      tester.view.devicePixelRatio = 1.0;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) {
+              expect(isLandscape(context), isFalse);
+              return Container();
+            },
+          ),
+        ),
+      );
+      addTearDown(tester.view.reset);
     });
   });
 }
