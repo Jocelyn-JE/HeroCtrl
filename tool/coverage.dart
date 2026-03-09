@@ -76,6 +76,25 @@ Future<void> main(List<String> args) async {
     exit(commandExitCode);
   }
 
+  stdout.writeln('Excluding localization files from coverage...');
+  commandExitCode = await _runCommand('lcov', [
+    '--remove',
+    'coverage/lcov.info',
+    'lib/l10n/*',
+    '-o',
+    'coverage/lcov.info',
+  ]);
+  if (commandExitCode != 0) {
+    stderr.writeln('Failed to filter localization files from coverage.');
+    stderr.writeln('Make sure lcov is installed and available in PATH.');
+    if (Platform.isLinux) {
+      stderr.writeln(
+        'Debian/Ubuntu install command: sudo apt-get install lcov\n Red-Hat/Fedora install command: sudo dnf install lcov',
+      );
+    }
+    exit(commandExitCode);
+  }
+
   stdout.writeln('Generating HTML report with genhtml...');
   commandExitCode = await _runCommand('genhtml', [
     'coverage/lcov.info',

@@ -47,6 +47,8 @@ Recommended (single command):
 dart run tool/coverage.dart
 ```
 
+This command excludes localization files in `lib/l10n/` from the coverage report.
+
 Generate report without opening browser:
 
 ```bash
