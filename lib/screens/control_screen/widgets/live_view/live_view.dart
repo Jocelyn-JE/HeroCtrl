@@ -113,9 +113,25 @@ class _LiveViewState extends State<LiveView> {
     _openStream();
   }
 
+  double _calculateAspectRatio() {
+    try {
+      switch (widget.cameraState!.status.cameraMode) {
+        case CameraMode.videoMode:
+          return widget.currentResolution!.aspectRatio;
+        case CameraMode.photoMode:
+          return 4 / 3;
+        default:
+          return 16 / 9;
+      }
+    } catch (e) {
+      AppLogger.error('Error calculating aspect ratio, defaulting to 16:9', e);
+    }
+    return 16 / 9;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final aspectRatio = widget.currentResolution?.aspectRatio ?? 16 / 9;
+    final aspectRatio = _calculateAspectRatio();
 
     return AspectRatio(
       aspectRatio: aspectRatio,
