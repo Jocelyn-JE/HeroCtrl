@@ -24,6 +24,7 @@ class CameraModeCarousel extends StatefulWidget {
 
 class _CameraModeCarouselState extends State<CameraModeCarousel> {
   bool _isLoading = false;
+  bool _wasRecording = false;
   late PageController _pageController;
   late int _selectedModeIndex;
   double _viewportFraction = 0.4;
@@ -58,12 +59,19 @@ class _CameraModeCarouselState extends State<CameraModeCarousel> {
     if (nextIndex != _selectedModeIndex) {
       _selectedModeIndex = nextIndex;
       if (_pageController.hasClients) {
-        final currentPage = _pageController.page?.round() ?? 0;
-        final currentModeIndex = currentPage % _modeOrder.length;
-        final offset = currentPage - currentModeIndex;
-        _pageController.jumpToPage(offset + nextIndex);
+        _jumpToSelectedModePage(nextIndex);
       }
+      // If !hasClients (recording), _wasRecording will trigger the page sync
+      // when the carousel reattaches.
     }
+  }
+
+  void _jumpToSelectedModePage(int modeIndex) {
+    final currentPage =
+        _pageController.page?.round() ?? _pageController.initialPage;
+    final currentModeIndex = _modeIndexFromPage(currentPage);
+    final offset = currentPage - currentModeIndex;
+    _pageController.jumpToPage(offset + modeIndex);
   }
 
   int _modeIndex(CameraMode mode) {
@@ -220,6 +228,7 @@ class _CameraModeCarouselState extends State<CameraModeCarousel> {
         _updateViewportFraction(carouselWidth);
 
         if (isRecording) {
+          _wasRecording = true;
           final recordingMode = widget.cameraState.status.cameraMode;
           return SizedBox(
             height: _carouselHeight,
@@ -236,6 +245,16 @@ class _CameraModeCarouselState extends State<CameraModeCarousel> {
               ),
             ),
           );
+        }
+
+        // PageView is re-appearing after recording: the controller re-attaches
+        // at its baked-in initialPage which may differ from the selected mode.
+        if (_wasRecording) {
+          _wasRecording = false;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted || !_pageController.hasClients) return;
+            _jumpToSelectedModePage(_selectedModeIndex);
+          });
         }
 
         return SizedBox(
