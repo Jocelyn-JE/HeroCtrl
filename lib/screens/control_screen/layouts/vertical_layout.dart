@@ -43,7 +43,9 @@ class VerticalLayout extends StatelessWidget {
                             onSettingChanged,
                             direction: Axis.horizontal,
                           ),
-                          CameraMode.photoMode => photoSettingsWidgets(
+                          CameraMode.photoMode ||
+                          CameraMode.burstMode ||
+                          CameraMode.timelapseMode => photoSettingsWidgets(
                             cameraState!,
                             password,
                             onSettingChanged,
