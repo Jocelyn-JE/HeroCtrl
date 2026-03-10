@@ -172,11 +172,14 @@ class GoProApiService {
     }
   }
 
-  static Future<CameraStatus> getStatus(String password) async {
+  static Future<CameraStatus> getStatus(
+    String password, {
+    CameraMode? fallbackCameraMode,
+  }) async {
     final response = await _getApi(_camera, GoProEndpoints.status, password);
     final bytes = response.bodyBytes;
     AppLogger.info('GoPro Status: ${bytes.length} bytes');
-    return CameraStatus(bytes);
+    return CameraStatus(bytes, fallbackCameraMode: fallbackCameraMode);
   }
 
   static Future<CameraVersion> getVersion(String password) async {

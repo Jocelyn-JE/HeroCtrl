@@ -269,6 +269,19 @@ void main() {
       expect(status.exposureCompensation, equals(ExposureCompensation.zero));
     });
 
+    test('uses provided fallback camera mode for unknown mode value', () {
+      final bytes = Uint8List(64);
+
+      bytes[1] = 0xFF; // Invalid camera mode
+
+      final status = CameraStatus(
+        bytes,
+        fallbackCameraMode: CameraMode.timelapseMode,
+      );
+
+      expect(status.cameraMode, equals(CameraMode.timelapseMode));
+    });
+
     test('parses all integer fields correctly', () {
       final bytes = Uint8List(64);
 

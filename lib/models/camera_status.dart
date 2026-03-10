@@ -115,10 +115,10 @@ class CameraStatus {
     return (byte & 0x40) != 0 ? LowLight.on : LowLight.off;
   }
 
-  CameraStatus(Uint8List bytes)
+  CameraStatus(Uint8List bytes, {CameraMode? fallbackCameraMode})
     : cameraMode = CameraMode.all.firstWhere(
         (mode) => mode.value == bytes[1],
-        orElse: () => CameraMode.videoMode,
+        orElse: () => fallbackCameraMode ?? CameraMode.videoMode,
       ),
       defaultCameraMode = DefaultCameraMode.all.firstWhere(
         (mode) => mode.value == bytes[3],
