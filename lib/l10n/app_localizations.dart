@@ -703,26 +703,56 @@ abstract class AppLocalizations {
   /// Photo resolution: 5 megapixels medium
   ///
   /// In en, this message translates to:
-  /// **'5MP Medium'**
+  /// **'5MP 1.42x'**
   String get photoResolution5MpMedium;
 
   /// Photo resolution: 7 megapixels medium
   ///
   /// In en, this message translates to:
-  /// **'7MP Medium'**
+  /// **'7MP 1.42x'**
   String get photoResolution7MpMedium;
 
   /// Photo resolution: 7 megapixels wide
   ///
   /// In en, this message translates to:
-  /// **'7MP Wide'**
+  /// **'7MP 1x'**
   String get photoResolution7MpWide;
 
   /// Photo resolution: 12 megapixels wide
   ///
   /// In en, this message translates to:
-  /// **'12MP Wide'**
+  /// **'12MP 1x'**
   String get photoResolution12MpWide;
+
+  /// Photo zoom level: wide angle (1x)
+  ///
+  /// In en, this message translates to:
+  /// **'Wide (1x)'**
+  String get photoZoomWide;
+
+  /// Photo zoom level: medium (1.42x)
+  ///
+  /// In en, this message translates to:
+  /// **'Medium (1.42x)'**
+  String get photoZoomMedium;
+
+  /// Photo resolution: 5 megapixels
+  ///
+  /// In en, this message translates to:
+  /// **'5MP'**
+  String get photoResolution5Mp;
+
+  /// Photo resolution: 7 megapixels
+  ///
+  /// In en, this message translates to:
+  /// **'7MP'**
+  String get photoResolution7Mp;
+
+  /// Photo resolution: 12 megapixels
+  ///
+  /// In en, this message translates to:
+  /// **'12MP'**
+  String get photoResolution12Mp;
 
   /// Timelapse interval: 0.5 seconds
   ///

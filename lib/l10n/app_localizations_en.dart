@@ -347,16 +347,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loopVideoMaxStorage => 'Max Storage';
 
   @override
-  String get photoResolution5MpMedium => '5MP Medium';
+  String get photoResolution5MpMedium => '5MP 1.42x';
 
   @override
-  String get photoResolution7MpMedium => '7MP Medium';
+  String get photoResolution7MpMedium => '7MP 1.42x';
 
   @override
-  String get photoResolution7MpWide => '7MP Wide';
+  String get photoResolution7MpWide => '7MP 1x';
 
   @override
-  String get photoResolution12MpWide => '12MP Wide';
+  String get photoResolution12MpWide => '12MP 1x';
+
+  @override
+  String get photoZoomWide => 'Wide (1x)';
+
+  @override
+  String get photoZoomMedium => 'Medium (1.42x)';
+
+  @override
+  String get photoResolution5Mp => '5MP';
+
+  @override
+  String get photoResolution7Mp => '7MP';
+
+  @override
+  String get photoResolution12Mp => '12MP';
 
   @override
   String get timelapse0_5Sec => '0.5 Seconds';

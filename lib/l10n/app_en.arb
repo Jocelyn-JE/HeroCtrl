@@ -459,21 +459,41 @@
     "@loopVideoMaxStorage": {
         "description": "Loop video duration: Use maximum storage"
     },
-    "photoResolution5MpMedium": "5MP Medium",
+    "photoResolution5MpMedium": "5MP 1.42x",
     "@photoResolution5MpMedium": {
         "description": "Photo resolution: 5 megapixels medium"
     },
-    "photoResolution7MpMedium": "7MP Medium",
+    "photoResolution7MpMedium": "7MP 1.42x",
     "@photoResolution7MpMedium": {
         "description": "Photo resolution: 7 megapixels medium"
     },
-    "photoResolution7MpWide": "7MP Wide",
+    "photoResolution7MpWide": "7MP 1x",
     "@photoResolution7MpWide": {
         "description": "Photo resolution: 7 megapixels wide"
     },
-    "photoResolution12MpWide": "12MP Wide",
+    "photoResolution12MpWide": "12MP 1x",
     "@photoResolution12MpWide": {
         "description": "Photo resolution: 12 megapixels wide"
+    },
+    "photoZoomWide": "Wide (1x)",
+    "@photoZoomWide": {
+        "description": "Photo zoom level: wide angle (1x)"
+    },
+    "photoZoomMedium": "Medium (1.42x)",
+    "@photoZoomMedium": {
+        "description": "Photo zoom level: medium (1.42x)"
+    },
+    "photoResolution5Mp": "5MP",
+    "@photoResolution5Mp": {
+        "description": "Photo resolution: 5 megapixels"
+    },
+    "photoResolution7Mp": "7MP",
+    "@photoResolution7Mp": {
+        "description": "Photo resolution: 7 megapixels"
+    },
+    "photoResolution12Mp": "12MP",
+    "@photoResolution12Mp": {
+        "description": "Photo resolution: 12 megapixels"
     },
     "timelapse0_5Sec": "0.5 Seconds",
     "@timelapse0_5Sec": {

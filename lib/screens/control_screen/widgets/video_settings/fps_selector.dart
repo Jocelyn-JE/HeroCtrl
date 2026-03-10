@@ -9,7 +9,6 @@ class FPSSelector extends StatelessWidget {
   final String password;
   final Future<void> Function() onFpsChanged;
   final EdgeInsetsGeometry padding;
-  final bool isExpanded;
 
   const FPSSelector({
     super.key,
@@ -17,7 +16,6 @@ class FPSSelector extends StatelessWidget {
     required this.password,
     required this.onFpsChanged,
     this.padding = const EdgeInsets.all(8.0),
-    this.isExpanded = false,
   });
 
   List<FPS> _getValidFpsOptions() {
@@ -42,7 +40,7 @@ class FPSSelector extends StatelessWidget {
         : Padding(
             padding: padding,
             child: DropdownButton<FPS>(
-              isExpanded: isExpanded,
+              isExpanded: true,
               value: selectedValue,
               onChanged: (cameraState.isCameraOn && validFpsOptions.isNotEmpty)
                   ? (newValue) {

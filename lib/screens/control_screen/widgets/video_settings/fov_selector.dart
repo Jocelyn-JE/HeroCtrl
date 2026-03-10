@@ -9,7 +9,6 @@ class FOVSelector extends StatelessWidget {
   final String password;
   final Future<void> Function() onFovChanged;
   final EdgeInsetsGeometry padding;
-  final bool isExpanded;
 
   const FOVSelector({
     super.key,
@@ -17,7 +16,6 @@ class FOVSelector extends StatelessWidget {
     required this.password,
     required this.onFovChanged,
     this.padding = const EdgeInsets.all(8.0),
-    this.isExpanded = false,
   });
 
   /// Get the valid FOV options for the current resolution and FPS combination
@@ -43,7 +41,7 @@ class FOVSelector extends StatelessWidget {
         : Padding(
             padding: padding,
             child: DropdownButton<FOV>(
-              isExpanded: isExpanded,
+              isExpanded: true,
               value: selectedValue,
               onChanged: (cameraState.isCameraOn && validFovOptions.isNotEmpty)
                   ? (newValue) {

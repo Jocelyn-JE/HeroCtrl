@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:heroctrl/constants/gopro_action_enums.dart';
+import 'package:heroctrl/constants/gopro_photo_enums.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
@@ -433,12 +434,43 @@ class GoProApiService {
     await _postApi(_camera, GoProEndpoints.fov, password, fovOption.value);
   }
 
+  static Future<PhotoResolution> getPhotoResolution(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.photoResolution,
+      password,
+    );
+    final value = response.bodyBytes[1];
+    try {
+      return PhotoResolution.all.firstWhere((res) => res.value == value);
+    } catch (e) {
+      AppLogger.error('Error parsing photo resolution', e);
+      return PhotoResolution.res12MPwide;
+    }
+  }
+
+  static Future<void> setPhotoResolution(
+    String password,
+    PhotoResolution resolutionOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.photoResolution,
+      password,
+      resolutionOption.value,
+    );
+  }
+
   static Future<void> formatSDCard(String password) async {
     await _postApi(_camera, GoProEndpoints.formatSDCard, password, null);
   }
 
   static Future<void> deleteAllMedia(String password) async {
     await _postApi(_camera, GoProEndpoints.deleteAllMedia, password, null);
+  }
+
+  static Future<void> deleteLastMedia(String password) async {
+    await _postApi(_camera, GoProEndpoints.deleteLastMedia, password, null);
   }
 
   static Future<http.Response> _getApi(

@@ -119,11 +119,9 @@ class _CameraModeCarouselState extends State<CameraModeCarousel> {
   }
 
   Future<void> _changeMode(CameraMode mode) async {
-    final isShutterDown = CameraStateConditions.isShutterDown(
-      widget.cameraState,
-    );
+    final isRecording = CameraStateConditions.isRecording(widget.cameraState);
     if (_isLoading ||
-        isShutterDown ||
+        isRecording ||
         mode == widget.cameraState.status.cameraMode) {
       return;
     }
@@ -165,7 +163,7 @@ class _CameraModeCarouselState extends State<CameraModeCarousel> {
         AppLogger.info('Capturing photo');
         await GoProApiService.startShutter(widget.password);
       } else {
-        if (CameraStateConditions.isShutterDown(widget.cameraState)) {
+        if (CameraStateConditions.isRecording(widget.cameraState)) {
           AppLogger.info('Stopping recording');
           await GoProApiService.stopShutter(widget.password);
         } else {
@@ -183,7 +181,7 @@ class _CameraModeCarouselState extends State<CameraModeCarousel> {
         final action =
             CameraStateConditions.isInPhotoOrBurstMode(widget.cameraState)
             ? 'capture photo'
-            : (CameraStateConditions.isShutterDown(widget.cameraState)
+            : (CameraStateConditions.isRecording(widget.cameraState)
                   ? 'stop recording'
                   : 'start recording');
         showSnackBarError(context, 'Error: Cannot $action: $e');
@@ -213,7 +211,7 @@ class _CameraModeCarouselState extends State<CameraModeCarousel> {
       widget.cameraState,
     );
     final isRecording = CameraStateConditions.isRecording(widget.cameraState);
-    final canSwitchModes = !_isLoading && !isShutterDown;
+    final canSwitchModes = !_isLoading && !isRecording;
     final colorScheme = Theme.of(context).colorScheme;
 
     return LayoutBuilder(
