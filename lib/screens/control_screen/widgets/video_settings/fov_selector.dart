@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
+import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 
 class FOVSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
-  final Future<void> Function(FOV) onFovChanged;
+  final Future<void> Function() onFovChanged;
   final EdgeInsetsGeometry padding;
   final bool isExpanded;
 
@@ -50,7 +51,9 @@ class FOVSelector extends StatelessWidget {
                         AppLogger.info(
                           'Changing FOV to ${newValue.getLocalizedName(context)}',
                         );
-                        onFovChanged(newValue);
+                        GoProApiService.setFOV(password, newValue).then((_) {
+                          onFovChanged();
+                        });
                       }
                     }
                   : null,

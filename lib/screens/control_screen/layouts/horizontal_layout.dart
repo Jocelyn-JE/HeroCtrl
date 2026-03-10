@@ -12,20 +12,14 @@ class HorizontalLayout extends StatelessWidget {
   final Widget previewArea;
   final CameraState? cameraState;
   final String password;
-  final Future<void> Function(VideoResolution) onResolutionChanged;
-  final Future<void> Function(FPS) onFpsChanged;
-  final Future<void> Function(FOV) onFovChanged;
-  final Future<void> Function() onStatusUpdated;
+  final Future<void> Function() onSettingChanged;
 
   const HorizontalLayout({
     super.key,
     required this.previewArea,
     required this.cameraState,
     required this.password,
-    required this.onResolutionChanged,
-    required this.onFpsChanged,
-    required this.onFovChanged,
-    required this.onStatusUpdated,
+    required this.onSettingChanged,
   });
 
   @override
@@ -80,7 +74,7 @@ class HorizontalLayout extends StatelessWidget {
                       ResolutionSelector(
                         cameraState: cameraState!,
                         password: password,
-                        onResolutionChanged: onResolutionChanged,
+                        onResolutionChanged: onSettingChanged,
                         padding: EdgeInsets.zero,
                       ),
                     if (showFps || showFov) const SizedBox(height: 8),
@@ -88,7 +82,7 @@ class HorizontalLayout extends StatelessWidget {
                       FPSSelector(
                         cameraState: cameraState!,
                         password: password,
-                        onFpsChanged: onFpsChanged,
+                        onFpsChanged: onSettingChanged,
                         padding: EdgeInsets.zero,
                         isExpanded: true,
                       ),
@@ -97,7 +91,7 @@ class HorizontalLayout extends StatelessWidget {
                       FOVSelector(
                         cameraState: cameraState!,
                         password: password,
-                        onFovChanged: onFovChanged,
+                        onFovChanged: onSettingChanged,
                         padding: EdgeInsets.zero,
                         isExpanded: true,
                       ),
@@ -106,7 +100,7 @@ class HorizontalLayout extends StatelessWidget {
                   CameraModeCarousel(
                     cameraState: cameraState!,
                     password: password,
-                    onStatusUpdated: onStatusUpdated,
+                    onStatusUpdated: onSettingChanged,
                   ),
                 ],
               ),

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
@@ -114,45 +113,6 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     }
   }
 
-  Future<void> _onResolutionChanged(VideoResolution newResolution) async {
-    try {
-      await GoProApiService.setVideoResolution(_password, newResolution);
-      // Refresh camera status to get the updated resolution and available FPS
-      await _updateCameraStatus();
-    } catch (e, stackTrace) {
-      AppLogger.error('Error changing video resolution', e, stackTrace);
-      if (mounted) {
-        showSnackBarError(context, 'Error changing resolution: $e');
-      }
-    }
-  }
-
-  Future<void> _onFpsChanged(FPS newFps) async {
-    try {
-      await GoProApiService.setFPS(_password, newFps);
-      // Refresh camera status to get the updated FPS
-      await _updateCameraStatus();
-    } catch (e, stackTrace) {
-      AppLogger.error('Error changing FPS', e, stackTrace);
-      if (mounted) {
-        showSnackBarError(context, 'Error changing FPS: $e');
-      }
-    }
-  }
-
-  Future<void> _onFovChanged(FOV newFov) async {
-    try {
-      await GoProApiService.setFOV(_password, newFov);
-      // Refresh camera status to get the updated FOV
-      await _updateCameraStatus();
-    } catch (e, stackTrace) {
-      AppLogger.error('Error changing FOV', e, stackTrace);
-      if (mounted) {
-        showSnackBarError(context, 'Error changing FOV: $e');
-      }
-    }
-  }
-
   Future<void> _checkPreviewStatus() async {
     try {
       AppLogger.info('Camera is on, waiting for preview to be enabled...');
@@ -171,18 +131,18 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     }
   }
 
-  Future<void> _updateCameraStatus() async {
-    final updatedStatus = await GoProApiService.getStatus(_password);
-    if (mounted && _cameraState != null) {
-      setState(() {
-        _cameraState!.status = updatedStatus;
-      });
-    }
-  }
-
   Future<void> _refreshCameraStatus() async {
     try {
-      await _updateCameraStatus();
+      final previousMode = _cameraState?.status.cameraMode;
+      final updatedStatus = await GoProApiService.getStatus(
+        _password,
+        fallbackCameraMode: previousMode,
+      );
+      if (mounted && _cameraState != null) {
+        setState(() {
+          _cameraState!.status = updatedStatus;
+        });
+      }
     } catch (e, stackTrace) {
       AppLogger.error('Error refreshing camera status', e, stackTrace);
     }
@@ -210,7 +170,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
             ? const BorderRadius.all(Radius.circular(12))
             : const BorderRadius.all(Radius.circular(0)),
         cameraState: _cameraState,
-        onReconnect: _updateCameraStatus,
+        onReconnect: _refreshCameraStatus,
       );
     } else if (CameraStateConditions.isInSettingsMode(_cameraState)) {
       previewArea = Text(
@@ -233,10 +193,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
                 : Center(child: previewArea),
             cameraState: _cameraState,
             password: _password,
-            onResolutionChanged: _onResolutionChanged,
-            onFpsChanged: _onFpsChanged,
-            onFovChanged: _onFovChanged,
-            onStatusUpdated: _updateCameraStatus,
+            onSettingChanged: _refreshCameraStatus,
           )
         : VerticalLayout(
             previewArea:
@@ -247,10 +204,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
                 : Center(child: previewArea),
             cameraState: _cameraState,
             password: _password,
-            onResolutionChanged: _onResolutionChanged,
-            onFpsChanged: _onFpsChanged,
-            onFovChanged: _onFovChanged,
-            onStatusUpdated: _updateCameraStatus,
+            onSettingChanged: _refreshCameraStatus,
           );
 
     return Scaffold(

@@ -12,20 +12,14 @@ class VerticalLayout extends StatelessWidget {
   final Widget previewArea;
   final CameraState? cameraState;
   final String password;
-  final Future<void> Function(VideoResolution) onResolutionChanged;
-  final Future<void> Function(FPS) onFpsChanged;
-  final Future<void> Function(FOV) onFovChanged;
-  final Future<void> Function() onStatusUpdated;
+  final Future<void> Function() onSettingChanged;
 
   const VerticalLayout({
     super.key,
     required this.previewArea,
     required this.cameraState,
     required this.password,
-    required this.onResolutionChanged,
-    required this.onFpsChanged,
-    required this.onFovChanged,
-    required this.onStatusUpdated,
+    required this.onSettingChanged,
   });
 
   @override
@@ -84,7 +78,7 @@ class VerticalLayout extends StatelessWidget {
                             child: ResolutionSelector(
                               cameraState: cameraState!,
                               password: password,
-                              onResolutionChanged: onResolutionChanged,
+                              onResolutionChanged: onSettingChanged,
                               padding: EdgeInsets.zero,
                             ),
                           ),
@@ -93,7 +87,7 @@ class VerticalLayout extends StatelessWidget {
                           FPSSelector(
                             cameraState: cameraState!,
                             password: password,
-                            onFpsChanged: onFpsChanged,
+                            onFpsChanged: onSettingChanged,
                             padding: EdgeInsets.zero,
                           ),
                         if (showFps && showFov) const SizedBox(width: 8),
@@ -101,7 +95,7 @@ class VerticalLayout extends StatelessWidget {
                           FOVSelector(
                             cameraState: cameraState!,
                             password: password,
-                            onFovChanged: onFovChanged,
+                            onFovChanged: onSettingChanged,
                             padding: EdgeInsets.zero,
                           ),
                       ],
@@ -113,7 +107,7 @@ class VerticalLayout extends StatelessWidget {
                   child: CameraModeCarousel(
                     cameraState: cameraState!,
                     password: password,
-                    onStatusUpdated: onStatusUpdated,
+                    onStatusUpdated: onSettingChanged,
                   ),
                 ),
               ],

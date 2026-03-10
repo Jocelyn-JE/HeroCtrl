@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
+import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 
 class ResolutionSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
-  final Future<void> Function(VideoResolution) onResolutionChanged;
+  final Future<void> Function() onResolutionChanged;
   final EdgeInsetsGeometry padding;
 
   const ResolutionSelector({
@@ -39,7 +40,11 @@ class ResolutionSelector extends StatelessWidget {
                   AppLogger.info(
                     'Changing video resolution to ${newValue.getLocalizedName(context)}',
                   );
-                  onResolutionChanged(newValue);
+                  GoProApiService.setVideoResolution(password, newValue).then((
+                    _,
+                  ) {
+                    onResolutionChanged();
+                  });
                 }
               }
             : null,

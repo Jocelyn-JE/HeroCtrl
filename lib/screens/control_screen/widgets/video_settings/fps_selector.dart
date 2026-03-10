@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
+import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 
 class FPSSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
-  final Future<void> Function(FPS) onFpsChanged;
+  final Future<void> Function() onFpsChanged;
   final EdgeInsetsGeometry padding;
   final bool isExpanded;
 
@@ -49,7 +50,9 @@ class FPSSelector extends StatelessWidget {
                         AppLogger.info(
                           'Changing FPS to ${newValue.getLocalizedName(context)}',
                         );
-                        onFpsChanged(newValue);
+                        GoProApiService.setFPS(password, newValue).then((_) {
+                          onFpsChanged();
+                        });
                       }
                     }
                   : null,
