@@ -39,8 +39,29 @@ class _LiveViewState extends State<LiveView> {
   late final VideoController _controller;
   late final StreamSubscription<Duration> _lengthSub;
   late final StreamSubscription<Duration> _positionSub;
+  late final StreamSubscription<bool> _bufferingSub;
+  static const Duration _reconnectCooldown = Duration(seconds: 2);
   Duration _duration = Duration.zero;
   bool _resettingStream = false;
+  bool _wasBuffering = false;
+  DateTime? _lastReconnectAt;
+
+  void _notifyReconnect({required String source}) {
+    if (!mounted) return;
+
+    final now = DateTime.now();
+    final lastReconnectAt = _lastReconnectAt;
+    if (lastReconnectAt != null &&
+        now.difference(lastReconnectAt) < _reconnectCooldown) {
+      AppLogger.info(
+        'Reconnect callback skipped due to cooldown (${_reconnectCooldown.inMilliseconds}ms) from $source',
+      );
+      return;
+    }
+
+    _lastReconnectAt = now;
+    unawaited(widget.onReconnect());
+  }
 
   Future<void> _fixStream() async {
     try {
@@ -82,7 +103,7 @@ class _LiveViewState extends State<LiveView> {
     }
     if (!mounted) return;
     await _player.open(Media(GoProEndpoints.livestreamUrl));
-    widget.onReconnect();
+    _notifyReconnect(source: 'openStream');
   }
 
   @override
@@ -108,6 +129,12 @@ class _LiveViewState extends State<LiveView> {
       } else if (playback > _duration - const Duration(seconds: 5)) {
         _resettingStream = false;
       }
+    });
+    _bufferingSub = _player.stream.buffering.listen((isBuffering) {
+      if (isBuffering && !_wasBuffering) {
+        _notifyReconnect(source: 'bufferingStart');
+      }
+      _wasBuffering = isBuffering;
     });
 
     _openStream();
@@ -169,6 +196,7 @@ class _LiveViewState extends State<LiveView> {
   void dispose() {
     _lengthSub.cancel();
     _positionSub.cancel();
+    _bufferingSub.cancel();
     _player.dispose();
     super.dispose();
   }
