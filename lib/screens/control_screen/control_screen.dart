@@ -5,7 +5,7 @@ import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/battery_monitor.dart';
 import 'package:heroctrl/screens/control_screen/widgets/battery_indicator.dart';
-import 'package:heroctrl/screens/control_screen/widgets/live_view.dart';
+import 'package:heroctrl/screens/control_screen/widgets/live_view/live_view.dart';
 import 'package:heroctrl/screens/control_screen/layouts/horizontal_layout.dart';
 import 'package:heroctrl/screens/control_screen/layouts/vertical_layout.dart';
 import 'package:heroctrl/services/app_prefs.dart';

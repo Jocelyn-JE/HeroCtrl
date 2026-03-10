@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:heroctrl/screens/control_screen/widgets/fix_stream_button.dart';
+import 'package:heroctrl/screens/control_screen/widgets/live_view/fix_stream_button.dart';
 import 'package:media_kit/media_kit.dart';
 
 class LiveViewControls extends StatefulWidget {
