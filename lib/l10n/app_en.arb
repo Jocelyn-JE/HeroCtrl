@@ -794,5 +794,31 @@
     "deleteAllMediaConfirmButton": "Delete All",
     "@deleteAllMediaConfirmButton": {
         "description": "Confirmation button label for deleting all media"
+    },
+    "showMediaCount": "Show video/photo count",
+    "@showMediaCount": {
+        "description": "Settings option to show the current video/photo count on the control screen"
+    },
+    "showMediaCountSubtitle": "Display how many videos or photos have been taken above the mode selector.",
+    "@showMediaCountSubtitle": {
+        "description": "Subtitle for the show media count option"
+    },
+    "mediaCountVideos": "{count} videos",
+    "@mediaCountVideos": {
+        "description": "Label showing the number of videos taken",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "mediaCountPhotos": "{count} photos",
+    "@mediaCountPhotos": {
+        "description": "Label showing the number of photos taken",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     }
 }

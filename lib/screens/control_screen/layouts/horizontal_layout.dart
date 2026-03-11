@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/camera_mode_carousel.dart';
+import 'package:heroctrl/screens/control_screen/widgets/media_count_display.dart';
 import 'package:heroctrl/screens/control_screen/widgets/photo_settings/photo_settings.dart';
 import 'package:heroctrl/screens/control_screen/widgets/video_settings/video_settings.dart';
 import 'package:heroctrl/utils/camera_state_conditions.dart';
@@ -59,6 +60,7 @@ class HorizontalLayout extends StatelessWidget {
                       ),
                     ),
                   const Spacer(),
+                  MediaCountDisplay(cameraState: cameraState),
                   CameraModeCarousel(
                     cameraState: cameraState!,
                     password: password,

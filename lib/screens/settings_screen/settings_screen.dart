@@ -3,6 +3,7 @@ import 'package:heroctrl/widgets/red_button.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 import 'widgets/disconnect_switch_card.dart';
 import 'widgets/forget_all_cameras_dialog.dart';
+import 'widgets/media_count_switch_card.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -24,6 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             children: [
               const DisconnectSwitchCard(),
+              const MediaCountSwitchCard(),
               const Spacer(),
               Center(
                 child: RedButton(

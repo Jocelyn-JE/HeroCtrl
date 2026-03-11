@@ -22,4 +22,22 @@ class AppPrefs {
       value: value.toString(),
     );
   }
+
+  static const String _showMediaCountKey = 'show_media_count';
+
+  /// Get whether to show the video/photo count above the mode selector.
+  /// Default is true.
+  static Future<bool> getShowMediaCount() async {
+    final value = await _secureStorage.read(key: _showMediaCountKey);
+    if (value == null) return true;
+    return value == 'true';
+  }
+
+  /// Set whether to show the video/photo count above the mode selector.
+  static Future<void> setShowMediaCount(bool value) async {
+    await _secureStorage.write(
+      key: _showMediaCountKey,
+      value: value.toString(),
+    );
+  }
 }

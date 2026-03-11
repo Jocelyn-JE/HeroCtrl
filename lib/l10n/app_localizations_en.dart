@@ -584,4 +584,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteAllMediaConfirmButton => 'Delete All';
+
+  @override
+  String get showMediaCount => 'Show video/photo count';
+
+  @override
+  String get showMediaCountSubtitle => 'Display how many videos or photos have been taken above the mode selector.';
+
+  @override
+  String mediaCountVideos(int count) {
+    return '$count videos';
+  }
+
+  @override
+  String mediaCountPhotos(int count) {
+    return '$count photos';
+  }
 }

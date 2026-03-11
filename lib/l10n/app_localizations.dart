@@ -1202,6 +1202,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete All'**
   String get deleteAllMediaConfirmButton;
+
+  /// Settings option to show the current video/photo count on the control screen
+  ///
+  /// In en, this message translates to:
+  /// **'Show video/photo count'**
+  String get showMediaCount;
+
+  /// Subtitle for the show media count option
+  ///
+  /// In en, this message translates to:
+  /// **'Display how many videos or photos have been taken above the mode selector.'**
+  String get showMediaCountSubtitle;
+
+  /// Label showing the number of videos taken
+  ///
+  /// In en, this message translates to:
+  /// **'{count} videos'**
+  String mediaCountVideos(int count);
+
+  /// Label showing the number of photos taken
+  ///
+  /// In en, this message translates to:
+  /// **'{count} photos'**
+  String mediaCountPhotos(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
