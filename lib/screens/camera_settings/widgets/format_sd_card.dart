@@ -4,16 +4,16 @@ import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/utils/snackbar.dart';
 
-class FormatSdCardCard extends StatefulWidget {
+class FormatSdCard extends StatefulWidget {
   final String password;
 
-  const FormatSdCardCard({super.key, required this.password});
+  const FormatSdCard({super.key, required this.password});
 
   @override
-  State<FormatSdCardCard> createState() => _FormatSdCardCardState();
+  State<FormatSdCard> createState() => _FormatSdCardState();
 }
 
-class _FormatSdCardCardState extends State<FormatSdCardCard> {
+class _FormatSdCardState extends State<FormatSdCard> {
   bool _isBusy = false;
 
   Future<void> _confirmAndFormat() async {

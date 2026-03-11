@@ -3,7 +3,7 @@ import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/camera_info_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/default_mode_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/delete_all_media_card.dart';
-import 'package:heroctrl/screens/camera_settings/widgets/format_sd_card_card.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/format_sd_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/locate_camera_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/video_standard_setting_card.dart';
@@ -42,7 +42,7 @@ class CameraSettingsScreen extends StatelessWidget {
                     VideoStandardSettingCard(password: password),
                     TimeSettingCard(password: password),
                     LocateCameraCard(password: password),
-                    FormatSdCardCard(password: password),
+                    FormatSdCard(password: password),
                     DeleteAllMediaCard(password: password),
                     CameraInfoCard(password: password),
                     SizedBox(height: 8),
