@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/services/app_prefs.dart';
 import 'package:heroctrl/widgets/red_button.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
+import 'widgets/disconnect_switch_card.dart';
 import 'widgets/forget_all_cameras_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -12,28 +12,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _switchOffCameraOnDisconnect = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadPreferences();
-  }
-
-  Future<void> _loadPreferences() async {
-    final value = await AppPrefs.getSwitchOffCameraOnDisconnect();
-    setState(() {
-      _switchOffCameraOnDisconnect = value;
-    });
-  }
-
-  Future<void> _updateSwitchOffCameraOnDisconnect(bool value) async {
-    await AppPrefs.setSwitchOffCameraOnDisconnect(value);
-    setState(() {
-      _switchOffCameraOnDisconnect = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -45,14 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           padding: EdgeInsets.fromLTRB(8, 0, 8, bottomInset),
           child: Column(
             children: [
-              Card(
-                child: SwitchListTile(
-                  title: Text(l10n.switchOffCameraOnDisconnect),
-                  subtitle: Text(l10n.switchOffCameraOnDisconnectSubtitle),
-                  value: _switchOffCameraOnDisconnect,
-                  onChanged: _updateSwitchOffCameraOnDisconnect,
-                ),
-              ),
+              const DisconnectSwitchCard(),
               const Spacer(),
               Center(
                 child: RedButton(
