@@ -33,7 +33,7 @@
     "@aboutPeriodicScanning": {
         "description": "Dialog title about scanning"
     },
-    "periodicScanningInfo": "The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ",
+    "periodicScanningInfo": "The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes. ",
     "@periodicScanningInfo": {
         "description": "Information about periodic WiFi scanning"
     },
