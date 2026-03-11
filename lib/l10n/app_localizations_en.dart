@@ -32,8 +32,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutPeriodicScanning => 'About periodic scanning';
 
   @override
-  String get periodicScanningInfo =>
-      'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ';
+  String get periodicScanningInfo => 'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ';
 
   @override
   String get ok => 'OK';
@@ -74,8 +73,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgetAllCameras => 'Forget all cameras';
 
   @override
-  String get forgetAllCamerasConfirm =>
-      'Are you sure you want to forget all cameras?';
+  String get forgetAllCamerasConfirm => 'Are you sure you want to forget all cameras?';
 
   @override
   String get forget => 'Forget';
@@ -84,8 +82,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchOffCameraOnDisconnect => 'Switch off camera on disconnect';
 
   @override
-  String get switchOffCameraOnDisconnectSubtitle =>
-      'Automatically power off the camera when disconnecting from it (will stop any active recording).';
+  String get switchOffCameraOnDisconnectSubtitle => 'Automatically power off the camera when disconnecting from it (will stop any active recording).';
 
   @override
   String get cameraSettings => 'Camera Settings';
@@ -94,8 +91,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ledSetting => 'LED Indicators';
 
   @override
-  String get ledSettingSubtitle =>
-      'Control which status LEDs are active on the camera.';
+  String get ledSettingSubtitle => 'Control which status LEDs are active on the camera.';
 
   @override
   String get ledOff => 'Off';
@@ -125,15 +121,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get orientationUpsideDown => 'Upside-Down Mode';
 
   @override
-  String get orientationUpsideDownSubtitle =>
-      'Flip the camera image when mounted upside down.';
+  String get orientationUpsideDownSubtitle => 'Flip the camera image when mounted upside down.';
 
   @override
   String get timeSetting => 'Date & Time';
 
   @override
-  String get timeSettingSubtitle =>
-      'Sync the camera clock with the current device time.';
+  String get timeSettingSubtitle => 'Sync the camera clock with the current device time.';
 
   @override
   String get timeSetToNow => 'Sync to Device Time';
@@ -145,8 +139,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get videoStandardSettingTitle => 'Video Mode';
 
   @override
-  String get videoStandardSettingSubtitle =>
-      'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.';
+  String get videoStandardSettingSubtitle => 'Switch between NTSC (multiples of 30fps) and PAL (multiples of 25fps) video modes.\nRecommended use is NTSC in North America, Western South America, and Japan. PAL in Europe, Asia, Africa and everywhere else.';
 
   @override
   String get videoStandardNtsc => 'NTSC (30fps)';
@@ -191,8 +184,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get defaultModeSetting => 'Default Camera Mode';
 
   @override
-  String get defaultModeSettingSubtitle =>
-      'Choose which mode the camera should start in when powered on.';
+  String get defaultModeSettingSubtitle => 'Choose which mode the camera should start in when powered on.';
 
   @override
   String get defaultModeVideo => 'Video';
@@ -210,8 +202,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locateCamera => 'Locate Camera';
 
   @override
-  String get locateCameraSubtitle =>
-      'Make the camera beep and flash its LEDs to help you find it.';
+  String get locateCameraSubtitle => 'Make the camera beep and flash its LEDs to help you find it.';
 
   @override
   String get locateCameraButton => 'Start Locating';
@@ -220,8 +211,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locateCameraDialogTitle => 'Locating Camera';
 
   @override
-  String get locateCameraDialogMessage =>
-      'The camera is beeping and flashing. Tap Stop when you\'ve found it.';
+  String get locateCameraDialogMessage => 'The camera is beeping and flashing. Tap Stop when you\'ve found it.';
 
   @override
   String get locateCameraStop => 'Stop';
@@ -230,19 +220,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get disconnectTitle => 'Disconnect & Turn Off';
 
   @override
-  String get disconnectSubtitle =>
-      'Turn off the camera and return to the home screen.';
+  String get disconnectSubtitle => 'Turn off the camera and return to the home screen.';
 
   @override
   String get disconnectConfirmTitle => 'Turn Off Camera?';
 
   @override
-  String get disconnectConfirmMessage =>
-      'This will power off the camera and disconnect. Any active recording will be stopped.';
+  String get disconnectConfirmMessage => 'This will power off the camera and disconnect. Any active recording will be stopped.';
 
   @override
-  String get liveViewUnavailableInSettings =>
-      'Live view is not available in settings mode.';
+  String get liveViewUnavailableInSettings => 'Live view is not available in settings mode.';
 
   @override
   String get disconnectConfirmButton => 'Turn Off';
@@ -374,55 +361,55 @@ class AppLocalizationsEn extends AppLocalizations {
   String get photoResolution12Mp => '12MP';
 
   @override
-  String get timelapse0_5Sec => '0.5 Seconds';
+  String get timelapse0_5Sec => '1 Photo/0.5s';
 
   @override
-  String get timelapse1Sec => '1 Second';
+  String get timelapse1Sec => '1 Photo/1s';
 
   @override
-  String get timelapse2Sec => '2 Seconds';
+  String get timelapse2Sec => '1 Photo/2s';
 
   @override
-  String get timelapse5Sec => '5 Seconds';
+  String get timelapse5Sec => '1 Photo/5s';
 
   @override
-  String get timelapse10Sec => '10 Seconds';
+  String get timelapse10Sec => '1 Photo/10s';
 
   @override
-  String get timelapse30Sec => '30 Seconds';
+  String get timelapse30Sec => '1 Photo/30s';
 
   @override
-  String get timelapse60Sec => '60 Seconds';
+  String get timelapse60Sec => '1 Photo/60s';
 
   @override
-  String get continuousShot3Photos => '3 Photos';
+  String get continuousShot3Photos => '3 Photos/s';
 
   @override
-  String get continuousShot5Photos => '5 Photos';
+  String get continuousShot5Photos => '5 Photos/s';
 
   @override
-  String get continuousShot10Photos => '10 Photos';
+  String get continuousShot10Photos => '10 Photos/s';
 
   @override
-  String get burstRate3PerSec => '3 Photos/s';
+  String get burstRate3PerSec => '3 Photos - 1s';
 
   @override
-  String get burstRate5PerSec => '5 Photos/s';
+  String get burstRate5PerSec => '5 Photos - 1s';
 
   @override
-  String get burstRate10PerSec => '10 Photos/s';
+  String get burstRate10PerSec => '10 Photos - 1s';
 
   @override
-  String get burstRate10Per2Sec => '10 Photos/2s';
+  String get burstRate10Per2Sec => '10 Photos - 2s';
 
   @override
-  String get burstRate30PerSec => '30 Photos/s';
+  String get burstRate30PerSec => '30 Photos - 1s';
 
   @override
-  String get burstRate30Per2Sec => '30 Photos/2s';
+  String get burstRate30Per2Sec => '30 Photos - 2s';
 
   @override
-  String get burstRate30Per3Sec => '30 Photos/3s';
+  String get burstRate30Per3Sec => '30 Photos - 3s';
 
   @override
   String get protuneOn => 'Pro Tune On';
@@ -530,8 +517,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fixStream => 'Fix Stream';
 
   @override
-  String get batteryCriticallyLow =>
-      'Battery critically low. Disconnecting from camera.';
+  String get batteryCriticallyLow => 'Battery critically low. Disconnecting from camera.';
 
   @override
   String get fps12 => '12 fps';
@@ -579,8 +565,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get formatSdCardConfirmTitle => 'Format SD Card?';
 
   @override
-  String get formatSdCardConfirmMessage =>
-      'This will erase all data from the SD card. This action cannot be undone.';
+  String get formatSdCardConfirmMessage => 'This will erase all data from the SD card. This action cannot be undone.';
 
   @override
   String get formatSdCardConfirmButton => 'Format';
@@ -595,8 +580,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteAllMediaConfirmTitle => 'Delete All Media?';
 
   @override
-  String get deleteAllMediaConfirmMessage =>
-      'This will delete all photos and videos from the camera. This action cannot be undone.';
+  String get deleteAllMediaConfirmMessage => 'This will delete all photos and videos from the camera. This action cannot be undone.';
 
   @override
   String get deleteAllMediaConfirmButton => 'Delete All';

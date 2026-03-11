@@ -61,8 +61,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,8 +69,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,16 +81,17 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en')
+  ];
 
   /// Label for password input field
   ///
@@ -757,103 +756,103 @@ abstract class AppLocalizations {
   /// Timelapse interval: 0.5 seconds
   ///
   /// In en, this message translates to:
-  /// **'0.5 Seconds'**
+  /// **'1 Photo/0.5s'**
   String get timelapse0_5Sec;
 
   /// Timelapse interval: 1 second
   ///
   /// In en, this message translates to:
-  /// **'1 Second'**
+  /// **'1 Photo/1s'**
   String get timelapse1Sec;
 
   /// Timelapse interval: 2 seconds
   ///
   /// In en, this message translates to:
-  /// **'2 Seconds'**
+  /// **'1 Photo/2s'**
   String get timelapse2Sec;
 
   /// Timelapse interval: 5 seconds
   ///
   /// In en, this message translates to:
-  /// **'5 Seconds'**
+  /// **'1 Photo/5s'**
   String get timelapse5Sec;
 
   /// Timelapse interval: 10 seconds
   ///
   /// In en, this message translates to:
-  /// **'10 Seconds'**
+  /// **'1 Photo/10s'**
   String get timelapse10Sec;
 
   /// Timelapse interval: 30 seconds
   ///
   /// In en, this message translates to:
-  /// **'30 Seconds'**
+  /// **'1 Photo/30s'**
   String get timelapse30Sec;
 
   /// Timelapse interval: 60 seconds
   ///
   /// In en, this message translates to:
-  /// **'60 Seconds'**
+  /// **'1 Photo/60s'**
   String get timelapse60Sec;
 
   /// Continuous shot: 3 photos
   ///
   /// In en, this message translates to:
-  /// **'3 Photos'**
+  /// **'3 Photos/s'**
   String get continuousShot3Photos;
 
   /// Continuous shot: 5 photos
   ///
   /// In en, this message translates to:
-  /// **'5 Photos'**
+  /// **'5 Photos/s'**
   String get continuousShot5Photos;
 
   /// Continuous shot: 10 photos
   ///
   /// In en, this message translates to:
-  /// **'10 Photos'**
+  /// **'10 Photos/s'**
   String get continuousShot10Photos;
 
   /// Burst rate: 3 photos per second
   ///
   /// In en, this message translates to:
-  /// **'3 Photos/s'**
+  /// **'3 Photos - 1s'**
   String get burstRate3PerSec;
 
   /// Burst rate: 5 photos per second
   ///
   /// In en, this message translates to:
-  /// **'5 Photos/s'**
+  /// **'5 Photos - 1s'**
   String get burstRate5PerSec;
 
   /// Burst rate: 10 photos per second
   ///
   /// In en, this message translates to:
-  /// **'10 Photos/s'**
+  /// **'10 Photos - 1s'**
   String get burstRate10PerSec;
 
   /// Burst rate: 10 photos per 2 seconds
   ///
   /// In en, this message translates to:
-  /// **'10 Photos/2s'**
+  /// **'10 Photos - 2s'**
   String get burstRate10Per2Sec;
 
   /// Burst rate: 30 photos per second
   ///
   /// In en, this message translates to:
-  /// **'30 Photos/s'**
+  /// **'30 Photos - 1s'**
   String get burstRate30PerSec;
 
   /// Burst rate: 30 photos per 2 seconds
   ///
   /// In en, this message translates to:
-  /// **'30 Photos/2s'**
+  /// **'30 Photos - 2s'**
   String get burstRate30Per2Sec;
 
   /// Burst rate: 30 photos per 3 seconds
   ///
   /// In en, this message translates to:
-  /// **'30 Photos/3s'**
+  /// **'30 Photos - 3s'**
   String get burstRate30Per3Sec;
 
   /// Pro Tune: Enabled
@@ -1205,8 +1204,7 @@ abstract class AppLocalizations {
   String get deleteAllMediaConfirmButton;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1215,24 +1213,24 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
+    case 'en': return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

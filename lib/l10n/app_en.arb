@@ -495,71 +495,71 @@
     "@photoResolution12Mp": {
         "description": "Photo resolution: 12 megapixels"
     },
-    "timelapse0_5Sec": "0.5 Seconds",
+    "timelapse0_5Sec": "1 Photo/0.5s",
     "@timelapse0_5Sec": {
         "description": "Timelapse interval: 0.5 seconds"
     },
-    "timelapse1Sec": "1 Second",
+    "timelapse1Sec": "1 Photo/1s",
     "@timelapse1Sec": {
         "description": "Timelapse interval: 1 second"
     },
-    "timelapse2Sec": "2 Seconds",
+    "timelapse2Sec": "1 Photo/2s",
     "@timelapse2Sec": {
         "description": "Timelapse interval: 2 seconds"
     },
-    "timelapse5Sec": "5 Seconds",
+    "timelapse5Sec": "1 Photo/5s",
     "@timelapse5Sec": {
         "description": "Timelapse interval: 5 seconds"
     },
-    "timelapse10Sec": "10 Seconds",
+    "timelapse10Sec": "1 Photo/10s",
     "@timelapse10Sec": {
         "description": "Timelapse interval: 10 seconds"
     },
-    "timelapse30Sec": "30 Seconds",
+    "timelapse30Sec": "1 Photo/30s",
     "@timelapse30Sec": {
         "description": "Timelapse interval: 30 seconds"
     },
-    "timelapse60Sec": "60 Seconds",
+    "timelapse60Sec": "1 Photo/60s",
     "@timelapse60Sec": {
         "description": "Timelapse interval: 60 seconds"
     },
-    "continuousShot3Photos": "3 Photos",
+    "continuousShot3Photos": "3 Photos/s",
     "@continuousShot3Photos": {
         "description": "Continuous shot: 3 photos"
     },
-    "continuousShot5Photos": "5 Photos",
+    "continuousShot5Photos": "5 Photos/s",
     "@continuousShot5Photos": {
         "description": "Continuous shot: 5 photos"
     },
-    "continuousShot10Photos": "10 Photos",
+    "continuousShot10Photos": "10 Photos/s",
     "@continuousShot10Photos": {
         "description": "Continuous shot: 10 photos"
     },
-    "burstRate3PerSec": "3 Photos/s",
+    "burstRate3PerSec": "3 Photos - 1s",
     "@burstRate3PerSec": {
         "description": "Burst rate: 3 photos per second"
     },
-    "burstRate5PerSec": "5 Photos/s",
+    "burstRate5PerSec": "5 Photos - 1s",
     "@burstRate5PerSec": {
         "description": "Burst rate: 5 photos per second"
     },
-    "burstRate10PerSec": "10 Photos/s",
+    "burstRate10PerSec": "10 Photos - 1s",
     "@burstRate10PerSec": {
         "description": "Burst rate: 10 photos per second"
     },
-    "burstRate10Per2Sec": "10 Photos/2s",
+    "burstRate10Per2Sec": "10 Photos - 2s",
     "@burstRate10Per2Sec": {
         "description": "Burst rate: 10 photos per 2 seconds"
     },
-    "burstRate30PerSec": "30 Photos/s",
+    "burstRate30PerSec": "30 Photos - 1s",
     "@burstRate30PerSec": {
         "description": "Burst rate: 30 photos per second"
     },
-    "burstRate30Per2Sec": "30 Photos/2s",
+    "burstRate30Per2Sec": "30 Photos - 2s",
     "@burstRate30Per2Sec": {
         "description": "Burst rate: 30 photos per 2 seconds"
     },
-    "burstRate30Per3Sec": "30 Photos/3s",
+    "burstRate30Per3Sec": "30 Photos - 3s",
     "@burstRate30Per3Sec": {
         "description": "Burst rate: 30 photos per 3 seconds"
     },
