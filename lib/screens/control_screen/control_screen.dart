@@ -69,6 +69,7 @@ class _RegisterControlScreenState extends State<ControlScreen> {
         final monitor = BatteryMonitor(
           camPassword: _password,
           initialPercent: batteryPercent,
+          onPollError: _onBatteryPollError,
         );
         monitor.trueReading.addListener(_onBatteryChanged);
         setState(() {
@@ -92,6 +93,12 @@ class _RegisterControlScreenState extends State<ControlScreen> {
     if (mounted) setState(() {});
     _refreshCameraStatus();
     _checkLowBatteryAndDisconnect();
+  }
+
+  void _onBatteryPollError(Object error, StackTrace stackTrace) {
+    if (!mounted || _hasScheduledDisconnectRedirect) return;
+    AppLogger.error('Battery poll failed, disconnecting', error, stackTrace);
+    _redirectToHomeOnDisconnected();
   }
 
   void _checkLowBatteryAndDisconnect() {

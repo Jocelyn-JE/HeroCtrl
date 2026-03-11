@@ -9,6 +9,7 @@ import 'package:heroctrl/utils/logger.dart';
 class BatteryMonitor {
   final String camPassword;
   final Duration pollInterval;
+  final void Function(Object error, StackTrace stackTrace)? onPollError;
 
   final ValueNotifier<int> batteryPercent;
   final ValueNotifier<int> trueReading = ValueNotifier(100);
@@ -31,6 +32,7 @@ class BatteryMonitor {
     required this.camPassword,
     required int initialPercent,
     this.pollInterval = const Duration(seconds: 30),
+    this.onPollError,
   }) : batteryPercent = ValueNotifier(initialPercent);
 
   void start() {
@@ -69,6 +71,7 @@ class BatteryMonitor {
         e,
         stackTrace,
       );
+      onPollError?.call(e, stackTrace);
     }
   }
 
