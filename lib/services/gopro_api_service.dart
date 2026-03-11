@@ -461,6 +461,30 @@ class GoProApiService {
     );
   }
 
+  static Future<void> setTimelapseInterval(
+    String password,
+    TimelapseInterval intervalOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.timeLapseInterval,
+      password,
+      intervalOption.value,
+    );
+  }
+
+  static Future<void> setBurstRate(
+    String password,
+    BurstRate burstRateOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.burstRate,
+      password,
+      burstRateOption.value,
+    );
+  }
+
   static Future<void> formatSDCard(String password) async {
     await _postApi(_camera, GoProEndpoints.formatSDCard, password, null);
   }
