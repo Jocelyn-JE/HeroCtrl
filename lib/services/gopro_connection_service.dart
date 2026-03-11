@@ -19,6 +19,11 @@ class GoProConnectionService {
 
   static String? get password => _currentConnection?.password;
 
+  /// Whether WiFi is enabled on the device.
+  static Future<bool> isWifiEnabled() async {
+    return WiFiForIoTPlugin.isEnabled();
+  }
+
   /// Connect to an unregistered GoPro camera
   static Future<bool> connectToUnregisteredGoPro(
     String ssid,
@@ -35,6 +40,7 @@ class GoProConnectionService {
       password: password,
       security: NetworkSecurity.WPA,
       timeoutInSeconds: 10,
+      withInternet: false,
     );
     WiFiForIoTPlugin.forceWifiUsage(true);
     await Future.delayed(const Duration(seconds: 3));
