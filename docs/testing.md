@@ -6,11 +6,28 @@
 
 ```txt
 test/
-├── models/          # Unit tests for data models and parsing logic
-├── services/        # Service layer tests (with mocks for network/storage)
-├── utils/           # Utility function and helper tests
+├── constants/       # Unit tests for enum definitions and recording settings
+│   └── gopro_recording_enums_test.dart
+├── models/          # Unit tests for data models and binary/JSON parsing
+│   ├── camera_serial_and_mac_test.dart
+│   ├── camera_state_test.dart
+│   ├── camera_status_test.dart
+│   ├── camera_version_test.dart
+│   ├── camera_wifi_info_test.dart
+│   └── gopro_registration_test.dart
+├── utils/           # Unit and widget tests for utility functions and helpers
+│   ├── app_routes_test.dart
+│   ├── camera_state_conditions_test.dart
+│   ├── gopro_validator_test.dart
+│   ├── logger_test.dart
+│   └── snackbar_test.dart
 ├── widgets/         # Widget tests for reusable UI components
-└── screens/         # Screen-level widget tests
+│   ├── battery_indicator_test.dart
+│   ├── password_field_test.dart
+│   ├── polling_timer_indicator_test.dart
+│   └── red_button_test.dart
+├── screens/         # Screen-level widget tests (none yet)
+└── services/        # Service layer tests (none yet)
 ```
 
 ## Running Tests
@@ -91,30 +108,117 @@ Open the report in your browser:
 
 ### Unit Tests (Pure Logic)
 
-Located in `models/`, `utils/`, and `constants/` folders.
+Located in `constants/`, `models/`, and `utils/` folders.
 
-**What's tested:**
+**`constants/gopro_recording_enums_test.dart`** — `VideoResolution`, `FOV`, `FPS`, `LoopVideoDuration`
 
-- Binary data parsing (CameraStatus, CameraVersion, etc.)
-- JSON serialization/deserialization (GoProRegistration)
-- Validation logic (GoProValidator)
-- State condition helpers (CameraStateConditions)
-- Enum functionality and FPS/resolution compatibility
+- FPS compatibility per resolution and video standard (NTSC/PAL)
+- FOV compatibility per resolution and FPS
+- Zoom factors, aspect ratios, uniqueness, and value ranges
+
+**`models/camera_status_test.dart`** — `CameraStatus`
+
+- Binary parsing of all status fields from raw bytes
+- Bit-field extraction (video standard, orientation, locate, ProTune, shutter, one-button mode, video preview)
+- Multi-byte integer parsing and max-value edge cases
+- Unknown enum values fall back to defaults; fallback camera mode override
+
+**`models/camera_version_test.dart`** — `CameraVersion`
+
+- Firmware version and camera type string extraction by offset/length
+- Edge cases: short, long, empty, and special-character strings
+- Real-world HERO3+ Silver firmware data
+
+**`models/camera_serial_and_mac_test.dart`** — `CameraSerialAndMac`
+
+- Serial number extraction (bytes 19–32) and MAC address extraction (bytes 1–6)
+- MAC formatting with separators and zero-padding
+- Edge cases: all-zero data, max byte values, special characters
+
+**`models/camera_wifi_info_test.dart`** — `CameraWifiInfo`
+
+- Password and SSID extraction by length-prefixed offset
+- Edge cases: short/long/empty credentials, special characters, numeric-only
+
+**`models/camera_state_test.dart`** — `CameraState`
+
+- Initialization with a `CameraStatus`, battery percent calculation
+- Mutating `cameraOn`, `previewOn`, and replacing the status
+
+**`models/gopro_registration_test.dart`** — `GoProRegistration`
+
+- Instance creation, JSON serialization and deserialization, round-trip fidelity
+
+**`utils/camera_state_conditions_test.dart`** — `CameraStateConditions` + `isLandscape`
+
+- All condition helpers: `isCameraOn`, `isPreviewOn`, `isRecording`, `isShutterDown`,
+  `isInSettingsMode`, `isInPhotoOrBurstMode`, `isInVideoOrTimelapseMode`,
+  `isInVideoMode`, `isInPhotoMode`, `isInTimelapseMode`
+- Each helper tested for true, false, and null-state cases
+- `isLandscape` verified with landscape and portrait viewport sizes
+
+**`utils/gopro_validator_test.dart`** — `GoProValidator`
+
+- `isGoPro`: valid HERO3/HERO3+ BSSID prefix, non-GoPro, invalid format, case-insensitive
+- `allKnownPrefixes`: returns full list of OUI prefixes, all properly formatted
+- `isRegistered`: async checks for registered, unregistered, and removed cameras
+
+**`utils/logger_test.dart`** — `AppLogger`
+
+- Singleton initialization and listener setup
+- `info`, `warning`, and `error` log methods at correct severity levels
+- Error logging with exception and stack trace
+- Sequential message ordering and log-level filtering
 
 ### Widget Tests
 
-Located in `widgets/` folder.
+Located in `utils/` (snackbar and routes) and `widgets/` folders.
 
-**What's tested:**
+**`utils/snackbar_test.dart`** — `showSnackBar`, `showSnackBarError`, `showSnackBarSuccess`, `showSnackBarWarning`
 
-- UI component rendering
-- User interactions (taps, text input, toggles)
-- State changes and updates
-- Accessibility and localization
+- Message display, default and custom colors, text color (white)
+- Clears previously shown snackbars
+- Graceful handling of unmounted context, missing `ScaffoldMessenger`, and errors during build
 
-### Integration Tests (Not Yet Implemented)
+**`utils/app_routes_test.dart`** — `AppRoutes`
 
-Would require mocking:
+- Route name constants and completeness of the routes map
+- Each named route builds the correct screen widget
+- Routes work with `MaterialApp` and `Navigator.pushNamed`
+
+**`widgets/battery_indicator_test.dart`** — `BatteryIndicator`
+
+- Displays battery percentage and estimated remaining time
+- Time formatting: minutes-only vs. hours + minutes
+- Icon selection for high, low, and critical (<5%) battery levels
+- Null and zero estimated-time edge cases; custom theme color
+
+**`widgets/password_field_test.dart`** — `PasswordField`
+
+- Renders with default and custom labels; text is obscured by default
+- Visibility toggle icon tap, text input, `onChanged` callback, `onEditingComplete` callback
+
+**`widgets/polling_timer_indicator_test.dart`** — `PollingTimerIndicator`
+
+- Shows zero progress when `nextPollTime` is null
+- Periodic timer ticks advance progress while mounted
+- Progress clamped to zero for a far-future poll time
+- `nextPollTimeListenable` takes precedence over `nextPollTime`
+- Listener rebinding when the listenable instance is replaced
+- UI updates when the listenable value changes
+- Custom color and text style application
+- Mode switching: listenable → timer and timer → listenable on widget update
+
+**`widgets/red_button_test.dart`** — `RedButton`
+
+- Renders the provided child widget
+- Invokes `onPressed` callback when tapped
+- Applies red-accent background and white foreground colors
+
+### Screen and Service Tests (Not Yet Implemented)
+
+`screens/` and `services/` test folders exist but are currently empty.
+Service tests would require mocking:
 
 - HTTP client for API calls
 - SecureStorage for persistence
