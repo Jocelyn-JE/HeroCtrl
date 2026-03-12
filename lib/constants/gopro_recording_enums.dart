@@ -116,99 +116,97 @@ class VideoResolution extends EnumClass {
     }
   }
 
-  static final Map<VideoResolution, List<FPS>> supportedFPS = {
-    wvga240fps: [FPS.fps240],
+  static final Map<VideoResolution, List<Fps>> supportedFps = {
+    wvga240fps: [Fps.fps240],
     // Note: 720p in NTSC only supports 60fps and 120fps, while in PAL it supports 50fps and 100fps
-    res720p: [FPS.fps50, FPS.fps60, FPS.fps100, FPS.fps120],
-    res960p: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
+    res720p: [Fps.fps50, Fps.fps60, Fps.fps100, Fps.fps120],
+    res960p: [Fps.fps48, Fps.fps50, Fps.fps60, Fps.fps100],
     res1080p: [
-      FPS.fps24,
-      FPS.fps25,
-      FPS.fps30,
-      FPS.fps48,
-      FPS.fps50,
-      FPS.fps60,
+      Fps.fps24,
+      Fps.fps25,
+      Fps.fps30,
+      Fps.fps48,
+      Fps.fps50,
+      Fps.fps60,
     ],
-    res1440p: [FPS.fps24, FPS.fps25, FPS.fps30, FPS.fps48],
-    res2_7k: [FPS.fps25, FPS.fps30],
-    res4k: [FPS.fps12_5, FPS.fps15],
-    res2_7k_17_9: [FPS.fps24],
-    res4k_17_9: [FPS.fps12],
+    res1440p: [Fps.fps24, Fps.fps25, Fps.fps30, Fps.fps48],
+    res2_7k: [Fps.fps25, Fps.fps30],
+    res4k: [Fps.fps12_5, Fps.fps15],
+    res2_7k_17_9: [Fps.fps24],
+    res4k_17_9: [Fps.fps12],
     res1080pSuperView: [
-      FPS.fps24,
-      FPS.fps25,
-      FPS.fps30,
-      FPS.fps48,
-      FPS.fps50,
-      FPS.fps60,
+      Fps.fps24,
+      Fps.fps25,
+      Fps.fps30,
+      Fps.fps48,
+      Fps.fps50,
+      Fps.fps60,
     ],
-    res720pSuperView: [FPS.fps48, FPS.fps50, FPS.fps60, FPS.fps100],
+    res720pSuperView: [Fps.fps48, Fps.fps50, Fps.fps60, Fps.fps100],
   };
 
   /// Get the valid FPS options for the current resolution and video mode.
   /// This is the intersection of:
   /// - FPS supported by the current resolution
   /// - FPS supported by the current video mode (NTSC/PAL)
-  static List<FPS> getSupportedFPS(
+  static List<Fps> getSupportedFps(
     VideoResolution resolution,
     VideoStandard standard,
   ) {
-    List<FPS> fpsForResolution;
-    List<FPS> fpsForStandard;
+    List<Fps> fpsForResolution;
+    List<Fps> fpsForStandard;
 
     if (resolution == res720p) {
       return standard == VideoStandard.ntsc
-          ? [FPS.fps60, FPS.fps120]
-          : [FPS.fps50, FPS.fps100];
+          ? [Fps.fps60, Fps.fps120]
+          : [Fps.fps50, Fps.fps100];
     }
-    fpsForResolution = supportedFPS[resolution] ?? [];
+    fpsForResolution = supportedFps[resolution] ?? [];
     fpsForStandard = VideoStandard.videoStandardFrameRates[standard] ?? [];
     return fpsForResolution
         .where((fps) => fpsForStandard.contains(fps))
         .toList();
   }
 
-  static final Map<VideoResolution, List<FOV>> supportedFOV = {
-    wvga240fps: [FOV.wide],
-    res720p: [FOV.wide, FOV.medium, FOV.narrow],
+  static final Map<VideoResolution, List<Fov>> supportedFov = {
+    wvga240fps: [Fov.wide],
+    res720p: [Fov.wide, Fov.medium, Fov.narrow],
     // Note: 720p at 100fps and 120fps only support Wide and Narrow (no Medium)
-    res960p: [FOV.wide],
-    res1080p: [FOV.wide, FOV.medium, FOV.narrow],
-    res1440p: [FOV.wide],
-    res2_7k: [FOV.wide, FOV.medium],
-    res4k: [FOV.wide],
-    res2_7k_17_9: [FOV.wide, FOV.medium],
-    res4k_17_9: [FOV.wide],
-    res1080pSuperView: [FOV.wide],
-    res720pSuperView: [FOV.wide],
+    res960p: [Fov.wide],
+    res1080p: [Fov.wide, Fov.medium, Fov.narrow],
+    res1440p: [Fov.wide],
+    res2_7k: [Fov.wide, Fov.medium],
+    res4k: [Fov.wide],
+    res2_7k_17_9: [Fov.wide, Fov.medium],
+    res4k_17_9: [Fov.wide],
+    res1080pSuperView: [Fov.wide],
+    res720pSuperView: [Fov.wide],
   };
 
   /// Returns supported FOV for a given resolution and FPS combination
   /// Special case: 720p at 100/120fps only supports Wide and Narrow
-  static List<FOV> getSupportedFOV(VideoResolution resolution, FPS fps) {
-    if (resolution == res720p && (fps == FPS.fps100 || fps == FPS.fps120)) {
-      return [FOV.wide, FOV.narrow];
+  static List<Fov> getSupportedFov(VideoResolution resolution, Fps fps) {
+    if (resolution == res720p && (fps == Fps.fps100 || fps == Fps.fps120)) {
+      return [Fov.wide, Fov.narrow];
     }
-    return supportedFOV[resolution] ?? [FOV.wide];
+    return supportedFov[resolution] ?? [Fov.wide];
   }
 
-  static VideoResolution fromByte(int byte) {
-    return all.firstWhere((res) => res.value == byte, orElse: () => res1080p);
-  }
+  static VideoResolution fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class FOV extends EnumClass {
+class Fov extends EnumClass {
   final double _factor;
 
-  const FOV._(super._value, this._factor);
+  const Fov._(super._value, this._factor);
 
   double get factor => _factor;
 
-  static const FOV wide = FOV._(0x00, 1.0);
-  static const FOV medium = FOV._(0x01, 1.42);
-  static const FOV narrow = FOV._(0x02, 2.0);
+  static const Fov wide = Fov._(0x00, 1.0);
+  static const Fov medium = Fov._(0x01, 1.42);
+  static const Fov narrow = Fov._(0x02, 2.0);
 
-  static const List<FOV> all = [wide, medium, narrow];
+  static const List<Fov> all = [wide, medium, narrow];
 
   @override
   String getLocalizedName(BuildContext context) {
@@ -222,23 +220,23 @@ class FOV extends EnumClass {
   static Fov fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class FPS extends EnumClass {
-  const FPS._(super._value);
+class Fps extends EnumClass {
+  const Fps._(super._value);
 
-  static const FPS fps12 = FPS._(0x00);
-  static const FPS fps12_5 = FPS._(0x0b);
-  static const FPS fps15 = FPS._(0x01);
-  static const FPS fps24 = FPS._(0x02);
-  static const FPS fps25 = FPS._(0x03);
-  static const FPS fps30 = FPS._(0x04);
-  static const FPS fps48 = FPS._(0x05);
-  static const FPS fps50 = FPS._(0x06);
-  static const FPS fps60 = FPS._(0x07);
-  static const FPS fps100 = FPS._(0x08);
-  static const FPS fps120 = FPS._(0x09);
-  static const FPS fps240 = FPS._(0x0a);
+  static const Fps fps12 = Fps._(0x00);
+  static const Fps fps12_5 = Fps._(0x0b);
+  static const Fps fps15 = Fps._(0x01);
+  static const Fps fps24 = Fps._(0x02);
+  static const Fps fps25 = Fps._(0x03);
+  static const Fps fps30 = Fps._(0x04);
+  static const Fps fps48 = Fps._(0x05);
+  static const Fps fps50 = Fps._(0x06);
+  static const Fps fps60 = Fps._(0x07);
+  static const Fps fps100 = Fps._(0x08);
+  static const Fps fps120 = Fps._(0x09);
+  static const Fps fps240 = Fps._(0x0a);
 
-  static const List<FPS> all = [
+  static const List<Fps> all = [
     fps12,
     fps12_5,
     fps15,

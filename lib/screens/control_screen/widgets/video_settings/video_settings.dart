@@ -13,11 +13,11 @@ List<Widget> videoSettingsWidgets(
   Axis direction = Axis.vertical,
 }) {
   bool showFps = CameraStateConditions.isInVideoMode(cameraState)
-      ? FPSSelector.getValidFpsOptionsFor(cameraState).length > 1
+      ? FpsSelector.getValidFpsOptionsFor(cameraState).length > 1
       : false;
 
   bool showFov = CameraStateConditions.isInVideoMode(cameraState)
-      ? VideoResolution.getSupportedFOV(
+      ? VideoResolution.getSupportedFov(
               cameraState.status.videoResolution,
               cameraState.status.fps,
             ).length >
@@ -36,7 +36,7 @@ List<Widget> videoSettingsWidgets(
 
     if ((showFps || showFov)) spacer,
     if (showFps)
-      FPSSelector(
+      FpsSelector(
         cameraState: cameraState,
         onFpsChanged: onSettingChanged,
         padding: EdgeInsets.zero,
@@ -45,7 +45,7 @@ List<Widget> videoSettingsWidgets(
 
     if (showFps && showFov) spacer,
     if (showFov)
-      FOVSelector(
+      FovSelector(
         cameraState: cameraState,
         onFovChanged: onSettingChanged,
         padding: EdgeInsets.zero,

@@ -148,14 +148,14 @@ class Sharpness extends EnumClass {
   static Sharpness fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ISOLimit extends EnumClass {
-  const ISOLimit._(super.value);
+class IsoLimit extends EnumClass {
+  const IsoLimit._(super.value);
 
-  static const ISOLimit iso6400 = ISOLimit._(0x00);
-  static const ISOLimit iso1600 = ISOLimit._(0x01);
-  static const ISOLimit iso400 = ISOLimit._(0x02);
+  static const IsoLimit iso6400 = IsoLimit._(0x00);
+  static const IsoLimit iso1600 = IsoLimit._(0x01);
+  static const IsoLimit iso400 = IsoLimit._(0x02);
 
-  static const List<ISOLimit> all = [iso6400, iso1600, iso400];
+  static const List<IsoLimit> all = [iso6400, iso1600, iso400];
 
   @override
   String getLocalizedName(BuildContext context) {
@@ -172,7 +172,7 @@ class ISOLimit extends EnumClass {
     }
   }
 
-  static ISOLimit fromByte(int byte) => enumFromByte(byte, all);
+  static IsoLimit fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class ColorProfile extends EnumClass {
@@ -293,48 +293,48 @@ class ProtuneVideoResolution extends EnumClass {
     }
   }
 
-  static final Map<ProtuneVideoResolution, List<FPS>>
-  protuneVideoResolutionSupportedFPS = {
-    res720p: [FPS.fps120, FPS.fps100, FPS.fps60, FPS.fps50],
-    res960p: [FPS.fps100, FPS.fps60, FPS.fps50],
+  static final Map<ProtuneVideoResolution, List<Fps>>
+  protuneVideoResolutionSupportedFps = {
+    res720p: [Fps.fps120, Fps.fps100, Fps.fps60, Fps.fps50],
+    res960p: [Fps.fps100, Fps.fps60, Fps.fps50],
     res1080p: [
-      FPS.fps60,
-      FPS.fps50,
-      FPS.fps48,
-      FPS.fps30,
-      FPS.fps25,
-      FPS.fps24,
+      Fps.fps60,
+      Fps.fps50,
+      Fps.fps48,
+      Fps.fps30,
+      Fps.fps25,
+      Fps.fps24,
     ],
-    res1440p: [FPS.fps48, FPS.fps30, FPS.fps25, FPS.fps24],
-    res2_7k: [FPS.fps30, FPS.fps25],
-    res4k: [FPS.fps15, FPS.fps12_5],
-    res2_7k_17_9: [FPS.fps24],
-    res4k_17_9: [FPS.fps12],
+    res1440p: [Fps.fps48, Fps.fps30, Fps.fps25, Fps.fps24],
+    res2_7k: [Fps.fps30, Fps.fps25],
+    res4k: [Fps.fps15, Fps.fps12_5],
+    res2_7k_17_9: [Fps.fps24],
+    res4k_17_9: [Fps.fps12],
     res1080pSuperView: [
-      FPS.fps60,
-      FPS.fps50,
-      FPS.fps48,
-      FPS.fps30,
-      FPS.fps25,
-      FPS.fps24,
+      Fps.fps60,
+      Fps.fps50,
+      Fps.fps48,
+      Fps.fps30,
+      Fps.fps25,
+      Fps.fps24,
     ],
-    res720pSuperView: [FPS.fps100, FPS.fps60, FPS.fps50],
+    res720pSuperView: [Fps.fps100, Fps.fps60, Fps.fps50],
   };
 
-  static List<FPS> getSupportedFPS(
+  static List<Fps> getSupportedFps(
     ProtuneVideoResolution? resolution,
     VideoStandard standard,
   ) {
-    List<FPS> fpsForResolution;
-    List<FPS> fpsForStandard;
+    List<Fps> fpsForResolution;
+    List<Fps> fpsForStandard;
 
     if (resolution == null) return [];
     if (resolution == res720p) {
       return standard == VideoStandard.ntsc
-          ? [FPS.fps60, FPS.fps120]
-          : [FPS.fps50, FPS.fps100];
+          ? [Fps.fps60, Fps.fps120]
+          : [Fps.fps50, Fps.fps100];
     }
-    fpsForResolution = protuneVideoResolutionSupportedFPS[resolution] ?? [];
+    fpsForResolution = protuneVideoResolutionSupportedFps[resolution] ?? [];
     fpsForStandard = VideoStandard.videoStandardFrameRates[standard] ?? [];
     return fpsForResolution
         .where((fps) => fpsForStandard.contains(fps))

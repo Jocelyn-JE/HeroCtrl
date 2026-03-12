@@ -215,22 +215,22 @@ class GoProApiService {
     return CameraWifiInfo(bytes);
   }
 
-  static Future<void> setLeds(String password, LED ledOption) async {
+  static Future<void> setLeds(String password, Led ledOption) async {
     await _postApi(_camera, GoProEndpoints.leds, password, ledOption.value);
   }
 
-  static Future<LED> getLeds(String password) async {
+  static Future<Led> getLeds(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.leds, password);
     final value = response.bodyBytes[1];
     switch (value) {
       case 0:
-        return LED.off;
+        return Led.off;
       case 1:
-        return LED.twoLeds;
+        return Led.twoLeds;
       case 2:
-        return LED.fourLeds;
+        return Led.fourLeds;
       default:
-        return LED.fourLeds;
+        return Led.fourLeds;
     }
   }
 
@@ -438,22 +438,22 @@ class GoProApiService {
     );
   }
 
-  static Future<void> setFPS(String password, FPS fpsOption) async {
+  static Future<void> setFps(String password, Fps fpsOption) async {
     await _postApi(_camera, GoProEndpoints.fps, password, fpsOption.value);
   }
 
-  static Future<FOV> getFOV(String password) async {
+  static Future<Fov> getFov(String password) async {
     final response = await _getApi(_camera, GoProEndpoints.fov, password);
     final value = response.bodyBytes[1];
     try {
-      return FOV.all.firstWhere((fov) => fov.value == value);
+      return Fov.all.firstWhere((fov) => fov.value == value);
     } catch (e) {
       AppLogger.error('Error parsing FOV', e);
-      return FOV.wide;
+      return Fov.wide;
     }
   }
 
-  static Future<void> setFOV(String password, FOV fovOption) async {
+  static Future<void> setFov(String password, Fov fovOption) async {
     await _postApi(_camera, GoProEndpoints.fov, password, fovOption.value);
   }
 

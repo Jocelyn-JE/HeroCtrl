@@ -4,13 +4,13 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 
-class FOVSelector extends StatelessWidget {
+class FovSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
   final Future<void> Function() onFovChanged;
   final EdgeInsetsGeometry padding;
 
-  const FOVSelector({
+  const FovSelector({
     super.key,
     required this.cameraState,
     required this.password,
@@ -19,20 +19,20 @@ class FOVSelector extends StatelessWidget {
   });
 
   /// Get the valid FOV options for the current resolution and FPS combination
-  List<FOV> _getValidFovOptions() {
+  List<Fov> _getValidFovOptions() {
     final currentResolution = cameraState.status.videoResolution;
     final currentFps = cameraState.status.fps;
 
-    return VideoResolution.getSupportedFOV(currentResolution, currentFps);
+    return VideoResolution.getSupportedFov(currentResolution, currentFps);
   }
 
   @override
   Widget build(BuildContext context) {
-    final FOV currentFov = cameraState.status.fov;
+    final Fov currentFov = cameraState.status.fov;
     final validFovOptions = _getValidFovOptions();
 
     // Ensure the current value exists in the valid options
-    final FOV? selectedValue = validFovOptions.contains(currentFov)
+    final Fov? selectedValue = validFovOptions.contains(currentFov)
         ? currentFov
         : null;
 
@@ -40,7 +40,7 @@ class FOVSelector extends StatelessWidget {
         ? const SizedBox.shrink()
         : Padding(
             padding: padding,
-            child: DropdownButton<FOV>(
+            child: DropdownButton<Fov>(
               isExpanded: true,
               value: selectedValue,
               onChanged: (cameraState.isCameraOn && validFovOptions.isNotEmpty)
@@ -49,7 +49,7 @@ class FOVSelector extends StatelessWidget {
                         AppLogger.info(
                           'Changing FOV to ${newValue.getLocalizedName(context)}',
                         );
-                        GoProApiService.setFOV(password, newValue).then((_) {
+                        GoProApiService.setFov(password, newValue).then((_) {
                           onFovChanged();
                         });
                       }

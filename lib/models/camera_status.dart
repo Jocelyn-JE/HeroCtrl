@@ -11,11 +11,11 @@ class CameraStatus {
   final SpotMeter spotMeter;
   final TimelapseInterval timelapseInterval;
   final AutoPowerOff autoPowerOff;
-  final FOV fov;
+  final Fov fov;
   final PhotoResolution photoResolution;
   final int recordingProgress; // in seconds
   final Volume volume;
-  final LED ledsStatus;
+  final Led ledsStatus;
   final VideoStandard videoStandard;
   final Locate locateStatus;
   final OneButton oneButtonMode;
@@ -36,9 +36,9 @@ class CameraStatus {
   final bool simultaneousVideoAndPhoto;
   final LoopVideoDuration loopVideoDuration;
   final VideoResolution videoResolution;
-  final FPS fps;
+  final Fps fps;
   final Sharpness sharpness;
-  final ISOLimit iso;
+  final IsoLimit iso;
   final ExposureCompensation exposureCompensation;
 
   static int _parseInt(int high, int low) {
@@ -86,17 +86,17 @@ class CameraStatus {
   }
 
   // ISO is the seventh and eighth bits of the byte starting from the left
-  static ISOLimit _parseIso(int byte) {
+  static IsoLimit _parseIso(int byte) {
     int isoBits = byte & 0x03;
     switch (isoBits) {
       case 0:
-        return ISOLimit.iso6400;
+        return IsoLimit.iso6400;
       case 1:
-        return ISOLimit.iso1600;
+        return IsoLimit.iso1600;
       case 2:
-        return ISOLimit.iso400;
+        return IsoLimit.iso400;
       default:
-        return ISOLimit.iso6400;
+        return IsoLimit.iso6400;
     }
   }
 
@@ -124,14 +124,8 @@ class CameraStatus {
       fov = Fov.fromByte(bytes[7]),
       photoResolution = PhotoResolution.fromByte(bytes[8]),
       recordingProgress = _parseInt(bytes[13], bytes[14]),
-      volume = Volume.all.firstWhere(
-        (vol) => vol.value == bytes[16],
-        orElse: () => Volume.percent100,
-      ),
-      ledsStatus = LED.all.firstWhere(
-        (led) => led.value == bytes[17],
-        orElse: () => LED.off,
-      ),
+      volume = Volume.fromByte(bytes[16]),
+      ledsStatus = Led.fromByte(bytes[17]),
       videoStandard = _parseVideoStandard(bytes[18]),
       locateStatus = _parseLocateStatus(bytes[18]),
       oneButtonMode = _parseOneButtonMode(bytes[18]),
@@ -152,7 +146,7 @@ class CameraStatus {
       simultaneousVideoAndPhoto = bytes[36] != 0,
       loopVideoDuration = LoopVideoDuration.fromByte(bytes[37]),
       videoResolution = VideoResolution.fromByte(bytes[50]),
-      fps = FPS.fromByte(bytes[51]),
+      fps = Fps.fromByte(bytes[51]),
       sharpness = _parseSharpness(bytes[52]),
       iso = _parseIso(bytes[52]),
       exposureCompensation = ExposureCompensation.fromByte(bytes[53]);

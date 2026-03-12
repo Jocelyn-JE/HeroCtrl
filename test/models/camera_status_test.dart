@@ -38,11 +38,11 @@ void main() {
       expect(status.cameraMode, equals(CameraMode.videoMode));
       expect(status.defaultCameraMode, equals(DefaultCameraMode.videoMode));
       expect(status.volume, equals(Volume.percent100));
-      expect(status.ledsStatus, equals(LED.fourLeds));
+      expect(status.ledsStatus, equals(Led.fourLeds));
       expect(status.videoStandard, equals(VideoStandard.ntsc));
       expect(status.shutterStatus, isFalse);
       expect(status.videoResolution, equals(VideoResolution.res1080p));
-      expect(status.fps, equals(FPS.fps60));
+      expect(status.fps, equals(Fps.fps60));
     });
 
     test('parses video standard from bit field correctly', () {
@@ -141,19 +141,19 @@ void main() {
       bytes[52] = 0x00;
       final status1 = CameraStatus(bytes);
       expect(status1.sharpness, equals(Sharpness.low));
-      expect(status1.iso, equals(ISOLimit.iso6400));
+      expect(status1.iso, equals(IsoLimit.iso6400));
 
       // Medium sharpness (01), ISO 1600 (01)
       bytes[52] = 0x05; // 00000101
       final status2 = CameraStatus(bytes);
       expect(status2.sharpness, equals(Sharpness.medium));
-      expect(status2.iso, equals(ISOLimit.iso1600));
+      expect(status2.iso, equals(IsoLimit.iso1600));
 
       // High sharpness (10), ISO 400 (10)
       bytes[52] = 0x0A; // 00001010
       final status3 = CameraStatus(bytes);
       expect(status3.sharpness, equals(Sharpness.high));
-      expect(status3.iso, equals(ISOLimit.iso400));
+      expect(status3.iso, equals(IsoLimit.iso400));
 
       // Test invalid/default sharpness value (11)
       bytes[52] = 0x0C; // 00001100 - bits 3-4 = 11 (invalid)
@@ -168,7 +168,7 @@ void main() {
       final status5 = CameraStatus(bytes);
       expect(
         status5.iso,
-        equals(ISOLimit.iso6400),
+        equals(IsoLimit.iso6400),
       ); // Should default to iso6400
     });
 

@@ -15,7 +15,7 @@ class LedSettingCard extends StatefulWidget {
 }
 
 class _LedSettingCardState extends State<LedSettingCard> {
-  LED? _currentLed;
+  Led? _currentLed;
   bool _isLoading = true;
 
   @override
@@ -42,7 +42,7 @@ class _LedSettingCardState extends State<LedSettingCard> {
     }
   }
 
-  Future<void> _setLed(LED value) async {
+  Future<void> _setLed(Led value) async {
     final previous = _currentLed;
     setState(() => _currentLed = value);
     try {
@@ -89,25 +89,25 @@ class _LedSettingCardState extends State<LedSettingCard> {
             else
               SizedBox(
                 width: double.infinity,
-                child: SegmentedButton<LED>(
+                child: SegmentedButton<Led>(
                   segments: [
                     ButtonSegment(
-                      value: LED.off,
+                      value: Led.off,
                       label: Text(l10n.ledOff),
                       icon: const Icon(Icons.flash_off),
                     ),
                     ButtonSegment(
-                      value: LED.twoLeds,
+                      value: Led.twoLeds,
                       label: Text(l10n.ledTwo),
                       icon: const Icon(Icons.flash_on),
                     ),
                     ButtonSegment(
-                      value: LED.fourLeds,
+                      value: Led.fourLeds,
                       label: Text(l10n.ledFour),
                       icon: const Icon(Icons.flashlight_on),
                     ),
                   ],
-                  selected: {_currentLed ?? LED.fourLeds},
+                  selected: {_currentLed ?? Led.fourLeds},
                   onSelectionChanged: (selected) => _setLed(selected.first),
                 ),
               ),

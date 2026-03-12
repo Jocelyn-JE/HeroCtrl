@@ -19,11 +19,11 @@ class _LocateCameraCardState extends State<LocateCameraCard> {
 
   Future<void> _startLocating() async {
     setState(() => _isLocating = true);
-    LED previousLedMode = LED.fourLeds;
+    Led previousLedMode = Led.fourLeds;
     try {
       await GoProApiService.setLocateCamera(widget.password, true);
       previousLedMode = await GoProApiService.getLeds(widget.password);
-      await GoProApiService.setLeds(widget.password, LED.fourLeds);
+      await GoProApiService.setLeds(widget.password, Led.fourLeds);
       if (!mounted) return;
       await showDialog<void>(
         context: context,

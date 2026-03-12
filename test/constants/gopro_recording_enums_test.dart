@@ -4,71 +4,71 @@ import 'package:heroctrl/constants/gopro_system_enums.dart';
 
 void main() {
   group('VideoResolution', () {
-    test('getSupportedFPS returns correct FPS for resolution and standard', () {
+    test('getSupportedFps returns correct FPS for resolution and standard', () {
       // 1080p NTSC should support 24, 30, 48, 60 fps
-      final ntsc1080 = VideoResolution.getSupportedFPS(
+      final ntsc1080 = VideoResolution.getSupportedFps(
         VideoResolution.res1080p,
         VideoStandard.ntsc,
       );
-      expect(ntsc1080, contains(FPS.fps24));
-      expect(ntsc1080, contains(FPS.fps30));
-      expect(ntsc1080, contains(FPS.fps48));
-      expect(ntsc1080, contains(FPS.fps60));
-      expect(ntsc1080, isNot(contains(FPS.fps25)));
-      expect(ntsc1080, isNot(contains(FPS.fps50)));
+      expect(ntsc1080, contains(Fps.fps24));
+      expect(ntsc1080, contains(Fps.fps30));
+      expect(ntsc1080, contains(Fps.fps48));
+      expect(ntsc1080, contains(Fps.fps60));
+      expect(ntsc1080, isNot(contains(Fps.fps25)));
+      expect(ntsc1080, isNot(contains(Fps.fps50)));
 
       // 1080p PAL should support 24, 25, 48, 50 fps
-      final pal1080 = VideoResolution.getSupportedFPS(
+      final pal1080 = VideoResolution.getSupportedFps(
         VideoResolution.res1080p,
         VideoStandard.pal,
       );
-      expect(pal1080, contains(FPS.fps24));
-      expect(pal1080, contains(FPS.fps25));
-      expect(pal1080, contains(FPS.fps48));
-      expect(pal1080, contains(FPS.fps50));
-      expect(pal1080, isNot(contains(FPS.fps30)));
-      expect(pal1080, isNot(contains(FPS.fps60)));
+      expect(pal1080, contains(Fps.fps24));
+      expect(pal1080, contains(Fps.fps25));
+      expect(pal1080, contains(Fps.fps48));
+      expect(pal1080, contains(Fps.fps50));
+      expect(pal1080, isNot(contains(Fps.fps30)));
+      expect(pal1080, isNot(contains(Fps.fps60)));
     });
 
     test('720p returns different FPS for NTSC and PAL', () {
-      final ntsc720 = VideoResolution.getSupportedFPS(
+      final ntsc720 = VideoResolution.getSupportedFps(
         VideoResolution.res720p,
         VideoStandard.ntsc,
       );
-      expect(ntsc720, equals([FPS.fps60, FPS.fps120]));
+      expect(ntsc720, equals([Fps.fps60, Fps.fps120]));
 
-      final pal720 = VideoResolution.getSupportedFPS(
+      final pal720 = VideoResolution.getSupportedFps(
         VideoResolution.res720p,
         VideoStandard.pal,
       );
-      expect(pal720, equals([FPS.fps50, FPS.fps100]));
+      expect(pal720, equals([Fps.fps50, Fps.fps100]));
     });
 
-    test('getSupportedFOV returns correct FOV for resolution', () {
+    test('getSupportedFov returns correct FOV for resolution', () {
       // 1080p supports wide, medium, narrow
-      final fov1080 = VideoResolution.getSupportedFOV(
+      final fov1080 = VideoResolution.getSupportedFov(
         VideoResolution.res1080p,
-        FPS.fps30,
+        Fps.fps30,
       );
-      expect(fov1080, contains(FOV.wide));
-      expect(fov1080, contains(FOV.medium));
-      expect(fov1080, contains(FOV.narrow));
+      expect(fov1080, contains(Fov.wide));
+      expect(fov1080, contains(Fov.medium));
+      expect(fov1080, contains(Fov.narrow));
 
       // 4K only supports wide
-      final fov4k = VideoResolution.getSupportedFOV(
+      final fov4k = VideoResolution.getSupportedFov(
         VideoResolution.res4k,
-        FPS.fps15,
+        Fps.fps15,
       );
-      expect(fov4k, equals([FOV.wide]));
+      expect(fov4k, equals([Fov.wide]));
     });
 
     test('720p at high FPS only supports wide and narrow FOV', () {
-      final fov120 = VideoResolution.getSupportedFOV(
+      final fov120 = VideoResolution.getSupportedFov(
         VideoResolution.res720p,
-        FPS.fps120,
+        Fps.fps120,
       );
-      expect(fov120, equals([FOV.wide, FOV.narrow]));
-      expect(fov120, isNot(contains(FOV.medium)));
+      expect(fov120, equals([Fov.wide, Fov.narrow]));
+      expect(fov120, isNot(contains(Fov.medium)));
     });
 
     test('aspect ratios are correct', () {
@@ -87,27 +87,27 @@ void main() {
 
   group('FOV', () {
     test('has correct zoom factors', () {
-      expect(FOV.wide.factor, equals(1.0));
-      expect(FOV.medium.factor, equals(1.42));
-      expect(FOV.narrow.factor, equals(2.0));
+      expect(Fov.wide.factor, equals(1.0));
+      expect(Fov.medium.factor, equals(1.42));
+      expect(Fov.narrow.factor, equals(2.0));
     });
 
     test('all FOV options are defined', () {
-      expect(FOV.all.length, equals(3));
-      expect(FOV.all, contains(FOV.wide));
-      expect(FOV.all, contains(FOV.medium));
-      expect(FOV.all, contains(FOV.narrow));
+      expect(Fov.all.length, equals(3));
+      expect(Fov.all, contains(Fov.wide));
+      expect(Fov.all, contains(Fov.medium));
+      expect(Fov.all, contains(Fov.narrow));
     });
   });
 
   group('FPS', () {
     test('all FPS values are unique', () {
-      final values = FPS.all.map((fps) => fps.value).toSet();
-      expect(values.length, equals(FPS.all.length));
+      final values = Fps.all.map((fps) => fps.value).toSet();
+      expect(values.length, equals(Fps.all.length));
     });
 
     test('FPS values are in expected range', () {
-      for (final fps in FPS.all) {
+      for (final fps in Fps.all) {
         expect(fps.value, greaterThanOrEqualTo(0));
         expect(fps.value, lessThanOrEqualTo(0x0b));
       }

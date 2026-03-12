@@ -31,14 +31,14 @@ class Volume extends EnumClass {
   static Volume fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class LED extends EnumClass {
-  const LED._(super._value);
+class Led extends EnumClass {
+  const Led._(super._value);
 
-  static const LED off = LED._(0x00);
-  static const LED twoLeds = LED._(0x01);
-  static const LED fourLeds = LED._(0x02);
+  static const Led off = Led._(0x00);
+  static const Led twoLeds = Led._(0x01);
+  static const Led fourLeds = Led._(0x02);
 
-  static const List<LED> all = [off, twoLeds, fourLeds];
+  static const List<Led> all = [off, twoLeds, fourLeds];
 
   @override
   String getLocalizedName(BuildContext context) {
@@ -116,25 +116,25 @@ class VideoStandard extends EnumClass {
 
   static final videoStandardFrameRates = {
     ntsc: [
-      FPS.fps15,
-      FPS.fps12,
-      FPS.fps24,
-      FPS.fps30,
-      FPS.fps48,
-      FPS.fps60,
-      FPS.fps100,
-      FPS.fps120,
-      FPS.fps240,
+      Fps.fps15,
+      Fps.fps12,
+      Fps.fps24,
+      Fps.fps30,
+      Fps.fps48,
+      Fps.fps60,
+      Fps.fps100,
+      Fps.fps120,
+      Fps.fps240,
     ],
     pal: [
-      FPS.fps12_5,
-      FPS.fps12,
-      FPS.fps24,
-      FPS.fps25,
-      FPS.fps48,
-      FPS.fps50,
-      FPS.fps100,
-      FPS.fps240,
+      Fps.fps12_5,
+      Fps.fps12,
+      Fps.fps24,
+      Fps.fps25,
+      Fps.fps48,
+      Fps.fps50,
+      Fps.fps100,
+      Fps.fps240,
     ],
   };
 

@@ -5,13 +5,13 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 
-class FPSSelector extends StatelessWidget {
+class FpsSelector extends StatelessWidget {
   final CameraState cameraState;
   final String password;
   final Future<void> Function() onFpsChanged;
   final EdgeInsetsGeometry padding;
 
-  const FPSSelector({
+  const FpsSelector({
     super.key,
     required this.cameraState,
     required this.password,
@@ -19,32 +19,32 @@ class FPSSelector extends StatelessWidget {
     this.padding = const EdgeInsets.all(8.0),
   });
 
-  static List<FPS> getValidFpsOptionsFor(CameraState cameraState) {
+  static List<Fps> getValidFpsOptionsFor(CameraState cameraState) {
     final resolution = cameraState.status.videoResolution;
     final standard = cameraState.status.videoStandard;
     final isProtuneOn = cameraState.status.protuneStatus == ProTune.on;
 
     if (!isProtuneOn) {
-      return VideoResolution.getSupportedFPS(resolution, standard);
+      return VideoResolution.getSupportedFps(resolution, standard);
     }
 
     final protuneResolution = ProtuneVideoResolution.fromVideoResolution(
       resolution,
     );
-    return ProtuneVideoResolution.getSupportedFPS(protuneResolution, standard);
+    return ProtuneVideoResolution.getSupportedFps(protuneResolution, standard);
   }
 
-  List<FPS> _getValidFpsOptions() {
+  List<Fps> _getValidFpsOptions() {
     return getValidFpsOptionsFor(cameraState);
   }
 
   @override
   Widget build(BuildContext context) {
-    final FPS currentFps = cameraState.status.fps;
+    final Fps currentFps = cameraState.status.fps;
     final validFpsOptions = _getValidFpsOptions();
 
     // Ensure the current value exists in the valid options
-    final FPS? selectedValue = validFpsOptions.contains(currentFps)
+    final Fps? selectedValue = validFpsOptions.contains(currentFps)
         ? currentFps
         : null;
 
@@ -52,7 +52,7 @@ class FPSSelector extends StatelessWidget {
         ? const SizedBox.shrink()
         : Padding(
             padding: padding,
-            child: DropdownButton<FPS>(
+            child: DropdownButton<Fps>(
               isExpanded: true,
               value: selectedValue,
               onChanged: (cameraState.isCameraOn && validFpsOptions.isNotEmpty)
@@ -61,7 +61,7 @@ class FPSSelector extends StatelessWidget {
                         AppLogger.info(
                           'Changing FPS to ${newValue.getLocalizedName(context)}',
                         );
-                        GoProApiService.setFPS(password, newValue).then((_) {
+                        GoProApiService.setFps(password, newValue).then((_) {
                           onFpsChanged();
                         });
                       }
