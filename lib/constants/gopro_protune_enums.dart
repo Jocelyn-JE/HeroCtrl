@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
 class ProTune {
@@ -276,6 +277,38 @@ class ProtuneVideoResolution {
     res720pSuperView,
   ];
 
+  // ProTune-capable video resolutions in the regular camera resolution domain.
+  static const List<VideoResolution> supportedVideoResolutions = [
+    VideoResolution.res720p,
+    VideoResolution.res960p,
+    VideoResolution.res1080p,
+    VideoResolution.res1440p,
+    VideoResolution.res2_7k,
+    VideoResolution.res4k,
+    VideoResolution.res2_7k_17_9,
+    VideoResolution.res4k_17_9,
+    VideoResolution.res1080pSuperView,
+    VideoResolution.res720pSuperView,
+  ];
+
+  static ProtuneVideoResolution? fromVideoResolution(
+    VideoResolution resolution,
+  ) {
+    if (resolution == VideoResolution.res720p) return res720p;
+    if (resolution == VideoResolution.res960p) return res960p;
+    if (resolution == VideoResolution.res1080p) return res1080p;
+    if (resolution == VideoResolution.res1440p) return res1440p;
+    if (resolution == VideoResolution.res2_7k) return res2_7k;
+    if (resolution == VideoResolution.res4k) return res4k;
+    if (resolution == VideoResolution.res2_7k_17_9) return res2_7k_17_9;
+    if (resolution == VideoResolution.res4k_17_9) return res4k_17_9;
+    if (resolution == VideoResolution.res1080pSuperView) {
+      return res1080pSuperView;
+    }
+    if (resolution == VideoResolution.res720pSuperView) return res720pSuperView;
+    return null;
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -314,29 +347,49 @@ class ProtuneVideoResolution {
 
   static final Map<ProtuneVideoResolution, List<FPS>>
   protuneVideoResolutionSupportedFPS = {
-    res720p: [FPS.fps50, FPS.fps60, FPS.fps100, FPS.fps120],
-    res960p: [FPS.fps50, FPS.fps60, FPS.fps100],
+    res720p: [FPS.fps120, FPS.fps100, FPS.fps60, FPS.fps50],
+    res960p: [FPS.fps100, FPS.fps60, FPS.fps50],
     res1080p: [
-      FPS.fps24,
-      FPS.fps25,
-      FPS.fps30,
-      FPS.fps48,
-      FPS.fps50,
       FPS.fps60,
+      FPS.fps50,
+      FPS.fps48,
+      FPS.fps30,
+      FPS.fps25,
+      FPS.fps24,
     ],
-    res1440p: [FPS.fps24, FPS.fps25, FPS.fps30, FPS.fps48],
-    res2_7k: [FPS.fps24, FPS.fps25, FPS.fps30],
-    res4k: [FPS.fps12, FPS.fps12_5, FPS.fps15],
-    res2_7k_17_9: [FPS.fps24, FPS.fps25, FPS.fps30],
-    res4k_17_9: [FPS.fps12, FPS.fps12_5, FPS.fps15],
+    res1440p: [FPS.fps48, FPS.fps30, FPS.fps25, FPS.fps24],
+    res2_7k: [FPS.fps30, FPS.fps25],
+    res4k: [FPS.fps15, FPS.fps12_5],
+    res2_7k_17_9: [FPS.fps24],
+    res4k_17_9: [FPS.fps12],
     res1080pSuperView: [
-      FPS.fps24,
-      FPS.fps25,
-      FPS.fps30,
-      FPS.fps48,
-      FPS.fps50,
       FPS.fps60,
+      FPS.fps50,
+      FPS.fps48,
+      FPS.fps30,
+      FPS.fps25,
+      FPS.fps24,
     ],
-    res720pSuperView: [FPS.fps50, FPS.fps60, FPS.fps100],
+    res720pSuperView: [FPS.fps100, FPS.fps60, FPS.fps50],
   };
+
+  static List<FPS> getSupportedFPS(
+    ProtuneVideoResolution? resolution,
+    VideoStandard standard,
+  ) {
+    List<FPS> fpsForResolution;
+    List<FPS> fpsForStandard;
+
+    if (resolution == null) return [];
+    if (resolution == res720p) {
+      return standard == VideoStandard.ntsc
+          ? [FPS.fps60, FPS.fps120]
+          : [FPS.fps50, FPS.fps100];
+    }
+    fpsForResolution = protuneVideoResolutionSupportedFPS[resolution] ?? [];
+    fpsForStandard = VideoStandard.videoStandardFrameRates[standard] ?? [];
+    return fpsForResolution
+        .where((fps) => fpsForStandard.contains(fps))
+        .toList();
+  }
 }
