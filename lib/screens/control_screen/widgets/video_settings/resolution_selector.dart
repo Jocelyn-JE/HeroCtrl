@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/gopro_protune_enums.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
@@ -18,14 +19,22 @@ class ResolutionSelector extends StatelessWidget {
     this.padding = const EdgeInsets.all(8.0),
   });
 
+  List<VideoResolution> _getValidResolutionOptions() {
+    final isProtuneOn = cameraState.status.protuneStatus == ProTune.on;
+    if (!isProtuneOn) return VideoResolution.all;
+
+    return ProtuneVideoResolution.supportedVideoResolutions;
+  }
+
   @override
   Widget build(BuildContext context) {
     final VideoResolution currentResolution =
         cameraState.status.videoResolution;
+    final validResolutionOptions = _getValidResolutionOptions();
 
     // Ensure the current value exists in the dropdown items
     final VideoResolution? selectedValue =
-        VideoResolution.all.contains(currentResolution)
+        validResolutionOptions.contains(currentResolution)
         ? currentResolution
         : null;
 
@@ -48,7 +57,7 @@ class ResolutionSelector extends StatelessWidget {
                 }
               }
             : null,
-        items: VideoResolution.all
+        items: validResolutionOptions
             .map(
               (resolution) => DropdownMenuItem(
                 value: resolution,

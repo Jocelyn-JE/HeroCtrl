@@ -138,7 +138,7 @@ abstract class AppLocalizations {
   /// Information about periodic WiFi scanning
   ///
   /// In en, this message translates to:
-  /// **'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. '**
+  /// **'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes. '**
   String get periodicScanningInfo;
 
   /// OK button text
@@ -230,6 +230,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Camera Settings'**
   String get cameraSettings;
+
+  /// Title for ProTune setting card
+  ///
+  /// In en, this message translates to:
+  /// **'ProTune'**
+  String get protuneSetting;
+
+  /// Subtitle explaining the ProTune setting
+  ///
+  /// In en, this message translates to:
+  /// **'Enable or disable ProTune image controls.'**
+  String get protuneSettingSubtitle;
 
   /// Title for LED setting card
   ///

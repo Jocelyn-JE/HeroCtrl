@@ -38,6 +38,7 @@ class CameraSettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       DisconnectCard(password: password),
+                      ProtuneSettingCard(password: password),
                       LedSettingCard(password: password),
                       VolumeSettingCard(password: password),
                       OrientationSettingCard(password: password),

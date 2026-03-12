@@ -32,7 +32,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutPeriodicScanning => 'About periodic scanning';
 
   @override
-  String get periodicScanningInfo => 'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes per app. ';
+  String get periodicScanningInfo => 'The timer indicates when the next automatic scan will occur. WiFi scanning is limited by Android to 4 scans every 2 minutes. ';
 
   @override
   String get ok => 'OK';
@@ -86,6 +86,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cameraSettings => 'Camera Settings';
+
+  @override
+  String get protuneSetting => 'ProTune';
+
+  @override
+  String get protuneSettingSubtitle => 'Enable or disable ProTune image controls.';
 
   @override
   String get ledSetting => 'LED Indicators';

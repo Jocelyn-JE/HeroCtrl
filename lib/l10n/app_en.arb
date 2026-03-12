@@ -117,6 +117,14 @@
     "@cameraSettings": {
         "description": "Title for camera settings screen"
     },
+    "protuneSetting": "ProTune",
+    "@protuneSetting": {
+        "description": "Title for ProTune setting card"
+    },
+    "protuneSettingSubtitle": "Enable or disable ProTune image controls.",
+    "@protuneSettingSubtitle": {
+        "description": "Subtitle explaining the ProTune setting"
+    },
     "ledSetting": "LED Indicators",
     "@ledSetting": {
         "description": "Title for LED setting card"

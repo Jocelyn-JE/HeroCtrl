@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
-import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/video_settings/fov_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/video_settings/fps_selector.dart';
@@ -14,18 +13,7 @@ List<Widget> videoSettingsWidgets(
   Axis direction = Axis.vertical,
 }) {
   bool showFps = CameraStateConditions.isInVideoMode(cameraState)
-      ? (() {
-          final currentResolution = cameraState.status.videoResolution;
-          final currentVideoStandard = cameraState.status.videoStandard;
-          final fpsForResolution =
-              VideoResolution.supportedFPS[currentResolution] ?? [];
-          final fpsForVideoStandard =
-              VideoStandard.videoStandardFrameRates[currentVideoStandard] ?? [];
-          final validFpsOptions = fpsForResolution
-              .where((fps) => fpsForVideoStandard.contains(fps))
-              .toList();
-          return validFpsOptions.length > 1;
-        })()
+      ? FPSSelector.getValidFpsOptionsFor(cameraState).length > 1
       : false;
 
   bool showFov = CameraStateConditions.isInVideoMode(cameraState)
