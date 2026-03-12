@@ -27,6 +27,8 @@ class Volume extends EnumClass {
         return toHex(value);
     }
   }
+
+  static Volume fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class LED extends EnumClass {
@@ -52,6 +54,8 @@ class LED extends EnumClass {
         return toHex(value);
     }
   }
+
+  static Led fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class DefaultCameraMode extends EnumClass {
@@ -85,6 +89,8 @@ class DefaultCameraMode extends EnumClass {
         return toHex(value);
     }
   }
+
+  static DefaultCameraMode fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class VideoStandard extends EnumClass {
@@ -131,6 +137,8 @@ class VideoStandard extends EnumClass {
       FPS.fps240,
     ],
   };
+
+  static VideoStandard fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class Orientation extends EnumClass {
@@ -153,6 +161,8 @@ class Orientation extends EnumClass {
         return toHex(value);
     }
   }
+
+  static Orientation fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class OneButton extends EnumClass {
@@ -175,6 +185,8 @@ class OneButton extends EnumClass {
         return toHex(value);
     }
   }
+
+  static OneButton fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class AutoPowerOff extends EnumClass {
@@ -208,4 +220,6 @@ class AutoPowerOff extends EnumClass {
         return toHex(value);
     }
   }
+
+  static AutoPowerOff fromByte(int byte) => enumFromByte(byte, all);
 }

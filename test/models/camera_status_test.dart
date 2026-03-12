@@ -251,22 +251,25 @@ void main() {
       final status = CameraStatus(bytes);
 
       // Should use defaults from orElse
-      expect(status.cameraMode, equals(CameraMode.videoMode));
-      expect(status.defaultCameraMode, equals(DefaultCameraMode.videoMode));
-      expect(status.spotMeter, equals(SpotMeter.off));
-      expect(status.timelapseInterval, equals(TimelapseInterval.halfASecond));
-      expect(status.autoPowerOff, equals(AutoPowerOff.never));
-      expect(status.fov, equals(FOV.wide));
-      expect(status.photoResolution, equals(PhotoResolution.res5MPmedium));
-      expect(status.volume, equals(Volume.percent100));
-      expect(status.ledsStatus, equals(LED.off));
-      expect(status.burstRate, equals(BurstRate.threePerSecond));
-      expect(status.continuousShotMode, equals(ContinuousShot.off));
-      expect(status.whiteBalance, equals(WhiteBalance.auto));
-      expect(status.loopVideoDuration, equals(LoopVideoDuration.off));
-      expect(status.videoResolution, equals(VideoResolution.wvga240fps));
-      expect(status.fps, equals(FPS.fps30));
-      expect(status.exposureCompensation, equals(ExposureCompensation.zero));
+      expect(status.cameraMode, equals(CameraMode.all.first));
+      expect(status.defaultCameraMode, equals(DefaultCameraMode.all.first));
+      expect(status.spotMeter, equals(SpotMeter.all.first));
+      expect(status.timelapseInterval, equals(TimelapseInterval.all.first));
+      expect(status.autoPowerOff, equals(AutoPowerOff.all.first));
+      expect(status.fov, equals(Fov.all.first));
+      expect(status.photoResolution, equals(PhotoResolution.all.first));
+      expect(status.volume, equals(Volume.all.first));
+      expect(status.ledsStatus, equals(Led.all.first));
+      expect(status.burstRate, equals(BurstRate.all.first));
+      expect(status.continuousShotMode, equals(ContinuousShot.all.first));
+      expect(status.whiteBalance, equals(WhiteBalance.all.first));
+      expect(status.loopVideoDuration, equals(LoopVideoDuration.all.first));
+      expect(status.videoResolution, equals(VideoResolution.all.first));
+      expect(status.fps, equals(Fps.all.first));
+      expect(
+        status.exposureCompensation,
+        equals(ExposureCompensation.all.first),
+      );
     });
 
     test('uses provided fallback camera mode for unknown mode value', () {

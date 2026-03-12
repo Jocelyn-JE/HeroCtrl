@@ -116,34 +116,13 @@ class CameraStatus {
   }
 
   CameraStatus(Uint8List bytes, {CameraMode? fallbackCameraMode})
-    : cameraMode = CameraMode.all.firstWhere(
-        (mode) => mode.value == bytes[1],
-        orElse: () => fallbackCameraMode ?? CameraMode.videoMode,
-      ),
-      defaultCameraMode = DefaultCameraMode.all.firstWhere(
-        (mode) => mode.value == bytes[3],
-        orElse: () => DefaultCameraMode.videoMode,
-      ),
-      spotMeter = SpotMeter.all.firstWhere(
-        (meter) => meter.value == bytes[4],
-        orElse: () => SpotMeter.off,
-      ),
-      timelapseInterval = TimelapseInterval.all.firstWhere(
-        (interval) => interval.value == bytes[5],
-        orElse: () => TimelapseInterval.halfASecond,
-      ),
-      autoPowerOff = AutoPowerOff.all.firstWhere(
-        (powerOff) => powerOff.value == bytes[6],
-        orElse: () => AutoPowerOff.never,
-      ),
-      fov = FOV.all.firstWhere(
-        (f) => f.value == bytes[7],
-        orElse: () => FOV.wide,
-      ),
-      photoResolution = PhotoResolution.all.firstWhere(
-        (res) => res.value == bytes[8],
-        orElse: () => PhotoResolution.res5MPmedium,
-      ),
+    : cameraMode = CameraMode.fromByte(bytes[1], fallbackCameraMode),
+      defaultCameraMode = DefaultCameraMode.fromByte(bytes[3]),
+      spotMeter = SpotMeter.fromByte(bytes[4]),
+      timelapseInterval = TimelapseInterval.fromByte(bytes[5]),
+      autoPowerOff = AutoPowerOff.fromByte(bytes[6]),
+      fov = Fov.fromByte(bytes[7]),
+      photoResolution = PhotoResolution.fromByte(bytes[8]),
       recordingProgress = _parseInt(bytes[13], bytes[14]),
       volume = Volume.all.firstWhere(
         (vol) => vol.value == bytes[16],

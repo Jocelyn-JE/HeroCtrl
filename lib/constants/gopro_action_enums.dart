@@ -23,6 +23,8 @@ class Power extends EnumClass {
         return toHex(value);
     }
   }
+
+  static Power fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class Shutter extends EnumClass {
@@ -45,6 +47,8 @@ class Shutter extends EnumClass {
         return toHex(value);
     }
   }
+
+  static Shutter fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class VideoPreview extends EnumClass {
@@ -67,6 +71,8 @@ class VideoPreview extends EnumClass {
         return toHex(value);
     }
   }
+
+  static VideoPreview fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class Locate extends EnumClass {
@@ -89,6 +95,8 @@ class Locate extends EnumClass {
         return toHex(value);
     }
   }
+
+  static Locate fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class CameraMode extends EnumClass {
@@ -132,5 +140,12 @@ class CameraMode extends EnumClass {
       default:
         return toHex(value);
     }
+  }
+
+  static CameraMode fromByte(int byte, CameraMode? fallbackCameraMode) {
+    return CameraMode.all.firstWhere(
+      (mode) => mode.value == byte,
+      orElse: () => fallbackCameraMode ?? CameraMode.all.first,
+    );
   }
 }

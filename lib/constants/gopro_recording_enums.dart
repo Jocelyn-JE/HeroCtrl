@@ -218,6 +218,8 @@ class FOV extends EnumClass {
 
     return factorStr;
   }
+
+  static Fov fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class FPS extends EnumClass {
@@ -284,9 +286,7 @@ class FPS extends EnumClass {
     }
   }
 
-  static FPS fromByte(int byte) {
-    return all.firstWhere((fps) => fps.value == byte, orElse: () => fps30);
-  }
+  static Fps fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class VideoAndPhotoInterval extends EnumClass {
@@ -324,6 +324,8 @@ class VideoAndPhotoInterval extends EnumClass {
         return toHex(value);
     }
   }
+
+  static VideoAndPhotoInterval fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class LoopVideoDuration extends EnumClass {
@@ -366,12 +368,7 @@ class LoopVideoDuration extends EnumClass {
     }
   }
 
-  static LoopVideoDuration fromByte(int byte) {
-    return all.firstWhere(
-      (duration) => duration.value == byte,
-      orElse: () => LoopVideoDuration.off,
-    );
-  }
+  static LoopVideoDuration fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class LowLight extends EnumClass {
@@ -394,6 +391,8 @@ class LowLight extends EnumClass {
         return toHex(value);
     }
   }
+
+  static LowLight fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class SpotMeter extends EnumClass {
@@ -416,4 +415,6 @@ class SpotMeter extends EnumClass {
         return toHex(value);
     }
   }
+
+  static SpotMeter fromByte(int byte) => enumFromByte(byte, all);
 }

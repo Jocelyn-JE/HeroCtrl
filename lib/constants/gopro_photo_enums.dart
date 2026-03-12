@@ -78,6 +78,8 @@ class PhotoResolution extends EnumClass {
         return toHex(value);
     }
   }
+
+  static PhotoResolution fromByte(int byte) => enumFromByte(byte, all);
 }
 
 enum PhotoZoom {
@@ -141,6 +143,8 @@ class TimelapseInterval extends EnumClass {
         return toHex(value);
     }
   }
+
+  static TimelapseInterval fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class ContinuousShot extends EnumClass {
