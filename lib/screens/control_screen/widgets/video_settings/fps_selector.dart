@@ -28,10 +28,10 @@ class FpsSelector extends StatelessWidget {
       return VideoResolution.getSupportedFps(resolution, standard);
     }
 
-    final protuneResolution = ProtuneVideoResolution.fromVideoResolution(
+    final protuneResolution = ProTuneVideoResolution.fromVideoResolution(
       resolution,
     );
-    return ProtuneVideoResolution.getSupportedFps(protuneResolution, standard);
+    return ProTuneVideoResolution.getSupportedFps(protuneResolution, standard);
   }
 
   List<Fps> _getValidFpsOptions() {

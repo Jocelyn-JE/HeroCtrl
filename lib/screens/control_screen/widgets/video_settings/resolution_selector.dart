@@ -23,7 +23,7 @@ class ResolutionSelector extends StatelessWidget {
     final isProtuneOn = cameraState.status.protuneStatus == ProTune.on;
     if (!isProtuneOn) return VideoResolution.all;
 
-    return ProtuneVideoResolution.supportedVideoResolutions;
+    return ProTuneVideoResolution.supportedVideoResolutions;
   }
 
   @override

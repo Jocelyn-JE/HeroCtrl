@@ -199,27 +199,27 @@ class ColorProfile extends EnumClass {
   static ColorProfile fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ProtuneVideoResolution extends EnumClass {
-  const ProtuneVideoResolution._(super.value);
+class ProTuneVideoResolution extends EnumClass {
+  const ProTuneVideoResolution._(super.value);
 
-  static const ProtuneVideoResolution res720p = ProtuneVideoResolution._(0x00);
-  static const ProtuneVideoResolution res960p = ProtuneVideoResolution._(0x02);
-  static const ProtuneVideoResolution res1080p = ProtuneVideoResolution._(0x03);
-  static const ProtuneVideoResolution res1440p = ProtuneVideoResolution._(0x04);
-  static const ProtuneVideoResolution res2_7k = ProtuneVideoResolution._(0x05);
-  static const ProtuneVideoResolution res4k = ProtuneVideoResolution._(0x06);
-  static const ProtuneVideoResolution res2_7k_17_9 = ProtuneVideoResolution._(
+  static const ProTuneVideoResolution res720p = ProTuneVideoResolution._(0x00);
+  static const ProTuneVideoResolution res960p = ProTuneVideoResolution._(0x02);
+  static const ProTuneVideoResolution res1080p = ProTuneVideoResolution._(0x03);
+  static const ProTuneVideoResolution res1440p = ProTuneVideoResolution._(0x04);
+  static const ProTuneVideoResolution res2_7k = ProTuneVideoResolution._(0x05);
+  static const ProTuneVideoResolution res4k = ProTuneVideoResolution._(0x06);
+  static const ProTuneVideoResolution res2_7k_17_9 = ProTuneVideoResolution._(
     0x07,
   );
-  static const ProtuneVideoResolution res4k_17_9 = ProtuneVideoResolution._(
+  static const ProTuneVideoResolution res4k_17_9 = ProTuneVideoResolution._(
     0x08,
   );
-  static const ProtuneVideoResolution res1080pSuperView =
-      ProtuneVideoResolution._(0x09);
-  static const ProtuneVideoResolution res720pSuperView =
-      ProtuneVideoResolution._(0x0a);
+  static const ProTuneVideoResolution res1080pSuperView =
+      ProTuneVideoResolution._(0x09);
+  static const ProTuneVideoResolution res720pSuperView =
+      ProTuneVideoResolution._(0x0a);
 
-  static const List<ProtuneVideoResolution> all = [
+  static const List<ProTuneVideoResolution> all = [
     res720p,
     res960p,
     res1080p,
@@ -246,7 +246,7 @@ class ProtuneVideoResolution extends EnumClass {
     VideoResolution.res720pSuperView,
   ];
 
-  static ProtuneVideoResolution? fromVideoResolution(
+  static ProTuneVideoResolution? fromVideoResolution(
     VideoResolution resolution,
   ) {
     if (resolution == VideoResolution.res720p) return res720p;
@@ -293,8 +293,8 @@ class ProtuneVideoResolution extends EnumClass {
     }
   }
 
-  static final Map<ProtuneVideoResolution, List<Fps>>
-  protuneVideoResolutionSupportedFps = {
+  static final Map<ProTuneVideoResolution, List<Fps>>
+  proTuneVideoResolutionSupportedFps = {
     res720p: [Fps.fps120, Fps.fps100, Fps.fps60, Fps.fps50],
     res960p: [Fps.fps100, Fps.fps60, Fps.fps50],
     res1080p: [
@@ -322,7 +322,7 @@ class ProtuneVideoResolution extends EnumClass {
   };
 
   static List<Fps> getSupportedFps(
-    ProtuneVideoResolution? resolution,
+    ProTuneVideoResolution? resolution,
     VideoStandard standard,
   ) {
     List<Fps> fpsForResolution;
@@ -334,12 +334,12 @@ class ProtuneVideoResolution extends EnumClass {
           ? [Fps.fps60, Fps.fps120]
           : [Fps.fps50, Fps.fps100];
     }
-    fpsForResolution = protuneVideoResolutionSupportedFps[resolution] ?? [];
+    fpsForResolution = proTuneVideoResolutionSupportedFps[resolution] ?? [];
     fpsForStandard = VideoStandard.videoStandardFrameRates[standard] ?? [];
     return fpsForResolution
         .where((fps) => fpsForStandard.contains(fps))
         .toList();
   }
 
-  static ProtuneVideoResolution fromByte(int byte) => enumFromByte(byte, all);
+  static ProTuneVideoResolution fromByte(int byte) => enumFromByte(byte, all);
 }
