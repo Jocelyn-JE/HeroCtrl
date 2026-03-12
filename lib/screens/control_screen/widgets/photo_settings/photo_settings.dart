@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/gopro_action_enums.dart';
+import 'package:heroctrl/gopro_settings/actions.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/photo_settings/burst_rate_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/photo_settings/resolution_selector.dart';

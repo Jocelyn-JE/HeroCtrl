@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/gopro_settings/recording.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/video_settings/fov_selector.dart';
 import 'package:heroctrl/screens/control_screen/widgets/video_settings/fps_selector.dart';

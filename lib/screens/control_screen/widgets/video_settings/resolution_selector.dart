@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/gopro_protune_enums.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/gopro_settings/protune.dart';
+import 'package:heroctrl/gopro_settings/recording.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';

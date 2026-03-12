@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/enum_class.dart';
-import 'package:heroctrl/constants/gopro_endpoints.dart';
-import 'package:heroctrl/constants/gopro_system_enums.dart';
+import 'package:heroctrl/gopro_settings/camera_setting.dart';
+import 'package:heroctrl/gopro_settings/endpoints.dart';
+import 'package:heroctrl/gopro_settings/system.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class VideoResolution extends EnumClass {
+class VideoResolution extends CameraSetting {
   final Icon _icon;
   final double _aspectRatio;
 
@@ -195,7 +195,7 @@ class VideoResolution extends EnumClass {
   static VideoResolution fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Fov extends EnumClass {
+class Fov extends CameraSetting {
   final double _factor;
 
   const Fov._(super._value, this._factor);
@@ -220,7 +220,7 @@ class Fov extends EnumClass {
   static Fov fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Fps extends EnumClass {
+class Fps extends CameraSetting {
   const Fps._(super._value);
 
   static const Fps fps12 = Fps._(0x00);
@@ -287,7 +287,7 @@ class Fps extends EnumClass {
   static Fps fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class VideoAndPhotoInterval extends EnumClass {
+class VideoAndPhotoInterval extends CameraSetting {
   const VideoAndPhotoInterval._(super._value);
 
   static const VideoAndPhotoInterval off = VideoAndPhotoInterval._(0x00);
@@ -326,7 +326,7 @@ class VideoAndPhotoInterval extends EnumClass {
   static VideoAndPhotoInterval fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class LoopVideoDuration extends EnumClass {
+class LoopVideoDuration extends CameraSetting {
   const LoopVideoDuration._(super._value);
 
   static const LoopVideoDuration off = LoopVideoDuration._(0x00);
@@ -369,7 +369,7 @@ class LoopVideoDuration extends EnumClass {
   static LoopVideoDuration fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class LowLight extends EnumClass {
+class LowLight extends CameraSetting {
   const LowLight._(super._value);
 
   static const LowLight off = LowLight._(0x00);
@@ -393,7 +393,7 @@ class LowLight extends EnumClass {
   static LowLight fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class SpotMeter extends EnumClass {
+class SpotMeter extends CameraSetting {
   const SpotMeter._(super._value);
 
   static const SpotMeter off = SpotMeter._(0x00);

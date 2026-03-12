@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:heroctrl/constants/gopro_action_enums.dart';
-import 'package:heroctrl/constants/gopro_photo_enums.dart';
-import 'package:heroctrl/constants/gopro_protune_enums.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
-import 'package:heroctrl/constants/gopro_system_enums.dart';
+import 'package:heroctrl/gopro_settings/actions.dart';
+import 'package:heroctrl/gopro_settings/photo.dart';
+import 'package:heroctrl/gopro_settings/protune.dart';
+import 'package:heroctrl/gopro_settings/recording.dart';
+import 'package:heroctrl/gopro_settings/system.dart';
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
 import 'package:heroctrl/models/camera_version.dart';
 import 'package:heroctrl/models/camera_wifi_info.dart';
@@ -11,7 +11,7 @@ import 'package:heroctrl/services/gopro_connection_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/models/camera_status.dart';
-import 'package:heroctrl/constants/gopro_endpoints.dart';
+import 'package:heroctrl/gopro_settings/endpoints.dart';
 
 class GoProApiService {
   static const _camera = 'camera';

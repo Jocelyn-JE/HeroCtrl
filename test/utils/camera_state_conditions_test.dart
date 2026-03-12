@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:heroctrl/constants/gopro_action_enums.dart';
+import 'package:heroctrl/gopro_settings/actions.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/models/camera_status.dart';
 import 'package:heroctrl/utils/camera_state_conditions.dart';

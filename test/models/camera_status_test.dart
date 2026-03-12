@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:heroctrl/constants/gopro_action_enums.dart';
-import 'package:heroctrl/constants/gopro_photo_enums.dart';
-import 'package:heroctrl/constants/gopro_protune_enums.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
-import 'package:heroctrl/constants/gopro_system_enums.dart';
+import 'package:heroctrl/gopro_settings/actions.dart';
+import 'package:heroctrl/gopro_settings/photo.dart';
+import 'package:heroctrl/gopro_settings/protune.dart';
+import 'package:heroctrl/gopro_settings/recording.dart';
+import 'package:heroctrl/gopro_settings/system.dart';
 import 'package:heroctrl/models/camera_status.dart';
 
 void main() {

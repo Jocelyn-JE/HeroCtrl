@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-abstract class EnumClass {
+abstract class CameraSetting {
   final int _value;
 
-  const EnumClass(this._value);
+  const CameraSetting(this._value);
 
   int get value => _value;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        other is EnumClass &&
+        other is CameraSetting &&
             runtimeType == other.runtimeType &&
             _value == other._value;
   }
@@ -21,7 +21,7 @@ abstract class EnumClass {
   String getLocalizedName(BuildContext context);
 }
 
-T enumFromByte<T extends EnumClass>(int byte, List<T> all) {
+T enumFromByte<T extends CameraSetting>(int byte, List<T> all) {
   assert(all.isNotEmpty, 'all must not be empty');
   return all.firstWhere((e) => e.value == byte, orElse: () => all.first);
 }

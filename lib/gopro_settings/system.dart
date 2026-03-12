@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/enum_class.dart';
-import 'package:heroctrl/constants/gopro_endpoints.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
+import 'package:heroctrl/gopro_settings/camera_setting.dart';
+import 'package:heroctrl/gopro_settings/endpoints.dart';
+import 'package:heroctrl/gopro_settings/recording.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class Volume extends EnumClass {
+class Volume extends CameraSetting {
   const Volume._(super._value);
 
   static const Volume mute = Volume._(0x00);
@@ -31,7 +31,7 @@ class Volume extends EnumClass {
   static Volume fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Led extends EnumClass {
+class Led extends CameraSetting {
   const Led._(super._value);
 
   static const Led off = Led._(0x00);
@@ -58,7 +58,7 @@ class Led extends EnumClass {
   static Led fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class DefaultCameraMode extends EnumClass {
+class DefaultCameraMode extends CameraSetting {
   const DefaultCameraMode._(super._value);
 
   static const DefaultCameraMode videoMode = DefaultCameraMode._(0x00);
@@ -93,7 +93,7 @@ class DefaultCameraMode extends EnumClass {
   static DefaultCameraMode fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class VideoStandard extends EnumClass {
+class VideoStandard extends CameraSetting {
   const VideoStandard._(super._value);
 
   static const VideoStandard ntsc = VideoStandard._(0x00);
@@ -141,7 +141,7 @@ class VideoStandard extends EnumClass {
   static VideoStandard fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class CameraOrientation extends EnumClass {
+class CameraOrientation extends CameraSetting {
   const CameraOrientation._(super._value);
 
   static const CameraOrientation up = CameraOrientation._(0x00);
@@ -165,7 +165,7 @@ class CameraOrientation extends EnumClass {
   static CameraOrientation fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class OneButton extends EnumClass {
+class OneButton extends CameraSetting {
   const OneButton._(super._value);
 
   static const OneButton off = OneButton._(0x00);
@@ -189,7 +189,7 @@ class OneButton extends EnumClass {
   static OneButton fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class AutoPowerOff extends EnumClass {
+class AutoPowerOff extends CameraSetting {
   const AutoPowerOff._(super._value);
 
   static const AutoPowerOff never = AutoPowerOff._(0x00);

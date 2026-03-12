@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/enum_class.dart';
-import 'package:heroctrl/constants/gopro_endpoints.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
-import 'package:heroctrl/constants/gopro_system_enums.dart';
+import 'package:heroctrl/gopro_settings/camera_setting.dart';
+import 'package:heroctrl/gopro_settings/endpoints.dart';
+import 'package:heroctrl/gopro_settings/recording.dart';
+import 'package:heroctrl/gopro_settings/system.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class ProTune extends EnumClass {
+class ProTune extends CameraSetting {
   const ProTune._(super.value);
 
   static const ProTune off = ProTune._(0x00);
@@ -29,7 +29,7 @@ class ProTune extends EnumClass {
   static ProTune fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class WhiteBalance extends EnumClass {
+class WhiteBalance extends CameraSetting {
   const WhiteBalance._(super.value);
 
   static const WhiteBalance auto = WhiteBalance._(0x00);
@@ -62,7 +62,7 @@ class WhiteBalance extends EnumClass {
   static WhiteBalance fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ExposureCompensation extends EnumClass {
+class ExposureCompensation extends CameraSetting {
   const ExposureCompensation._(super.value);
 
   static const ExposureCompensation minusTwo = ExposureCompensation._(0x06);
@@ -121,7 +121,7 @@ class ExposureCompensation extends EnumClass {
   static ExposureCompensation fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Sharpness extends EnumClass {
+class Sharpness extends CameraSetting {
   const Sharpness._(super.value);
 
   static const Sharpness high = Sharpness._(0x00);
@@ -148,7 +148,7 @@ class Sharpness extends EnumClass {
   static Sharpness fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class IsoLimit extends EnumClass {
+class IsoLimit extends CameraSetting {
   const IsoLimit._(super.value);
 
   static const IsoLimit iso6400 = IsoLimit._(0x00);
@@ -175,7 +175,7 @@ class IsoLimit extends EnumClass {
   static IsoLimit fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ColorProfile extends EnumClass {
+class ColorProfile extends CameraSetting {
   const ColorProfile._(super.value);
 
   static const ColorProfile goPro = ColorProfile._(0x00);
@@ -199,7 +199,7 @@ class ColorProfile extends EnumClass {
   static ColorProfile fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ProTuneVideoResolution extends EnumClass {
+class ProTuneVideoResolution extends CameraSetting {
   const ProTuneVideoResolution._(super.value);
 
   static const ProTuneVideoResolution res720p = ProTuneVideoResolution._(0x00);

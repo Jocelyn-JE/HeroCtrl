@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/enum_class.dart';
-import 'package:heroctrl/constants/gopro_endpoints.dart';
+import 'package:heroctrl/gopro_settings/camera_setting.dart';
+import 'package:heroctrl/gopro_settings/endpoints.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class PhotoResolution extends EnumClass {
+class PhotoResolution extends CameraSetting {
   final Icon _icon;
   final PhotoZoom zoom;
   const PhotoResolution._(super.value, this._icon, this.zoom);
@@ -100,7 +100,7 @@ enum PhotoZoom {
   }
 }
 
-class TimelapseInterval extends EnumClass {
+class TimelapseInterval extends CameraSetting {
   const TimelapseInterval._(super.value);
 
   static const TimelapseInterval halfASecond = TimelapseInterval._(0x00);
@@ -147,7 +147,7 @@ class TimelapseInterval extends EnumClass {
   static TimelapseInterval fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ContinuousShot extends EnumClass {
+class ContinuousShot extends CameraSetting {
   const ContinuousShot._(super.value);
 
   static const ContinuousShot off = ContinuousShot._(0x00);
@@ -182,7 +182,7 @@ class ContinuousShot extends EnumClass {
   static ContinuousShot fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class BurstRate extends EnumClass {
+class BurstRate extends CameraSetting {
   const BurstRate._(super.value);
 
   static const BurstRate threePerSecond = BurstRate._(0x00);

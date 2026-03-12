@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/constants/enum_class.dart';
-import 'package:heroctrl/constants/gopro_endpoints.dart';
+import 'package:heroctrl/gopro_settings/camera_setting.dart';
+import 'package:heroctrl/gopro_settings/endpoints.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class Power extends EnumClass {
+class Power extends CameraSetting {
   const Power._(super._value);
 
   static const Power off = Power._(0x00);
@@ -27,7 +27,7 @@ class Power extends EnumClass {
   static Power fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Shutter extends EnumClass {
+class Shutter extends CameraSetting {
   const Shutter._(super._value);
 
   static const Shutter stop = Shutter._(0x00);
@@ -51,7 +51,7 @@ class Shutter extends EnumClass {
   static Shutter fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class VideoPreview extends EnumClass {
+class VideoPreview extends CameraSetting {
   const VideoPreview._(super._value);
 
   static const VideoPreview off = VideoPreview._(0x00);
@@ -75,7 +75,7 @@ class VideoPreview extends EnumClass {
   static VideoPreview fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Locate extends EnumClass {
+class Locate extends CameraSetting {
   const Locate._(super._value);
 
   static const Locate off = Locate._(0x00);
@@ -99,7 +99,7 @@ class Locate extends EnumClass {
   static Locate fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class CameraMode extends EnumClass {
+class CameraMode extends CameraSetting {
   final IconData _icon;
   const CameraMode._(super._value, this._icon);
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:heroctrl/constants/gopro_recording_enums.dart';
-import 'package:heroctrl/constants/gopro_system_enums.dart';
+import 'package:heroctrl/gopro_settings/recording.dart';
+import 'package:heroctrl/gopro_settings/system.dart';
 
 void main() {
   group('VideoResolution', () {
