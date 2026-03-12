@@ -41,7 +41,7 @@ class CameraSettingsScreen extends StatelessWidget {
                       ProtuneSettingCard(password: password),
                       LedSettingCard(password: password),
                       VolumeSettingCard(password: password),
-                      OrientationSettingCard(password: password),
+                      CameraOrientationSettingCard(password: password),
                       DefaultModeCard(password: password),
                       VideoStandardSettingCard(password: password),
                       TimeSettingCard(password: password),

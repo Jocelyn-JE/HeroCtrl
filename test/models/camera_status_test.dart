@@ -65,12 +65,12 @@ void main() {
       // Test upright (bit 6 = 0)
       bytes[18] = 0x00;
       final statusUp = CameraStatus(bytes);
-      expect(statusUp.orientation, equals(Orientation.up));
+      expect(statusUp.orientation, equals(CameraOrientation.up));
 
       // Test upside down (bit 6 = 1)
       bytes[18] = 0x04;
       final statusDown = CameraStatus(bytes);
-      expect(statusDown.orientation, equals(Orientation.down));
+      expect(statusDown.orientation, equals(CameraOrientation.down));
     });
 
     test('parses locate status from bit field correctly', () {
@@ -216,14 +216,14 @@ void main() {
       final bytes = Uint8List(64);
 
       // Test multiple flags in byte 18
-      // Set all flags: PAL (0x20), Locate (0x40), OneButton (0x08), Orientation (0x04), VideoPreview (0x01)
+      // Set all flags: PAL (0x20), Locate (0x40), OneButton (0x08), CameraOrientation (0x04), VideoPreview (0x01)
       bytes[18] = 0x6D; // 01101101
       final status = CameraStatus(bytes);
 
       expect(status.videoStandard, equals(VideoStandard.pal));
       expect(status.locateStatus, equals(Locate.on));
       expect(status.oneButtonMode, equals(OneButton.on));
-      expect(status.orientation, equals(Orientation.down));
+      expect(status.orientation, equals(CameraOrientation.down));
       expect(status.videoPreview, equals(VideoPreview.on));
     });
 

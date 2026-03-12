@@ -19,7 +19,7 @@ class CameraStatus {
   final VideoStandard videoStandard;
   final Locate locateStatus;
   final OneButton oneButtonMode;
-  final Orientation orientation;
+  final CameraOrientation orientation;
   final VideoPreview videoPreview;
   final int batteryLevel; // 0 - 3, need to call bl for percentage
   final int photosRemaining;
@@ -60,9 +60,9 @@ class CameraStatus {
     return (byte & 0x08) != 0 ? OneButton.on : OneButton.off;
   }
 
-  // Orientation is the sixth bit of the byte starting from the left
-  static Orientation _parseOrientation(int byte) {
-    return (byte & 0x04) == 0 ? Orientation.up : Orientation.down;
+  // CameraOrientation is the sixth bit of the byte starting from the left
+  static CameraOrientation _parseCameraOrientation(int byte) {
+    return (byte & 0x04) == 0 ? CameraOrientation.up : CameraOrientation.down;
   }
 
   // Video preview is the eighth bit of the byte starting from the left
@@ -129,7 +129,7 @@ class CameraStatus {
       videoStandard = _parseVideoStandard(bytes[18]),
       locateStatus = _parseLocateStatus(bytes[18]),
       oneButtonMode = _parseOneButtonMode(bytes[18]),
-      orientation = _parseOrientation(bytes[18]),
+      orientation = _parseCameraOrientation(bytes[18]),
       videoPreview = _parseVideoPreview(bytes[18]),
       batteryLevel = bytes[19],
       photosRemaining = _parseInt(bytes[21], bytes[22]),

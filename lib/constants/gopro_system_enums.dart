@@ -141,13 +141,13 @@ class VideoStandard extends EnumClass {
   static VideoStandard fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Orientation extends EnumClass {
-  const Orientation._(super._value);
+class CameraOrientation extends EnumClass {
+  const CameraOrientation._(super._value);
 
-  static const Orientation up = Orientation._(0x00);
-  static const Orientation down = Orientation._(0x01);
+  static const CameraOrientation up = CameraOrientation._(0x00);
+  static const CameraOrientation down = CameraOrientation._(0x01);
 
-  static const List<Orientation> all = [up, down];
+  static const List<CameraOrientation> all = [up, down];
 
   @override
   String getLocalizedName(BuildContext context) {
@@ -162,7 +162,7 @@ class Orientation extends EnumClass {
     }
   }
 
-  static Orientation fromByte(int byte) => enumFromByte(byte, all);
+  static CameraOrientation fromByte(int byte) => enumFromByte(byte, all);
 }
 
 class OneButton extends EnumClass {

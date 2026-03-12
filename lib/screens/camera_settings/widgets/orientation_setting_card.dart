@@ -4,26 +4,28 @@ import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 import 'package:heroctrl/utils/snackbar.dart';
 
-class OrientationSettingCard extends StatefulWidget {
+class CameraOrientationSettingCard extends StatefulWidget {
   final String password;
 
-  const OrientationSettingCard({super.key, required this.password});
+  const CameraOrientationSettingCard({super.key, required this.password});
 
   @override
-  State<OrientationSettingCard> createState() => _OrientationSettingCardState();
+  State<CameraOrientationSettingCard> createState() =>
+      _CameraOrientationSettingCardState();
 }
 
-class _OrientationSettingCardState extends State<OrientationSettingCard> {
+class _CameraOrientationSettingCardState
+    extends State<CameraOrientationSettingCard> {
   bool? _upsideDown;
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchOrientationSetting();
+    _fetchCameraOrientationSetting();
   }
 
-  Future<void> _fetchOrientationSetting() async {
+  Future<void> _fetchCameraOrientationSetting() async {
     try {
       final upsideDown = await GoProApiService.isUpsideDown(widget.password);
       if (mounted) {
@@ -41,11 +43,11 @@ class _OrientationSettingCardState extends State<OrientationSettingCard> {
     }
   }
 
-  Future<void> _setOrientation(bool upsideDown) async {
+  Future<void> _setCameraOrientation(bool upsideDown) async {
     final previous = _upsideDown;
     setState(() => _upsideDown = upsideDown);
     try {
-      await GoProApiService.setOrientation(widget.password, upsideDown);
+      await GoProApiService.setCameraOrientation(widget.password, upsideDown);
     } catch (e, stackTrace) {
       AppLogger.error('Error setting orientation', e, stackTrace);
       if (mounted) {
@@ -96,7 +98,7 @@ class _OrientationSettingCardState extends State<OrientationSettingCard> {
                 alignment: Alignment.centerRight,
                 child: Switch(
                   value: _upsideDown ?? false,
-                  onChanged: _setOrientation,
+                  onChanged: _setCameraOrientation,
                 ),
               ),
           ],
