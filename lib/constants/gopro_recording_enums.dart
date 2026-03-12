@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/enum_class.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class VideoResolution {
-  final int _value;
+class VideoResolution extends EnumClass {
   final Icon _icon;
   final double _aspectRatio;
 
-  const VideoResolution._(this._value, this._icon, this._aspectRatio);
+  const VideoResolution._(super._value, this._icon, this._aspectRatio);
 
-  int get value => _value;
   Icon get icon => _icon;
   double get aspectRatio => _aspectRatio;
 
@@ -87,17 +86,9 @@ class VideoResolution {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is VideoResolution && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
-  /// Returns the localized display name for this resolution
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.resolutionWvga240fps;
       case 0x01:
@@ -121,7 +112,7 @@ class VideoResolution {
       case 0x0a:
         return l10n.resolution720pSuperView;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 
@@ -162,14 +153,16 @@ class VideoResolution {
     VideoResolution resolution,
     VideoStandard standard,
   ) {
+    List<FPS> fpsForResolution;
+    List<FPS> fpsForStandard;
+
     if (resolution == res720p) {
       return standard == VideoStandard.ntsc
           ? [FPS.fps60, FPS.fps120]
           : [FPS.fps50, FPS.fps100];
     }
-    var fpsForResolution = supportedFPS[resolution] ?? [];
-    var fpsForStandard = VideoStandard.videoStandardFrameRates[standard] ?? [];
-
+    fpsForResolution = supportedFPS[resolution] ?? [];
+    fpsForStandard = VideoStandard.videoStandardFrameRates[standard] ?? [];
     return fpsForResolution
         .where((fps) => fpsForStandard.contains(fps))
         .toList();
@@ -198,15 +191,17 @@ class VideoResolution {
     }
     return supportedFOV[resolution] ?? [FOV.wide];
   }
+
+  static VideoResolution fromByte(int byte) {
+    return all.firstWhere((res) => res.value == byte, orElse: () => res1080p);
+  }
 }
 
-class FOV {
-  final int _value;
+class FOV extends EnumClass {
   final double _factor;
 
-  const FOV._(this._value, this._factor);
+  const FOV._(super._value, this._factor);
 
-  int get value => _value;
   double get factor => _factor;
 
   static const FOV wide = FOV._(0x00, 1.0);
@@ -216,14 +211,8 @@ class FOV {
   static const List<FOV> all = [wide, medium, narrow];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is FOV && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
-    final factorStr = factor == factor.toInt()
+    final String factorStr = factor == factor.toInt()
         ? '${factor.toInt()}x'
         : '${factor.toStringAsFixed(2)}x';
 
@@ -231,11 +220,8 @@ class FOV {
   }
 }
 
-class FPS {
-  final int _value;
-  const FPS._(this._value);
-
-  int get value => _value;
+class FPS extends EnumClass {
+  const FPS._(super._value);
 
   static const FPS fps12 = FPS._(0x00);
   static const FPS fps12_5 = FPS._(0x0b);
@@ -266,15 +252,9 @@ class FPS {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is FPS && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.fps12;
       case 0x0b:
@@ -300,16 +280,17 @@ class FPS {
       case 0x0a:
         return l10n.fps240;
       default:
-        return '${toHex(_value)}fps';
+        return '${toHex(value)}fps';
     }
+  }
+
+  static FPS fromByte(int byte) {
+    return all.firstWhere((fps) => fps.value == byte, orElse: () => fps30);
   }
 }
 
-class VideoAndPhotoInterval {
-  final int _value;
-  const VideoAndPhotoInterval._(this._value);
-
-  int get value => _value;
+class VideoAndPhotoInterval extends EnumClass {
+  const VideoAndPhotoInterval._(super._value);
 
   static const VideoAndPhotoInterval off = VideoAndPhotoInterval._(0x00);
   static const VideoAndPhotoInterval every5s = VideoAndPhotoInterval._(0x01);
@@ -326,16 +307,9 @@ class VideoAndPhotoInterval {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is VideoAndPhotoInterval && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.volumeOff;
       case 0x01:
@@ -347,16 +321,13 @@ class VideoAndPhotoInterval {
       case 0x04:
         return l10n.videoAndPhotoEvery60s;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
 
-class LoopVideoDuration {
-  final int _value;
-  const LoopVideoDuration._(this._value);
-
-  int get value => _value;
+class LoopVideoDuration extends EnumClass {
+  const LoopVideoDuration._(super._value);
 
   static const LoopVideoDuration off = LoopVideoDuration._(0x00);
   static const LoopVideoDuration fiveMinutes = LoopVideoDuration._(0x01);
@@ -375,16 +346,9 @@ class LoopVideoDuration {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is LoopVideoDuration && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.volumeOff;
       case 0x01:
@@ -398,16 +362,20 @@ class LoopVideoDuration {
       case 0x05:
         return l10n.loopVideoMaxStorage;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
+  }
+
+  static LoopVideoDuration fromByte(int byte) {
+    return all.firstWhere(
+      (duration) => duration.value == byte,
+      orElse: () => LoopVideoDuration.off,
+    );
   }
 }
 
-class LowLight {
-  final int _value;
-  const LowLight._(this._value);
-
-  int get value => _value;
+class LowLight extends EnumClass {
+  const LowLight._(super._value);
 
   static const LowLight off = LowLight._(0x00);
   static const LowLight on = LowLight._(0x01);
@@ -415,30 +383,21 @@ class LowLight {
   static const List<LowLight> all = [off, on];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is LowLight && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.lowLightOff;
       case 0x01:
         return l10n.lowLightOn;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
 
-class SpotMeter {
-  final int _value;
-  const SpotMeter._(this._value);
-
-  int get value => _value;
+class SpotMeter extends EnumClass {
+  const SpotMeter._(super._value);
 
   static const SpotMeter off = SpotMeter._(0x00);
   static const SpotMeter on = SpotMeter._(0x01);
@@ -446,21 +405,15 @@ class SpotMeter {
   static const List<SpotMeter> all = [off, on];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is SpotMeter && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.spotMeterOff;
       case 0x01:
         return l10n.spotMeterOn;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }

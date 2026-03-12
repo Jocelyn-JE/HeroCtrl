@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/enum_class.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class PhotoResolution {
-  final int _value;
+class PhotoResolution extends EnumClass {
   final Icon _icon;
   final PhotoZoom zoom;
-  const PhotoResolution._(this._value, this._icon, this.zoom);
+  const PhotoResolution._(super.value, this._icon, this.zoom);
 
-  int get value => _value;
   Icon get icon => _icon;
 
   static const PhotoResolution res5MPmedium = PhotoResolution._(
@@ -49,16 +48,9 @@ class PhotoResolution {
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PhotoResolution && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x03:
         return l10n.photoResolution5MpMedium;
       case 0x04:
@@ -68,13 +60,13 @@ class PhotoResolution {
       case 0x06:
         return l10n.photoResolution7MpMedium;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 
   String getLocalizedMpName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x03:
         return l10n.photoResolution5Mp;
       case 0x04:
@@ -83,7 +75,7 @@ class PhotoResolution {
       case 0x05:
         return l10n.photoResolution12Mp;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
@@ -106,11 +98,8 @@ enum PhotoZoom {
   }
 }
 
-class TimelapseInterval {
-  final int _value;
-  const TimelapseInterval._(this._value);
-
-  int get value => _value;
+class TimelapseInterval extends EnumClass {
+  const TimelapseInterval._(super.value);
 
   static const TimelapseInterval halfASecond = TimelapseInterval._(0x00);
   static const TimelapseInterval oneSecond = TimelapseInterval._(0x01);
@@ -131,16 +120,9 @@ class TimelapseInterval {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is TimelapseInterval && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.timelapse0_5Sec;
       case 0x01:
@@ -156,16 +138,13 @@ class TimelapseInterval {
       case 0x3c:
         return l10n.timelapse60Sec;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
 
-class ContinuousShot {
-  final int _value;
-  const ContinuousShot._(this._value);
-
-  int get value => _value;
+class ContinuousShot extends EnumClass {
+  const ContinuousShot._(super.value);
 
   static const ContinuousShot off = ContinuousShot._(0x00);
   static const ContinuousShot threePhotos = ContinuousShot._(0x03);
@@ -180,16 +159,9 @@ class ContinuousShot {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ContinuousShot && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.volumeOff;
       case 0x03:
@@ -199,16 +171,15 @@ class ContinuousShot {
       case 0x0a:
         return l10n.continuousShot10Photos;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static ContinuousShot fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class BurstRate {
-  final int _value;
-  const BurstRate._(this._value);
-
-  int get value => _value;
+class BurstRate extends EnumClass {
+  const BurstRate._(super.value);
 
   static const BurstRate threePerSecond = BurstRate._(0x00);
   static const BurstRate fivePerSecond = BurstRate._(0x01);
@@ -229,15 +200,9 @@ class BurstRate {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is BurstRate && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.burstRate3PerSec;
       case 0x01:
@@ -253,7 +218,9 @@ class BurstRate {
       case 0x06:
         return l10n.burstRate30Per3Sec;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static BurstRate fromByte(int byte) => enumFromByte(byte, all);
 }

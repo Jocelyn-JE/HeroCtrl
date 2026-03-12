@@ -167,35 +167,14 @@ class CameraStatus {
       colorProfile = _parseColorProfile(bytes[30]),
       protuneStatus = _parseProtuneStatus(bytes[30]),
       lowLightMode = _parseLowLightMode(bytes[30]),
-      burstRate = BurstRate.all.firstWhere(
-        (rate) => rate.value == bytes[32],
-        orElse: () => BurstRate.threePerSecond,
-      ),
-      continuousShotMode = ContinuousShot.all.firstWhere(
-        (shot) => shot.value == bytes[33],
-        orElse: () => ContinuousShot.off,
-      ),
-      whiteBalance = WhiteBalance.all.firstWhere(
-        (wb) => wb.value == bytes[34],
-        orElse: () => WhiteBalance.auto,
-      ),
+      burstRate = BurstRate.fromByte(bytes[32]),
+      continuousShotMode = ContinuousShot.fromByte(bytes[33]),
+      whiteBalance = WhiteBalance.fromByte(bytes[34]),
       simultaneousVideoAndPhoto = bytes[36] != 0,
-      loopVideoDuration = LoopVideoDuration.all.firstWhere(
-        (duration) => duration.value == bytes[37],
-        orElse: () => LoopVideoDuration.off,
-      ),
-      videoResolution = VideoResolution.all.firstWhere(
-        (res) => res.value == bytes[50],
-        orElse: () => VideoResolution.wvga240fps,
-      ),
-      fps = FPS.all.firstWhere(
-        (f) => f.value == bytes[51],
-        orElse: () => FPS.fps30,
-      ),
+      loopVideoDuration = LoopVideoDuration.fromByte(bytes[37]),
+      videoResolution = VideoResolution.fromByte(bytes[50]),
+      fps = FPS.fromByte(bytes[51]),
       sharpness = _parseSharpness(bytes[52]),
       iso = _parseIso(bytes[52]),
-      exposureCompensation = ExposureCompensation.all.firstWhere(
-        (ec) => ec.value == bytes[53],
-        orElse: () => ExposureCompensation.zero,
-      );
+      exposureCompensation = ExposureCompensation.fromByte(bytes[53]);
 }

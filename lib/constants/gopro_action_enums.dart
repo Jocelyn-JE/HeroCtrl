@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/enum_class.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class Power {
-  final int _value;
-  const Power._(this._value);
-
-  int get value => _value;
+class Power extends EnumClass {
+  const Power._(super._value);
 
   static const Power off = Power._(0x00);
   static const Power on = Power._(0x01);
@@ -14,30 +12,21 @@ class Power {
   static const List<Power> all = [off, on];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is Power && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.powerOff;
       case 0x01:
         return l10n.powerOn;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
 
-class Shutter {
-  final int _value;
-  const Shutter._(this._value);
-
-  int get value => _value;
+class Shutter extends EnumClass {
+  const Shutter._(super._value);
 
   static const Shutter stop = Shutter._(0x00);
   static const Shutter start = Shutter._(0x01);
@@ -45,30 +34,21 @@ class Shutter {
   static const List<Shutter> all = [stop, start];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is Shutter && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.shutterStop;
       case 0x01:
         return l10n.shutterStart;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
 
-class VideoPreview {
-  final int _value;
-  const VideoPreview._(this._value);
-
-  int get value => _value;
+class VideoPreview extends EnumClass {
+  const VideoPreview._(super._value);
 
   static const VideoPreview off = VideoPreview._(0x00);
   static const VideoPreview on = VideoPreview._(0x02);
@@ -76,30 +56,21 @@ class VideoPreview {
   static const List<VideoPreview> all = [off, on];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is VideoPreview && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.previewOff;
       case 0x02:
         return l10n.previewOn;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
 
-class Locate {
-  final int _value;
-  const Locate._(this._value);
-
-  int get value => _value;
+class Locate extends EnumClass {
+  const Locate._(super._value);
 
   static const Locate off = Locate._(0x00);
   static const Locate on = Locate._(0x01);
@@ -107,31 +78,23 @@ class Locate {
   static const List<Locate> all = [off, on];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is Locate && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.locateOff;
       case 0x01:
         return l10n.locateOn;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }
 
-class CameraMode {
-  final int _value;
+class CameraMode extends EnumClass {
   final IconData _icon;
-  const CameraMode._(this._value, this._icon);
+  const CameraMode._(super._value, this._icon);
 
-  int get value => _value;
   IconData get icon => _icon;
 
   static const CameraMode videoMode = CameraMode._(0x00, Icons.videocam);
@@ -151,15 +114,9 @@ class CameraMode {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is CameraMode && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.defaultModeVideo;
       case 0x01:
@@ -173,7 +130,7 @@ class CameraMode {
       case 0x07:
         return l10n.cameraModeSettings;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 }

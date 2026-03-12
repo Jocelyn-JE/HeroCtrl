@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:heroctrl/constants/enum_class.dart';
 import 'package:heroctrl/constants/gopro_endpoints.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
-class ProTune {
-  final int _value;
-  const ProTune._(this._value);
-
-  int get value => _value;
+class ProTune extends EnumClass {
+  const ProTune._(super.value);
 
   static const ProTune off = ProTune._(0x00);
   static const ProTune on = ProTune._(0x01);
@@ -16,30 +14,23 @@ class ProTune {
   static const List<ProTune> all = [off, on];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is ProTune && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.protuneOff;
       case 0x01:
         return l10n.protuneOn;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static ProTune fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class WhiteBalance {
-  final int _value;
-  const WhiteBalance._(this._value);
-
-  int get value => _value;
+class WhiteBalance extends EnumClass {
+  const WhiteBalance._(super.value);
 
   static const WhiteBalance auto = WhiteBalance._(0x00);
   static const WhiteBalance k3000 = WhiteBalance._(0x01);
@@ -50,15 +41,9 @@ class WhiteBalance {
   static const List<WhiteBalance> all = [auto, k3000, k5500, k6500, camRaw];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is WhiteBalance && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.whiteBalanceAuto;
       case 0x01:
@@ -70,16 +55,15 @@ class WhiteBalance {
       case 0x04:
         return l10n.whiteBalanceCamRaw;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static WhiteBalance fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ExposureCompensation {
-  final int _value;
-  const ExposureCompensation._(this._value);
-
-  int get value => _value;
+class ExposureCompensation extends EnumClass {
+  const ExposureCompensation._(super.value);
 
   static const ExposureCompensation minusTwo = ExposureCompensation._(0x06);
   static const ExposureCompensation minusOneAndHalf = ExposureCompensation._(
@@ -108,16 +92,9 @@ class ExposureCompensation {
   ];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ExposureCompensation && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x06:
         return l10n.exposureCompensation2Minus;
       case 0x07:
@@ -137,16 +114,15 @@ class ExposureCompensation {
       case 0x0e:
         return l10n.exposureCompensation2Plus;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static ExposureCompensation fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class Sharpness {
-  final int _value;
-  const Sharpness._(this._value);
-
-  int get value => _value;
+class Sharpness extends EnumClass {
+  const Sharpness._(super.value);
 
   static const Sharpness high = Sharpness._(0x00);
   static const Sharpness medium = Sharpness._(0x01);
@@ -155,15 +131,9 @@ class Sharpness {
   static const List<Sharpness> all = [high, medium, low];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is Sharpness && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.sharpnessHigh;
       case 0x01:
@@ -171,16 +141,15 @@ class Sharpness {
       case 0x02:
         return l10n.sharpnessLow;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static Sharpness fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ISOLimit {
-  final int _value;
-  const ISOLimit._(this._value);
-
-  int get value => _value;
+class ISOLimit extends EnumClass {
+  const ISOLimit._(super.value);
 
   static const ISOLimit iso6400 = ISOLimit._(0x00);
   static const ISOLimit iso1600 = ISOLimit._(0x01);
@@ -189,15 +158,9 @@ class ISOLimit {
   static const List<ISOLimit> all = [iso6400, iso1600, iso400];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is ISOLimit && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.isoLimit6400;
       case 0x01:
@@ -205,16 +168,15 @@ class ISOLimit {
       case 0x02:
         return l10n.isoLimit400;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static ISOLimit fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ColorProfile {
-  final int _value;
-  const ColorProfile._(this._value);
-
-  int get value => _value;
+class ColorProfile extends EnumClass {
+  const ColorProfile._(super.value);
 
   static const ColorProfile goPro = ColorProfile._(0x00);
   static const ColorProfile flat = ColorProfile._(0x01);
@@ -222,30 +184,23 @@ class ColorProfile {
   static const List<ColorProfile> all = [goPro, flat];
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is ColorProfile && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.colorProfileGoPro;
       case 0x01:
         return l10n.colorProfileFlat;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
+
+  static ColorProfile fromByte(int byte) => enumFromByte(byte, all);
 }
 
-class ProtuneVideoResolution {
-  final int _value;
-  const ProtuneVideoResolution._(this._value);
-
-  int get value => _value;
+class ProtuneVideoResolution extends EnumClass {
+  const ProtuneVideoResolution._(super.value);
 
   static const ProtuneVideoResolution res720p = ProtuneVideoResolution._(0x00);
   static const ProtuneVideoResolution res960p = ProtuneVideoResolution._(0x02);
@@ -310,16 +265,9 @@ class ProtuneVideoResolution {
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ProtuneVideoResolution && _value == other._value;
-
-  @override
-  int get hashCode => _value.hashCode;
-
   String getLocalizedName(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    switch (_value) {
+    switch (value) {
       case 0x00:
         return l10n.resolution720p;
       case 0x02:
@@ -341,7 +289,7 @@ class ProtuneVideoResolution {
       case 0x0a:
         return l10n.resolution720pSuperView;
       default:
-        return toHex(_value);
+        return toHex(value);
     }
   }
 
@@ -392,4 +340,6 @@ class ProtuneVideoResolution {
         .where((fps) => fpsForStandard.contains(fps))
         .toList();
   }
+
+  static ProtuneVideoResolution fromByte(int byte) => enumFromByte(byte, all);
 }
