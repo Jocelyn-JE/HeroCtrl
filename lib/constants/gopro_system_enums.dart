@@ -60,13 +60,13 @@ class DefaultCameraMode extends EnumClass {
   static const DefaultCameraMode videoMode = DefaultCameraMode._(0x00);
   static const DefaultCameraMode photoMode = DefaultCameraMode._(0x01);
   static const DefaultCameraMode burstMode = DefaultCameraMode._(0x02);
-  static const DefaultCameraMode timeLapseMode = DefaultCameraMode._(0x03);
+  static const DefaultCameraMode timelapseMode = DefaultCameraMode._(0x03);
 
   static const List<DefaultCameraMode> all = [
     videoMode,
     photoMode,
     burstMode,
-    timeLapseMode,
+    timelapseMode,
   ];
 
   @override
@@ -80,7 +80,7 @@ class DefaultCameraMode extends EnumClass {
       case 0x02:
         return l10n.defaultModeBurst;
       case 0x03:
-        return l10n.defaultModeTimeLapse;
+        return l10n.defaultModeTimelapse;
       default:
         return toHex(value);
     }

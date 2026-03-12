@@ -279,8 +279,8 @@
     "@defaultModePhoto": {
         "description": "Default mode option for photo mode"
     },
-    "defaultModeTimeLapse": "Time-Lapse",
-    "@defaultModeTimeLapse": {
+    "defaultModeTimelapse": "Time-Lapse",
+    "@defaultModeTimelapse": {
         "description": "Default mode option for time-lapse mode"
     },
     "defaultModeBurst": "Burst",

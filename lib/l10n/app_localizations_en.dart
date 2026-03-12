@@ -199,7 +199,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get defaultModePhoto => 'Photo';
 
   @override
-  String get defaultModeTimeLapse => 'Time-Lapse';
+  String get defaultModeTimelapse => 'Time-Lapse';
 
   @override
   String get defaultModeBurst => 'Burst';

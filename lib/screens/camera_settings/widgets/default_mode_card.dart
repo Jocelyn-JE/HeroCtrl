@@ -123,12 +123,12 @@ class _DefaultModeCardState extends State<DefaultModeCard> {
                       ),
                     ),
                     DropdownMenuItem(
-                      value: DefaultCameraMode.timeLapseMode,
+                      value: DefaultCameraMode.timelapseMode,
                       child: Row(
                         children: [
                           const Icon(Icons.timelapse),
                           const SizedBox(width: 12),
-                          Text(l10n.defaultModeTimeLapse),
+                          Text(l10n.defaultModeTimelapse),
                         ],
                       ),
                     ),

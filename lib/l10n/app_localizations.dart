@@ -433,7 +433,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Time-Lapse'**
-  String get defaultModeTimeLapse;
+  String get defaultModeTimelapse;
 
   /// Default mode option for burst mode
   ///

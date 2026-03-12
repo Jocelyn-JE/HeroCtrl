@@ -382,7 +382,7 @@ class GoProApiService {
       case 2:
         return DefaultCameraMode.burstMode;
       case 3:
-        return DefaultCameraMode.timeLapseMode;
+        return DefaultCameraMode.timelapseMode;
       default:
         return DefaultCameraMode.videoMode;
     }
