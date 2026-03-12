@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:heroctrl/gopro_settings/actions.dart';
+import 'package:heroctrl/gopro_settings/actions/camera_mode.dart';
 import 'package:heroctrl/gopro_settings/endpoints.dart';
-import 'package:heroctrl/gopro_settings/recording.dart';
+import 'package:heroctrl/gopro_settings/recording/video_resolution.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view/live_view_controls.dart';
 import 'package:heroctrl/screens/control_screen/widgets/live_view/media_status_display.dart';

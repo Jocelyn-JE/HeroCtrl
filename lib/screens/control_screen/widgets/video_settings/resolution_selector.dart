@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/gopro_settings/protune.dart';
-import 'package:heroctrl/gopro_settings/recording.dart';
+import 'package:heroctrl/gopro_settings/protune/pro_tune.dart';
+import 'package:heroctrl/gopro_settings/protune/pro_tune_video_resolution.dart';
+import 'package:heroctrl/gopro_settings/recording/video_resolution.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';

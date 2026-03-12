@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/gopro_settings/actions.dart';
+import 'package:heroctrl/gopro_settings/actions/camera_mode.dart';
 import 'package:heroctrl/models/camera_state.dart';
 
 class CameraStateConditions {

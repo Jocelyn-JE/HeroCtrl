@@ -1,9 +1,9 @@
 import 'dart:typed_data';
-import 'package:heroctrl/gopro_settings/actions.dart';
-import 'package:heroctrl/gopro_settings/photo.dart';
-import 'package:heroctrl/gopro_settings/protune.dart';
-import 'package:heroctrl/gopro_settings/recording.dart';
-import 'package:heroctrl/gopro_settings/system.dart';
+import 'package:heroctrl/gopro_settings/actions/actions.dart';
+import 'package:heroctrl/gopro_settings/photo/photo.dart';
+import 'package:heroctrl/gopro_settings/protune/protune.dart';
+import 'package:heroctrl/gopro_settings/recording/recording.dart';
+import 'package:heroctrl/gopro_settings/system/system.dart';
 
 class CameraStatus {
   final CameraMode cameraMode;

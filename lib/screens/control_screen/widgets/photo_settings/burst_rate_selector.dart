@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heroctrl/gopro_settings/photo.dart';
+import 'package:heroctrl/gopro_settings/photo/burst_rate.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
