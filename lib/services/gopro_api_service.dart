@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:heroctrl/constants/gopro_action_enums.dart';
 import 'package:heroctrl/constants/gopro_photo_enums.dart';
+import 'package:heroctrl/constants/gopro_protune_enums.dart';
 import 'package:heroctrl/constants/gopro_recording_enums.dart';
 import 'package:heroctrl/constants/gopro_system_enums.dart';
 import 'package:heroctrl/models/camera_serial_and_mac.dart';
@@ -329,6 +330,28 @@ class GoProApiService {
         return VideoStandard.pal;
       default:
         return VideoStandard.ntsc;
+    }
+  }
+
+  static Future<void> setProtune(String password, ProTune protuneOption) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.protune,
+      password,
+      protuneOption.value,
+    );
+  }
+
+  static Future<ProTune> getProtune(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.protune, password);
+    final value = response.bodyBytes[1];
+    switch (value) {
+      case 0:
+        return ProTune.off;
+      case 1:
+        return ProTune.on;
+      default:
+        return ProTune.off;
     }
   }
 
