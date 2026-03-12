@@ -26,23 +26,6 @@ jobs:
           filters: |
             app:
               - 'app/**'
-  
-  check_tests_changes:
-    runs-on: ubuntu-latest
-    outputs:
-      tests_changed: ${{ steps.changes.outputs.test }}
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: "Check for test changes"
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            test:
-              - 'test/**'
 
   build:
     needs: check_changes
@@ -65,9 +48,9 @@ jobs:
         run: flutter build apk --release
 
   test:
-    needs: check_tests_changes
+    needs: check_changes
     runs-on: ubuntu-latest
-    if: needs.check_tests_changes.outputs.tests_changed == 'true'
+    if: needs.check_changes.outputs.app_changed == 'true'
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
