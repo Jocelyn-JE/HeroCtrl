@@ -6,6 +6,7 @@ import 'package:heroctrl/screens/camera_settings/widgets/delete_all_media_card.d
 import 'package:heroctrl/screens/camera_settings/widgets/format_sd_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/locate_camera_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/orientation_setting_card.dart';
+import 'package:heroctrl/screens/camera_settings/widgets/protune_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/video_standard_setting_card.dart';
 import 'package:heroctrl/screens/camera_settings/widgets/volume_setting_card.dart';
 import 'package:heroctrl/services/gopro_connection_service.dart';
@@ -32,21 +33,24 @@ class CameraSettingsScreen extends StatelessWidget {
         child: GoProConnectionService.isConnected
             ? Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: ListView(
-                  children: [
-                    DisconnectCard(password: password),
-                    LedSettingCard(password: password),
-                    VolumeSettingCard(password: password),
-                    OrientationSettingCard(password: password),
-                    DefaultModeCard(password: password),
-                    VideoStandardSettingCard(password: password),
-                    TimeSettingCard(password: password),
-                    LocateCameraCard(password: password),
-                    FormatSdCard(password: password),
-                    DeleteAllMediaCard(password: password),
-                    CameraInfoCard(password: password),
-                    SizedBox(height: 8),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      DisconnectCard(password: password),
+                      LedSettingCard(password: password),
+                      VolumeSettingCard(password: password),
+                      OrientationSettingCard(password: password),
+                      DefaultModeCard(password: password),
+                      VideoStandardSettingCard(password: password),
+                      TimeSettingCard(password: password),
+                      LocateCameraCard(password: password),
+                      FormatSdCard(password: password),
+                      DeleteAllMediaCard(password: password),
+                      CameraInfoCard(password: password),
+                      SizedBox(height: 8),
+                    ],
+                  ),
                 ),
               )
             : Center(child: Text('No camera connected')),
