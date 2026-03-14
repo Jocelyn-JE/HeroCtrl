@@ -34,7 +34,7 @@ class HorizontalLayout extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  if (CameraStateConditions.isRecording(cameraState))
+                  if (!CameraStateConditions.isRecording(cameraState))
                     Card(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
