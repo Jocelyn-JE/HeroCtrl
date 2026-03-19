@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/gopro_settings/protune/pro_tune.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/gopro_settings/protune/pro_tune_video_resolution.dart';
 import 'package:heroctrl/gopro_settings/recording/fov.dart';
 import 'package:heroctrl/gopro_settings/recording/fps.dart';
@@ -60,11 +61,13 @@ class VideoSettingsCard extends StatelessWidget {
         validResolutionOptions.contains(currentResolution)
         ? currentResolution
         : null;
+    final l10n = AppLocalizations.of(context);
 
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Video Resolution'),
+        Text(l10n.videoResolution),
         DropdownButton<VideoResolution>(
           isExpanded: true,
           value: selectedValue,
@@ -108,11 +111,13 @@ class VideoSettingsCard extends StatelessWidget {
     final Fps? selectedValue = validFpsOptions.contains(currentFps)
         ? currentFps
         : null;
+    final l10n = AppLocalizations.of(context);
 
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('FPS'),
+        Text(l10n.fps),
         DropdownButton<Fps>(
           isExpanded: true,
           value: selectedValue,
@@ -143,11 +148,13 @@ class VideoSettingsCard extends StatelessWidget {
     final Fov? selectedValue = validFovOptions.contains(currentFov)
         ? currentFov
         : null;
+    final l10n = AppLocalizations.of(context);
 
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Zoom'),
+        Text(l10n.zoom),
         DropdownButton<Fov>(
           isExpanded: true,
           value: selectedValue,

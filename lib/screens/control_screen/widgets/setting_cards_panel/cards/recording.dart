@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/gopro_settings/actions/camera_mode.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/gopro_settings/recording/fps.dart';
 import 'package:heroctrl/gopro_settings/recording/low_light.dart';
 import 'package:heroctrl/gopro_settings/recording/spot_meter.dart';
@@ -70,6 +71,9 @@ class RecordingSettingsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    if (l10n == null) return const SizedBox.shrink();
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -77,7 +81,7 @@ class RecordingSettingsCard extends StatelessWidget {
           SwitchListTile(
             dense: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
-            title: const Text('Spot Meter'),
+            title: Text(l10n.spotMeter),
             subtitle: Text(
               cameraState.status.spotMeter.getLocalizedName(context),
             ),
@@ -89,7 +93,7 @@ class RecordingSettingsCard extends StatelessWidget {
             SwitchListTile(
               dense: true,
               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
-              title: const Text('Low Light'),
+              title: Text(l10n.lowLight),
               subtitle: Text(
                 cameraState.status.lowLightMode.getLocalizedName(context),
               ),

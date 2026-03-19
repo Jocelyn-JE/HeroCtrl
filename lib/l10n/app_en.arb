@@ -828,5 +828,57 @@
                 "type": "int"
             }
         }
+    },
+    "photoResolution": "Photo Resolution",
+    "@photoResolution": {
+        "description": "Label for photo resolution selector"
+    },
+    "burstRate": "Burst Rate",
+    "@burstRate": {
+        "description": "Label for burst rate selector"
+    },
+    "timelapseInterval": "Timelapse Interval",
+    "@timelapseInterval": {
+        "description": "Label for timelapse interval selector"
+    },
+    "videoResolution": "Video Resolution",
+    "@videoResolution": {
+        "description": "Label for video resolution selector"
+    },
+    "fps": "FPS",
+    "@fps": {
+        "description": "Label for frames per second selector"
+    },
+    "zoom": "Zoom",
+    "@zoom": {
+        "description": "Label for field of view/zoom selector"
+    },
+    "spotMeter": "Spot Meter",
+    "@spotMeter": {
+        "description": "Label for spot meter setting"
+    },
+    "lowLight": "Low Light",
+    "@lowLight": {
+        "description": "Label for low light mode setting"
+    },
+    "proTuneSettings": "ProTune Settings",
+    "@proTuneSettings": {
+        "description": "Title for ProTune settings card"
+    },
+    "whiteBalance": "White Balance",
+    "@whiteBalance": {
+        "description": "Label for white balance selector"
+    },
+    "sharpness": "Sharpness",
+    "@sharpness": {
+        "description": "Label for sharpness selector"
+    },
+    "isoLimit": "ISO Limit",
+    "@isoLimit": {
+        "description": "Label for ISO limit selector"
+    },
+    "exposureCompensation": "Exposure Compensation",
+    "@exposureCompensation": {
+        "description": "Label for exposure compensation selector"
     }
 }

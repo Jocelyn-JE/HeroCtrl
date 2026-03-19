@@ -1238,6 +1238,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} photos'**
   String mediaCountPhotos(int count);
+
+  /// Label for photo resolution selector
+  ///
+  /// In en, this message translates to:
+  /// **'Photo Resolution'**
+  String get photoResolution;
+
+  /// Label for burst rate selector
+  ///
+  /// In en, this message translates to:
+  /// **'Burst Rate'**
+  String get burstRate;
+
+  /// Label for timelapse interval selector
+  ///
+  /// In en, this message translates to:
+  /// **'Timelapse Interval'**
+  String get timelapseInterval;
+
+  /// Label for video resolution selector
+  ///
+  /// In en, this message translates to:
+  /// **'Video Resolution'**
+  String get videoResolution;
+
+  /// Label for frames per second selector
+  ///
+  /// In en, this message translates to:
+  /// **'FPS'**
+  String get fps;
+
+  /// Label for field of view/zoom selector
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom'**
+  String get zoom;
+
+  /// Label for spot meter setting
+  ///
+  /// In en, this message translates to:
+  /// **'Spot Meter'**
+  String get spotMeter;
+
+  /// Label for low light mode setting
+  ///
+  /// In en, this message translates to:
+  /// **'Low Light'**
+  String get lowLight;
+
+  /// Title for ProTune settings card
+  ///
+  /// In en, this message translates to:
+  /// **'ProTune Settings'**
+  String get proTuneSettings;
+
+  /// Label for white balance selector
+  ///
+  /// In en, this message translates to:
+  /// **'White Balance'**
+  String get whiteBalance;
+
+  /// Label for sharpness selector
+  ///
+  /// In en, this message translates to:
+  /// **'Sharpness'**
+  String get sharpness;
+
+  /// Label for ISO limit selector
+  ///
+  /// In en, this message translates to:
+  /// **'ISO Limit'**
+  String get isoLimit;
+
+  /// Label for exposure compensation selector
+  ///
+  /// In en, this message translates to:
+  /// **'Exposure Compensation'**
+  String get exposureCompensation;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/gopro_settings/actions/camera_mode.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/gopro_settings/photo/burst_rate.dart';
 import 'package:heroctrl/gopro_settings/photo/photo_resolution.dart';
 import 'package:heroctrl/gopro_settings/photo/timelapse_interval.dart';
@@ -58,11 +59,13 @@ class PhotoSettingsCard extends StatelessWidget {
     final BurstRate? selectedValue = BurstRate.all.contains(currentBurstRate)
         ? currentBurstRate
         : null;
+    final l10n = AppLocalizations.of(context);
 
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Burst Rate'),
+        Text(l10n.burstRate),
         DropdownButton<BurstRate>(
           isExpanded: true,
           value: selectedValue,
@@ -93,11 +96,13 @@ class PhotoSettingsCard extends StatelessWidget {
         TimelapseInterval.all.contains(currentInterval)
         ? currentInterval
         : null;
+    final l10n = AppLocalizations.of(context);
 
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Timelapse Interval'),
+        Text(l10n.timelapseInterval),
         DropdownButton<TimelapseInterval>(
           isExpanded: true,
           value: selectedValue,
@@ -211,11 +216,13 @@ class _PhotoResolutionSelectorWidgetState
     final otherZoom = _selectedZoom == PhotoZoom.wide
         ? PhotoZoom.medium
         : PhotoZoom.wide;
+    final l10n = AppLocalizations.of(context);
 
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Photo Resolution'),
+        Text(l10n.photoResolution),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

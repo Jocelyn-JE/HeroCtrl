@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/gopro_settings/protune/protune.dart';
+import 'package:heroctrl/l10n/app_localizations.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
@@ -53,10 +54,13 @@ class ProTuneSettingsCard extends StatelessWidget {
   }
 
   Widget _buildWhiteBalanceSelector(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('White Balance'),
+        Text(l10n.whiteBalance),
         DropdownButton<WhiteBalance>(
           isExpanded: true,
           value: cameraState.status.whiteBalance,
@@ -84,10 +88,13 @@ class ProTuneSettingsCard extends StatelessWidget {
   }
 
   Widget _buildSharpnessSelector(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Sharpness'),
+        Text(l10n.sharpness),
         DropdownButton<Sharpness>(
           isExpanded: true,
           value: cameraState.status.sharpness,
@@ -112,10 +119,13 @@ class ProTuneSettingsCard extends StatelessWidget {
   }
 
   Widget _buildIsoSelector(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('ISO Limit'),
+        Text(l10n.isoLimit),
         DropdownButton<IsoLimit>(
           isExpanded: true,
           value: cameraState.status.iso,
@@ -140,10 +150,13 @@ class ProTuneSettingsCard extends StatelessWidget {
   }
 
   Widget _buildExposureSelector(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    if (l10n == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Exposure Compensation'),
+        Text(l10n.exposureCompensation),
         DropdownButton<ExposureCompensation>(
           isExpanded: true,
           value: cameraState.status.exposureCompensation,
@@ -171,7 +184,9 @@ class ProTuneSettingsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+    final l10n = AppLocalizations.of(context);
 
+    if (l10n == null) return const SizedBox.shrink();
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -181,7 +196,7 @@ class ProTuneSettingsCard extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                'ProTune Settings',
+                l10n.proTuneSettings,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),

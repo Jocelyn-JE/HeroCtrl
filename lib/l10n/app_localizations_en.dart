@@ -606,4 +606,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String mediaCountPhotos(int count) {
     return '$count photos';
   }
+
+  @override
+  String get photoResolution => 'Photo Resolution';
+
+  @override
+  String get burstRate => 'Burst Rate';
+
+  @override
+  String get timelapseInterval => 'Timelapse Interval';
+
+  @override
+  String get videoResolution => 'Video Resolution';
+
+  @override
+  String get fps => 'FPS';
+
+  @override
+  String get zoom => 'Zoom';
+
+  @override
+  String get spotMeter => 'Spot Meter';
+
+  @override
+  String get lowLight => 'Low Light';
+
+  @override
+  String get proTuneSettings => 'ProTune Settings';
+
+  @override
+  String get whiteBalance => 'White Balance';
+
+  @override
+  String get sharpness => 'Sharpness';
+
+  @override
+  String get isoLimit => 'ISO Limit';
+
+  @override
+  String get exposureCompensation => 'Exposure Compensation';
 }
