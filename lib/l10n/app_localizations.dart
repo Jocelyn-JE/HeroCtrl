@@ -984,19 +984,19 @@ abstract class AppLocalizations {
   /// ISO limit: 6400
   ///
   /// In en, this message translates to:
-  /// **'ISO 6400'**
+  /// **'6400'**
   String get isoLimit6400;
 
   /// ISO limit: 1600
   ///
   /// In en, this message translates to:
-  /// **'ISO 1600'**
+  /// **'1600'**
   String get isoLimit1600;
 
   /// ISO limit: 400
   ///
   /// In en, this message translates to:
-  /// **'ISO 400'**
+  /// **'400'**
   String get isoLimit400;
 
   /// Color profile: GoPro standard colors

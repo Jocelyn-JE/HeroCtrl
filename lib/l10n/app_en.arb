@@ -647,15 +647,15 @@
     "@sharpnessLow": {
         "description": "Sharpness: Low"
     },
-    "isoLimit6400": "ISO 6400",
+    "isoLimit6400": "6400",
     "@isoLimit6400": {
         "description": "ISO limit: 6400"
     },
-    "isoLimit1600": "ISO 1600",
+    "isoLimit1600": "1600",
     "@isoLimit1600": {
         "description": "ISO limit: 1600"
     },
-    "isoLimit400": "ISO 400",
+    "isoLimit400": "400",
     "@isoLimit400": {
         "description": "ISO limit: 400"
     },

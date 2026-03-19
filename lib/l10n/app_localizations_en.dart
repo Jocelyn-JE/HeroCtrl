@@ -475,13 +475,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sharpnessLow => 'Low';
 
   @override
-  String get isoLimit6400 => 'ISO 6400';
+  String get isoLimit6400 => '6400';
 
   @override
-  String get isoLimit1600 => 'ISO 1600';
+  String get isoLimit1600 => '1600';
 
   @override
-  String get isoLimit400 => 'ISO 400';
+  String get isoLimit400 => '400';
 
   @override
   String get colorProfileGoPro => 'GoPro Color';
