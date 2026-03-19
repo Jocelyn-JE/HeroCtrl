@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:heroctrl/gopro_settings/actions/camera_mode.dart';
+import 'package:heroctrl/gopro_settings/protune/pro_tune.dart';
 import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/screens/control_screen/widgets/camera_mode_carousel.dart';
 import 'package:heroctrl/screens/control_screen/widgets/media_count_display.dart';
 import 'package:heroctrl/screens/control_screen/widgets/photo_settings/photo_settings.dart';
+import 'package:heroctrl/screens/control_screen/widgets/protune_options_card.dart';
 import 'package:heroctrl/screens/control_screen/widgets/recording_options_card.dart';
 import 'package:heroctrl/screens/control_screen/widgets/video_settings/video_settings.dart';
 import 'package:heroctrl/utils/camera_state_conditions.dart';
@@ -85,6 +87,13 @@ class VerticalLayout extends StatelessWidget {
                           ),
                         if (showSettingCards)
                           RecordingOptionsCard(
+                            cameraState: cameraState!,
+                            password: password,
+                            onSettingChanged: onSettingChanged,
+                          ),
+                        if (showSettingCards &&
+                            cameraState!.status.protuneStatus == ProTune.on)
+                          ProTuneOptionsCard(
                             cameraState: cameraState!,
                             password: password,
                             onSettingChanged: onSettingChanged,
