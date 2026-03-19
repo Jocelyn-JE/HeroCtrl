@@ -66,7 +66,8 @@ class SettingCardsPanel extends StatelessWidget {
                 onSettingChanged: onSettingChanged,
               ),
             if (_showSettingCards &&
-                cameraState.status.protuneStatus == ProTune.on)
+                cameraState.status.protuneStatus == ProTune.on &&
+                cameraState.status.cameraMode == CameraMode.videoMode)
               ProTuneSettingsCard(
                 cameraState: cameraState,
                 password: password,
