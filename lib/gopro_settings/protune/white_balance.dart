@@ -4,15 +4,21 @@ import 'package:heroctrl/gopro_settings/endpoints.dart';
 import 'package:heroctrl/l10n/app_localizations.dart';
 
 class WhiteBalance extends CameraSetting {
-  const WhiteBalance._(super.value);
+  const WhiteBalance._(super.value, this._icon);
+  final Icon _icon;
 
-  static const WhiteBalance auto = WhiteBalance._(0x00);
-  static const WhiteBalance k3000 = WhiteBalance._(0x01);
-  static const WhiteBalance k5500 = WhiteBalance._(0x02);
-  static const WhiteBalance k6500 = WhiteBalance._(0x03);
-  static const WhiteBalance camRaw = WhiteBalance._(0x04);
+  static const WhiteBalance auto = WhiteBalance._(0x00, Icon(Icons.wb_auto));
+  static const WhiteBalance k3000 = WhiteBalance._(
+    0x01,
+    Icon(Icons.wb_incandescent),
+  );
+  static const WhiteBalance k5500 = WhiteBalance._(0x02, Icon(Icons.wb_sunny));
+  static const WhiteBalance k6500 = WhiteBalance._(0x03, Icon(Icons.wb_cloudy));
+  static const WhiteBalance camRaw = WhiteBalance._(0x04, Icon(Icons.raw_on));
 
   static const List<WhiteBalance> all = [auto, k3000, k5500, k6500, camRaw];
+
+  Icon get icon => _icon;
 
   @override
   String getLocalizedName(BuildContext context) {
