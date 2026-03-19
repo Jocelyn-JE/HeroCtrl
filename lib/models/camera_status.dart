@@ -75,13 +75,13 @@ class CameraStatus {
     int sharpnessBits = (byte & 0x0C) >> 2;
     switch (sharpnessBits) {
       case 0:
-        return Sharpness.low;
+        return Sharpness.high;
       case 1:
         return Sharpness.medium;
       case 2:
-        return Sharpness.high;
+        return Sharpness.low;
       default:
-        return Sharpness.medium;
+        return Sharpness.high;
     }
   }
 
