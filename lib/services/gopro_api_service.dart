@@ -408,6 +408,126 @@ class GoProApiService {
     }
   }
 
+  static Future<void> setWhiteBalance(
+    String password,
+    WhiteBalance whiteBalanceOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.whiteBalance,
+      password,
+      whiteBalanceOption.value,
+    );
+  }
+
+  static Future<WhiteBalance> getWhiteBalance(String password) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.whiteBalance,
+      password,
+    );
+    final value = response.bodyBytes[1];
+    try {
+      return WhiteBalance.all.firstWhere((wb) => wb.value == value);
+    } catch (e) {
+      AppLogger.error('Error parsing white balance', e);
+      return WhiteBalance.auto;
+    }
+  }
+
+  static Future<void> setSharpness(
+    String password,
+    Sharpness sharpnessOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.sharpness,
+      password,
+      sharpnessOption.value,
+    );
+  }
+
+  static Future<Sharpness> getSharpness(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.sharpness, password);
+    final value = response.bodyBytes[1];
+    try {
+      return Sharpness.all.firstWhere((s) => s.value == value);
+    } catch (e) {
+      AppLogger.error('Error parsing sharpness', e);
+      return Sharpness.medium;
+    }
+  }
+
+  static Future<void> setIsoLimit(
+    String password,
+    IsoLimit isoLimitOption,
+  ) async {
+    await _postApi(_camera, GoProEndpoints.iso, password, isoLimitOption.value);
+  }
+
+  static Future<IsoLimit> getIsoLimit(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.iso, password);
+    final value = response.bodyBytes[1];
+    try {
+      return IsoLimit.all.firstWhere((iso) => iso.value == value);
+    } catch (e) {
+      AppLogger.error('Error parsing ISO limit', e);
+      return IsoLimit.iso6400;
+    }
+  }
+
+  static Future<void> setExposureCompensation(
+    String password,
+    ExposureCompensation exposureOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.exposureCompensation,
+      password,
+      exposureOption.value,
+    );
+  }
+
+  static Future<ExposureCompensation> getExposureCompensation(
+    String password,
+  ) async {
+    final response = await _getApi(
+      _camera,
+      GoProEndpoints.exposureCompensation,
+      password,
+    );
+    final value = response.bodyBytes[1];
+    try {
+      return ExposureCompensation.all.firstWhere((ec) => ec.value == value);
+    } catch (e) {
+      AppLogger.error('Error parsing exposure compensation', e);
+      return ExposureCompensation.zero;
+    }
+  }
+
+  static Future<void> setColorProfile(
+    String password,
+    ColorProfile colorProfileOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.color,
+      password,
+      colorProfileOption.value,
+    );
+  }
+
+  static Future<ColorProfile> getColorProfile(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.color, password);
+    final value = response.bodyBytes[1];
+    try {
+      return ColorProfile.all.firstWhere((cp) => cp.value == value);
+    } catch (e) {
+      AppLogger.error('Error parsing color profile', e);
+      return ColorProfile.goPro;
+    }
+  }
+
   static Future<void> setDefaultMode(
     String password,
     DefaultCameraMode modeOption,
