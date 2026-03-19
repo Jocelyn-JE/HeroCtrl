@@ -137,10 +137,10 @@ void main() {
       final bytes = Uint8List(64);
 
       // Sharpness is bits 3-4, ISO is bits 1-2
-      // Low sharpness (00), ISO 6400 (00)
+      // High sharpness (00), ISO 6400 (00) - default values
       bytes[52] = 0x00;
       final status1 = CameraStatus(bytes);
-      expect(status1.sharpness, equals(Sharpness.low));
+      expect(status1.sharpness, equals(Sharpness.high));
       expect(status1.iso, equals(IsoLimit.iso6400));
 
       // Medium sharpness (01), ISO 1600 (01)
@@ -149,10 +149,10 @@ void main() {
       expect(status2.sharpness, equals(Sharpness.medium));
       expect(status2.iso, equals(IsoLimit.iso1600));
 
-      // High sharpness (10), ISO 400 (10)
+      // Low sharpness (10), ISO 400 (10)
       bytes[52] = 0x0A; // 00001010
       final status3 = CameraStatus(bytes);
-      expect(status3.sharpness, equals(Sharpness.high));
+      expect(status3.sharpness, equals(Sharpness.low));
       expect(status3.iso, equals(IsoLimit.iso400));
 
       // Test invalid/default sharpness value (11)
@@ -160,8 +160,8 @@ void main() {
       final status4 = CameraStatus(bytes);
       expect(
         status4.sharpness,
-        equals(Sharpness.medium),
-      ); // Should default to medium
+        equals(Sharpness.high),
+      ); // Should default to high (2)
 
       // Test invalid/default ISO value (11)
       bytes[52] = 0x03; // 00000011 - bits 1-2 = 11 (invalid)
