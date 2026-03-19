@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:heroctrl/gopro_settings/actions/actions.dart';
 import 'package:heroctrl/gopro_settings/photo/photo.dart';
 import 'package:heroctrl/gopro_settings/protune/protune.dart';
@@ -64,6 +65,7 @@ class GoProApiService {
       GoProEndpoints.videoPreview,
       password,
       VideoPreview.on.value,
+      logResponse: false,
     );
   }
 
@@ -73,6 +75,7 @@ class GoProApiService {
       GoProEndpoints.videoPreview,
       password,
       VideoPreview.off.value,
+      logResponse: false,
     );
   }
 
@@ -717,8 +720,9 @@ class GoProApiService {
     String device,
     String command,
     String? password,
-    dynamic option,
-  ) => _withLock(() async {
+    dynamic option, {
+    bool logResponse = true,
+  }) => _withLock(() async {
     if (device != _camera && device != _bacpac) {
       throw Exception('_postApi: Invalid device "$device"');
     }
@@ -735,6 +739,25 @@ class GoProApiService {
         '_postApi: Failed to send "$path" to GoPro\n Response: ${response.body} (hex: ${response.bodyBytes.toString()})',
       );
     }
+    if (logResponse && !response.bodyBytes.responseMatchesOption(option)) {
+      AppLogger.warning(
+        '_postApi: Response for "$command" differs from requested option. Response: ${response.bodyBytes.toHexString()}, Requested option: $option',
+      );
+    }
     return response;
   });
+}
+
+extension on Uint8List {
+  String toHexString() =>
+      map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+  bool responseMatchesOption(dynamic option) {
+    if (option == null) return true;
+    final optionStr = (option is int) ? toHex(option) : option.toString();
+    final responseStr = toHexString();
+    // AppLogger.info(
+    //   'Comparing response to option: response="$responseStr", option="$optionStr"',
+    // );
+    return responseStr.contains(optionStr);
+  }
 }
