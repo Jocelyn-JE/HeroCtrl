@@ -358,6 +358,56 @@ class GoProApiService {
     }
   }
 
+  static Future<void> setSpotMeter(
+    String password,
+    SpotMeter spotMeterOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.spotMeter,
+      password,
+      spotMeterOption.value,
+    );
+  }
+
+  static Future<SpotMeter> getSpotMeter(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.spotMeter, password);
+    final value = response.bodyBytes[1];
+    switch (value) {
+      case 0:
+        return SpotMeter.off;
+      case 1:
+        return SpotMeter.on;
+      default:
+        return SpotMeter.off;
+    }
+  }
+
+  static Future<void> setLowLight(
+    String password,
+    LowLight lowLightOption,
+  ) async {
+    await _postApi(
+      _camera,
+      GoProEndpoints.lowLight,
+      password,
+      lowLightOption.value,
+    );
+  }
+
+  static Future<LowLight> getLowLight(String password) async {
+    final response = await _getApi(_camera, GoProEndpoints.lowLight, password);
+    final value = response.bodyBytes[1];
+    switch (value) {
+      case 0:
+        return LowLight.off;
+      case 1:
+        return LowLight.on;
+      default:
+        return LowLight.off;
+    }
+  }
+
   static Future<void> setDefaultMode(
     String password,
     DefaultCameraMode modeOption,
