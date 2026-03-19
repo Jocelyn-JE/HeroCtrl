@@ -70,7 +70,7 @@ class CameraConnectionHandler {
       }
     } catch (e, stackTrace) {
       // If verification fails, treat as failed connection
-      AppLogger.error('Connection verification failed', e, stackTrace);
+      AppLogger.error('Connection verification failed: $e', e, stackTrace);
       if (connected) {
         await GoProConnectionService.disconnect(instant: true);
       }
