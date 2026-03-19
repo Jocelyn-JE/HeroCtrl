@@ -4,12 +4,12 @@ import 'package:heroctrl/models/camera_state.dart';
 import 'package:heroctrl/services/gopro_api_service.dart';
 import 'package:heroctrl/utils/logger.dart';
 
-class ProTuneOptionsCard extends StatelessWidget {
+class ProTuneSettingsCard extends StatelessWidget {
   final CameraState cameraState;
   final String password;
   final Future<void> Function() onSettingChanged;
 
-  const ProTuneOptionsCard({
+  const ProTuneSettingsCard({
     super.key,
     required this.cameraState,
     required this.password,
