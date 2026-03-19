@@ -46,42 +46,55 @@ class HorizontalLayout extends StatelessWidget {
         spacing: 8.0,
         children: [
           if (cameraState != null)
-            Flexible(
+            Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  if (showSettingCards)
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                          children: switch (cameraState!.status.cameraMode) {
-                            CameraMode.videoMode => videoSettingsWidgets(
-                              cameraState!,
-                              password,
-                              onSettingChanged,
-                              direction: Axis.vertical,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (showSettingCards)
+                            Card(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
+                                child: Column(
+                                  children:
+                                      switch (cameraState!.status.cameraMode) {
+                                        CameraMode.videoMode =>
+                                          videoSettingsWidgets(
+                                            cameraState!,
+                                            password,
+                                            onSettingChanged,
+                                            direction: Axis.vertical,
+                                          ),
+                                        CameraMode.photoMode ||
+                                        CameraMode.burstMode ||
+                                        CameraMode.timelapseMode =>
+                                          photoSettingsWidgets(
+                                            cameraState!,
+                                            password,
+                                            onSettingChanged,
+                                            direction: Axis.vertical,
+                                          ),
+                                        CameraMode() => [],
+                                      },
+                                ),
+                              ),
                             ),
-                            CameraMode.photoMode ||
-                            CameraMode.burstMode ||
-                            CameraMode.timelapseMode => photoSettingsWidgets(
-                              cameraState!,
-                              password,
-                              onSettingChanged,
-                              direction: Axis.vertical,
+                          if (showSettingCards)
+                            RecordingOptionsCard(
+                              cameraState: cameraState!,
+                              password: password,
+                              onSettingChanged: onSettingChanged,
                             ),
-                            CameraMode() => [],
-                          },
-                        ),
+                        ],
                       ),
                     ),
-                  if (showSettingCards)
-                    RecordingOptionsCard(
-                      cameraState: cameraState!,
-                      password: password,
-                      onSettingChanged: onSettingChanged,
-                    ),
-                  const Spacer(),
+                  ),
                   MediaCountDisplay(cameraState: cameraState),
                   CameraModeCarousel(
                     cameraState: cameraState!,
@@ -91,7 +104,7 @@ class HorizontalLayout extends StatelessWidget {
                 ],
               ),
             ),
-          Expanded(flex: 0, child: previewArea),
+          previewArea,
         ],
       ),
     );

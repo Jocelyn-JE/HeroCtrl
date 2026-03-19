@@ -48,38 +48,51 @@ class VerticalLayout extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (showSettingCards)
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Column(
-                        children: switch (cameraState!.status.cameraMode) {
-                          CameraMode.videoMode => videoSettingsWidgets(
-                            cameraState!,
-                            password,
-                            onSettingChanged,
-                            direction: Axis.horizontal,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (showSettingCards)
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                              ),
+                              child: Column(
+                                children: switch (cameraState!
+                                    .status
+                                    .cameraMode) {
+                                  CameraMode.videoMode => videoSettingsWidgets(
+                                    cameraState!,
+                                    password,
+                                    onSettingChanged,
+                                    direction: Axis.horizontal,
+                                  ),
+                                  CameraMode.photoMode ||
+                                  CameraMode.burstMode ||
+                                  CameraMode.timelapseMode =>
+                                    photoSettingsWidgets(
+                                      cameraState!,
+                                      password,
+                                      onSettingChanged,
+                                      direction: Axis.horizontal,
+                                    ),
+                                  CameraMode() => [],
+                                },
+                              ),
+                            ),
                           ),
-                          CameraMode.photoMode ||
-                          CameraMode.burstMode ||
-                          CameraMode.timelapseMode => photoSettingsWidgets(
-                            cameraState!,
-                            password,
-                            onSettingChanged,
-                            direction: Axis.horizontal,
+                        if (showSettingCards)
+                          RecordingOptionsCard(
+                            cameraState: cameraState!,
+                            password: password,
+                            onSettingChanged: onSettingChanged,
                           ),
-                          CameraMode() => [],
-                        },
-                      ),
+                      ],
                     ),
                   ),
-                if (showSettingCards)
-                  RecordingOptionsCard(
-                    cameraState: cameraState!,
-                    password: password,
-                    onSettingChanged: onSettingChanged,
-                  ),
-                const Spacer(),
+                ),
                 MediaCountDisplay(cameraState: cameraState),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14.0),
